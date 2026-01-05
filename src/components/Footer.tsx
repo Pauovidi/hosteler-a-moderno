@@ -1,5 +1,3 @@
-import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from "lucide-react";
-
 const quickLinks = [
   { name: "Servilletas", href: "#servilletas" },
   { name: "Cristalería", href: "#cristaleria" },
@@ -16,16 +14,16 @@ const legalLinks = [
 
 export const Footer = () => {
   return (
-    <footer className="bg-secondary/50 border-t border-border/50">
+    <footer className="bg-secondary border-t border-border">
       <div className="container mx-auto px-4 md:px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <a href="/" className="flex items-center gap-2 mb-6">
-              <span className="text-3xl font-display font-bold text-gradient-gold">
+            <a href="/" className="flex items-center gap-3 mb-6">
+              <span className="text-3xl font-display font-bold text-primary">
                 PH
               </span>
-              <span className="text-sm text-muted-foreground leading-tight">
+              <span className="text-sm text-muted-foreground leading-tight border-l border-border pl-3">
                 Personalizados<br />Hostelería
               </span>
             </a>
@@ -34,21 +32,21 @@ export const Footer = () => {
               Calidad premium y entrega récord.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors">
-                <Instagram className="w-4 h-4 text-primary" />
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm uppercase tracking-wider">
+                Instagram
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors">
-                <Facebook className="w-4 h-4 text-primary" />
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm uppercase tracking-wider">
+                Facebook
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors">
-                <Linkedin className="w-4 h-4 text-primary" />
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm uppercase tracking-wider">
+                LinkedIn
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-display font-semibold text-foreground mb-6">
+            <h3 className="text-lg font-display font-semibold text-foreground mb-6 uppercase tracking-wider">
               Productos
             </h3>
             <ul className="space-y-3">
@@ -67,32 +65,29 @@ export const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-display font-semibold text-foreground mb-6">
+            <h3 className="text-lg font-display font-semibold text-foreground mb-6 uppercase tracking-wider">
               Contacto
             </h3>
             <ul className="space-y-4">
               <li>
                 <a
                   href="tel:+34XXX"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  <Phone className="w-4 h-4" />
-                  <span>Teléfono de contacto</span>
+                  Teléfono de contacto
                 </a>
               </li>
               <li>
                 <a
                   href="mailto:info@personalizadoshosteleria.com"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  <Mail className="w-4 h-4" />
-                  <span>info@personalizadoshosteleria.com</span>
+                  info@personalizadoshosteleria.com
                 </a>
               </li>
               <li>
-                <span className="flex items-start gap-3 text-muted-foreground">
-                  <MapPin className="w-4 h-4 mt-1" />
-                  <span>España - Envíos a toda Europa</span>
+                <span className="text-muted-foreground">
+                  España - Envíos a toda Europa
                 </span>
               </li>
             </ul>
@@ -100,7 +95,7 @@ export const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h3 className="text-lg font-display font-semibold text-foreground mb-6">
+            <h3 className="text-lg font-display font-semibold text-foreground mb-6 uppercase tracking-wider">
               Legal
             </h3>
             <ul className="space-y-3">
@@ -120,7 +115,7 @@ export const Footer = () => {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-border/50">
+      <div className="border-t border-border">
         <div className="container mx-auto px-4 md:px-6 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p>

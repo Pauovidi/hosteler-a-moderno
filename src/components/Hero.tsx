@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, Award, Truck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 import heroImage from "@/assets/hero-tableware.jpg";
 
@@ -23,7 +23,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-block px-4 py-2 mb-6 text-sm font-medium text-primary bg-primary/10 rounded-full border border-primary/20"
+            className="inline-block px-4 py-2 mb-6 text-sm font-medium text-primary bg-primary/10 border border-primary/30"
           >
             Soluciones integrales para HORECA
           </motion.span>
@@ -35,7 +35,7 @@ export const Hero = () => {
             className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight mb-6"
           >
             Productos{" "}
-            <span className="text-gradient-gold">Personalizados</span>{" "}
+            <span className="text-primary">Personalizados</span>{" "}
             con Tiempos de Entrega Récord
           </motion.h1>
 
@@ -65,37 +65,43 @@ export const Hero = () => {
             </Button>
           </motion.div>
 
-          {/* Trust indicators */}
+          {/* Trust indicators - with images instead of icons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="grid grid-cols-1 sm:grid-cols-3 gap-6"
           >
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Clock className="w-5 h-5 text-primary" />
-              </div>
+            <div className="flex items-center gap-4 border-l-2 border-primary pl-4">
+              <img 
+                src="https://cdn.palbincdn.com/users/36776/upload/images/envio-rapido.png" 
+                alt="Entrega rápida" 
+                className="w-16 h-16 object-contain"
+              />
               <div>
                 <p className="font-semibold text-foreground">Entrega Rápida</p>
-                <p className="text-sm text-muted-foreground">Plazos récord</p>
+                <p className="text-sm text-muted-foreground">Plazos récord del mercado</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Award className="w-5 h-5 text-primary" />
-              </div>
+            <div className="flex items-center gap-4 border-l-2 border-primary pl-4">
+              <img 
+                src="https://cdn.palbincdn.com/users/36776/upload/images/marcas-europeas.png" 
+                alt="Calidad Premium" 
+                className="w-16 h-16 object-contain"
+              />
               <div>
                 <p className="font-semibold text-foreground">Calidad Premium</p>
-                <p className="text-sm text-muted-foreground">Mejores marcas</p>
+                <p className="text-sm text-muted-foreground">Mejores marcas europeas</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Truck className="w-5 h-5 text-primary" />
-              </div>
+            <div className="flex items-center gap-4 border-l-2 border-primary pl-4">
+              <img 
+                src="https://cdn.palbincdn.com/users/36776/upload/images/envios-europa.png" 
+                alt="Envíos Europa" 
+                className="w-16 h-16 object-contain"
+              />
               <div>
                 <p className="font-semibold text-foreground">Envíos Europa</p>
                 <p className="text-sm text-muted-foreground">Servicio integral</p>

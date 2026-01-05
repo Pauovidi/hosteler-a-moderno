@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
 
 const navLinks = [
@@ -16,16 +16,14 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       {/* Top bar */}
-      <div className="hidden md:flex items-center justify-end gap-6 px-6 py-2 bg-secondary/50 text-sm">
-        <a href="tel:+34XXX" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-          <Phone className="w-3 h-3" />
-          <span>Llámanos</span>
+      <div className="hidden md:flex items-center justify-end gap-8 px-6 py-2 bg-secondary text-sm border-b border-border">
+        <a href="tel:+34XXX" className="text-muted-foreground hover:text-primary transition-colors">
+          Llámanos: +34 XXX XXX XXX
         </a>
-        <a href="mailto:info@personalizadoshosteleria.com" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-          <Mail className="w-3 h-3" />
-          <span>info@personalizadoshosteleria.com</span>
+        <a href="mailto:info@personalizadoshosteleria.com" className="text-muted-foreground hover:text-primary transition-colors">
+          info@personalizadoshosteleria.com
         </a>
       </div>
 
@@ -33,11 +31,11 @@ export const Header = () => {
       <nav className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2">
-            <span className="text-2xl md:text-3xl font-display font-bold text-gradient-gold">
+          <a href="/" className="flex items-center gap-3">
+            <span className="text-2xl md:text-3xl font-display font-bold text-primary">
               PH
             </span>
-            <span className="hidden sm:block text-sm text-muted-foreground leading-tight">
+            <span className="hidden sm:block text-sm text-muted-foreground leading-tight border-l border-border pl-3">
               Personalizados<br />Hostelería
             </span>
           </a>
@@ -48,7 +46,7 @@ export const Header = () => {
               <li key={link.name}>
                 <a
                   href={link.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300"
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 uppercase tracking-wider"
                 >
                   {link.name}
                 </a>
@@ -88,14 +86,14 @@ export const Header = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="block py-3 text-foreground hover:text-primary transition-colors"
+                    className="block py-3 text-foreground hover:text-primary transition-colors uppercase tracking-wider text-sm"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.name}
                   </a>
                 </li>
               ))}
-              <li className="pt-4">
+              <li className="pt-4 border-t border-border">
                 <Button variant="gold" className="w-full">
                   Pedir Presupuesto
                 </Button>

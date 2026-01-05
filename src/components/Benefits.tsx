@@ -1,36 +1,35 @@
 import { motion } from "framer-motion";
-import { Clock, Shield, Package, Headphones, Truck, BadgeCheck } from "lucide-react";
 
 const benefits = [
   {
-    icon: Clock,
     title: "Tiempos Récord",
     description: "Los plazos de entrega más bajos del mercado para que nunca se quede sin stock.",
+    image: "https://cdn.palbincdn.com/users/36776/upload/images/tiempos-record.png",
   },
   {
-    icon: Shield,
     title: "Calidad Garantizada",
     description: "Trabajamos solo con las mejores marcas europeas: Arcoroc, Bormioli, Stoelzle.",
+    image: "https://cdn.palbincdn.com/users/36776/upload/images/calidad-garantizada.png",
   },
   {
-    icon: Package,
     title: "Mínimos Bajos",
     description: "Los pedidos mínimos más accesibles para adaptarnos a sus necesidades.",
+    image: "https://cdn.palbincdn.com/users/36776/upload/images/minimos-bajos.png",
   },
   {
-    icon: Headphones,
     title: "Asesoramiento Experto",
     description: "Equipo especializado en hostelería para guiarle en cada proyecto.",
+    image: "https://cdn.palbincdn.com/users/36776/upload/images/asesoramiento-experto.png",
   },
   {
-    icon: Truck,
     title: "Envíos Europeos",
     description: "Distribución a toda Europa con tarifas competitivas.",
+    image: "https://cdn.palbincdn.com/users/36776/upload/images/envios-europeos.png",
   },
   {
-    icon: BadgeCheck,
     title: "Servicio Integral",
     description: "La única empresa capaz de coordinar todos sus productos personalizados.",
+    image: "https://cdn.palbincdn.com/users/36776/upload/images/servicio-integral.png",
   },
 ];
 
@@ -64,11 +63,11 @@ export const Benefits = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full border border-primary/20">
+          <span className="inline-block px-4 py-2 mb-4 text-sm font-medium text-primary bg-primary/10 border border-primary/30 uppercase tracking-wider">
             Por qué elegirnos
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
-            Su <span className="text-gradient-gold">Socio Estratégico</span> en HORECA
+            Su <span className="text-primary">Socio Estratégico</span> en HORECA
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Más de dos décadas de experiencia nos avalan como líderes en personalización hostelera
@@ -86,10 +85,14 @@ export const Benefits = () => {
             <motion.div
               key={benefit.title}
               variants={itemVariants}
-              className="group p-8 rounded-xl bg-gradient-card border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-gold"
+              className="group p-8 bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-card"
             >
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                <benefit.icon className="w-6 h-6 text-primary" />
+              <div className="w-20 h-20 mb-6 flex items-center justify-center bg-secondary">
+                <img 
+                  src={benefit.image} 
+                  alt={benefit.title}
+                  className="w-16 h-16 object-contain group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
               <h3 className="text-xl font-display font-bold text-foreground mb-3">
                 {benefit.title}
