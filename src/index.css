@@ -2,97 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Personalizados Hostelería - Elegant Dark Theme Design System */
+/* Personalizados Hostelería - Classic Elegant Theme Design System */
 
 @layer base {
   :root {
-    /* Light elegant background */
-    --background: 40 30% 97%;
-    --foreground: 220 25% 15%;
+    /* Classic light background - warm white */
+    --background: 45 30% 98%;
+    --foreground: 30 20% 18%;
 
-    /* Cards with subtle elevation */
+    /* Cards with subtle warmth */
     --card: 0 0% 100%;
-    --card-foreground: 220 25% 15%;
+    --card-foreground: 30 20% 18%;
 
     /* Popovers */
     --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 15%;
+    --popover-foreground: 30 20% 18%;
 
-    /* Primary - Deep Gold */
-    --primary: 38 50% 42%;
+    /* Primary - Classic Gold #b99c60 → HSL(40, 37%, 55%) */
+    --primary: 40 37% 55%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Warm cream */
-    --secondary: 40 25% 92%;
-    --secondary-foreground: 220 25% 20%;
+    /* Secondary - Warm beige */
+    --secondary: 40 20% 94%;
+    --secondary-foreground: 30 20% 20%;
 
     /* Muted */
-    --muted: 40 20% 94%;
-    --muted-foreground: 220 15% 45%;
+    --muted: 40 15% 95%;
+    --muted-foreground: 30 15% 40%;
 
     /* Accent */
-    --accent: 38 50% 42%;
+    --accent: 40 37% 55%;
     --accent-foreground: 0 0% 100%;
 
     /* Destructive */
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders */
-    --border: 40 20% 88%;
-    --input: 40 20% 90%;
-    --ring: 38 50% 42%;
+    /* Borders - more defined for classic look */
+    --border: 40 15% 82%;
+    --input: 40 15% 88%;
+    --ring: 40 37% 55%;
 
-    --radius: 0.5rem;
+    /* No rounded corners for classic look */
+    --radius: 0px;
 
     /* Custom design tokens */
-    --gold: 38 50% 42%;
-    --gold-light: 40 45% 55%;
-    --gold-dark: 35 55% 32%;
-    --charcoal: 220 25% 15%;
-    --charcoal-light: 220 20% 25%;
+    --gold: 40 37% 55%;
+    --gold-light: 40 40% 65%;
+    --gold-dark: 40 40% 42%;
+    --charcoal: 30 20% 18%;
+    --charcoal-light: 30 15% 30%;
 
-    /* Gradients */
-    --gradient-gold: linear-gradient(135deg, hsl(38 50% 40%) 0%, hsl(40 55% 52%) 50%, hsl(38 50% 40%) 100%);
-    --gradient-dark: linear-gradient(180deg, hsl(40 30% 97%) 0%, hsl(40 25% 94%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(40 25% 98%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(40 30% 97% / 0.95) 0%, hsl(40 25% 94% / 0.9) 100%);
+    /* Gradients - more subtle for classic look */
+    --gradient-gold: linear-gradient(135deg, hsl(40 37% 52%) 0%, hsl(40 42% 62%) 50%, hsl(40 37% 52%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(45 30% 98%) 0%, hsl(40 20% 95%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(45 25% 98%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(45 30% 98% / 0.97) 0%, hsl(40 20% 95% / 0.95) 100%);
 
-    /* Shadows */
-    --shadow-gold: 0 4px 30px hsl(38 50% 42% / 0.12);
-    --shadow-card: 0 8px 32px hsl(220 25% 15% / 0.08);
-    --shadow-elevated: 0 20px 60px hsl(220 25% 15% / 0.12);
+    /* Shadows - softer for classic elegance */
+    --shadow-gold: 0 2px 20px hsl(40 37% 55% / 0.15);
+    --shadow-card: 0 4px 20px hsl(30 20% 18% / 0.06);
+    --shadow-elevated: 0 12px 40px hsl(30 20% 18% / 0.1);
 
-    /* Fonts */
+    /* Fonts - Serif body for classic feel */
     --font-display: 'Playfair Display', serif;
-    --font-body: 'Inter', sans-serif;
+    --font-body: 'Georgia', 'Times New Roman', serif;
 
     /* Sidebar */
-    --sidebar-background: 40 30% 97%;
-    --sidebar-foreground: 220 25% 15%;
-    --sidebar-primary: 38 50% 42%;
+    --sidebar-background: 45 30% 98%;
+    --sidebar-foreground: 30 20% 18%;
+    --sidebar-primary: 40 37% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 40 25% 92%;
-    --sidebar-accent-foreground: 220 25% 15%;
-    --sidebar-border: 40 20% 88%;
-    --sidebar-ring: 38 50% 42%;
-  }
-
-  /* Dark mode override */
-  .dark {
-    --background: 220 20% 7%;
-    --foreground: 40 20% 95%;
-    --card: 220 18% 10%;
-    --card-foreground: 40 20% 95%;
-    --primary: 42 45% 60%;
-    --primary-foreground: 220 20% 7%;
-    --secondary: 220 15% 15%;
-    --secondary-foreground: 40 20% 90%;
-    --muted: 220 15% 18%;
-    --muted-foreground: 220 10% 55%;
-    --border: 220 15% 18%;
-    --gold: 42 45% 60%;
-    --gold-light: 42 50% 75%;
+    --sidebar-accent: 40 20% 94%;
+    --sidebar-accent-foreground: 30 20% 18%;
+    --sidebar-border: 40 15% 82%;
+    --sidebar-ring: 40 37% 55%;
   }
 }
 
@@ -103,10 +87,18 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    font-size: 16px;
+    line-height: 1.7;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+  }
+
+  /* Classic underlines for links */
+  a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
 }
 
