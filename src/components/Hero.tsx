@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Truck, Award, Globe } from "lucide-react";
 import { Button } from "./ui/button";
 import heroImage from "@/assets/hero-tableware.jpg";
 
@@ -73,11 +73,9 @@ export const Hero = () => {
             className="grid grid-cols-1 sm:grid-cols-3 gap-6"
           >
             <div className="flex items-center gap-4 border-l-2 border-primary pl-4">
-              <img 
-                src="https://cdn.palbincdn.com/users/36776/upload/images/envio-rapido.png" 
-                alt="Entrega rápida" 
-                className="w-16 h-16 object-contain"
-              />
+              <div className="w-12 h-12 flex items-center justify-center bg-primary/10 border border-primary/30">
+                <Truck className="w-6 h-6 text-primary" />
+              </div>
               <div>
                 <p className="font-semibold text-foreground">Entrega Rápida</p>
                 <p className="text-sm text-muted-foreground">Plazos récord del mercado</p>
@@ -85,11 +83,9 @@ export const Hero = () => {
             </div>
 
             <div className="flex items-center gap-4 border-l-2 border-primary pl-4">
-              <img 
-                src="https://cdn.palbincdn.com/users/36776/upload/images/marcas-europeas.png" 
-                alt="Calidad Premium" 
-                className="w-16 h-16 object-contain"
-              />
+              <div className="w-12 h-12 flex items-center justify-center bg-primary/10 border border-primary/30">
+                <Award className="w-6 h-6 text-primary" />
+              </div>
               <div>
                 <p className="font-semibold text-foreground">Calidad Premium</p>
                 <p className="text-sm text-muted-foreground">Mejores marcas europeas</p>
@@ -97,11 +93,9 @@ export const Hero = () => {
             </div>
 
             <div className="flex items-center gap-4 border-l-2 border-primary pl-4">
-              <img 
-                src="https://cdn.palbincdn.com/users/36776/upload/images/envios-europa.png" 
-                alt="Envíos Europa" 
-                className="w-16 h-16 object-contain"
-              />
+              <div className="w-12 h-12 flex items-center justify-center bg-primary/10 border border-primary/30">
+                <Globe className="w-6 h-6 text-primary" />
+              </div>
               <div>
                 <p className="font-semibold text-foreground">Envíos Europa</p>
                 <p className="text-sm text-muted-foreground">Servicio integral</p>

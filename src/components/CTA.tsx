@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "./ui/button";
 
 export const CTA = () => {
@@ -45,11 +45,7 @@ export const CTA = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex items-center justify-center gap-4"
           >
-            <img 
-              src="https://cdn.palbincdn.com/users/36776/upload/images/whatsapp-contact.png" 
-              alt="WhatsApp" 
-              className="w-8 h-8 object-contain"
-            />
+            <MessageCircle className="w-6 h-6 text-primary" />
             <span className="text-muted-foreground">También disponible por WhatsApp</span>
           </motion.div>
         </motion.div>
