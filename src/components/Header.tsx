@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 
 const navLinks = [
@@ -54,10 +55,9 @@ export const Header = () => {
             ))}
           </ul>
 
-          {/* CTA */}
           <div className="hidden md:block">
-            <Button variant="gold" size="lg">
-              Pedir Presupuesto
+            <Button variant="gold" size="lg" asChild>
+              <Link to="/presupuesto">Pedir Presupuesto</Link>
             </Button>
           </div>
 
@@ -94,8 +94,8 @@ export const Header = () => {
                 </li>
               ))}
               <li className="pt-4 border-t border-border">
-                <Button variant="gold" className="w-full">
-                  Pedir Presupuesto
+                <Button variant="gold" className="w-full" asChild>
+                  <Link to="/presupuesto">Pedir Presupuesto</Link>
                 </Button>
               </li>
             </ul>

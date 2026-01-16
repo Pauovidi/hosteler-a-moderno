@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Truck, Award, Globe } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import heroImage from "@/assets/hero-tableware.jpg";
 
@@ -56,9 +57,11 @@ export const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 mb-12"
           >
-            <Button variant="hero" size="xl">
-              Solicitar Presupuesto
-              <ArrowRight className="w-5 h-5" />
+            <Button variant="hero" size="xl" asChild>
+              <Link to="/presupuesto">
+                Solicitar Presupuesto
+                <ArrowRight className="w-5 h-5" />
+              </Link>
             </Button>
             <Button variant="goldOutline" size="xl">
               Ver Catálogo

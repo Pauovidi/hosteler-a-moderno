@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 
 export const CTA = () => {
@@ -28,9 +29,11 @@ export const CTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Button variant="hero" size="xl">
-              Pedir Presupuesto
-              <ArrowRight className="w-5 h-5" />
+            <Button variant="hero" size="xl" asChild>
+              <Link to="/presupuesto">
+                Pedir Presupuesto
+                <ArrowRight className="w-5 h-5" />
+              </Link>
             </Button>
             <Button variant="goldOutline" size="xl">
               Llamar Ahora
