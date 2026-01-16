@@ -1,35 +1,36 @@
 import { motion } from "framer-motion";
+import { Clock, Award, Package, Users, Truck, Settings } from "lucide-react";
 
 const benefits = [
   {
     title: "Tiempos Récord",
     description: "Los plazos de entrega más bajos del mercado para que nunca se quede sin stock.",
-    image: "https://cdn.palbincdn.com/users/36776/upload/images/tiempos-record.png",
+    icon: Clock,
   },
   {
     title: "Calidad Garantizada",
     description: "Trabajamos solo con las mejores marcas europeas: Arcoroc, Bormioli, Stoelzle.",
-    image: "https://cdn.palbincdn.com/users/36776/upload/images/calidad-garantizada.png",
+    icon: Award,
   },
   {
     title: "Mínimos Bajos",
     description: "Los pedidos mínimos más accesibles para adaptarnos a sus necesidades.",
-    image: "https://cdn.palbincdn.com/users/36776/upload/images/minimos-bajos.png",
+    icon: Package,
   },
   {
     title: "Asesoramiento Experto",
     description: "Equipo especializado en hostelería para guiarle en cada proyecto.",
-    image: "https://cdn.palbincdn.com/users/36776/upload/images/asesoramiento-experto.png",
+    icon: Users,
   },
   {
     title: "Envíos Europeos",
     description: "Distribución a toda Europa con tarifas competitivas.",
-    image: "https://cdn.palbincdn.com/users/36776/upload/images/envios-europeos.png",
+    icon: Truck,
   },
   {
     title: "Servicio Integral",
     description: "La única empresa capaz de coordinar todos sus productos personalizados.",
-    image: "https://cdn.palbincdn.com/users/36776/upload/images/servicio-integral.png",
+    icon: Settings,
   },
 ];
 
@@ -87,12 +88,8 @@ export const Benefits = () => {
               variants={itemVariants}
               className="group p-8 bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-card"
             >
-              <div className="w-20 h-20 mb-6 flex items-center justify-center bg-secondary">
-                <img 
-                  src={benefit.image} 
-                  alt={benefit.title}
-                  className="w-16 h-16 object-contain group-hover:scale-105 transition-transform duration-300"
-                />
+              <div className="w-16 h-16 mb-6 flex items-center justify-center bg-primary/10 border border-primary/30">
+                <benefit.icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
               </div>
               <h3 className="text-xl font-display font-bold text-foreground mb-3">
                 {benefit.title}
