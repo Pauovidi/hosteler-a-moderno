@@ -64,9 +64,9 @@
     --shadow-card: 0 4px 20px hsl(30 20% 18% / 0.06);
     --shadow-elevated: 0 12px 40px hsl(30 20% 18% / 0.1);
 
-    /* Fonts - Serif body for classic feel */
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'Georgia', 'Times New Roman', serif;
+    /* Fonts - Trivial-style for display, Agency FB-style for body */
+    --font-display: 'Oswald', 'Impact', sans-serif;
+    --font-body: 'Roboto Condensed', 'Arial Narrow', sans-serif;
 
     /* Sidebar */
     --sidebar-background: 45 30% 98%;

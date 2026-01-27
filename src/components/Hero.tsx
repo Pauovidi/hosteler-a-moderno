@@ -26,7 +26,7 @@ export const Hero = () => {
             transition={{ duration: 0.6 }}
             className="inline-block px-4 py-2 mb-6 text-sm font-medium text-primary bg-primary/10 border border-primary/30"
           >
-            Soluciones integrales para HORECA
+            Branding y Soluciones Integrales para Hostelería y Agencias
           </motion.span>
 
           <motion.h1
@@ -46,9 +46,9 @@ export const Hero = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl"
           >
-            Su socio estratégico en la creación de una identidad de marca impecable. 
-            Cristalería, vajilla, cubertería y textil para el sector hostelero con 
-            la máxima calidad y los mejores plazos del mercado.
+            Expertos en aperturas, eventos y estrategias de marca. 
+            Cristalería, vajilla, cubertería y textil con los mejores 
+            productos europeos y tiempos de entrega récord.
           </motion.p>
 
           <motion.div
@@ -91,7 +91,7 @@ export const Hero = () => {
               </div>
               <div>
                 <p className="font-semibold text-foreground">Calidad Premium</p>
-                <p className="text-sm text-muted-foreground">Mejores marcas europeas</p>
+                <p className="text-sm text-muted-foreground">Mejores productos europeos</p>
               </div>
             </div>
 

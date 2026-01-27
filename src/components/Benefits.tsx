@@ -8,8 +8,8 @@ const benefits = [
     icon: Clock,
   },
   {
-    title: "Calidad Garantizada",
-    description: "Trabajamos solo con las mejores marcas europeas: Arcoroc, Bormioli, Stoelzle.",
+    title: "Calidad Premium",
+    description: "Seleccionamos los mejores productos europeos por calidad y precio. Somos los expertos.",
     icon: Award,
   },
   {
@@ -19,7 +19,7 @@ const benefits = [
   },
   {
     title: "Asesoramiento Experto",
-    description: "Equipo especializado en hostelería para guiarle en cada proyecto.",
+    description: "Especialistas en aperturas, eventos y proyectos de marca para hostelería y agencias.",
     icon: Users,
   },
   {
