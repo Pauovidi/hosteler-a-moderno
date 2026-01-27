@@ -70,7 +70,7 @@ export const Categories = () => {
             Todo para su <span className="text-primary">Establecimiento</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Solución integral para la reposición constante y las grandes aperturas de hostelería
+            Solución integral para reposición constante, grandes aperturas y proyectos de branding
           </p>
         </motion.div>
 
