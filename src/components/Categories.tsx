@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-
+import { Link } from "react-router-dom";
 const categories = [
   {
     id: "servilletas",
@@ -82,38 +82,40 @@ export const Categories = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {categories.map((category, index) => (
-            <motion.a
+            <motion.div
               key={category.id}
-              href={`#${category.id}`}
               variants={itemVariants}
-              className={`group relative overflow-hidden bg-card border border-border hover:border-primary/50 transition-all duration-300 ${
-                index === 0 ? "md:col-span-2 lg:col-span-2" : ""
-              }`}
+              className={index === 0 ? "md:col-span-2 lg:col-span-2" : ""}
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img
-                  src={category.image}
-                  alt={category.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-transparent" />
-              </div>
-
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <div className="text-card">
-                  <h3 className="text-xl md:text-2xl font-display font-bold mb-2">
-                    {category.title}
-                  </h3>
-                  <p className="text-sm opacity-90 line-clamp-2">
-                    {category.description}
-                  </p>
-                  <span className="inline-block mt-4 text-sm uppercase tracking-wider border-b border-current pb-1 group-hover:border-primary group-hover:text-primary transition-colors">
-                    Ver productos →
-                  </span>
+              <Link
+                to={`/producto/${category.id}`}
+                className="group relative block overflow-hidden bg-card border border-border hover:border-primary/50 transition-all duration-300"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={category.image}
+                    alt={category.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-transparent" />
                 </div>
-              </div>
-            </motion.a>
+
+                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                  <div className="text-card">
+                    <h3 className="text-xl md:text-2xl font-display font-bold mb-2">
+                      {category.title}
+                    </h3>
+                    <p className="text-sm opacity-90 line-clamp-2">
+                      {category.description}
+                    </p>
+                    <span className="inline-block mt-4 text-sm uppercase tracking-wider border-b border-current pb-1 group-hover:border-primary group-hover:text-primary transition-colors">
+                      Ver producto →
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </motion.div>
       </div>

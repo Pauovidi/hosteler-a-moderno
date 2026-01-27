@@ -64,9 +64,9 @@
     --shadow-card: 0 4px 20px hsl(30 20% 18% / 0.06);
     --shadow-elevated: 0 12px 40px hsl(30 20% 18% / 0.1);
 
-    /* Fonts - Trivial-style for display, Agency FB-style for body */
-    --font-display: 'Oswald', 'Impact', sans-serif;
-    --font-body: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+    /* Fonts - Orbitron for headings, Agdasima for body */
+    --font-display: 'Orbitron', 'Impact', sans-serif;
+    --font-body: 'Agdasima', 'Arial Narrow', sans-serif;
 
     /* Sidebar */
     --sidebar-background: 45 30% 98%;
