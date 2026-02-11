@@ -33,11 +33,7 @@ export function Header() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-gold flex items-center justify-center">
-              <span className="text-primary-foreground font-display text-xl font-bold">
-                PH
-              </span>
-            </div>
+            <img src="/logo-3.jpg" alt="Personalizados Hosteleria" className="h-12 w-auto" />
             <span className="font-display text-lg text-foreground hidden sm:block">
               Personalizados Hosteleria
             </span>

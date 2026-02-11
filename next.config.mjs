@@ -16,6 +16,33 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/c:id(\\d+)-:legacySlug.html',
+        destination: '/legacy-category/:id?slug=:legacySlug',
+      },
+    ];
+  },
+  async redirects() {
+    try {
+      // Dynamic import to avoid build errors if file is missing during initial setup
+      // Note: In Next.js, importing JSON requires assert or using fs read if server-side only.
+      // But redirects() runs at build/server time. 
+      // Simplified approach: fs read
+      const fs = await import('fs');
+      const path = await import('path');
+      const redirectsPath = path.join(process.cwd(), 'out/redirects.json');
+
+      if (fs.existsSync(redirectsPath)) {
+        const redirects = JSON.parse(fs.readFileSync(redirectsPath, 'utf8'));
+        return redirects;
+      }
+    } catch (e) {
+      console.warn('Redirects file not found or invalid:', e.message);
+    }
+    return [];
+  },
 }
 
 export default nextConfig
