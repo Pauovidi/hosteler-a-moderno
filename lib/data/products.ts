@@ -1,104 +1,165 @@
-// MIGRATION NOTE:
-// This file serves as the Single Source of Truth for product data.
-// A simpler version is currently used.
-// To migrate to a CMS (contentful, strapi, etc) or JSON file:
-// 1. Replace the `products` constant with a fetch call or import from a JSON file.
-// 2. Update `getAllProducts` and `getProduct` to be async if fetching from an API.
-// 3. Ensure the `Product` interface matches your CMS schema.
+import 'server-only';
 
-export interface OptionTier {
+import fs from 'fs';
+import path from 'path';
+
+export type ProductOption = {
   label: string;
   price: number;
-  stock?: number;
-  weight?: number;
+  effectivePrice: number;
+  stock: number;
+  weight: number;
   discountType?: string;
   discountValue?: number;
-  effectivePrice: number;
-}
+};
 
-export interface Product {
+export type Product = {
   id: string;
-  name: string; // "Nombre"
   slug: string;
+  title: string;
+
   descriptionHtml?: string;
   shortDescriptionHtml?: string;
-  categoryPaths: string[][];
+
+  categoryPaths: string[];
   categoriesFlat: string[];
 
-  // Images
-  imagesSource?: string[];
-  image?: string; // Main image derived from imagesSource or placeholder (app compatibility)
+  image?: string;
+  images?: string[];
 
-  // Pricing
-  price?: number; // Base/Header price
-  cost?: number;
-  tax?: number;
+  price?: number;
+  options: ProductOption[];
 
-  // Metadata
-  sku?: string;
+  tax?: string;
   brand?: string;
-  tags?: string[];
   status?: string;
   featured?: boolean;
   secondHand?: boolean;
   marketingLabel?: string;
   marketingLabelDate?: string;
+  cost?: number;
+  tags?: string[];
+  personalizationsRaw?: string;
+};
 
-  // Variants
-  variantName?: string;
-  options: OptionTier[];
+type RawProduct = {
+  id: string | number;
+  name?: string;
+  title?: string;
+  slug?: string;
+  descriptionHtml?: string;
+  shortDescriptionHtml?: string;
+  categoryPaths?: string[];
+  categoriesFlat?: string[];
+  imagesSource?: string[];
+  image?: string;
+  price?: number;
+  options?: Array<{
+    label?: string;
+    price?: number;
+    effectivePrice?: number;
+    stock?: number;
+    weight?: number;
+    discountType?: string;
+    discountValue?: number;
+  }>;
+  tax?: string;
+  brand?: string;
+  status?: string;
+  featured?: boolean;
+  secondHand?: boolean;
+  marketingLabel?: string;
+  marketingLabelDate?: string;
+  cost?: number;
+  tags?: string[];
+  personalizationsRaw?: string;
+};
 
-  // Legacy / Misc
-  features: string[]; // Compat: mapped from features or empty array
-  brands?: string[];
+let _cache: Product[] | null = null;
 
-  // Compatibility fields (Runtime mapped)
-  title: string;
-  longDescription: string;
+function computeBestPrice(raw: RawProduct): number | undefined {
+  if (typeof raw.price === 'number' && raw.price > 0) return raw.price;
 
-  metaTitle?: string;
-  metaDescription?: string;
-  legacyPath?: string;
+  const opts = Array.isArray(raw.options) ? raw.options : [];
+  const prices = opts
+    .map((o) => (typeof o.effectivePrice === 'number' ? o.effectivePrice : (typeof o.price === 'number' ? o.price : 0)))
+    .filter((v) => typeof v === 'number' && v > 0);
+
+  if (prices.length === 0) return 0;
+  return Math.min(...prices);
 }
 
-// SIMULATED DATABASE
-// In the future, this could be: import products form '@/data/products.json';
-// SIMULATED DATABASE
-// Importing generated data from CSV migration (real import)
-import generatedProducts from './products.json';
+function toProduct(raw: RawProduct): Product {
+  const images = Array.isArray(raw.imagesSource) ? raw.imagesSource.filter(Boolean) : [];
+  const image = raw.image || images[0];
 
-// Cast and Map
-const productsArray = (generatedProducts as unknown as Product[]).map(p => ({
-  ...p,
-  // Compat map
-  title: p.name,
-  image: (p.imagesSource && p.imagesSource.length > 0) ? p.imagesSource[0] : "/placeholder.svg",
-  features: p.features || [],
-  brands: p.brand ? [p.brand] : (p.brands || []),
-  longDescription: p.descriptionHtml || "",
-  shortDescription: p.shortDescriptionHtml || ""
-}));
+  const title = raw.title || raw.name || '';
 
-export const products: Record<string, Product> = productsArray.reduce((acc, product) => {
-  acc[product.slug] = product;
-  return acc;
-}, {} as Record<string, Product>);
+  return {
+    id: String(raw.id ?? ''),
+    slug: String(raw.slug ?? ''),
+    title,
 
-export const productsById: Record<string, Product> = productsArray.reduce((acc, product) => {
-  if (product.id) {
-    acc[product.id] = product;
-  }
-  return acc;
-}, {} as Record<string, Product>);
+    descriptionHtml: raw.descriptionHtml || '',
+    shortDescriptionHtml: raw.shortDescriptionHtml || '',
 
-export function getProduct(slug: string): Product | undefined {
-  return products[slug];
-}
+    categoryPaths: Array.isArray(raw.categoryPaths) ? raw.categoryPaths : [],
+    categoriesFlat: Array.isArray(raw.categoriesFlat) ? raw.categoriesFlat : [],
 
-export function getProductById(id: string): Product | undefined {
-  return productsById[id];
+    images,
+    image,
+
+    price: computeBestPrice(raw),
+
+    options: Array.isArray(raw.options)
+      ? raw.options.map((o) => ({
+          label: String(o.label ?? ''),
+          price: Number(o.price ?? 0),
+          effectivePrice: Number(o.effectivePrice ?? o.price ?? 0),
+          stock: Number(o.stock ?? 0),
+          weight: Number(o.weight ?? 0),
+          discountType: o.discountType,
+          discountValue: typeof o.discountValue === 'number' ? o.discountValue : Number(o.discountValue ?? 0),
+        }))
+      : [],
+
+    tax: raw.tax,
+    brand: raw.brand,
+    status: raw.status,
+    featured: raw.featured,
+    secondHand: raw.secondHand,
+    marketingLabel: raw.marketingLabel,
+    marketingLabelDate: raw.marketingLabelDate,
+    cost: typeof raw.cost === 'number' ? raw.cost : Number(raw.cost ?? 0),
+    tags: raw.tags,
+    personalizationsRaw: raw.personalizationsRaw,
+  };
 }
 
 export function getAllProducts(): Product[] {
-  return Object.values(products);
+  if (_cache) return _cache;
+
+  const filePath = path.join(process.cwd(), 'lib/data/products.json');
+  if (!fs.existsSync(filePath)) {
+    console.warn(`[products] Missing ${filePath}. Did prebuild run? Returning empty list.`);
+    _cache = [];
+    return _cache;
+  }
+
+  const raw = fs.readFileSync(filePath, 'utf8');
+  const data = JSON.parse(raw);
+  const list: RawProduct[] = Array.isArray(data) ? data : [];
+  _cache = list.map(toProduct);
+  return _cache;
+}
+
+export function getProductById(id: string | number): Product | undefined {
+  return getAllProducts().find((p) => String(p.id) === String(id));
+}
+
+export function toLegacySlug(p: Product): string {
+  const id = String(p.id || '');
+  const slug = String(p.slug || '');
+  const suffix = `-${id}`;
+  return slug.endsWith(suffix) ? slug.slice(0, -suffix.length) : slug;
 }
