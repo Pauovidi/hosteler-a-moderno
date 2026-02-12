@@ -1,165 +1,116 @@
-import 'server-only';
+// MIGRATION NOTE:
+// This file serves as the Single Source of Truth for product data.
+// A simpler version is currently used.
+// To migrate to a CMS (contentful, strapi, etc) or JSON file:
+// 1. Replace the `products` constant with a fetch call or import from a JSON file.
+// 2. Update `getAllProducts` and `getProduct` to be async if fetching from an API.
+// 3. Ensure the `Product` interface matches your CMS schema.
 
-import fs from 'fs';
-import path from 'path';
-
-export type ProductOption = {
+export interface OptionTier {
   label: string;
   price: number;
-  effectivePrice: number;
-  stock: number;
-  weight: number;
+  stock?: number;
+  weight?: number;
   discountType?: string;
   discountValue?: number;
-};
-
-export type Product = {
-  id: string;
-  slug: string;
-  title: string;
-
-  descriptionHtml?: string;
-  shortDescriptionHtml?: string;
-
-  categoryPaths: string[];
-  categoriesFlat: string[];
-
-  image?: string;
-  images?: string[];
-
-  price?: number;
-  options: ProductOption[];
-
-  tax?: string;
-  brand?: string;
-  status?: string;
-  featured?: boolean;
-  secondHand?: boolean;
-  marketingLabel?: string;
-  marketingLabelDate?: string;
-  cost?: number;
-  tags?: string[];
-  personalizationsRaw?: string;
-};
-
-type RawProduct = {
-  id: string | number;
-  name?: string;
-  title?: string;
-  slug?: string;
-  descriptionHtml?: string;
-  shortDescriptionHtml?: string;
-  categoryPaths?: string[];
-  categoriesFlat?: string[];
-  imagesSource?: string[];
-  image?: string;
-  price?: number;
-  options?: Array<{
-    label?: string;
-    price?: number;
-    effectivePrice?: number;
-    stock?: number;
-    weight?: number;
-    discountType?: string;
-    discountValue?: number;
-  }>;
-  tax?: string;
-  brand?: string;
-  status?: string;
-  featured?: boolean;
-  secondHand?: boolean;
-  marketingLabel?: string;
-  marketingLabelDate?: string;
-  cost?: number;
-  tags?: string[];
-  personalizationsRaw?: string;
-};
-
-let _cache: Product[] | null = null;
-
-function computeBestPrice(raw: RawProduct): number | undefined {
-  if (typeof raw.price === 'number' && raw.price > 0) return raw.price;
-
-  const opts = Array.isArray(raw.options) ? raw.options : [];
-  const prices = opts
-    .map((o) => (typeof o.effectivePrice === 'number' ? o.effectivePrice : (typeof o.price === 'number' ? o.price : 0)))
-    .filter((v) => typeof v === 'number' && v > 0);
-
-  if (prices.length === 0) return 0;
-  return Math.min(...prices);
+  effectivePrice: number;
 }
 
-function toProduct(raw: RawProduct): Product {
-  const images = Array.isArray(raw.imagesSource) ? raw.imagesSource.filter(Boolean) : [];
-  const image = raw.image || images[0];
+export interface Product {
+  id: string;
+  name: string; // "Nombre"
+  slug: string;
+  descriptionHtml?: string;
+  shortDescriptionHtml?: string;
+  categoryPaths: string[][];
+  categoriesFlat: string[];
 
-  const title = raw.title || raw.name || '';
+  // Images
+  imagesSource?: string[];
+  image?: string; // Main image derived from imagesSource or placeholder (app compatibility)
 
-  return {
-    id: String(raw.id ?? ''),
-    slug: String(raw.slug ?? ''),
-    title,
+  // Pricing
+  price?: number; // Base/Header price
+  cost?: number;
+  tax?: number;
 
-    descriptionHtml: raw.descriptionHtml || '',
-    shortDescriptionHtml: raw.shortDescriptionHtml || '',
+  // Metadata
+  sku?: string;
+  brand?: string;
+  tags?: string[];
+  status?: string;
+  featured?: boolean;
+  secondHand?: boolean;
+  marketingLabel?: string;
+  marketingLabelDate?: string;
 
-    categoryPaths: Array.isArray(raw.categoryPaths) ? raw.categoryPaths : [],
-    categoriesFlat: Array.isArray(raw.categoriesFlat) ? raw.categoriesFlat : [],
+  // Variants
+  variantName?: string;
+  options: OptionTier[];
 
-    images,
-    image,
+  // Legacy / Misc
+  features: string[]; // Compat: mapped from features or empty array
+  brands?: string[];
 
-    price: computeBestPrice(raw),
+  // Compatibility fields (Runtime mapped)
+  title: string;
+  longDescription: string;
 
-    options: Array.isArray(raw.options)
-      ? raw.options.map((o) => ({
-          label: String(o.label ?? ''),
-          price: Number(o.price ?? 0),
-          effectivePrice: Number(o.effectivePrice ?? o.price ?? 0),
-          stock: Number(o.stock ?? 0),
-          weight: Number(o.weight ?? 0),
-          discountType: o.discountType,
-          discountValue: typeof o.discountValue === 'number' ? o.discountValue : Number(o.discountValue ?? 0),
-        }))
-      : [],
+  metaTitle?: string;
+  metaDescription?: string;
+  legacyPath?: string;
+}
 
-    tax: raw.tax,
-    brand: raw.brand,
-    status: raw.status,
-    featured: raw.featured,
-    secondHand: raw.secondHand,
-    marketingLabel: raw.marketingLabel,
-    marketingLabelDate: raw.marketingLabelDate,
-    cost: typeof raw.cost === 'number' ? raw.cost : Number(raw.cost ?? 0),
-    tags: raw.tags,
-    personalizationsRaw: raw.personalizationsRaw,
-  };
+// SIMULATED DATABASE
+// In the future, this could be: import products form '@/data/products.json';
+// SIMULATED DATABASE
+// Importing generated data from CSV migration (real import)
+import generatedProducts from './products.json';
+
+// Cast and Map
+const productsArray = (generatedProducts as unknown as Product[]).map(p => ({
+  ...p,
+  // Compat map
+  title: p.name,
+  image: (p.imagesSource && p.imagesSource.length > 0) ? p.imagesSource[0] : "/placeholder.svg",
+  features: p.features || [],
+  brands: p.brand ? [p.brand] : (p.brands || []),
+  longDescription: p.descriptionHtml || "",
+  shortDescription: p.shortDescriptionHtml || ""
+}));
+
+export const products: Record<string, Product> = productsArray.reduce((acc, product) => {
+  acc[product.slug] = product;
+  return acc;
+}, {} as Record<string, Product>);
+
+export function getProduct(slug: string): Product | undefined {
+  return products[slug];
 }
 
 export function getAllProducts(): Product[] {
-  if (_cache) return _cache;
-
-  const filePath = path.join(process.cwd(), 'lib/data/products.json');
-  if (!fs.existsSync(filePath)) {
-    console.warn(`[products] Missing ${filePath}. Did prebuild run? Returning empty list.`);
-    _cache = [];
-    return _cache;
-  }
-
-  const raw = fs.readFileSync(filePath, 'utf8');
-  const data = JSON.parse(raw);
-  const list: RawProduct[] = Array.isArray(data) ? data : [];
-  _cache = list.map(toProduct);
-  return _cache;
+  return Object.values(products);
 }
 
-export function getProductById(id: string | number): Product | undefined {
-  return getAllProducts().find((p) => String(p.id) === String(id));
+/**
+ * Find product by numeric legacy ID (string in the JSON).
+ * Used by legacy SEO routes: /p<ID>-<slug>.html
+ */
+export function getProductById(id: string): Product | undefined {
+  // productsArray is the canonical list loaded from products.json
+  return productsArray.find((p) => p.id === id);
 }
 
-export function toLegacySlug(p: Product): string {
-  const id = String(p.id || '');
-  const slug = String(p.slug || '');
-  const suffix = `-${id}`;
-  return slug.endsWith(suffix) ? slug.slice(0, -suffix.length) : slug;
+/**
+ * Slugify compatible with the legacy URL scheme.
+ * We keep it simple and deterministic.
+ */
+export function toLegacySlug(input: string): string {
+  return (input || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // remove accents
+    .toLowerCase()
+    .replace(/&/g, 'y')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
