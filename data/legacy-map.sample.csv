@@ -1,2 +1,7 @@
-sku;legacyPath
-12345;/old-category/old-product.html
+## Two supported formats (semicolon or comma separated):
+## 1) source;destination
+## 2) id;legacyPath   (destination will be computed to the canonical /p<ID>-slug.html)
+##
+## Examples:
+/antiguo-producto.html;/p8222301-cuberteria-personalizada-aurora-champan-nacar-3-mm.html
+8222301;/antiguo-producto.html

@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "npm run data:build && npm run legacy:build",
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
@@ -13,7 +12,8 @@
     "data:build": "node scripts/import-catalog.js --input data/exportProducts.csv --out lib/data/products.json",
     "data:build:strict": "node scripts/import-catalog.js --input data/exportProducts.csv --out lib/data/products.json --strict",
     "legacy:build": "node scripts/legacy-urls.js",
-    "legacy:build:strict": "node scripts/legacy-urls.js --strict"
+    "legacy:build:strict": "node scripts/legacy-urls.js --strict",
+    "prebuild": "npm run data:build && npm run legacy:build"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
