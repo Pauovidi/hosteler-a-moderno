@@ -1,14 +1,31 @@
 {
-    "442240": {
-        "type": "category",
-        "key": "tazas-platillos-cafe"
+    "415714": {
+        "title": "PRODUCTOS PERSONALIZADOS",
+        "mode": "all"
     },
-    "534870": {
-        "type": "category",
-        "key": "copas-vino"
+    "412080": {
+        "title": "CRISTALERÍA",
+        "mode": "categoryExact",
+        "value": "Cristalería Personalizada para Hostelería y Restauración"
     },
-    "415579": {
-        "type": "category",
-        "key": "airlaid"
+    "412082": {
+        "title": "VAJILLA",
+        "mode": "categoryContains",
+        "value": "Vajilla"
+    },
+    "453874": {
+        "title": "CUBIERTOS PERSONALIZADOS",
+        "mode": "categoryExact",
+        "value": "CUBIERTOS PERSONALIZADOS"
+    },
+    "412083": {
+        "title": "SERVILLETAS",
+        "mode": "categoryContains",
+        "value": "Servilletas"
+    },
+    "412081": {
+        "title": "TEXTIL HOTELES",
+        "mode": "categoryContains",
+        "value": "MANTELERÍA"
     }
 }

@@ -9,9 +9,11 @@ const SAMPLE_MAP_PATH = path.join(__dirname, '../data/legacy-map.sample.csv');
 
 // Load Data
 if (!fs.existsSync(INPUT_PRODUCTS_PATH)) {
-    console.error(`ERROR: Product data not found at ${INPUT_PRODUCTS_PATH}`);
-    console.error("Please run 'npm run data:build' first.");
-    process.exit(1);
+    // Graceful exit for Vercel if data build hasn't run yet or failed
+    console.warn(`WARNING: Product data not found at ${INPUT_PRODUCTS_PATH}. Skipping redirects.`);
+    fs.mkdirSync(path.dirname(REDIRECTS_OUTPUT_PATH), { recursive: true });
+    fs.writeFileSync(REDIRECTS_OUTPUT_PATH, "[]");
+    process.exit(0);
 }
 
 let products = [];

@@ -7,11 +7,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { name: "Servilletas", href: "/producto/servilletas" },
-  { name: "Cristaleria", href: "/producto/cristaleria" },
-  { name: "Vajilla", href: "/producto/vajilla" },
-  { name: "Cuberteria", href: "/producto/cuberteria" },
-  { name: "Textil Hoteles", href: "/producto/textil-hoteles" },
+  { name: "Servilletas", href: "/c412083-servilletas-para-hosteleria-personalizadas.html" },
+  { name: "Cristaleria", href: "/c412080-cristaleria-personalizada-hosteleria.html" },
+  { name: "Vajilla", href: "/c412082-vajilla-personalizada.html" },
+  { name: "Cuberteria", href: "/c453874-cubiertos-personalizados.html" },
+  { name: "Textil Hoteles", href: "/c412081-manteleria-textil-personalizada.html" },
   { name: "Contacto", href: "#contacto" },
 ];
 
