@@ -22,6 +22,7 @@ export interface Product {
   slug: string;
   descriptionHtml?: string;
   shortDescriptionHtml?: string;
+  shortDescription?: string; // compat/SEO (texto corto)
   categoryPaths: string[][];
   categoriesFlat: string[];
 
