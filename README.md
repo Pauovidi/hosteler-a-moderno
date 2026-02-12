@@ -1,73 +1,55 @@
-# Welcome to your Lovable project
+# Palbin Replication Project
 
-## Project info
+## Getting Started (One Truth)
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-## How can I edit this code?
+2. **Build the real catalog data (from CSV)**
+   ```bash
+   npm run data:build
+   ```
+   This generates:
+   - `lib/data/products.json`
+   - `out/import-report.json`
+   - `out/import-errors.json`
 
-There are several ways of editing your application.
+3. **(Optional) Legacy product redirects**
+   - Create `data/legacy-map.csv` with:
+     ```csv
+     key;legacyPath
+     7295638;/ruta-antigua.html
+     ```
+     Where `key` is the product `id` from `products.json`.
+   - Then run:
+     ```bash
+     npm run legacy:build
+     ```
+     This generates `out/redirects.json` (used by `next.config.mjs`).
 
-**Use Lovable**
+4. **Run the dev server**
+   ```bash
+   npm run dev
+   ```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Scripts
 
-Changes made via Lovable will be committed automatically to this repo.
+- `npm run data:build` / `npm run data:build:strict`: Import real catalog from `data/exportProducts.csv` to `lib/data/products.json`.
+- `npm run legacy:build` / `npm run legacy:build:strict`: Generate legacy 301 redirects to `out/redirects.json` (requires `data/legacy-map.csv`).
+- `npm run build`: Build for production.
+- `npm run start`: Start production server.
 
-**Use your preferred IDE**
+## Legacy URLs
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Products (301)**: `/old-url.html` -> `/producto/<slug>` (generated via `scripts/legacy-urls.js` + `data/legacy-map.csv`).
+- **Categories (rewrite + canonical)**: `/c123-slug.html` -> internal `/legacy-category/123?slug=slug`
+  - Mapping lives in `data/legacy-landing-map.json`.
+  - Canonical is set to the **legacy URL itself** (`/c123-slug.html`).
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Data Flow
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- **Source**: `data/exportProducts.csv`
+- **Output (official)**: `lib/data/products.json`
+- **Frontend**: consumes the official JSON via `lib/data/products.ts`
