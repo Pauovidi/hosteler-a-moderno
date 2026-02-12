@@ -15,20 +15,15 @@ interface ProductClientProps {
   categoria: string;
 }
 
-function toLegacySlug(p: Product) {
-  const id = String(p.id || "");
-  const slug = String(p.slug || "");
-  const suffix = `-${id}`;
-  return slug.endsWith(suffix) ? slug.slice(0, -suffix.length) : slug;
-}
-
-function legacyProductHref(p: Product) {
-  const id = String(p.id || "");
-  const legacySlug = toLegacySlug(p) || "producto";
+function legacyProductHref(p: Product): string {
+  const id = p.id;
+  const raw = p.slug || "";
+  const legacySlug = raw.replace(new RegExp(`-${id}$`), "") || raw;
   return `/p${id}-${legacySlug}.html`;
 }
 
 export default function ProductClient({ product, categoria }: ProductClientProps) {
+  // Get other products for "Related Products" section
   const otherProducts = getAllProducts().filter((p) => p.slug !== categoria);
 
   return (
@@ -101,27 +96,26 @@ export default function ProductClient({ product, categoria }: ProductClientProps
                       </thead>
                       <tbody className="divide-y divide-border">
                         {product.options.map((option, idx) => {
-                          const displayPrice =
-                            option.effectivePrice && option.effectivePrice > 0
-                              ? option.effectivePrice
-                              : option.price && option.price > 0
+                          const displayPrice = option.effectivePrice && option.effectivePrice > 0
+                            ? option.effectivePrice
+                            : option.price && option.price > 0
                               ? option.price
                               : product.price && product.price > 0
-                              ? product.price
-                              : null;
+                                ? product.price
+                                : null;
 
                           return (
                             <tr key={idx} className="hover:bg-muted/50 transition-colors">
                               <td className="px-4 py-3 text-foreground">{option.label}</td>
                               <td className="px-4 py-3 text-right text-foreground font-medium">
-                                {displayPrice !== null ? (
-                                  new Intl.NumberFormat("es-ES", {
-                                    style: "currency",
-                                    currency: "EUR",
-                                  }).format(displayPrice)
-                                ) : (
-                                  <span className="text-muted-foreground italic text-xs">Solicitar presupuesto</span>
-                                )}
+                                {displayPrice !== null
+                                  ? new Intl.NumberFormat("es-ES", {
+                                      style: "currency",
+                                      currency: "EUR",
+                                    }).format(displayPrice)
+                                  : (
+                                    <span className="text-muted-foreground italic text-xs">Solicitar presupuesto</span>
+                                  )}
                               </td>
                             </tr>
                           );

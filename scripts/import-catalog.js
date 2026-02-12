@@ -1,23 +1,24 @@
 const fs = require('fs');
 const path = require('path');
 
-// Configuration (CLI args; aligned with package.json)
-function getArg(flag, fallback) {
+
+// Configuration (CLI)
+// Usage:
+//   node scripts/import-catalog.js --input data/exportProducts.csv --out lib/data/products.json [--strict]
+function getArgValue(flag) {
   const idx = process.argv.indexOf(flag);
-  if (idx !== -1 && process.argv[idx + 1] && !process.argv[idx + 1].startsWith('--')) {
-    return process.argv[idx + 1];
-  }
-  return fallback;
+  if (idx === -1) return null;
+  const val = process.argv[idx + 1];
+  if (!val || val.startsWith('--')) return null;
+  return val;
 }
 
-const INPUT_CSV = path.resolve(process.cwd(), getArg('--input', 'data/exportProducts.csv'));
-const OUTPUT_JSON = path.resolve(process.cwd(), getArg('--out', 'lib/data/products.json'));
+const INPUT_CSV = path.resolve(process.cwd(), getArgValue('--input') || 'data/exportProducts.csv');
+const OUTPUT_JSON = path.resolve(process.cwd(), getArgValue('--out') || 'lib/data/products.json');
 const OUTPUT_REPORT = path.resolve(process.cwd(), 'out/import-report.json');
 const OUTPUT_ERRORS = path.resolve(process.cwd(), 'out/import-errors.json');
 
 const STRICT_MODE = process.argv.includes('--strict');
-
-// --- HELPER FUNCTIONS ---
 
 // --- HELPER FUNCTIONS ---
 

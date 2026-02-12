@@ -6,13 +6,15 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
+// IMPORTANT: Old-site (legacy) category URLs (we keep them for SEO)
 const navLinks = [
-  { name: "Servilletas", href: "#servilletas" },
-  { name: "Cristaleria", href: "#cristaleria" },
-  { name: "Vajilla", href: "#vajilla" },
-  { name: "Cuberteria", href: "#cuberteria" },
-  { name: "Textil Hoteles", href: "#textil" },
-  { name: "Contacto", href: "#contacto" },
+  { name: "Productos", href: "/c415714-productos-personalizados.html" },
+  { name: "Servilletas", href: "/c412083-servilletas-para-hosteleria-personalizadas.html" },
+  { name: "Cristalería", href: "/c412080-cristaleria-personalizada-hosteleria.html" },
+  { name: "Vajilla", href: "/c412082-vajilla-personalizada.html" },
+  { name: "Cubertería", href: "/c453874-cubiertos-personalizados.html" },
+  { name: "Textil Hoteles", href: "/c412081-manteleria-textil-personalizada.html" },
+  { name: "Contacto", href: "/presupuesto" },
 ];
 
 export function Header() {
@@ -23,7 +25,7 @@ export function Header() {
       {/* Top bar */}
       <div className="bg-foreground text-background py-2 px-4 text-sm hidden md:block">
         <div className="container mx-auto flex justify-between items-center">
-          <span className="font-sans">Llamanos: +34 XXX XXX XXX</span>
+          <span className="font-sans">Llámanos: +34 XXX XXX XXX</span>
           <span className="font-sans">info@personalizadoshosteleria.com</span>
         </div>
       </div>
@@ -43,12 +45,12 @@ export function Header() {
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <div key={link.name} className="relative group">
-                <a
+                <Link
                   href={link.href}
                   className="font-sans text-foreground/80 hover:text-foreground transition-colors text-lg tracking-wide"
                 >
                   {link.name}
-                </a>
+                </Link>
               </div>
             ))}
           </div>
@@ -83,13 +85,13 @@ export function Header() {
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <div key={link.name}>
-                  <a
+                  <Link
                     href={link.href}
                     className="font-sans text-foreground/80 hover:text-foreground transition-colors text-lg block py-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </div>
               ))}
               <Link href="/presupuesto" onClick={() => setIsMenuOpen(false)}>

@@ -84,8 +84,19 @@ export const products: Record<string, Product> = productsArray.reduce((acc, prod
   return acc;
 }, {} as Record<string, Product>);
 
+export const productsById: Record<string, Product> = productsArray.reduce((acc, product) => {
+  if (product.id) {
+    acc[product.id] = product;
+  }
+  return acc;
+}, {} as Record<string, Product>);
+
 export function getProduct(slug: string): Product | undefined {
   return products[slug];
+}
+
+export function getProductById(id: string): Product | undefined {
+  return productsById[id];
 }
 
 export function getAllProducts(): Product[] {

@@ -1,14 +1,13 @@
 {
-    "442240": {
-        "type": "category",
-        "key": "tazas-platillos-cafe"
-    },
-    "534870": {
-        "type": "category",
-        "key": "copas-vino"
-    },
-    "415579": {
-        "type": "category",
-        "key": "airlaid"
-    }
+  "415714": { "title": "Productos personalizados", "mode": "all" },
+
+  "412083": { "title": "Servilletas para hostelería personalizadas", "mode": "contains", "value": "servilletas" },
+  "412080": { "title": "Cristalería personalizada hostelería", "mode": "contains", "value": "cristaler" },
+  "412082": { "title": "Vajilla personalizada", "mode": "contains", "value": "vajilla" },
+  "453874": { "title": "Cubiertos personalizados", "mode": "contains", "value": "cubert" },
+  "412081": { "title": "Mantelería textil personalizada", "mode": "contains", "value": "manteler" },
+
+  "442240": { "title": "Tazas y platillos café personalizado", "mode": "contains", "value": "tazas" },
+  "534870": { "title": "Copas de vino personalizadas", "mode": "contains", "value": "copas" },
+  "415579": { "title": "Airlaid", "mode": "contains", "value": "airlaid" }
 }

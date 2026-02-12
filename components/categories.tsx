@@ -10,30 +10,35 @@ const categories = [
     title: "Servilletas Personalizadas",
     description: "Servilletas de papel y tela con su logo para crear una imagen de marca coherente.",
     image: "https://cdn.palbincdn.com/users/36776/upload/images/servilletas-personalizadas.png",
+    href: "/c412083-servilletas-para-hosteleria-personalizadas.html",
   },
   {
     id: "cristaleria",
-    title: "Cristaleria Personalizada",
+    title: "Cristalería Personalizada",
     description: "Copas, vasos y jarras grabados con su marca. Colaboramos con Arcoroc, Bormioli, Stoelzle.",
     image: "https://cdn.palbincdn.com/users/36776/upload/images/copas-personalizadas.png",
+    href: "/c412080-cristaleria-personalizada-hosteleria.html",
   },
   {
     id: "vajilla",
     title: "Vajilla Personalizada",
     description: "Platos, tazas y platillos con su identidad corporativa. Porcelana de primera calidad.",
     image: "https://cdn.palbincdn.com/users/36776/upload/images/copas-vasos-jarras-todo-personalizado.png",
+    href: "/c412082-vajilla-personalizada.html",
   },
   {
     id: "cuberteria",
-    title: "Cuberteria Personalizada",
-    description: "Cubiertos de acero inoxidable grabados con laser. Modelos exclusivos 18/10.",
+    title: "Cubertería Personalizada",
+    description: "Cubiertos de acero inoxidable grabados con láser. Modelos exclusivos 18/10.",
     image: "https://cdn.palbincdn.com/users/36776/upload/images/cuberteria-personalizada-4.png",
+    href: "/c453874-cubiertos-personalizados.html",
   },
   {
     id: "textil",
     title: "Contract Textil Hoteles",
-    description: "Soluciones textiles completas para hoteles: sabanas, toallas, mantelerias personalizadas.",
+    description: "Soluciones textiles completas para hoteles: sábanas, toallas, mantelerías personalizadas.",
     image: "https://cdn.palbincdn.com/users/36776/upload/images/soluciones-textiles-para-hoteles-3.png",
+    href: "/c412081-manteleria-textil-personalizada.html",
   },
 ];
 
@@ -73,7 +78,7 @@ export function Categories() {
             Todo para su Establecimiento
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Solucion integral para reposicion constante, grandes aperturas y proyectos de branding
+            Solución integral para reposición constante, grandes aperturas y proyectos de branding
           </p>
         </motion.div>
 
@@ -88,10 +93,9 @@ export function Categories() {
             <motion.div
               key={category.id}
               variants={itemVariants}
-              id={category.id}
               className={index === categories.length - 1 ? "md:col-span-2 lg:col-span-1" : ""}
             >
-              <Link href={`/producto/${category.id}`}>
+              <Link href={category.href}>
                 <div className="group bg-card border border-border overflow-hidden hover:border-gold/30 transition-all duration-300">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
@@ -111,7 +115,7 @@ export function Categories() {
                       {category.description}
                     </p>
                     <span className="text-gold font-display text-sm tracking-wider inline-flex items-center">
-                      Ver producto →
+                      Ver catálogo →
                     </span>
                   </div>
                 </div>

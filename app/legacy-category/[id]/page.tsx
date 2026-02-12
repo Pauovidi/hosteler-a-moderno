@@ -1,105 +1,150 @@
-import { notFound } from 'next/navigation';
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import { Categories } from "@/components/categories";
-import { Hero } from "@/components/hero";
-import legacyMap from '@/data/legacy-landing-map.json';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
 
-interface Props {
-  params: { id: string };
-  searchParams?: { slug?: string };
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
+import { WhatsAppButton } from '@/components/whatsapp-button';
+
+import legacyMap from '@/data/legacy-landing-map.json';
+import { getAllProducts, Product } from '@/lib/data/products';
+
+type LegacyRule = {
+  title: string;
+  mode: 'all' | 'exact' | 'contains';
+  value?: string;
+};
+
+function norm(s: string) {
+  return (s || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
 }
-export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
-  const { id } = params;
-  const slug = searchParams?.slug ?? '';
-    const mapping = (legacyMap as Record<string, { type: string; key: string }>)[id];
 
-    if (!mapping) {
-        return {
-            title: 'Página no encontrada'
-        }
-    }
+function toLegacySlug(p: Product) {
+  const id = String(p.id || '');
+  const slug = String(p.slug || '');
+  const suffix = `-${id}`;
+  return slug.endsWith(suffix) ? slug.slice(0, -suffix.length) : slug;
+}
 
-    // In a real scenario, we'd fetch the category title based on the key
-    // For now, we'll format the key
-    const title = mapping.key.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+function legacyProductHref(p: Product) {
+  const id = String(p.id || '');
+  const legacySlug = toLegacySlug(p) || 'producto';
+  return `/p${id}-${legacySlug}.html`;
+}
 
-    const canonicalPath = slug ? `/c${id}-${slug}.html` : `/c${id}-unknown.html`;
+function getRule(id: string): LegacyRule | undefined {
+  const raw: any = (legacyMap as any)[id];
+  if (!raw) return undefined;
 
+  // Backwards compatibility: {type:'category', key:'airlaid'}
+  if (raw.key && !raw.title) {
     return {
-        title: `${title} | Personalizados Hosteleria`,
-        description: `Descubre nuestra selección de ${title}.`,
-        alternates: { canonical: canonicalPath },
-        openGraph: {
-            url: canonicalPath,
-            title: `${title} | Personalizados Hosteleria`,
-            description: `Descubre nuestra selección de ${title}.`,
-        },
+      title: String(raw.key).replace(/-/g, ' ').toUpperCase(),
+      mode: 'contains',
+      value: String(raw.key),
     };
+  }
+
+  return raw as LegacyRule;
 }
 
-export default async function LegacyCategoryPage({ params }: Props) {
-  const { id } = params;
+export async function generateMetadata(
+  { params, searchParams }: { params: { id: string }; searchParams?: { slug?: string | string[] } }
+): Promise<Metadata> {
+  const id = params.id;
+  const rule = getRule(id);
+  if (!rule) {
+    return { title: 'Página no encontrada' };
+  }
 
-    // 1. Lookup ID in map
-    const mapping = (legacyMap as Record<string, { type: string; key: string }>)[id];
+  const rawSlug = (searchParams as any)?.slug;
+  const slug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
+  const canonicalPath = `/c${id}-${slug || 'categoria'}.html`;
+  const canonical = `https://www.personalizadoshosteleria.com${canonicalPath}`;
 
-    if (!mapping) {
-        return notFound();
-    }
+  return {
+    title: `${rule.title} | Personalizados Hosteleria`,
+    description: `Descubre nuestra selección de ${rule.title}.`,
+    alternates: { canonical },
+    openGraph: {
+      title: `${rule.title} | Personalizados Hosteleria`,
+      url: canonical,
+    },
+  };
+}
 
-    // 2. Render appropriate content based on type
-    // For "category", we currently re-use the Categories component or Home structures
-    // The user requested to "use the same product list component".
-    // The 'Categories' component on Home lists *categories*, not products.
-    // The 'ProductoPage' ([categoria]) lists a specific product details.
-    // We need a proper Product List page. 
-    // GLANCE: The existing app seems to have:
-    // - / (Home): Categories, Hero, Benefits...
-    // - /producto/[categoria]: Single product detail?
-    // - /presupuesto: Cart/Quote.
+export default async function LegacyCategoryPage(
+  { params }: { params: { id: string }; searchParams?: { slug?: string | string[] } }
+) {
+  const id = params.id;
+  const rule = getRule(id);
+  if (!rule) return notFound();
 
-    // If the legacy page was a LIST of products (e.g. "copas-vino"), we should ideally 
-    // show a grid of products filtered by that category.
-    // BUT we don't have a dedicated "Category Product List" page yet in the App Router (based on file list).
-    // The request says: "Use the same component of list of products THAT ALREADY EXISTS".
-    // On Home, <Categories /> lists categories.
-    // Let's create a simple page that reuses the Header/Footer and displays the "Categories" 
-    // component but maybe focused or just a generic landing for now, 
-    // validating that the ID routing works.
+  const products = getAllProducts();
 
-    // NOTE: The user prompt implies "renderiza una página de listado... grid + filtros si hay".
-    // If we don't have a grid+filters component, we'll build a simple grid of all products 
-    // for the demo, or filter by the mapped key if possible.
+  const filtered = products.filter((p) => {
+    if (rule.mode === 'all') return true;
+    const value = norm(rule.value || '');
+    if (!value) return false;
+    const cats = (p.categoriesFlat || []).map(norm);
+    if (rule.mode === 'exact') return cats.some((c) => c === value);
+    return cats.some((c) => c.includes(value));
+  });
 
-    return (
-        <div className="min-h-screen flex flex-col">
-            <Header />
-            <main className="flex-1">
-                <div className="container mx-auto px-4 py-8 pt-32">
-                    <h1 className="text-3xl font-display mb-6">
-                        Colección: {mapping.key.replace(/-/g, ' ').toUpperCase()}
-                    </h1>
-                    <div className="bg-muted/30 p-6 rounded-lg mb-8">
-                        <p>
-                            Estás viendo una colección importada de nuestra web anterior (ID: {id}).
-                            <br />
-                            Mostrando productos relacionados...
-                        </p>
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1 pt-32 pb-20">
+        <div className="container mx-auto px-4">
+          <h1 className="font-display text-3xl md:text-4xl text-foreground mb-4">
+            {rule.title}
+          </h1>
+          <p className="text-muted-foreground mb-10">
+            {filtered.length} producto{filtered.length === 1 ? '' : 's'}
+          </p>
+
+          {filtered.length === 0 ? (
+            <div className="border border-border p-6 bg-muted/30">
+              <p className="text-muted-foreground">
+                No hay productos disponibles para esta colección todavía.
+              </p>
+              <div className="mt-4">
+                <Link href="/presupuesto" className="text-gold font-display underline">
+                  Solicitar presupuesto
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {filtered.map((p) => (
+                <Link key={p.slug} href={legacyProductHref(p)}>
+                  <div className="group border border-border hover:border-gold/30 transition-all bg-card">
+                    <div className="aspect-square relative overflow-hidden">
+                      <Image
+                        src={p.image || '/placeholder.svg'}
+                        alt={p.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
-                    {/* 
-              Reuse Categories component to show navigation options, 
-              or we could import ProductGrid if it existed. 
-              For the specific requested URL/behavior, we are "replicating" 
-              the legacy view.
-              Let's re-use the Home's Categories component as a fallback list 
-              since we don't have a dedicated ProductGrid component file visible yet.
-             */}
-                    <Categories />
-                </div>
-            </main>
-            <Footer />
+                    <div className="p-4">
+                      <p className="font-display text-sm text-foreground group-hover:text-gold transition-colors text-center">
+                        {p.title}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
-    );
+      </main>
+      <Footer />
+      <WhatsAppButton />
+    </div>
+  );
 }
