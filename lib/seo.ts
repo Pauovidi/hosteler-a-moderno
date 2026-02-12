@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import type { Product } from "./data/products";
 
 const SITE = {
-  // Dominio CANÓNICO (web antigua) para preservar SEO
+  // Dominio canónico (web antigua) para preservar SEO
   origin: "https://www.personalizadoshosteleria.com",
   name: "Personalizados Hosteleria",
 };
@@ -25,39 +25,39 @@ function stripHtml(html: string) {
 }
 
 function getBestDescription(product: Product) {
-  // prioridad: metaDescription > shortDescription (texto) > shortDescriptionHtml (limpiado) > vacío
-  const meta = (product as any).metaDescription as string | undefined;
-  const shortText = (product as any).shortDescription as string | undefined;
-  const shortHtml = (product as any).shortDescriptionHtml as string | undefined;
+  const p: any = product as any;
 
-  return (
-    meta ||
-    shortText ||
-    (shortHtml ? stripHtml(shortHtml) : "") ||
-    ""
-  );
+  const meta = (p.metaDescription as string | undefined) || "";
+  const shortText = (p.shortDescription as string | undefined) || "";
+  const shortHtml = (p.shortDescriptionHtml as string | undefined) || "";
+
+  return meta || shortText || (shortHtml ? stripHtml(shortHtml) : "") || "";
 }
 
 function getOgImages(product: Product) {
-  // FIX DEL ERROR: NO devolvemos url undefined
-  const img = (product as any).image as string | undefined;
+  // FIX: nunca devolvemos url undefined
+  const p: any = product as any;
+  const img = p.image as string | undefined;
   if (!img) return undefined;
 
   return [
     {
       url: img,
-      alt: (product as any).title ?? SITE.name,
+      alt: (p.title as string | undefined) ?? SITE.name,
     },
   ];
 }
 
 /**
- * SEO para producto (Metadata Next.js).
- * - canonicalAbs: URL absoluta que quieres como canonical (p.e. legacy /p<ID>-slug.html)
+ * Metadata para producto.
+ * - canonicalAbs: URL absoluta o path (ej: "/p10446447-mi-producto.html") que quieres como canonical.
  */
 export function productMetadata(product: Product, canonicalAbs?: string): Metadata {
-  const title = (product as any).metaTitle || (product as any).title || SITE.name;
-  const description = getBestDescription(product);
+  const p: any = product as any;
+
+  const title: string = (p.metaTitle as string | undefined) || (p.title as string | undefined) || SITE.name;
+  const description: string = getBestDescription(product);
+
   const canonical = canonicalAbs ? absoluteUrl(canonicalAbs) : SITE.origin;
 
   const ogImages = getOgImages(product);
@@ -87,7 +87,7 @@ export function productMetadata(product: Product, canonicalAbs?: string): Metada
 }
 
 /**
- * SEO para categoría/landing legacy.
+ * Metadata para categoría/landing legacy.
  */
 export function categoryMetadata(opts: {
   title: string;
@@ -117,9 +117,40 @@ export function categoryMetadata(opts: {
 }
 
 /**
- * Aliases por compatibilidad (por si ya estabas importando otro nombre).
+ * Metadata base del sitio (usado por app/layout.tsx).
+ * Importante: exportamos buildBaseMetadata porque el layout lo está pidiendo.
  */
+export function baseMetadata(): Metadata {
+  const title = SITE.name;
+  const description = `${SITE.name} — Catálogo y productos personalizados para hostelería.`;
+
+  return {
+    metadataBase: new URL(SITE.origin),
+    title: {
+      default: title,
+      template: `%s | ${SITE.name}`,
+    },
+    description,
+    openGraph: {
+      type: "website",
+      url: SITE.origin,
+      title,
+      description,
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
+  };
+}
+
+// Backwards-compatible exports (para no romper imports existentes)
+export const buildBaseMetadata = baseMetadata;
+
 export const getProductSeo = productMetadata;
 export const getProductMetadata = productMetadata;
 export const buildProductMetadata = productMetadata;
+
 export const buildCategoryMetadata = categoryMetadata;
+export const buildCategorySeo = categoryMetadata;
