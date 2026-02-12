@@ -2,8 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 // Generates out/redirects.json for Next.js `redirects()`.
-// IMPORTANT: main legacy pages (/p<ID>-slug.html and /c<ID>-slug.html) are handled by `rewrites()` and MUST NOT be 301'ed.
-// This script is only for extra legacy URLs that do NOT match those patterns.
+//
+// IMPORTANT
+// - Main legacy pages (/p<ID>-slug.html and /c<ID>-slug.html) are handled by `rewrites()` (200 OK) and MUST NOT be 301'ed.
+// - This script is only for *extra* legacy URLs that do NOT match those patterns (e.g. old marketing pages, typos, alternate paths).
 
 const PRODUCTS_PATH = path.resolve(process.cwd(), 'lib/data/products.json');
 const REDIRECTS_OUTPUT_PATH = path.resolve(process.cwd(), 'out/redirects.json');
@@ -23,7 +25,7 @@ function writeRedirects(redirects) {
 }
 
 function isMainLegacyPattern(p) {
-  return /^\/([pc])\d+-.*\.html$/i.test(p) || /^\/(p)\d+\.html$/i.test(p);
+  return /^\/(?:[pc])\d+-.*\.html$/i.test(p) || /^\/(?:p)\d+\.html$/i.test(p);
 }
 
 function toLegacySlug(product) {
@@ -85,61 +87,78 @@ function parseCsvMap() {
   return rows;
 }
 
-function run() {
-  const productsById = loadProductsById();
-  const mapRows = parseCsvMap();
+function normalizePath(p) {
+  if (!p) return '';
+  const s = String(p).trim();
+  return s.startsWith('/') ? s : `/${s}`;
+}
 
+function buildRedirects(rows, productsById) {
   const redirects = [];
+  const seen = new Set();
 
-  for (const row of mapRows) {
-    const a = row.a;
-    const b = row.b;
+  const push = (source, destination) => {
+    const src = normalizePath(source);
+    const dst = normalizePath(destination);
+    if (!src || !dst) return;
 
-    // Format 1: source;destination
-    // If first column starts with '/' we treat it as a direct source.
+    // Never 301 the main legacy patterns (they must stay 200 OK via rewrites)
+    if (isMainLegacyPattern(src)) return;
+
+    const key = `${src}=>${dst}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+
+    redirects.push({ source: src, destination: dst, permanent: true });
+  };
+
+  for (const row of rows) {
+    const a = String(row.a || '').trim();
+    const b = String(row.b || '').trim();
+    if (!a || !b) continue;
+
+    // Format (1): explicit source;destination
     if (a.startsWith('/')) {
-      const source = a;
-      const destination = b;
+      push(a, b);
+      continue;
+    }
 
-      if (!source || !destination) continue;
-      if (isMainLegacyPattern(source)) {
-        // /p... and /c... are served via rewrites (200 OK) — do NOT redirect them.
+    // Format (2): id;legacyPath  (destination computed to canonical /p<ID>-slug.html)
+    if (/^\d+$/.test(a)) {
+      const id = a;
+      const legacyPath = b;
+      const product = productsById.get(String(id));
+      if (!product) {
+        const msg = `Mapping refers to missing product id=${id}`;
+        if (STRICT) throw new Error(msg);
+        console.warn(`[WARN] ${msg}`);
         continue;
       }
-      redirects.push({ source, destination, permanent: true });
+      push(legacyPath, legacyProductHref(product));
       continue;
     }
 
-    // Format 2: id;legacyPath
-    const id = a;
-    const legacyPath = b;
-
-    if (!id || !legacyPath) continue;
-    if (isMainLegacyPattern(legacyPath)) {
-      // Already handled by rewrites.
-      continue;
-    }
-
-    const product = productsById.get(String(id));
-    if (!product) {
-      if (STRICT) {
-        throw new Error(`legacy-map.csv references unknown product id: ${id}`);
-      }
-      continue;
-    }
-
-    const destination = legacyProductHref(product);
-    redirects.push({ source: legacyPath, destination, permanent: true });
+    // Unknown row format
+    const msg = `Unrecognized mapping row: "${a};${b}"`;
+    if (STRICT) throw new Error(msg);
+    console.warn(`[WARN] ${msg}`);
   }
 
-  writeRedirects(redirects);
+  return redirects;
 }
 
-try {
-  run();
-} catch (e) {
-  console.error(e?.message || e);
-  if (STRICT) process.exit(1);
-  // Never fail builds in non-strict mode.
-  writeRedirects([]);
+function main() {
+  try {
+    const productsById = loadProductsById();
+    const rows = parseCsvMap();
+    const redirects = buildRedirects(rows, productsById);
+    writeRedirects(redirects);
+  } catch (e) {
+    console.error(`[legacy:build] ERROR: ${e?.message || e}`);
+    // Never fail build unless STRICT
+    if (STRICT) process.exit(1);
+    writeRedirects([]);
+  }
 }
+
+main();
