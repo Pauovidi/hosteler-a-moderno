@@ -63,7 +63,7 @@ if (fs.existsSync(LEGACY_MAP_PATH)) {
 const redirects = [];
 products.forEach(p => {
     // New Path Strategy
-    const newPath = `/producto/${p.slug}`;
+    const newPath = `/p/${p.slug}`;
 
     // Legacy Path Strategy
     // 1. Check Map by ID (most reliable)

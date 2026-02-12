@@ -7,11 +7,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { name: "Servilletas", href: "#servilletas" },
-  { name: "Cristaleria", href: "#cristaleria" },
-  { name: "Vajilla", href: "#vajilla" },
-  { name: "Cuberteria", href: "#cuberteria" },
-  { name: "Textil Hoteles", href: "#textil" },
+  { name: "Servilletas", href: "/producto/servilletas" },
+  { name: "Cristaleria", href: "/producto/cristaleria" },
+  { name: "Vajilla", href: "/producto/vajilla" },
+  { name: "Cuberteria", href: "/producto/cuberteria" },
+  { name: "Textil Hoteles", href: "/producto/textil-hoteles" },
   { name: "Contacto", href: "#contacto" },
 ];
 
