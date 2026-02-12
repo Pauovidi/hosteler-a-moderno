@@ -1,182 +1,134 @@
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import Image from 'next/image';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import { getAllProducts, Product, toLegacySlug } from '@/lib/data/products';
+import productsData from "@/lib/data/products.json";
 
-// Optional map (if you have it). If missing, we fall back to slug-based filtering.
-// Keep the import inside try/catch to avoid build errors if the file is not present.
-let LANDING_MAP: Record<string, { title?: string; mode?: 'all' | 'categoryExact' | 'categoryContains'; value?: string }> = {};
-try {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  LANDING_MAP = require('@/data/legacy-landing-map.json');
-} catch {
-  LANDING_MAP = {};
-}
+type Product = {
+  id: string;
+  name: string;
+  slug?: string;
+  categoriesFlat?: string[];
+  price?: number;
+  options?: { label?: string; price?: number; effectivePrice?: number }[];
+};
 
-function prettyTitleFromSlug(slug: string) {
-  const s = (slug || '').replace(/\.html$/i, '').replace(/-/g, ' ').trim();
-  if (!s) return 'Productos';
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-function slugKeywords(slug: string) {
-  const stop = new Set([
-    'personalizado','personalizados','personalizada','personalizadas',
-    'hosteleria','hostelería','restauracion','restauración','para','de','y','en',
-    'alta','calidad','bajo','precio','o','la','el','los','las','del','al','mm','cl','uds','ud'
-  ]);
-  return (slug || '')
+function slugify(input: string): string {
+  return (input || "")
     .toLowerCase()
-    .split('-')
-    .map((t) => t.trim())
-    .filter((t) => t && t.length >= 3 && !stop.has(t));
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
-function matchesBySlug(product: Product, legacySlug: string) {
-  const keys = slugKeywords(legacySlug);
-  if (keys.length === 0) return false;
+function toLegacySlugFromProduct(p: Product): string {
+  const raw = String(p.slug || "").trim();
+  const suffix = `-${p.id}`;
+  return raw && suffix && raw.endsWith(suffix) ? raw.slice(0, -suffix.length) : raw;
+}
 
-  const hay = [
-    product.title,
-    ...(product.categoriesFlat || []),
-    ...(product.categoryPaths || []),
-  ]
-    .join(' ')
-    .toLowerCase();
+function bestCategoryFromSlug(products: Product[], legacySlug: string): string | null {
+  const tokens = slugify(legacySlug).split("-").filter(Boolean);
+  if (tokens.length === 0) return null;
 
-  return keys.some((k) => hay.includes(k));
+  // Score categories by how many tokens they contain (and prefer longer matches).
+  const score: Record<string, number> = {};
+  for (const p of products) {
+    for (const cat of p.categoriesFlat || []) {
+      const s = slugify(cat);
+      let hits = 0;
+      for (const t of tokens) if (s.includes(t)) hits += 1;
+      if (hits > 0) score[cat] = Math.max(score[cat] || 0, hits * 100 + s.length);
+    }
+  }
+
+  const sorted = Object.entries(score).sort((a, b) => b[1] - a[1]);
+  return sorted.length ? sorted[0][0] : null;
+}
+
+function getBestPrice(p: Product): number {
+  const base = typeof p.price === "number" ? p.price : 0;
+  const opt = (p.options || [])
+    .map((o) => (typeof o.effectivePrice === "number" ? o.effectivePrice : (typeof o.price === "number" ? o.price : 0)))
+    .filter((n) => n > 0)
+    .sort((a, b) => a - b)[0];
+  return base > 0 ? base : (opt || 0);
 }
 
 export async function generateMetadata(
-  { params, searchParams }: { params: { id: string }; searchParams?: { slug?: string } }
+  { params, searchParams }: { params: { id: string }; searchParams?: Record<string, string | string[] | undefined> }
 ): Promise<Metadata> {
   const id = params.id;
-  const legacySlug = searchParams?.slug || 'productos-personalizados';
-  const mapItem = LANDING_MAP?.[id];
-
-  const title = mapItem?.title || prettyTitleFromSlug(legacySlug);
-
-  const canonicalPath = `/c${id}-${legacySlug}.html`;
-  const canonical = `https://www.personalizadoshosteleria.com${canonicalPath}`;
+  const legacySlug = typeof searchParams?.slug === "string" ? searchParams.slug : "";
+  const canonicalPath = `/c${id}${legacySlug ? `-${legacySlug}` : ""}.html`;
 
   return {
-    title: `${title} - Personalizados Hostelería`,
-    description: `Catálogo de ${title}.`,
-    alternates: { canonical },
+    alternates: { canonical: canonicalPath },
+    openGraph: { url: canonicalPath },
   };
 }
 
-export default async function LegacyCategoryPage(
-  { params, searchParams }: { params: { id: string }; searchParams?: { slug?: string } }
+export default function LegacyCategoryPage(
+  { params, searchParams }: { params: { id: string }; searchParams?: Record<string, string | string[] | undefined> }
 ) {
+  const products = productsData as unknown as Product[];
+
   const id = params.id;
-  const legacySlug = searchParams?.slug || 'productos-personalizados';
+  const legacySlug = typeof searchParams?.slug === "string" ? searchParams.slug : "";
 
-  const allProducts = getAllProducts();
-  if (!allProducts.length) {
-    // Data not generated or missing
-    return (
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1 pt-32 pb-20">
-          <div className="container mx-auto px-4">
-            <h1 className="font-display text-3xl md:text-4xl text-foreground mb-4">
-              {prettyTitleFromSlug(legacySlug)}
-            </h1>
-            <p className="text-muted-foreground">
-              No hay catálogo disponible todavía (falta generar <code>lib/data/products.json</code>).
-            </p>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  // Primary: try to infer a category from the legacy slug (works even if the ID isn't mapped yet).
+  const inferredCategory = bestCategoryFromSlug(products, legacySlug);
 
-  const mapItem = LANDING_MAP?.[id];
-  let categoryProducts: Product[] = [];
+  const categoryProducts = inferredCategory
+    ? products.filter((p) => (p.categoriesFlat || []).includes(inferredCategory))
+    : [];
 
-  if (mapItem?.mode === 'all') {
-    categoryProducts = allProducts;
-  } else if (mapItem?.mode === 'categoryExact' && mapItem.value) {
-    categoryProducts = allProducts.filter((p) => p.categoriesFlat.includes(mapItem.value as string));
-  } else if (mapItem?.mode === 'categoryContains' && mapItem.value) {
-    categoryProducts = allProducts.filter((p) => p.categoriesFlat.some((c) => c.includes(mapItem.value as string)));
-  } else {
-    // Fallback: infer category by slug keywords (no mapping needed)
-    categoryProducts = allProducts.filter((p) => matchesBySlug(p, legacySlug));
-  }
-
-  // If still empty, don't 404 — show empty state (SEO-safe)
-  const title = mapItem?.title || prettyTitleFromSlug(legacySlug);
+  // If we couldn't infer anything, don't hard-404: show empty state (still returns 200 for legacy URL).
+  // But if the ID is invalid (non-numeric), return 404.
+  if (!/^\d+$/.test(id)) return notFound();
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1 pt-32 pb-20">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 text-center">
-            <h1 className="font-display text-3xl md:text-4xl text-foreground mb-4">
-              {title}
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Selección de productos.
-            </p>
-          </div>
+    <main className="mx-auto max-w-6xl px-4 py-10">
+      <div className="mb-8">
+        <h1 className="text-3xl font-semibold">
+          {inferredCategory ? inferredCategory : "Categoría"}
+        </h1>
+        <p className="mt-2 text-sm opacity-80">
+          URL legacy: <span className="font-mono">/c{id}{legacySlug ? `-${legacySlug}` : ""}.html</span>
+        </p>
+      </div>
 
-          {categoryProducts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {categoryProducts.map((product) => {
-                const productLegacySlug = toLegacySlug(product) || 'producto';
-                const productUrl = `/p${product.id}-${productLegacySlug}.html`;
-
-                const price = typeof product.price === 'number' ? product.price : 0;
-
-                return (
-                  <Link key={product.id} href={productUrl} className="group">
-                    <div className="border border-border rounded-lg overflow-hidden transition-all hover:shadow-lg hover:border-gold/30">
-                      <div className="aspect-square relative overflow-hidden bg-muted">
-                        <Image
-                          src={product.image || '/placeholder.svg'}
-                          alt={product.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </div>
-                      <div className="p-6">
-                        <h3 className="font-display text-lg text-foreground mb-2 group-hover:text-gold transition-colors">
-                          {product.title}
-                        </h3>
-                        {price > 0 ? (
-                          <p className="text-muted-foreground font-medium">
-                            Desde {new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(price)}
-                          </p>
-                        ) : (
-                          <p className="text-muted-foreground font-medium">
-                            Solicitar presupuesto
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="text-center py-16">
-              <p className="text-muted-foreground">
-                No hay productos en esta categoría (todavía).
-              </p>
-            </div>
-          )}
+      {categoryProducts.length === 0 ? (
+        <div className="rounded-xl border p-6">
+          <p className="text-lg font-medium">No hay productos para mostrar.</p>
+          <p className="mt-2 text-sm opacity-80">
+            (Esto no es un 404: mantenemos la URL legacy viva. Cuando afinemos el mapeo/heurística, aquí aparecerá el listado.)
+          </p>
         </div>
-      </main>
-      <Footer />
-    </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {categoryProducts.map((product) => {
+            const productLegacySlug = toLegacySlugFromProduct(product) || "producto";
+            const href = `/p${product.id}-${productLegacySlug}.html`;
+            const price = getBestPrice(product);
+
+            return (
+              <Link
+                key={product.id}
+                href={href}
+                className="rounded-2xl border p-5 transition hover:shadow-sm"
+              >
+                <div className="text-sm opacity-70">{product.id}</div>
+                <div className="mt-2 text-lg font-semibold leading-snug">{product.name}</div>
+                <div className="mt-3 text-sm opacity-80">
+                  {price > 0 ? `${price.toFixed(2)} €` : "Solicitar presupuesto"}
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      )}
+    </main>
   );
 }
