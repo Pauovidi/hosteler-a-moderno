@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 import { getProductById } from "@/lib/data/products";
 import { buildBaseMetadata, buildProductMetadata } from "@/lib/seo";
