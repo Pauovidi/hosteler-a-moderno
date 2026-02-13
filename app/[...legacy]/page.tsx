@@ -1,68 +1,85 @@
 import { notFound } from "next/navigation";
 
-import { buildBaseMetadata } from "@/lib/seo";
-
-// Reuse the already-implemented legacy handlers.
+// Reutilizamos las páginas internas (mantienes UI + SEO en un solo sitio)
 import LegacyCategoryPage, {
   generateMetadata as generateLegacyCategoryMetadata,
 } from "@/app/legacy-category/[id]/page";
+
 import LegacyProductPage, {
   generateMetadata as generateLegacyProductMetadata,
 } from "@/app/legacy-product/[id]/page";
 
 type Props = {
-  params: { legacy: string[] };
+  params: Promise<{ legacy: string[] }>;
 };
 
-function safeDecode(input: string): string {
-  try {
-    return decodeURIComponent(input);
-  } catch {
-    return input;
-  }
-}
-
-function parseLegacySegment(segment: string):
-  | { kind: "c" | "p"; id: string; slug: string }
+function parseLegacySegment(
+  segment: string
+):
+  | { kind: "c"; id: string; slug: string }
+  | { kind: "p"; id: string; slug: string }
   | null {
-  // Matches:
-  //  - c412080-cristaleria-personalizada-hosteleria.html
-  //  - p10446447-servilleta-...-qr.html
-  const m = segment.match(/^([pc])(\d+)(?:-(.+))?\.html$/i);
-  if (!m) return null;
+  // /c412083-servilletas-para-hosteleria-personalizadas.html
+  // /p10446447-servilleta-airlaid-....html
+  const match = segment.match(/^([cp])(\d+)(?:-(.*))?\.html$/i);
+  if (!match) return null;
 
-  const kind = m[1].toLowerCase() as "c" | "p";
-  const id = m[2];
-  const slug = safeDecode(m[3] || "");
+  const kind = match[1].toLowerCase() as "c" | "p";
+  const id = match[2];
+  const rawSlug = match[3] || "";
+
+  let slug = rawSlug;
+  try {
+    slug = decodeURIComponent(rawSlug);
+  } catch {
+    // ignore
+  }
+
   return { kind, id, slug };
 }
 
 export async function generateMetadata({ params }: Props) {
-  const base = buildBaseMetadata();
-
-  const segment = params?.legacy?.[0];
-  if (!segment) return base;
+  const { legacy } = await params;
+  const segment = legacy?.[0];
+  if (!segment) return {};
 
   const parsed = parseLegacySegment(segment);
-  if (!parsed) return base;
+  if (!parsed) return {};
 
-  const common = {
-    params: { id: parsed.id },
-    searchParams: { slug: parsed.slug },
-  } as any;
+  if (parsed.kind === "c") {
+    return generateLegacyCategoryMetadata({
+      params: Promise.resolve({ id: parsed.id }),
+      searchParams: Promise.resolve({ slug: parsed.slug }),
+    } as any);
+  }
 
-  return parsed.kind === "c"
-    ? generateLegacyCategoryMetadata(common)
-    : generateLegacyProductMetadata(common);
+  return generateLegacyProductMetadata({
+    params: Promise.resolve({ id: parsed.id }),
+    searchParams: Promise.resolve({ slug: parsed.slug }),
+  } as any);
 }
 
-export default function LegacyCatchAllPage({ params }: Props) {
-  const segment = params?.legacy?.[0];
-  if (!segment) return notFound();
+export default async function LegacyEntryPage({ params }: Props) {
+  const { legacy } = await params;
+  const segment = legacy?.[0];
+  if (!segment) notFound();
 
   const parsed = parseLegacySegment(segment);
-  if (!parsed) return notFound();
+  if (!parsed) notFound();
 
-  const Comp: any = parsed.kind === "c" ? LegacyCategoryPage : LegacyProductPage;
-  return <Comp params={{ id: parsed.id }} searchParams={{ slug: parsed.slug }} />;
+  if (parsed.kind === "c") {
+    return (
+      <LegacyCategoryPage
+        params={Promise.resolve({ id: parsed.id })}
+        searchParams={Promise.resolve({ slug: parsed.slug })}
+      />
+    );
+  }
+
+  return (
+    <LegacyProductPage
+      params={Promise.resolve({ id: parsed.id })}
+      searchParams={Promise.resolve({ slug: parsed.slug })}
+    />
+  );
 }
