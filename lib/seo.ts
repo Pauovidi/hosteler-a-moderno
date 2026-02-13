@@ -1,156 +1,69 @@
-// lib/seo.ts
-import type { Metadata } from "next";
-import type { Product } from "./data/products";
+import { Metadata } from "next";
+import { Product } from "./data/products";
 
-const SITE = {
-  // Dominio canónico (web antigua) para preservar SEO
-  origin: "https://www.personalizadoshosteleria.com",
-  name: "Personalizados Hosteleria",
-};
+const DEFAULT_TITLE = "Personalizados Hosteleria | Branding y Soluciones Integrales";
+const DEFAULT_DESCRIPTION =
+  "Expertos en productos personalizados para hosteleria: cristaleria, vajilla, cuberteria, servilletas y textil. Entrega rapida y calidad premium europea.";
+const SITE_URL = "https://v0-personalizados-hosteleria.vercel.app";
 
-function absoluteUrl(pathOrUrl: string) {
-  if (!pathOrUrl) return SITE.origin;
-  if (pathOrUrl.startsWith("http://") || pathOrUrl.startsWith("https://")) return pathOrUrl;
-  const path = pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`;
-  return `${SITE.origin}${path}`;
+function toAbsoluteUrl(input: string): string {
+  if (!input) return SITE_URL;
+  if (/^https?:\/\//i.test(input)) return input;
+  const path = input.startsWith("/") ? input : `/${input}`;
+  return `${SITE_URL}${path}`;
 }
 
-function stripHtml(html: string) {
-  return (html || "")
-    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, " ")
-    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, " ")
-    .replace(/<\/?[^>]+(>|$)/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+function stripHtml(html: string): string {
+  return String(html || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 }
 
-function getBestDescription(product: Product) {
-  const p: any = product as any;
-
-  const meta = (p.metaDescription as string | undefined) || "";
-  const shortText = (p.shortDescription as string | undefined) || "";
-  const shortHtml = (p.shortDescriptionHtml as string | undefined) || "";
-
-  return meta || shortText || (shortHtml ? stripHtml(shortHtml) : "") || "";
-}
-
-function getOgImages(product: Product) {
-  // FIX: nunca devolvemos url undefined
-  const p: any = product as any;
-  const img = p.image as string | undefined;
-  if (!img) return undefined;
-
-  return [
-    {
-      url: img,
-      alt: (p.title as string | undefined) ?? SITE.name,
-    },
-  ];
-}
-
-/**
- * Metadata para producto.
- * - canonicalAbs: URL absoluta o path (ej: "/p10446447-mi-producto.html") que quieres como canonical.
- */
-export function productMetadata(product: Product, canonicalAbs?: string): Metadata {
-  const p: any = product as any;
-
-  const title: string = (p.metaTitle as string | undefined) || (p.title as string | undefined) || SITE.name;
-  const description: string = getBestDescription(product);
-
-  const canonical = canonicalAbs ? absoluteUrl(canonicalAbs) : SITE.origin;
-
-  const ogImages = getOgImages(product);
-
-  const openGraph: NonNullable<Metadata["openGraph"]> = {
-    type: "website",
-    url: canonical,
-    title,
-    description,
-    ...(ogImages ? { images: ogImages } : {}),
-  };
-
-  const twitter: NonNullable<Metadata["twitter"]> = {
-    card: ogImages ? "summary_large_image" : "summary",
-    title,
-    description,
-    ...(ogImages ? { images: [ogImages[0]!.url] } : {}),
-  };
-
+export function buildBaseMetadata(): Metadata {
   return {
-    title,
-    description,
-    alternates: { canonical },
-    openGraph,
-    twitter,
-  };
-}
-
-/**
- * Metadata para categoría/landing legacy.
- */
-export function categoryMetadata(opts: {
-  title: string;
-  description?: string;
-  canonicalAbs: string;
-}): Metadata {
-  const canonical = absoluteUrl(opts.canonicalAbs);
-  const title = opts.title || SITE.name;
-  const description = opts.description || "";
-
-  return {
-    title,
-    description,
-    alternates: { canonical },
-    openGraph: {
-      type: "website",
-      url: canonical,
-      title,
-      description,
-    },
-    twitter: {
-      card: "summary",
-      title,
-      description,
-    },
-  };
-}
-
-/**
- * Metadata base del sitio (usado por app/layout.tsx).
- * Importante: exportamos buildBaseMetadata porque el layout lo está pidiendo.
- */
-export function baseMetadata(): Metadata {
-  const title = SITE.name;
-  const description = `${SITE.name} — Catálogo y productos personalizados para hostelería.`;
-
-  return {
-    metadataBase: new URL(SITE.origin),
     title: {
-      default: title,
-      template: `%s | ${SITE.name}`,
+      default: DEFAULT_TITLE,
+      template: `%s | Personalizados Hosteleria`,
     },
-    description,
+    description: DEFAULT_DESCRIPTION,
+    keywords: ["hosteleria", "personalizados", "cristaleria", "vajilla", "cuberteria", "servilletas", "hoteles", "HORECA"],
     openGraph: {
       type: "website",
-      url: SITE.origin,
-      title,
-      description,
+      locale: "es_ES",
+      url: SITE_URL,
+      title: DEFAULT_TITLE,
+      description: DEFAULT_DESCRIPTION,
+      siteName: "Personalizados Hosteleria",
+      images: [
+        {
+          url: toAbsoluteUrl("/logo-3.jpg"),
+          width: 800,
+          height: 600,
+          alt: "Personalizados Hosteleria Logo",
+        },
+      ],
     },
-    twitter: {
-      card: "summary",
-      title,
-      description,
+    icons: {
+      icon: [{ url: "/favicon.jpg", sizes: "any" }],
+      apple: "/favicon.jpg",
     },
   };
 }
 
-// Backwards-compatible exports (para no romper imports existentes)
-export const buildBaseMetadata = baseMetadata;
+export function buildProductMetadata(product: Product): Metadata {
+  const description =
+    product.metaDescription ||
+    product.shortDescription ||
+    stripHtml(product.shortDescriptionHtml || "") ||
+    DEFAULT_DESCRIPTION;
 
-export const getProductSeo = productMetadata;
-export const getProductMetadata = productMetadata;
-export const buildProductMetadata = productMetadata;
+  const imageUrl = toAbsoluteUrl(product.image || "/logo-3.jpg");
 
-export const buildCategoryMetadata = categoryMetadata;
-export const buildCategorySeo = categoryMetadata;
+  return {
+    title: product.metaTitle || product.title,
+    description,
+    openGraph: {
+      title: product.metaTitle || product.title,
+      description,
+      images: [{ url: imageUrl, alt: product.title }],
+    },
+  };
+}
