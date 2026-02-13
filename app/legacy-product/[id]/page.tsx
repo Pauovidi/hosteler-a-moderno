@@ -1,51 +1,61 @@
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
+import { notFound } from "next/navigation";
 
-import ProductClient from '@/app/producto/[categoria]/product-client';
-import { getProductById, toLegacySlug } from '@/lib/data/products';
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
-interface Props {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ slug?: string | string[] }>;
-}
+import { getProductById } from "@/lib/data/products";
+import { buildBaseMetadata, buildProductMetadata } from "@/lib/seo";
 
-export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
-  const { id } = await params;
-  const { slug: rawSlug } = await searchParams;
+// Reuse the existing product UI
+import ProductClient from "@/app/producto/[categoria]/product-client";
+
+type PageProps = {
+  params: { id: string };
+  searchParams?: { slug?: string };
+};
+
+export async function generateMetadata({ params, searchParams }: PageProps) {
+  const base = buildBaseMetadata();
+  const id = params?.id;
+  if (!id) return base;
 
   const product = getProductById(id);
-  if (!product) {
-    return { title: 'Producto no encontrado' };
-  }
+  if (!product) return base;
 
-  const slug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
-  const canonicalSlug = slug && slug.length > 0 ? slug : toLegacySlug(product.name || product.title);
-  const canonicalPath = `/p${id}-${canonicalSlug}.html`;
+  const legacySlug =
+    searchParams?.slug && searchParams.slug.trim()
+      ? searchParams.slug.trim()
+      : product.slug.replace(new RegExp(`-${id}$`), "");
 
-  const title = product.metaTitle || product.title;
-  const description = product.metaDescription || product.shortDescriptionHtml || '';
+  const canonicalPath = `/p${id}-${legacySlug}.html`;
+  const productMeta = buildProductMetadata(product);
 
   return {
-    title: `${title} | Personalizados Hosteleria`,
-    description,
-    alternates: { canonical: canonicalPath },
+    ...base,
+    ...productMeta,
+    alternates: {
+      ...(productMeta.alternates || {}),
+      canonical: canonicalPath,
+    },
     openGraph: {
-      title: `${title} | Personalizados Hosteleria`,
-      description,
+      ...(productMeta.openGraph || {}),
       url: canonicalPath,
-      images: product.image ? [{ url: product.image, alt: title }] : undefined,
     },
   };
 }
 
-export default async function LegacyProductPage({ params, searchParams }: Props) {
-  const { id } = await params;
-  // avoid unawaited promise warnings
-  await searchParams;
+export default function LegacyProductPage({ params }: PageProps) {
+  const id = params?.id;
+  if (!id) notFound();
 
   const product = getProductById(id);
-  if (!product) return notFound();
+  if (!product) notFound();
 
-  // ProductClient expects `categoria` just as a string; pass slug to keep related-products logic sane.
-  return <ProductClient product={product} categoria={product.slug} />;
+  return (
+    <div className="min-h-screen">
+      <Header />
+      <ProductClient product={product} />
+      <Footer />
+    </div>
+  );
 }
