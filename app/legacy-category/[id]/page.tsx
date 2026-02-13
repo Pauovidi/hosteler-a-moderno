@@ -8,8 +8,8 @@ import { getAllProducts, type Product } from "@/lib/data/products";
 import { buildBaseMetadata } from "@/lib/seo";
 
 type PageProps = {
-  params: { id: string };
-  searchParams?: { slug?: string };
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<{ slug?: string }>;
 };
 
 function normalize(s: string): string {
@@ -43,6 +43,12 @@ function productLegacySlug(product: Product): string {
   return base || "producto";
 }
 
+/**
+ * IMPORTANTE:
+ * La web antigua no tiene "categorías" reales.
+ * Estas /c<ID>-slug.html son landings del menú, así que filtramos por tokens del slug.
+ * Si no hay match, devolvemos TODO el catálogo (nunca 404 por “categoría inexistente”).
+ */
 function filterByLegacySlug(products: Product[], legacySlug?: string): Product[] {
   if (!legacySlug) return products;
 
@@ -82,12 +88,14 @@ function filterByLegacySlug(products: Product[], legacySlug?: string): Product[]
 
 export async function generateMetadata({ params, searchParams }: PageProps) {
   const base = buildBaseMetadata();
-  const id = params?.id;
+
+  const { id } = await params;
   if (!id) return base;
 
-  const slug = searchParams?.slug || "";
-  const canonicalPath = `/c${id}-${slug}.html`;
+  const sp = (await searchParams) ?? {};
+  const slug = sp.slug || "";
 
+  const canonicalPath = `/c${id}-${slug}.html`;
   const title = `${titleFromSlug(slug)} | Personalizados Hosteleria`;
   const description = `Descubre ${titleFromSlug(slug).toLowerCase()} en Personalizados Hosteleria.`;
 
@@ -107,11 +115,13 @@ export async function generateMetadata({ params, searchParams }: PageProps) {
   };
 }
 
-export default function LegacyCategoryPage({ params, searchParams }: PageProps) {
-  const id = params?.id;
+export default async function LegacyCategoryPage({ params, searchParams }: PageProps) {
+  const { id } = await params;
   if (!id) notFound();
 
-  const legacySlug = searchParams?.slug || "";
+  const sp = (await searchParams) ?? {};
+  const legacySlug = sp.slug || "";
+
   const allProducts = getAllProducts();
   const categoryProducts = filterByLegacySlug(allProducts, legacySlug);
 
@@ -128,7 +138,7 @@ export default function LegacyCategoryPage({ params, searchParams }: PageProps) 
         </p>
 
         {categoryProducts.length === 0 ? (
-          <div className="text-center text-gray-600">No hay productos en esta categoría.</div>
+          <div className="text-center text-gray-600">No hay productos en esta landing.</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {categoryProducts.map((product) => {
