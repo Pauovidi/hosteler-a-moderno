@@ -22,7 +22,8 @@ export interface Product {
   slug: string;
   descriptionHtml?: string;
   shortDescriptionHtml?: string;
-  shortDescription?: string; // compat/SEO (texto corto)
+  /** Compat: short plain-text description used by SEO helpers. */
+  shortDescription?: string;
   categoryPaths: string[][];
   categoriesFlat: string[];
 
@@ -93,25 +94,7 @@ export function getAllProducts(): Product[] {
   return Object.values(products);
 }
 
-/**
- * Find product by numeric legacy ID (string in the JSON).
- * Used by legacy SEO routes: /p<ID>-<slug>.html
- */
 export function getProductById(id: string): Product | undefined {
-  // productsArray is the canonical list loaded from products.json
-  return productsArray.find((p) => p.id === id);
-}
-
-/**
- * Slugify compatible with the legacy URL scheme.
- * We keep it simple and deterministic.
- */
-export function toLegacySlug(input: string): string {
-  return (input || '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '') // remove accents
-    .toLowerCase()
-    .replace(/&/g, 'y')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+  const wanted = String(id);
+  return productsArray.find((p) => p.id === wanted);
 }
