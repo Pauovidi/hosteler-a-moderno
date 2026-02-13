@@ -1,134 +1,180 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import productsData from "@/lib/data/products.json";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import { getAllProducts, type Product } from "@/lib/data/products";
+import { buildBaseMetadata } from "@/lib/seo";
 
-type Product = {
-  id: string;
-  name: string;
-  slug?: string;
-  categoriesFlat?: string[];
-  price?: number;
-  options?: { label?: string; price?: number; effectivePrice?: number }[];
+type PageProps = {
+  params: { id: string };
+  searchParams?: { slug?: string };
 };
 
-function slugify(input: string): string {
-  return (input || "")
+function normalize(s: string): string {
+  return s
     .toLowerCase()
     .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
-function toLegacySlugFromProduct(p: Product): string {
-  const raw = String(p.slug || "").trim();
-  const suffix = `-${p.id}`;
-  return raw && suffix && raw.endsWith(suffix) ? raw.slice(0, -suffix.length) : raw;
+function titleFromSlug(slug?: string): string {
+  if (!slug) return "Catálogo";
+  const clean = slug
+    .replace(/\.html$/i, "")
+    .split("-")
+    .filter(Boolean)
+    .join(" ");
+  return clean
+    .split(" ")
+    .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(" ");
 }
 
-function bestCategoryFromSlug(products: Product[], legacySlug: string): string | null {
-  const tokens = slugify(legacySlug).split("-").filter(Boolean);
-  if (tokens.length === 0) return null;
+function productLegacySlug(product: Product): string {
+  const base = String(product.slug || "")
+    .replace(new RegExp(`-${product.id}$`), "")
+    .replace(/\/+$/g, "")
+    .trim();
+  return base || "producto";
+}
 
-  // Score categories by how many tokens they contain (and prefer longer matches).
-  const score: Record<string, number> = {};
-  for (const p of products) {
-    for (const cat of p.categoriesFlat || []) {
-      const s = slugify(cat);
-      let hits = 0;
-      for (const t of tokens) if (s.includes(t)) hits += 1;
-      if (hits > 0) score[cat] = Math.max(score[cat] || 0, hits * 100 + s.length);
-    }
+function filterByLegacySlug(products: Product[], legacySlug?: string): Product[] {
+  if (!legacySlug) return products;
+
+  const normalizedSlug = normalize(legacySlug);
+
+  if (
+    normalizedSlug.includes("productos") ||
+    normalizedSlug.includes("catalog") ||
+    normalizedSlug.includes("catalogo")
+  ) {
+    return products;
   }
 
-  const sorted = Object.entries(score).sort((a, b) => b[1] - a[1]);
-  return sorted.length ? sorted[0][0] : null;
+  const tokens = normalizedSlug
+    .split(/[-\s]+/)
+    .map((t) => t.trim())
+    .filter((t) => t.length >= 4);
+
+  if (tokens.length === 0) return products;
+
+  const matches = products.filter((p) => {
+    const haystack = normalize(
+      [
+        p.title,
+        p.name,
+        ...(p.categoriesFlat || []),
+        ...(p.categoryPaths || []).flat(),
+      ]
+        .filter(Boolean)
+        .join(" ")
+    );
+    return tokens.some((t) => haystack.includes(t));
+  });
+
+  return matches.length ? matches : products;
 }
 
-function getBestPrice(p: Product): number {
-  const base = typeof p.price === "number" ? p.price : 0;
-  const opt = (p.options || [])
-    .map((o) => (typeof o.effectivePrice === "number" ? o.effectivePrice : (typeof o.price === "number" ? o.price : 0)))
-    .filter((n) => n > 0)
-    .sort((a, b) => a - b)[0];
-  return base > 0 ? base : (opt || 0);
-}
+export async function generateMetadata({ params, searchParams }: PageProps) {
+  const base = buildBaseMetadata();
+  const id = params?.id;
+  if (!id) return base;
 
-export async function generateMetadata(
-  { params, searchParams }: { params: { id: string }; searchParams?: Record<string, string | string[] | undefined> }
-): Promise<Metadata> {
-  const id = params.id;
-  const legacySlug = typeof searchParams?.slug === "string" ? searchParams.slug : "";
-  const canonicalPath = `/c${id}${legacySlug ? `-${legacySlug}` : ""}.html`;
+  const slug = searchParams?.slug || "";
+  const canonicalPath = `/c${id}-${slug}.html`;
+
+  const title = `${titleFromSlug(slug)} | Personalizados Hosteleria`;
+  const description = `Descubre ${titleFromSlug(slug).toLowerCase()} en Personalizados Hosteleria.`;
 
   return {
-    alternates: { canonical: canonicalPath },
-    openGraph: { url: canonicalPath },
+    ...base,
+    title,
+    description,
+    alternates: {
+      canonical: canonicalPath,
+    },
+    openGraph: {
+      ...(base.openGraph || {}),
+      title,
+      description,
+      url: canonicalPath,
+    },
   };
 }
 
-export default function LegacyCategoryPage(
-  { params, searchParams }: { params: { id: string }; searchParams?: Record<string, string | string[] | undefined> }
-) {
-  const products = productsData as unknown as Product[];
+export default function LegacyCategoryPage({ params, searchParams }: PageProps) {
+  const id = params?.id;
+  if (!id) notFound();
 
-  const id = params.id;
-  const legacySlug = typeof searchParams?.slug === "string" ? searchParams.slug : "";
+  const legacySlug = searchParams?.slug || "";
+  const allProducts = getAllProducts();
+  const categoryProducts = filterByLegacySlug(allProducts, legacySlug);
 
-  // Primary: try to infer a category from the legacy slug (works even if the ID isn't mapped yet).
-  const inferredCategory = bestCategoryFromSlug(products, legacySlug);
-
-  const categoryProducts = inferredCategory
-    ? products.filter((p) => (p.categoriesFlat || []).includes(inferredCategory))
-    : [];
-
-  // If we couldn't infer anything, don't hard-404: show empty state (still returns 200 for legacy URL).
-  // But if the ID is invalid (non-numeric), return 404.
-  if (!/^\d+$/.test(id)) return notFound();
+  const pageTitle = titleFromSlug(legacySlug);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10">
-      <div className="mb-8">
-        <h1 className="text-3xl font-semibold">
-          {inferredCategory ? inferredCategory : "Categoría"}
-        </h1>
-        <p className="mt-2 text-sm opacity-80">
-          URL legacy: <span className="font-mono">/c{id}{legacySlug ? `-${legacySlug}` : ""}.html</span>
+    <div className="min-h-screen">
+      <Header />
+
+      <main className="max-w-6xl mx-auto px-4 py-10">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-2">{pageTitle}</h1>
+        <p className="text-center text-gray-600 mb-10">
+          Mostrando {categoryProducts.length} producto{categoryProducts.length === 1 ? "" : "s"}
         </p>
-      </div>
 
-      {categoryProducts.length === 0 ? (
-        <div className="rounded-xl border p-6">
-          <p className="text-lg font-medium">No hay productos para mostrar.</p>
-          <p className="mt-2 text-sm opacity-80">
-            (Esto no es un 404: mantenemos la URL legacy viva. Cuando afinemos el mapeo/heurística, aquí aparecerá el listado.)
-          </p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {categoryProducts.map((product) => {
-            const productLegacySlug = toLegacySlugFromProduct(product) || "producto";
-            const href = `/p${product.id}-${productLegacySlug}.html`;
-            const price = getBestPrice(product);
+        {categoryProducts.length === 0 ? (
+          <div className="text-center text-gray-600">No hay productos en esta categoría.</div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {categoryProducts.map((product) => {
+              const pSlug = productLegacySlug(product);
+              const href = `/p${product.id}-${pSlug}.html`;
+              const img = product.image || "/logo-3.jpg";
 
-            return (
-              <Link
-                key={product.id}
-                href={href}
-                className="rounded-2xl border p-5 transition hover:shadow-sm"
-              >
-                <div className="text-sm opacity-70">{product.id}</div>
-                <div className="mt-2 text-lg font-semibold leading-snug">{product.name}</div>
-                <div className="mt-3 text-sm opacity-80">
-                  {price > 0 ? `${price.toFixed(2)} €` : "Solicitar presupuesto"}
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      )}
-    </main>
+              return (
+                <Link
+                  key={product.id}
+                  href={href}
+                  className="group block rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow"
+                >
+                  <div className="relative aspect-[4/3] bg-gray-50">
+                    <Image
+                      src={img}
+                      alt={product.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-contain p-4"
+                    />
+                  </div>
+
+                  <div className="p-4">
+                    <h2 className="font-semibold text-lg leading-snug group-hover:underline">
+                      {product.title}
+                    </h2>
+
+                    <p className="text-sm text-gray-600 mt-2 line-clamp-3">
+                      {product.shortDescription || "Producto personalizado para hostelería."}
+                    </p>
+
+                    <div className="mt-4 font-semibold">
+                      {typeof product.price === "number" && product.price > 0
+                        ? `${product.price.toFixed(2)} €`
+                        : "Consultar"}
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </main>
+
+      <Footer />
+    </div>
   );
 }
