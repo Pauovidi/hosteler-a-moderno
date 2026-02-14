@@ -34,6 +34,12 @@
    npm run dev
    ```
 
+## Environment
+
+- `NEXT_PUBLIC_WHATSAPP_PHONE`: WhatsApp number in international format (digits only).
+  - Example: `34693039422`
+
+
 ## Scripts
 
 - `npm run data:build` / `npm run data:build:strict`: Import real catalog from `data/exportProducts.csv` to `lib/data/products.json`.
