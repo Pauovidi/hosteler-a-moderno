@@ -5,9 +5,13 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { ArrowLeft, FileText, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useMemo, useState } from "react";
 import { Product, getAllProducts } from "@/lib/data/products";
 
 interface ProductClientProps {
@@ -28,8 +32,61 @@ function legacyProductHref(p: Product) {
   return `/p${id}-${legacySlug}.html`;
 }
 
-export default function ProductClient({ product, categoria }: ProductClientProps) {
-  const otherProducts = getAllProducts().filter((p) => p.slug !== categoria);
+function normalizePhone(raw: string): string {
+  return String(raw || "").replace(/\D/g, "");
+}
+
+export default function ProductClient({ product }: ProductClientProps) {
+  const [personalizationValues, setPersonalizationValues] = useState<Record<string, any>>({});
+
+  const otherProducts = useMemo(() => {
+    return getAllProducts().filter((p) => p.slug !== product.slug).slice(0, 8);
+  }, [product.slug]);
+
+  const phoneNumber = normalizePhone(process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "34693039422");
+
+  const whatsappHref = useMemo(() => {
+    const url = typeof window !== "undefined" ? window.location.href : "";
+    const message = encodeURIComponent(
+      `Hola, me gustar\u00eda solicitar informaci\u00f3n sobre este producto.\n\nProducto: ${product.title}\nURL: ${url}`
+    );
+    return `https://wa.me/${phoneNumber}?text=${message}`;
+  }, [phoneNumber, product.title]);
+
+  const presupuestoMessage = useMemo(() => {
+    const url = typeof window !== "undefined" ? window.location.href : "";
+    const lines: string[] = [`Producto: ${product.title}`, `URL: ${url}`];
+
+    const fields = product.personalizations || [];
+    if (fields.length) {
+      lines.push("", "Personalización:");
+      fields.forEach((f, idx) => {
+        const key = String(idx);
+        const v = personalizationValues[key];
+
+        if (f.kind === "checkbox") {
+          lines.push(`- ${f.label}: ${v ? "Sí" : "No"}`);
+          return;
+        }
+
+        if (f.kind === "file") {
+          lines.push(`- ${f.label}: ${v ? `archivo (${v})` : "pendiente"}`);
+          return;
+        }
+
+        lines.push(`- ${f.label}: ${v ? String(v).trim() : ""}`);
+      });
+    }
+
+    return lines.join("\n").trim();
+  }, [product.title, product.personalizations, personalizationValues]);
+
+  const presupuestoHref = useMemo(() => {
+    const sp = new URLSearchParams();
+    sp.set("mensaje", presupuestoMessage);
+    sp.set("producto", product.title);
+    return `/presupuesto?${sp.toString()}`;
+  }, [presupuestoMessage, product.title]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -80,6 +137,75 @@ export default function ProductClient({ product, categoria }: ProductClientProps
                 className="text-muted-foreground text-lg mb-8 leading-relaxed prose prose-stone max-w-none"
                 dangerouslySetInnerHTML={{ __html: product.longDescription }}
               />
+
+              {/* Legacy-like Personalization Form (optional, per product) */}
+              {product.personalizations && product.personalizations.length > 0 && (
+                <div className="mb-10 border border-border rounded-lg p-6">
+                  <h2 className="font-display text-xl text-foreground mb-6">Personaliza tu pedido</h2>
+
+                  <div className="space-y-6">
+                    {product.personalizations.map((field, idx) => {
+                      const key = String(idx);
+
+                      return (
+                        <div key={key}>
+                          <Label className="font-display text-foreground">
+                            {field.label}
+                            {field.required ? " *" : ""}
+                          </Label>
+
+                          <div className="mt-2">
+                            {field.kind === "textarea" ? (
+                              <Textarea
+                                value={personalizationValues[key] || ""}
+                                onChange={(e) =>
+                                  setPersonalizationValues((prev) => ({ ...prev, [key]: e.target.value }))
+                                }
+                                placeholder={field.help || "Escribe aquí..."}
+                              />
+                            ) : field.kind === "text" ? (
+                              <Input
+                                value={personalizationValues[key] || ""}
+                                onChange={(e) =>
+                                  setPersonalizationValues((prev) => ({ ...prev, [key]: e.target.value }))
+                                }
+                                placeholder={field.help || "Escribe aquí..."}
+                              />
+                            ) : field.kind === "checkbox" ? (
+                              <label className="inline-flex items-center gap-2 text-sm text-foreground">
+                                <input
+                                  type="checkbox"
+                                  checked={Boolean(personalizationValues[key])}
+                                  onChange={(e) =>
+                                    setPersonalizationValues((prev) => ({ ...prev, [key]: e.target.checked }))
+                                  }
+                                  className="h-4 w-4"
+                                />
+                                Sí
+                              </label>
+                            ) : (
+                              <Input
+                                type="file"
+                                onChange={(e) =>
+                                  setPersonalizationValues((prev) => ({
+                                    ...prev,
+                                    [key]: e.target.files?.[0]?.name || "",
+                                  }))
+                                }
+                              />
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <p className="text-xs text-muted-foreground mt-6">
+                    * Este formulario es orientativo (como en la web anterior). El presupuesto final se
+                    confirma por email/WhatsApp.
+                  </p>
+                </div>
+              )}
 
               {/* Variants Table */}
               {product.options && product.options.length > 0 && (
@@ -145,7 +271,7 @@ export default function ProductClient({ product, categoria }: ProductClientProps
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                <Link href="/presupuesto">
+                <Link href={presupuestoHref}>
                   <Button
                     size="lg"
                     className="bg-gradient-gold text-primary-foreground hover:opacity-90 font-display tracking-wider w-full sm:w-auto"
@@ -154,7 +280,7 @@ export default function ProductClient({ product, categoria }: ProductClientProps
                     Pedir Presupuesto
                   </Button>
                 </Link>
-                <a href="https://wa.me/34XXXXXXXXX" target="_blank" rel="noopener noreferrer">
+                <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
                   <Button
                     size="lg"
                     variant="outline"
