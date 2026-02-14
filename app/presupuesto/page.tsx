@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { FileText, Send, CheckCircle } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 const categorias = [
@@ -21,7 +21,17 @@ const categorias = [
   "Otros",
 ];
 
+// ✅ Page wrapper con Suspense (evita el prerender error)
 export default function PresupuestoPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex flex-col"><Header /><main className="flex-1 pt-32 pb-20"><div className="container mx-auto px-4">Cargando…</div></main><Footer /></div>}>
+      <PresupuestoInner />
+    </Suspense>
+  );
+}
+
+// ✅ Aquí va tu lógica actual (useSearchParams dentro del boundary)
+function PresupuestoInner() {
   const searchParams = useSearchParams();
 
   const fromProduct = useMemo(() => {
