@@ -6,6 +6,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { getAllProducts, type Product } from "@/lib/data/products";
 import { buildBaseMetadata } from "@/lib/seo";
+import { legacyMenuMap } from "@/data/legacy-menu-map";
 
 type PageProps = {
   params: Promise<{ id: string }>;
@@ -13,7 +14,7 @@ type PageProps = {
 };
 
 function normalize(s: string): string {
-  return s
+  return String(s || "")
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -35,6 +36,10 @@ function titleFromSlug(slug?: string): string {
     .join(" ");
 }
 
+function stripHtml(html: string): string {
+  return String(html || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 function productLegacySlug(product: Product): string {
   const base = String(product.slug || "")
     .replace(new RegExp(`-${product.id}$`), "")
@@ -44,51 +49,47 @@ function productLegacySlug(product: Product): string {
 }
 
 /**
- * IMPORTANTE:
- * La web antigua no tiene "categorías" reales.
- * Estas /c<ID>-slug.html son landings del menú, así que filtramos por tokens del slug.
- * Si no hay match, devolvemos TODO el catálogo (nunca 404 por “categoría inexistente”).
+ * Filtro por ID del menú legacy (NO hay categorías reales en Palbin).
+ * Esto evita mezclas: cada ID de /c<ID>-... tiene su propia regla interna.
  */
-function filterByLegacySlug(products: Product[], legacySlug?: string): Product[] {
-  if (!legacySlug) return products;
+function filterByMenuId(products: Product[], menuId: string): Product[] {
+  const rule = legacyMenuMap[menuId];
+  if (!rule) return products;
 
-  const normalizedSlug = normalize(legacySlug);
+  // “Productos” = catálogo completo
+  if (rule.mode === "all") return products;
 
-  if (
-    normalizedSlug.includes("productos") ||
-    normalizedSlug.includes("catalog") ||
-    normalizedSlug.includes("catalogo")
-  ) {
-    return products;
-  }
+  const inc = (rule.include || []).map(normalize);
+  const exc = (rule.exclude || []).map(normalize);
 
-  const tokens = normalizedSlug
-    .split(/[-\s]+/)
-    .map((t) => t.trim())
-    .filter((t) => t.length >= 4);
-
-  if (tokens.length === 0) return products;
-
-  const matches = products.filter((p) => {
+  const filtered = products.filter((p) => {
     const haystack = normalize(
       [
         p.title,
         p.name,
+        p.shortDescription,
+        stripHtml(p.shortDescriptionHtml || ""),
+        stripHtml(p.descriptionHtml || ""),
+        p.slug,
         ...(p.categoriesFlat || []),
         ...(p.categoryPaths || []).flat(),
       ]
         .filter(Boolean)
         .join(" ")
     );
-    return tokens.some((t) => haystack.includes(t));
+
+    const hasInclude = inc.length === 0 ? true : inc.some((k) => haystack.includes(k));
+    const hasExclude = exc.length === 0 ? false : exc.some((k) => haystack.includes(k));
+
+    return hasInclude && !hasExclude;
   });
 
-  return matches.length ? matches : products;
+  // Si por reglas se queda demasiado vacío, mejor mostrar algo útil en vez de “0”
+  return filtered.length ? filtered : products;
 }
 
 export async function generateMetadata({ params, searchParams }: PageProps) {
   const base = buildBaseMetadata();
-
   const { id } = await params;
   if (!id) return base;
 
@@ -96,8 +97,13 @@ export async function generateMetadata({ params, searchParams }: PageProps) {
   const slug = sp.slug || "";
 
   const canonicalPath = `/c${id}-${slug}.html`;
-  const title = `${titleFromSlug(slug)} | Personalizados Hosteleria`;
-  const description = `Descubre ${titleFromSlug(slug).toLowerCase()} en Personalizados Hosteleria.`;
+
+  // Título: prioridad al mapa interno (menú), fallback al slug
+  const titleFromMap = legacyMenuMap[id]?.title;
+  const pageTitle = titleFromMap || titleFromSlug(slug);
+
+  const title = `${pageTitle} | Personalizados Hosteleria`;
+  const description = `Descubre ${pageTitle.toLowerCase()} en Personalizados Hosteleria.`;
 
   return {
     ...base,
@@ -123,9 +129,12 @@ export default async function LegacyCategoryPage({ params, searchParams }: PageP
   const legacySlug = sp.slug || "";
 
   const allProducts = getAllProducts();
-  const categoryProducts = filterByLegacySlug(allProducts, legacySlug);
 
-  const pageTitle = titleFromSlug(legacySlug);
+  // ✅ Filtrado por ID de menú legacy
+  const categoryProducts = filterByMenuId(allProducts, id);
+
+  // H1: prioridad al mapa interno (menú), fallback al slug
+  const pageTitle = legacyMenuMap[id]?.title || titleFromSlug(legacySlug);
 
   return (
     <div className="min-h-screen">
@@ -138,7 +147,7 @@ export default async function LegacyCategoryPage({ params, searchParams }: PageP
         </p>
 
         {categoryProducts.length === 0 ? (
-          <div className="text-center text-gray-600">No hay productos en esta landing.</div>
+          <div className="text-center text-gray-600">No hay productos en esta sección.</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {categoryProducts.map((product) => {
