@@ -39,6 +39,20 @@ function cleanText(str) {
         .replace(/\s+/g, ' ')          // Collapse spaces
         .trim();
 
+    // Fix common CP850 control-range bytes that appear when decoding CP850 as latin1
+    // (e.g. 0x82 -> 'é'). This keeps the import robust without extra dependencies.
+    const cp850Controls = {
+        "\x80": "Ç",
+        "\x82": "é",
+        "\x84": "ä",
+        "\x87": "ç",
+        "\x90": "É",
+        "\x94": "ö",
+        "\x99": "Ö",
+        "\x9B": "ø",
+    };
+    cleaned = cleaned.replace(/[\x80-\x9F]/g, (ch) => cp850Controls[ch] || ch);
+
     // Specific replacements requested
     const replacements = {
         "m£ltiplos": "múltiplos",
