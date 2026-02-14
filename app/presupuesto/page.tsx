@@ -1,162 +1,104 @@
 "use client";
 
-import React from "react"
-
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Upload, CheckCircle } from "lucide-react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import Link from "next/link";
-import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { FileText, Send, CheckCircle } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
-const categories = [
-  {
-    id: "vajilla",
-    title: "Vajilla Personalizada",
-    image: "https://cdn.palbincdn.com/users/36776/upload/images/vajilla-para-opresupuesto.png",
-  },
-  {
-    id: "cristaleria",
-    title: "Cristaleria Personalizada",
-    image: "https://cdn.palbincdn.com/users/36776/upload/images/cristaleria-generica.png",
-  },
-  {
-    id: "servilletas",
-    title: "Servilletas Personalizadas",
-    image: "https://cdn.palbincdn.com/users/36776/upload/images/categoria-arilaid@x256--f[gb]--o[jpeg].png",
-  },
-  {
-    id: "cuberteria",
-    title: "Cuberteria Personalizada",
-    image: "https://cdn.palbincdn.com/users/36776/upload/images/cuberteria-personalizada-5@x256--f[gb]--o[jpeg].png",
-  },
-  {
-    id: "textil",
-    title: "Textil para Hoteles",
-    image: "https://cdn.palbincdn.com/users/36776/upload/images/soluciones-textiles-para-hoteles-3.png",
-  },
+const categorias = [
+  "Servilletas",
+  "Cristalería",
+  "Vajilla",
+  "Cubertería",
+  "Textil Hoteles",
+  "Otros",
 ];
 
-interface FormData {
-  nombre: string;
-  empresa: string;
-  email: string;
-  telefono: string;
-  mensaje: string;
-}
+export default function PresupuestoPage() {
+  const searchParams = useSearchParams();
 
-interface FormErrors {
-  nombre?: string;
-  empresa?: string;
-  email?: string;
-  telefono?: string;
-  mensaje?: string;
-  categorias?: string;
-}
+  const fromProduct = useMemo(() => {
+    const producto = searchParams.get("producto") || "";
+    const mensaje = searchParams.get("mensaje") || "";
+    return { producto, mensaje };
+  }, [searchParams]);
 
-export default function Presupuesto() {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState({
     nombre: "",
-    empresa: "",
     email: "",
     telefono: "",
+    empresa: "",
+    categorias: [] as string[],
     mensaje: "",
   });
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const toggleCategory = (categoryId: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(categoryId)
-        ? prev.filter((id) => id !== categoryId)
-        : [...prev, categoryId]
-    );
-    if (errors.categorias) {
-      setErrors((prev) => ({ ...prev, categorias: undefined }));
+  const [enviado, setEnviado] = useState(false);
+
+  useEffect(() => {
+    // Prefill message when coming from a product page
+    if (fromProduct.mensaje) {
+      setFormData((prev) => ({ ...prev, mensaje: fromProduct.mensaje }));
     }
+  }, [fromProduct.mensaje]);
+
+  const handleCategoriaToggle = (categoria: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      categorias: prev.categorias.includes(categoria)
+        ? prev.categorias.filter((c) => c !== categoria)
+        : [...prev.categorias, categoria],
+    }));
   };
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-    if (errors[field as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
-    }
-  };
-
-  const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
-    
-    if (!formData.nombre.trim()) {
-      newErrors.nombre = "El nombre es obligatorio";
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = "El email es obligatorio";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Email no valido";
-    }
-    if (!formData.telefono.trim()) {
-      newErrors.telefono = "El telefono es obligatorio";
-    }
-    if (selectedCategories.length === 0) {
-      newErrors.categorias = "Selecciona al menos una categoria";
-    }
-    if (!formData.mensaje.trim()) {
-      newErrors.mensaje = "El mensaje es obligatorio";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    // Aquí en el futuro se conectará con email/CRM. Para demo, simulamos.
+    setEnviado(true);
   };
 
-  if (isSubmitted) {
+  if (enviado) {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-1 flex items-center justify-center pt-32 pb-20">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center max-w-lg mx-auto px-4"
-          >
-            <div className="w-20 h-20 bg-green-100 mx-auto mb-6 flex items-center justify-center">
-              <CheckCircle className="w-10 h-10 text-green-600" />
-            </div>
-            <h1 className="font-display text-3xl text-foreground mb-4">
-              Gracias por tu solicitud!
-            </h1>
-            <p className="text-muted-foreground mb-8 leading-relaxed">
-              Hemos recibido tu peticion de presupuesto. Nuestro equipo revisara 
-              los detalles y te contactara en las proximas 24-48 horas.
-            </p>
-            <Link href="/">
-              <Button className="bg-gradient-gold text-primary-foreground hover:opacity-90 font-display tracking-wider">
-                Volver al Inicio
+        <main className="flex-1 pt-32 pb-20">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-2xl mx-auto text-center"
+            >
+              <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="w-10 h-10 text-green-500" />
+              </div>
+              <h1 className="font-display text-3xl text-foreground mb-4">¡Solicitud Enviada!</h1>
+              <p className="text-muted-foreground text-lg mb-8">
+                Hemos recibido tu solicitud de presupuesto. Te contactaremos en menos de 24 horas laborables.
+              </p>
+              <Button
+                onClick={() => {
+                  setEnviado(false);
+                  setFormData({
+                    nombre: "",
+                    email: "",
+                    telefono: "",
+                    empresa: "",
+                    categorias: [],
+                    mensaje: "",
+                  });
+                }}
+                className="bg-gradient-gold text-primary-foreground hover:opacity-90 font-display tracking-wider"
+              >
+                Enviar Otra Solicitud
               </Button>
-            </Link>
-          </motion.div>
+            </motion.div>
+          </div>
         </main>
         <Footer />
       </div>
@@ -166,218 +108,134 @@ export default function Presupuesto() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1 pt-32 pb-20">
         <div className="container mx-auto px-4">
-          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
+            className="max-w-4xl mx-auto"
           >
-            <p className="text-gold font-display text-sm tracking-[0.3em] uppercase mb-4">
-              Solicitar Presupuesto
-            </p>
-            <h1 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-              Cuentanos tu Proyecto
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Rellena el formulario con la informacion de tu proyecto. 
-              No olvides enviarnos tu logo o diseno de personalizacion.
-            </p>
-          </motion.div>
-
-          <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
-            {/* Category Selection */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="mb-12"
-            >
-              <h2 className="font-display text-xl text-foreground mb-6">
-                1. Selecciona las categorias de producto
-              </h2>
-              {errors.categorias && (
-                <p className="text-destructive text-sm mb-4">{errors.categorias}</p>
-              )}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    type="button"
-                    onClick={() => toggleCategory(category.id)}
-                    className={`group relative overflow-hidden border-2 transition-all duration-300 ${
-                      selectedCategories.includes(category.id)
-                        ? "border-primary"
-                        : "border-border hover:border-primary/50"
-                    }`}
-                  >
-                    <div className="aspect-square relative">
-                      <Image
-                        src={category.image || "/placeholder.svg"}
-                        alt={category.title}
-                        fill
-                        className="object-cover"
-                      />
-                      {selectedCategories.includes(category.id) && (
-                        <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">
-                          <CheckCircle className="w-8 h-8 text-primary" />
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-3 bg-card">
-                      <p className="font-display text-xs text-foreground text-center">
-                        {category.title}
-                      </p>
-                    </div>
-                  </button>
-                ))}
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 text-gold font-display text-sm tracking-[0.3em] uppercase mb-4">
+                <FileText className="w-4 h-4" />
+                Solicitud de Presupuesto
               </div>
-            </motion.div>
+              <h1 className="font-display text-4xl md:text-5xl text-foreground mb-6">Pedir Presupuesto</h1>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Cuéntanos qué necesitas y te prepararemos un presupuesto personalizado sin compromiso.
+              </p>
 
-            {/* Contact Information */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-12"
-            >
-              <h2 className="font-display text-xl text-foreground mb-6">
-                2. Datos de contacto
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="nombre">Nombre completo *</Label>
-                  <Input
-                    id="nombre"
-                    value={formData.nombre}
-                    onChange={(e) => handleInputChange("nombre", e.target.value)}
-                    placeholder="Tu nombre"
-                    className={errors.nombre ? "border-destructive" : ""}
-                  />
-                  {errors.nombre && (
-                    <p className="text-destructive text-sm mt-1">{errors.nombre}</p>
-                  )}
-                </div>
-                <div>
-                  <Label htmlFor="empresa">Empresa</Label>
-                  <Input
-                    id="empresa"
-                    value={formData.empresa}
-                    onChange={(e) => handleInputChange("empresa", e.target.value)}
-                    placeholder="Nombre de tu empresa (opcional)"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="email">Email *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
-                    placeholder="tu@email.com"
-                    className={errors.email ? "border-destructive" : ""}
-                  />
-                  {errors.email && (
-                    <p className="text-destructive text-sm mt-1">{errors.email}</p>
-                  )}
-                </div>
-                <div>
-                  <Label htmlFor="telefono">Telefono *</Label>
-                  <Input
-                    id="telefono"
-                    value={formData.telefono}
-                    onChange={(e) => handleInputChange("telefono", e.target.value)}
-                    placeholder="+34 XXX XXX XXX"
-                    className={errors.telefono ? "border-destructive" : ""}
-                  />
-                  {errors.telefono && (
-                    <p className="text-destructive text-sm mt-1">{errors.telefono}</p>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+              {fromProduct.producto ? (
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Presupuesto para: <span className="text-foreground font-medium">{fromProduct.producto}</span>
+                </p>
+              ) : null}
+            </div>
 
-            {/* Project Details */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mb-12"
-            >
-              <h2 className="font-display text-xl text-foreground mb-6">
-                3. Detalles del proyecto
-              </h2>
-              <div className="space-y-6">
-                <div>
-                  <Label htmlFor="mensaje">
-                    Describe tu proyecto: cantidades, colores, personalizacion... *
-                  </Label>
-                  <Textarea
-                    id="mensaje"
-                    value={formData.mensaje}
-                    onChange={(e) => handleInputChange("mensaje", e.target.value)}
-                    placeholder="Cuentanos todos los detalles de tu proyecto: que productos necesitas, cantidades aproximadas, tipo de personalizacion (grabado, serigrafia, etc.), colores preferidos..."
-                    rows={6}
-                    className={errors.mensaje ? "border-destructive" : ""}
-                  />
-                  {errors.mensaje && (
-                    <p className="text-destructive text-sm mt-1">{errors.mensaje}</p>
-                  )}
-                </div>
-
-                {/* File upload hint */}
-                <div className="bg-muted p-6 border border-border">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gold/10 flex items-center justify-center flex-shrink-0">
-                      <Upload className="w-6 h-6 text-gold" />
-                    </div>
+            <Card className="border-border">
+              <CardContent className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <p className="font-display text-foreground mb-2">
-                        Tienes un logo o diseno?
-                      </p>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        Envianos tu logo o diseno de personalizacion a{" "}
-                        <a href="mailto:info@personalizadoshosteleria.com" className="text-gold hover:underline">
-                          info@personalizadoshosteleria.com
-                        </a>{" "}
-                        indicando tu nombre y empresa para que podamos asociarlo a tu solicitud.
-                      </p>
+                      <Label htmlFor="nombre" className="font-display">Nombre *</Label>
+                      <Input
+                        id="nombre"
+                        value={formData.nombre}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, nombre: e.target.value }))}
+                        required
+                        className="mt-2"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="email" className="font-display">Email *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                        required
+                        className="mt-2"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="telefono" className="font-display">Teléfono</Label>
+                      <Input
+                        id="telefono"
+                        value={formData.telefono}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, telefono: e.target.value }))}
+                        className="mt-2"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="empresa" className="font-display">Empresa</Label>
+                      <Input
+                        id="empresa"
+                        value={formData.empresa}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, empresa: e.target.value }))}
+                        className="mt-2"
+                      />
                     </div>
                   </div>
-                </div>
-              </div>
-            </motion.div>
 
-            {/* Submit */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-center"
-            >
-              <Button
-                type="submit"
-                size="lg"
-                disabled={isSubmitting}
-                className="bg-gradient-gold text-primary-foreground hover:opacity-90 font-display tracking-wider px-12"
-              >
-                {isSubmitting ? (
-                  "Enviando..."
-                ) : (
-                  <>
-                    Enviar Solicitud
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </>
-                )}
-              </Button>
-              <p className="text-muted-foreground text-sm mt-4">
-                Al enviar este formulario, aceptas que nos pongamos en contacto contigo 
-                para ofrecerte un presupuesto personalizado.
-              </p>
-            </motion.div>
-          </form>
+                  <div>
+                    <Label className="font-display">Categorías de interés</Label>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-3">
+                      {categorias.map((categoria) => (
+                        <label
+                          key={categoria}
+                          className={
+                            "flex items-center gap-2 p-3 border rounded-lg cursor-pointer transition-colors " +
+                            (formData.categorias.includes(categoria)
+                              ? "border-gold bg-gold/5"
+                              : "border-border hover:border-gold/30")
+                          }
+                        >
+                          <input
+                            type="checkbox"
+                            checked={formData.categorias.includes(categoria)}
+                            onChange={() => handleCategoriaToggle(categoria)}
+                            className="rounded"
+                          />
+                          <span className="text-sm">{categoria}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="mensaje" className="font-display">Mensaje *</Label>
+                    <Textarea
+                      id="mensaje"
+                      value={formData.mensaje}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, mensaje: e.target.value }))}
+                      required
+                      rows={6}
+                      className="mt-2"
+                      placeholder="Describe tu proyecto, cantidades aproximadas, plazos, etc."
+                    />
+                  </div>
+
+                  <div className="text-center">
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="bg-gradient-gold text-primary-foreground hover:opacity-90 font-display tracking-wider px-12"
+                    >
+                      <Send className="mr-2 h-5 w-5" />
+                      Enviar Solicitud
+                    </Button>
+                    <p className="text-muted-foreground text-sm mt-4">
+                      Te responderemos en menos de 24 horas laborables.
+                    </p>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
       </main>
 
