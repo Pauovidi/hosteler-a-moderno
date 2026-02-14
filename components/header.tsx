@@ -31,7 +31,7 @@ export function Header() {
       </div>
 
       {/* Main nav */}
-      <nav className="bg-background/95 backdrop-blur-sm border-b border-border">
+      <nav className="bg-white border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
@@ -80,7 +80,7 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background border-b border-border"
+            className="lg:hidden bg-white border-b border-border"
           >
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
