@@ -1,85 +1,94 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
-// Reutilizamos las páginas internas (mantienes UI + SEO en un solo sitio)
-import LegacyCategoryPage, {
-  generateMetadata as generateLegacyCategoryMetadata,
-} from "@/app/legacy-category/[id]/page";
+import LegacyCategoryPage from "@/app/legacy-category/[id]/page";
+import LegacyProductPage from "@/app/legacy-product/[id]/page";
 
-import LegacyProductPage, {
-  generateMetadata as generateLegacyProductMetadata,
-} from "@/app/legacy-product/[id]/page";
+import { buildBaseMetadata, buildProductMetadata } from "@/lib/seo";
+import { getProductById } from "@/lib/data/products";
 
 type Props = {
-  params: Promise<{ legacy: string[] }>;
+  params: { legacy: string[] };
 };
 
-function parseLegacySegment(
-  segment: string
-):
-  | { kind: "c"; id: string; slug: string }
-  | { kind: "p"; id: string; slug: string }
-  | null {
-  // /c412083-servilletas-para-hosteleria-personalizadas.html
-  // /p10446447-servilleta-airlaid-....html
-  const match = segment.match(/^([cp])(\d+)(?:-(.*))?\.html$/i);
-  if (!match) return null;
+function parseLegacy(segments: string[]) {
+  const raw = (segments?.[0] || "").trim();
 
-  const kind = match[1].toLowerCase() as "c" | "p";
-  const id = match[2];
-  const rawSlug = match[3] || "";
+  // c412083-servilletas-....html
+  const m = raw.match(/^([cp])(\d+)(?:-(.+?))?\.html?$/i);
+  if (!m) return null;
 
-  let slug = rawSlug;
-  try {
-    slug = decodeURIComponent(rawSlug);
-  } catch {
-    // ignore
-  }
-
-  return { kind, id, slug };
+  return {
+    kind: m[1].toLowerCase() as "c" | "p",
+    id: m[2],
+    slug: (m[3] || "").replace(/\.html?$/i, ""),
+  };
 }
 
-export async function generateMetadata({ params }: Props) {
-  const { legacy } = await params;
-  const segment = legacy?.[0];
-  if (!segment) return {};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const base = buildBaseMetadata();
+  const parsed = parseLegacy(params.legacy);
 
-  const parsed = parseLegacySegment(segment);
-  if (!parsed) return {};
+  if (!parsed) return base;
 
-  if (parsed.kind === "c") {
-    return generateLegacyCategoryMetadata({
-      params: Promise.resolve({ id: parsed.id }),
-      searchParams: Promise.resolve({ slug: parsed.slug }),
-    } as any);
+  const { kind, id, slug } = parsed;
+
+  // Canonical exacto a la legacy
+  const canonical =
+    kind === "c"
+      ? `/c${id}-${slug}.html`
+      : `/p${id}-${slug}.html`;
+
+  if (kind === "c") {
+    // Metadata genérica para categorías/landings
+    const title = slug
+      ? slug.split("-").map(w => w[0]?.toUpperCase() + w.slice(1)).join(" ")
+      : "Catálogo";
+
+    return {
+      ...base,
+      title: `${title} | Personalizados Hosteleria`,
+      description: `Descubre ${title.toLowerCase()} en Personalizados Hosteleria.`,
+      alternates: { canonical },
+      openGraph: {
+        ...(base.openGraph || {}),
+        title: `${title} | Personalizados Hosteleria`,
+        description: `Descubre ${title.toLowerCase()} en Personalizados Hosteleria.`,
+        url: canonical,
+      },
+    };
   }
 
-  return generateLegacyProductMetadata({
-    params: Promise.resolve({ id: parsed.id }),
-    searchParams: Promise.resolve({ slug: parsed.slug }),
-  } as any);
+  // kind === "p"
+  const product = getProductById(id);
+  if (!product) return base;
+
+  const productMeta = buildProductMetadata(product);
+
+  return {
+    ...base,
+    ...productMeta,
+    alternates: {
+      ...(productMeta.alternates || {}),
+      canonical,
+    },
+    openGraph: {
+      ...(productMeta.openGraph || {}),
+      url: canonical,
+    },
+  };
 }
 
-export default async function LegacyEntryPage({ params }: Props) {
-  const { legacy } = await params;
-  const segment = legacy?.[0];
-  if (!segment) notFound();
+export default function LegacyCatchAllPage({ params }: Props) {
+  const parsed = parseLegacy(params.legacy);
 
-  const parsed = parseLegacySegment(segment);
   if (!parsed) notFound();
 
-  if (parsed.kind === "c") {
-    return (
-      <LegacyCategoryPage
-        params={Promise.resolve({ id: parsed.id })}
-        searchParams={Promise.resolve({ slug: parsed.slug })}
-      />
-    );
+  const { kind, id, slug } = parsed;
+
+  if (kind === "c") {
+    return <LegacyCategoryPage params={{ id }} searchParams={{ slug }} />;
   }
 
-  return (
-    <LegacyProductPage
-      params={Promise.resolve({ id: parsed.id })}
-      searchParams={Promise.resolve({ slug: parsed.slug })}
-    />
-  );
+  return <LegacyProductPage params={{ id }} searchParams={{ slug }} />;
 }
