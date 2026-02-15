@@ -1,339 +1,363 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import { WhatsAppButton } from "@/components/whatsapp-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft, FileText, Check } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
 import { useMemo, useState } from "react";
-import { Product, getAllProducts } from "@/lib/data/products";
 
-interface ProductClientProps {
+import { type Product, getAllProducts } from "@/lib/data/products";
+
+function toLegacySlug(product: Product) {
+  // Prefer explicit legacy slug if present (coming from CSV)
+  if (product.legacySlug) return product.legacySlug;
+  // Fallback: create something like "c412083-foo-bar.html" if we only have id + title
+  const safeTitle = (product.title || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9áéíóúñü\s-]/gi, "")
+    .trim()
+    .replace(/\s+/g, "-");
+  return `c${product.id}-${safeTitle}.html`;
+}
+
+function normalizePhoneForWa(phone: string) {
+  // WhatsApp wa.me expects digits only (no +, spaces)
+  return (phone || "").replace(/[^\d]/g, "");
+}
+
+type PersonalizationField =
+  | { id: string; label: string; type: "text"; placeholder?: string }
+  | { id: string; label: string; type: "textarea"; placeholder?: string }
+  | { id: string; label: string; type: "file"; help?: string }
+  | { id: string; label: string; type: "checkbox"; help?: string };
+
+export default function ProductClient({
+  product,
+  categoria,
+}: {
   product: Product;
   categoria: string;
-}
+}) {
+  const legacyProductHref = `/${toLegacySlug(product)}`;
 
-function toLegacySlug(p: Product) {
-  const id = String(p.id || "");
-  const slug = String(p.slug || "");
-  const suffix = `-${id}`;
-  return slug.endsWith(suffix) ? slug.slice(0, -suffix.length) : slug;
-}
+  // Change this default to your real number (or set NEXT_PUBLIC_WHATSAPP_PHONE in Vercel)
+  const phoneNumber = normalizePhoneForWa(
+    process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "34693039422"
+  );
 
-function legacyProductHref(p: Product) {
-  const id = String(p.id || "");
-  const legacySlug = toLegacySlug(p) || "producto";
-  return `/p${id}-${legacySlug}.html`;
-}
+  const isPremium = Boolean((product as any).isPremium);
 
-function normalizePhone(raw: string): string {
-  return String(raw || "").replace(/\D/g, "");
-}
+  // ✅ Needed: used by handlePersonalizationChange + presupuestoMessage
+  const [personalizationValues, setPersonalizationValues] = useState<
+    Record<string, string | boolean>
+  >({});
 
-export default function ProductClient({ product, categoria: _categoria }: ProductClientProps) {
-  const otherProducts = getAllProducts().filter((p) => p.id !== product.id).slice(0, 8);
-
+  // ✅ Only one definition (fixes build error)
   const otherProducts = useMemo(() => {
-    return getAllProducts().filter((p) => p.slug !== product.slug).slice(0, 8);
-  }, [product.slug]);
+    const currentId = String(product.id);
+    return getAllProducts()
+      .filter((p) => String(p.id) !== currentId)
+      .slice(0, 8);
+  }, [product.id]);
 
-  const phoneNumber = normalizePhone(process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "34693039422");
+  const personalizations: PersonalizationField[] = useMemo(() => {
+    // If your product JSON includes per-product fields, use them; else fallback to a sensible default.
+    const fromData = (product as any).personalizations as
+      | PersonalizationField[]
+      | undefined;
+    if (Array.isArray(fromData) && fromData.length > 0) return fromData;
 
-  const whatsappHref = useMemo(() => {
-    const url = typeof window !== "undefined" ? window.location.href : "";
-    const message = encodeURIComponent(
-      `Hola, me gustar\u00eda solicitar informaci\u00f3n sobre este producto.\n\nProducto: ${product.title}\nURL: ${url}`
-    );
-    return `https://wa.me/${phoneNumber}?text=${message}`;
-  }, [phoneNumber, product.title]);
+    if (!isPremium) return [];
+
+    // Default “premium” form similar to old Palbin style (you can adjust)
+    return [
+      {
+        id: "texto_caja",
+        label: "Texto para caja 150*75 mm (sólo el texto)",
+        type: "textarea",
+        placeholder: "indica aquí qué quieres poner",
+      },
+      {
+        id: "fuente",
+        label: "La Fuente de letra",
+        type: "textarea",
+        placeholder: "indica aquí el nombre de la fuente de letra",
+      },
+      {
+        id: "img_caja",
+        label: "Adjunta aquí un logo o imagen caja",
+        type: "file",
+        help: "Formatos recomendados: PNG/JPG/PDF",
+      },
+      {
+        id: "texto_copa",
+        label: "Texto para copa 45*45 mm máximo",
+        type: "textarea",
+        placeholder: "dinos texto y fuente de letra",
+      },
+      {
+        id: "img_copa",
+        label: "Adjunta aquí logo para copa",
+        type: "file",
+        help: "Formatos recomendados: PNG/JPG/PDF",
+      },
+      {
+        id: "observaciones",
+        label: "Observaciones",
+        type: "textarea",
+        placeholder: "Cualquier detalle adicional…",
+      },
+    ];
+  }, [product, isPremium]);
+
+  const handlePersonalizationChange = (
+    fieldId: string,
+    value: string | boolean
+  ) => {
+    setPersonalizationValues((prev) => ({ ...prev, [fieldId]: value }));
+  };
 
   const presupuestoMessage = useMemo(() => {
-    const url = typeof window !== "undefined" ? window.location.href : "";
-    const lines: string[] = [`Producto: ${product.title}`, `URL: ${url}`];
+    const lines: string[] = [];
+    lines.push(`Hola, quiero presupuesto para: ${product.title}`);
 
-    const fields = product.personalizations || [];
-    if (fields.length) {
-      lines.push("", "Personalización:");
-      fields.forEach((f, idx) => {
-        const key = String(idx);
-        const v = personalizationValues[key];
+    if (personalizations.length) {
+      lines.push("");
+      lines.push("Personalización:");
+      for (const f of personalizations) {
+        const v = personalizationValues[f.id];
+        if (v === undefined || v === "" || v === false) continue;
 
-        if (f.kind === "checkbox") {
-          lines.push(`- ${f.label}: ${v ? "Sí" : "No"}`);
-          return;
+        if (f.type === "checkbox") {
+          lines.push(`- ${f.label}: Sí`);
+        } else {
+          lines.push(`- ${f.label}: ${String(v)}`);
         }
-
-        if (f.kind === "file") {
-          lines.push(`- ${f.label}: ${v ? `archivo (${v})` : "pendiente"}`);
-          return;
-        }
-
-        lines.push(`- ${f.label}: ${v ? String(v).trim() : ""}`);
-      });
+      }
     }
 
-    return lines.join("\n").trim();
-  }, [product.title, product.personalizations, personalizationValues]);
+    lines.push("");
+    lines.push("Enlace producto:");
+    lines.push(legacyProductHref);
+
+    return lines.join("\n");
+  }, [legacyProductHref, personalizationValues, personalizations, product.title]);
+
+  const whatsappHref = useMemo(() => {
+    const text = encodeURIComponent(presupuestoMessage);
+    return `https://wa.me/${phoneNumber}?text=${text}`;
+  }, [phoneNumber, presupuestoMessage]);
 
   const presupuestoHref = useMemo(() => {
     const sp = new URLSearchParams();
-    sp.set("mensaje", presupuestoMessage);
     sp.set("producto", product.title);
+    sp.set("mensaje", presupuestoMessage);
     return `/presupuesto?${sp.toString()}`;
-  }, [presupuestoMessage, product.title]);
+  }, [product.title, presupuestoMessage]);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <div className="min-h-screen bg-[#f6f0e6]">
+      {/* Back */}
+      <div className="max-w-6xl mx-auto px-4 pt-10">
+        <a
+          href={legacyProductHref.replace(/\/c\d+-.*\.html$/, "/")}
+          className="inline-flex items-center gap-2 text-sm text-neutral-700 hover:text-neutral-900"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Volver al catálogo
+        </a>
+      </div>
 
-      <main className="flex-1 pt-32 pb-20">
-        <div className="container mx-auto px-4">
-          <Link
-            href="/c415714-productos-personalizados.html"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Volver al catálogo
-          </Link>
+      {/* Main */}
+      <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {/* Image */}
+        <div className="bg-white border border-neutral-200">
+          <div className="aspect-square w-full flex items-center justify-center">
+            {/* Use normal img for export/static simplicity */}
+            <img
+              src={product.image || "/placeholder.svg"}
+              alt={product.title}
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Product Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="relative"
+        {/* Content */}
+        <div>
+          {isPremium ? (
+            <div className="text-xs tracking-[0.35em] uppercase text-[#b18a2a] mb-3">
+              PERSONALIZACIÓN PREMIUM
+            </div>
+          ) : null}
+
+          <h1 className="font-display text-4xl md:text-5xl leading-tight text-neutral-900 mb-3">
+            {product.title}
+          </h1>
+
+          {product.shortDescription ? (
+            <p className="text-neutral-700 mb-6">{product.shortDescription}</p>
+          ) : null}
+
+          {product.longDescription ? (
+            <div
+              className="prose prose-neutral max-w-none mb-8"
+              dangerouslySetInnerHTML={{ __html: product.longDescription }}
+            />
+          ) : null}
+
+          <div className="flex flex-wrap gap-3 mb-10">
+            <Button
+              asChild
+              className="bg-[#b07a00] hover:bg-[#9a6a00] text-white"
             >
-              <div className="aspect-square relative border border-border">
-                <Image
-                  src={product.image || "/placeholder.svg"}
-                  alt={product.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              {product.brands && (
-                <div className="mt-4 p-4 bg-muted border border-border">
-                  <p className="text-sm text-muted-foreground mb-2">Colaboramos con:</p>
-                  <p className="font-display text-foreground">{product.brands.join(" - ")}</p>
-                </div>
-              )}
-            </motion.div>
+              <a href={presupuestoHref}>
+                <FileText className="w-4 h-4 mr-2" />
+                Pedir Presupuesto
+              </a>
+            </Button>
 
-            {/* Product Info */}
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-              <p className="text-gold font-display text-sm tracking-[0.3em] uppercase mb-4">
-                Personalización Premium
-              </p>
-
-              <h1 className="font-display text-3xl md:text-4xl text-foreground mb-6">{product.title}</h1>
-
-              <div
-                className="text-muted-foreground text-lg mb-8 leading-relaxed prose prose-stone max-w-none"
-                dangerouslySetInnerHTML={{ __html: product.longDescription }}
-              />
-
-              {/* Legacy-like Personalization Form (optional, per product) */}
-              {product.personalizations && product.personalizations.length > 0 && (
-                <div className="mb-10 border border-border rounded-lg p-6">
-                  <h2 className="font-display text-xl text-foreground mb-6">Personaliza tu pedido</h2>
-
-                  <div className="space-y-6">
-                    {product.personalizations.map((field, idx) => {
-                      const key = String(idx);
-
-                      return (
-                        <div key={key}>
-                          <Label className="font-display text-foreground">
-                            {field.label}
-                            {field.required ? " *" : ""}
-                          </Label>
-
-                          <div className="mt-2">
-                            {field.kind === "textarea" ? (
-                              <Textarea
-                                value={personalizationValues[key] || ""}
-                                onChange={(e) =>
-                                  setPersonalizationValues((prev) => ({ ...prev, [key]: e.target.value }))
-                                }
-                                placeholder={field.help || "Escribe aquí..."}
-                              />
-                            ) : field.kind === "text" ? (
-                              <Input
-                                value={personalizationValues[key] || ""}
-                                onChange={(e) =>
-                                  setPersonalizationValues((prev) => ({ ...prev, [key]: e.target.value }))
-                                }
-                                placeholder={field.help || "Escribe aquí..."}
-                              />
-                            ) : field.kind === "checkbox" ? (
-                              <label className="inline-flex items-center gap-2 text-sm text-foreground">
-                                <input
-                                  type="checkbox"
-                                  checked={Boolean(personalizationValues[key])}
-                                  onChange={(e) =>
-                                    setPersonalizationValues((prev) => ({ ...prev, [key]: e.target.checked }))
-                                  }
-                                  className="h-4 w-4"
-                                />
-                                Sí
-                              </label>
-                            ) : (
-                              <Input
-                                type="file"
-                                onChange={(e) =>
-                                  setPersonalizationValues((prev) => ({
-                                    ...prev,
-                                    [key]: e.target.files?.[0]?.name || "",
-                                  }))
-                                }
-                              />
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  <p className="text-xs text-muted-foreground mt-6">
-                    * Este formulario es orientativo (como en la web anterior). El presupuesto final se
-                    confirma por email/WhatsApp.
-                  </p>
-                </div>
-              )}
-
-              {/* Variants Table */}
-              {product.options && product.options.length > 0 && (
-                <div className="mb-8 border border-border rounded-lg overflow-hidden">
-                  <div className="bg-muted px-4 py-3 border-b border-border">
-                    <h3 className="font-display text-foreground">Opciones Disponibles</h3>
-                  </div>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm item-center">
-                      <thead className="bg-background">
-                        <tr className="border-b border-border">
-                          <th className="px-4 py-3 text-left font-display text-muted-foreground">
-                            Cantidad / Variante
-                          </th>
-                          <th className="px-4 py-3 text-right font-display text-muted-foreground">
-                            Precio Unitario
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-border">
-                        {product.options.map((option, idx) => {
-                          const displayPrice =
-                            option.effectivePrice && option.effectivePrice > 0
-                              ? option.effectivePrice
-                              : option.price && option.price > 0
-                              ? option.price
-                              : product.price && product.price > 0
-                              ? product.price
-                              : null;
-
-                          return (
-                            <tr key={idx} className="hover:bg-muted/50 transition-colors">
-                              <td className="px-4 py-3 text-foreground">{option.label}</td>
-                              <td className="px-4 py-3 text-right text-foreground font-medium">
-                                {displayPrice !== null ? (
-                                  new Intl.NumberFormat("es-ES", {
-                                    style: "currency",
-                                    currency: "EUR",
-                                  }).format(displayPrice)
-                                ) : (
-                                  <span className="text-muted-foreground italic text-xs">Solicitar presupuesto</span>
-                                )}
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
-
-              <div className="mb-8">
-                <p className="font-display text-foreground mb-4">Características:</p>
-                <ul className="space-y-3">
-                  {product.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                <Link href={presupuestoHref}>
-                  <Button
-                    size="lg"
-                    className="bg-gradient-gold text-primary-foreground hover:opacity-90 font-display tracking-wider w-full sm:w-auto"
-                  >
-                    <FileText className="mr-2 h-5 w-5" />
-                    Pedir Presupuesto
-                  </Button>
-                </Link>
-                <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-2 border-gold text-foreground hover:bg-gold/10 font-display tracking-wider w-full sm:w-auto bg-transparent"
-                  >
-                    Contactar por WhatsApp
-                  </Button>
-                </a>
-              </div>
-
-              <p className="text-muted-foreground text-sm">
-                * Solicite presupuesto sin compromiso. Respuesta en menos de 24h laborables.
-              </p>
-            </motion.div>
+            <Button asChild variant="outline" className="border-neutral-300">
+              <a href={whatsappHref} target="_blank" rel="noreferrer">
+                WhatsApp
+              </a>
+            </Button>
           </div>
 
-          {/* Related Products */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mt-20"
-          >
-            <h2 className="font-display text-2xl text-foreground mb-8 text-center">
-              Otros Productos que Pueden Interesarle
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {otherProducts.map((prod) => (
-                <Link key={prod.slug} href={legacyProductHref(prod)}>
-                  <div className="group border border-border hover:border-gold/30 transition-all">
-                    <div className="aspect-square relative overflow-hidden">
-                      <Image
-                        src={prod.image || "/placeholder.svg"}
-                        alt={prod.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+          {/* Premium form */}
+          {isPremium && personalizations.length ? (
+            <div className="bg-white border border-neutral-200 p-6">
+              <h2 className="font-display text-xl text-neutral-900 mb-5">
+                Personalización
+              </h2>
+
+              <div className="space-y-5">
+                {personalizations.map((f) => {
+                  const val = personalizationValues[f.id];
+
+                  if (f.type === "checkbox") {
+                    return (
+                      <div key={f.id} className="space-y-2">
+                        <label className="flex items-center gap-3">
+                          <input
+                            type="checkbox"
+                            checked={Boolean(val)}
+                            onChange={(e) =>
+                              handlePersonalizationChange(
+                                f.id,
+                                e.target.checked
+                              )
+                            }
+                          />
+                          <span className="text-sm text-neutral-900">
+                            {f.label}
+                          </span>
+                        </label>
+                        {"help" in f && f.help ? (
+                          <p className="text-xs text-neutral-500">{f.help}</p>
+                        ) : null}
+                      </div>
+                    );
+                  }
+
+                  if (f.type === "file") {
+                    return (
+                      <div key={f.id} className="space-y-2">
+                        <Label className="text-sm text-neutral-900">
+                          {f.label}
+                        </Label>
+                        <Input
+                          type="file"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            handlePersonalizationChange(
+                              f.id,
+                              file ? file.name : ""
+                            );
+                          }}
+                        />
+                        {"help" in f && f.help ? (
+                          <p className="text-xs text-neutral-500">{f.help}</p>
+                        ) : null}
+                        {val ? (
+                          <p className="text-xs text-neutral-700 inline-flex items-center gap-1">
+                            <Check className="w-3 h-3" />
+                            {String(val)}
+                          </p>
+                        ) : null}
+                      </div>
+                    );
+                  }
+
+                  if (f.type === "textarea") {
+                    return (
+                      <div key={f.id} className="space-y-2">
+                        <Label className="text-sm text-neutral-900">
+                          {f.label}
+                        </Label>
+                        <Textarea
+                          value={typeof val === "string" ? val : ""}
+                          onChange={(e) =>
+                            handlePersonalizationChange(f.id, e.target.value)
+                          }
+                          rows={4}
+                          placeholder={f.placeholder}
+                        />
+                      </div>
+                    );
+                  }
+
+                  // text
+                  return (
+                    <div key={f.id} className="space-y-2">
+                      <Label className="text-sm text-neutral-900">
+                        {f.label}
+                      </Label>
+                      <Input
+                        value={typeof val === "string" ? val : ""}
+                        onChange={(e) =>
+                          handlePersonalizationChange(f.id, e.target.value)
+                        }
+                        placeholder={f.placeholder}
                       />
                     </div>
-                    <div className="p-4">
-                      <p className="font-display text-sm text-foreground group-hover:text-gold transition-colors text-center">
-                        {prod.title}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+                  );
+                })}
+              </div>
             </div>
-          </motion.div>
+          ) : null}
         </div>
-      </main>
+      </div>
 
-      <Footer />
-      <WhatsAppButton />
+      {/* Other products */}
+      <div className="max-w-6xl mx-auto px-4 pb-16">
+        <h2 className="font-display text-2xl text-neutral-900 mb-6">
+          Otros productos que podrían interesarte
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {otherProducts.map((p) => (
+            <a
+              key={p.id}
+              href={`/${toLegacySlug(p)}`}
+              className="bg-white border border-neutral-200 hover:border-neutral-400 transition-colors"
+            >
+              <div className="aspect-square w-full flex items-center justify-center">
+                <img
+                  src={p.image || "/placeholder.svg"}
+                  alt={p.title}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="p-4">
+                <div className="font-display text-sm text-neutral-900">
+                  {p.title}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
