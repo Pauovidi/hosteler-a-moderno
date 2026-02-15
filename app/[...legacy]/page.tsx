@@ -8,13 +8,12 @@ import { buildBaseMetadata, buildProductMetadata } from "@/lib/seo";
 import { getProductById } from "@/lib/data/products";
 
 type Props = {
-  params: { legacy: string[] };
+  params: Promise<{ legacy: string[] }>;
 };
 
 function parseLegacy(segments: string[]) {
   const raw = (segments?.[0] || "").trim();
 
-  // c412083-servilletas-....html
   const m = raw.match(/^([cp])(\d+)(?:-(.+?))?\.html?$/i);
   if (!m) return null;
 
@@ -27,23 +26,16 @@ function parseLegacy(segments: string[]) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const base = buildBaseMetadata();
-  const parsed = parseLegacy(params.legacy);
+  const resolvedParams = await params;
+  const parsed = parseLegacy(resolvedParams.legacy);
 
   if (!parsed) return base;
 
   const { kind, id, slug } = parsed;
-
-  // Canonical exacto a la legacy
-  const canonical =
-    kind === "c"
-      ? `/c${id}-${slug}.html`
-      : `/p${id}-${slug}.html`;
+  const canonical = kind === "c" ? `/c${id}-${slug}.html` : `/p${id}-${slug}.html`;
 
   if (kind === "c") {
-    // Metadata genérica para categorías/landings
-    const title = slug
-      ? slug.split("-").map(w => w[0]?.toUpperCase() + w.slice(1)).join(" ")
-      : "Catálogo";
+    const title = slug ? slug.split("-").map((w) => w[0]?.toUpperCase() + w.slice(1)).join(" ") : "Catálogo";
 
     return {
       ...base,
@@ -59,7 +51,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  // kind === "p"
   const product = getProductById(id);
   if (!product) return base;
 
@@ -79,8 +70,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function LegacyCatchAllPage({ params }: Props) {
-  const parsed = parseLegacy(params.legacy);
+export default async function LegacyCatchAllPage({ params }: Props) {
+  const resolvedParams = await params;
+  const parsed = parseLegacy(resolvedParams.legacy);
 
   if (!parsed) notFound();
 
