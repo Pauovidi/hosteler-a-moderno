@@ -1,6 +1,9 @@
 "use client";
 
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
+
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -9,8 +12,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { FileText, Send, CheckCircle } from "lucide-react";
-import { Suspense, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
 
 const categorias = [
   "Servilletas",
@@ -21,16 +22,6 @@ const categorias = [
   "Otros",
 ];
 
-// ✅ Page wrapper con Suspense (evita el prerender error)
-export default function PresupuestoPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen flex flex-col"><Header /><main className="flex-1 pt-32 pb-20"><div className="container mx-auto px-4">Cargando…</div></main><Footer /></div>}>
-      <PresupuestoInner />
-    </Suspense>
-  );
-}
-
-// ✅ Aquí va tu lógica actual (useSearchParams dentro del boundary)
 function PresupuestoInner() {
   const searchParams = useSearchParams();
 
@@ -148,7 +139,9 @@ function PresupuestoInner() {
                 <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="nombre" className="font-display">Nombre *</Label>
+                      <Label htmlFor="nombre" className="font-display">
+                        Nombre *
+                      </Label>
                       <Input
                         id="nombre"
                         value={formData.nombre}
@@ -159,7 +152,9 @@ function PresupuestoInner() {
                     </div>
 
                     <div>
-                      <Label htmlFor="email" className="font-display">Email *</Label>
+                      <Label htmlFor="email" className="font-display">
+                        Email *
+                      </Label>
                       <Input
                         id="email"
                         type="email"
@@ -171,7 +166,9 @@ function PresupuestoInner() {
                     </div>
 
                     <div>
-                      <Label htmlFor="telefono" className="font-display">Teléfono</Label>
+                      <Label htmlFor="telefono" className="font-display">
+                        Teléfono
+                      </Label>
                       <Input
                         id="telefono"
                         value={formData.telefono}
@@ -181,7 +178,9 @@ function PresupuestoInner() {
                     </div>
 
                     <div>
-                      <Label htmlFor="empresa" className="font-display">Empresa</Label>
+                      <Label htmlFor="empresa" className="font-display">
+                        Empresa
+                      </Label>
                       <Input
                         id="empresa"
                         value={formData.empresa}
@@ -217,7 +216,9 @@ function PresupuestoInner() {
                   </div>
 
                   <div>
-                    <Label htmlFor="mensaje" className="font-display">Mensaje *</Label>
+                    <Label htmlFor="mensaje" className="font-display">
+                      Mensaje *
+                    </Label>
                     <Textarea
                       id="mensaje"
                       value={formData.mensaje}
@@ -238,9 +239,7 @@ function PresupuestoInner() {
                       <Send className="mr-2 h-5 w-5" />
                       Enviar Solicitud
                     </Button>
-                    <p className="text-muted-foreground text-sm mt-4">
-                      Te responderemos en menos de 24 horas laborables.
-                    </p>
+                    <p className="text-muted-foreground text-sm mt-4">Te responderemos en menos de 24 horas laborables.</p>
                   </div>
                 </form>
               </CardContent>
@@ -251,5 +250,14 @@ function PresupuestoInner() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function PresupuestoPage() {
+  // Next pide Suspense cuando usas useSearchParams en el "page".
+  return (
+    <Suspense fallback={<div className="min-h-screen" />}>
+      <PresupuestoInner />
+    </Suspense>
   );
 }
