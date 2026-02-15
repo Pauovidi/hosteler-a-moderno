@@ -1,8 +1,5 @@
 import { notFound } from "next/navigation";
 
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-
 import { getProductById } from "@/lib/data/products";
 import { buildBaseMetadata, buildProductMetadata } from "@/lib/seo";
 
@@ -54,10 +51,6 @@ export default function LegacyProductPage({ params }: PageProps) {
   // El ProductClient de este repo requiere "categoria" (string) pero aquí no existe como tal.
   // Le pasamos el slug para que no casque y para mantener coherencia.
   return (
-    <div className="min-h-screen">
-      <Header />
-      <ProductClient product={product} categoria={product.slug} />
-      <Footer />
-    </div>
+    <ProductClient product={product} categoria={product.slug} />
   );
 }

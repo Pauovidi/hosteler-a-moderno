@@ -34,11 +34,9 @@ export function Header() {
       <nav className="bg-white border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center" aria-label="Personalizados Hosteleria">
             <img src="/logo-3.jpg" alt="Personalizados Hosteleria" className="h-12 w-auto" />
-            <span className="font-display text-lg text-foreground hidden sm:block">
-              Personalizados Hosteleria
-            </span>
+            <span className="sr-only">Personalizados Hosteleria</span>
           </Link>
 
           {/* Desktop nav */}
