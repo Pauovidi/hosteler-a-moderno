@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { getPost, getAllPosts } from "@/lib/data/blog";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -28,9 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             type: "article",
             title: post.title,
             description: post.excerpt,
-            publishedTime: post.date,
-            authors: [post.author],
-            tags: post.tags,
+            publishedTime: post.publishedAt,
+            authors: [post.authorName],
         },
     };
 }
@@ -68,21 +66,13 @@ export default async function BlogPostPage({ params }: Props) {
                     </h1>
 
                     <div className="flex items-center gap-4 text-sm text-muted-foreground mb-12 pb-8 border-b border-border">
-                        <span>{post.date}</span>
+                        <span>{new Date(post.publishedAt).toLocaleDateString('es-ES')}</span>
                         <span>•</span>
-                        <span>{post.author}</span>
-                        <span>•</span>
-                        <div className="flex gap-2">
-                            {post.tags.map(tag => (
-                                <span key={tag} className="bg-muted px-2 py-0.5 rounded-full text-xs">
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
+                        <span>{post.authorName}</span>
                     </div>
 
                     <div className="prose prose-stone max-w-none prose-lg">
-                        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
                     </div>
                 </article>
             </main>

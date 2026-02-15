@@ -1,144 +1,115 @@
 const fs = require('fs');
 const path = require('path');
-const { Readable } = require('stream');
 
-// Configuration
 const INPUT_CSV_PATH = path.join(__dirname, '../data/exportBlog.csv');
-const OUTPUT_JSON_PATH = path.join(__dirname, '../out/blog-posts.json');
-const TARGET_LIB_PATH = path.join(__dirname, '../lib/data/generated-blog.json');
+const OUTPUT_JSON_PATH = path.join(__dirname, '../lib/data/generated-blog.json');
 
-// Ensure directories
-function ensureDir(dir) {
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-    }
-}
-ensureDir(path.dirname(OUTPUT_JSON_PATH));
+function parseCsvLine(line) {
+  const values = [];
+  let current = '';
+  let inQuotes = false;
 
-// Decoding Helper (Same as migrate-data.js)
-function readTextSmart(buffer) {
-    // Detect if valid UTF-8
-    let isUtf8 = true;
-    for (let i = 0; i < buffer.length; i++) {
-        const byte = buffer[i];
-        if ((byte & 0x80) === 0) continue;
-        if ((byte & 0xE0) === 0xC0) {
-            if (i + 1 >= buffer.length || (buffer[i + 1] & 0xC0) !== 0x80) { isUtf8 = false; break; }
-            i += 1;
-        } else if ((byte & 0xF0) === 0xE0) {
-            if (i + 2 >= buffer.length || (buffer[i + 1] & 0xC0) !== 0x80 || (buffer[i + 2] & 0xC0) !== 0x80) { isUtf8 = false; break; }
-            i += 2;
-        } else if ((byte & 0xF8) === 0xF0) {
-            if (i + 3 >= buffer.length || (buffer[i + 1] & 0xC0) !== 0x80 || (buffer[i + 2] & 0xC0) !== 0x80 || (buffer[i + 3] & 0xC0) !== 0x80) { isUtf8 = false; break; }
-            i += 3;
-        } else {
-            isUtf8 = false;
-            break;
-        }
+  for (let i = 0; i < line.length; i += 1) {
+    const char = line[i];
+
+    if (char === '"') {
+      const next = line[i + 1];
+      if (inQuotes && next === '"') {
+        current += '"';
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
     }
 
-    if (isUtf8) return buffer.toString('utf8');
-    return buffer.toString('latin1');
-}
-
-// Simple CSV Parser (Semicolon)
-function parseCSV(text) {
-    const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
-    if (lines.length === 0) return [];
-
-    const headers = lines[0].split(';').map(h => h.trim().replace(/^"|"$/g, ''));
-    const result = [];
-
-    for (let i = 1; i < lines.length; i++) {
-        const line = lines[i];
-        // Note: This simple split fails if quotes contain semicolons.
-        // But for this legacy export, it seems sufficient based on product migration.
-        // If needed, we can use a library, but sticking to "no extra deps".
-        const values = line.split(';');
-        const row = {};
-
-        headers.forEach((h, idx) => {
-            let val = values[idx] || '';
-            val = val.trim().replace(/^"|"$/g, '');
-            row[h] = val;
-        });
-        result.push(row);
-    }
-    return result;
-}
-
-// Slugify
-function slugify(text) {
-    return text.toString().toLowerCase()
-        .replace(/\s+/g, '-')           // Replace spaces with -
-        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-        .replace(/^-+/, '')             // Trim - from start
-        .replace(/-+$/, '');            // Trim - from end
-}
-
-// Main Map
-function mapPost(row, index) {
-    // Map CSV columns to BlogPost
-    // CSV Headers seen: Título;Estado;Comentarios;Fecha Creación;Fecha Actualización;
-    // We assume there's a content column, probably "Contenido" or similar, 
-    // but the `Get-Content` output was truncated.
-    // Let's assume standard headers or try to find them dynamically.
-
-    // Fallback if headers are missing/weird
-    const title = row['Título'] || row['Title'] || `Untitled Post ${index}`;
-    const date = row['Fecha Creación'] || row['Date'] || new Date().toISOString();
-    const content = row['Contenido'] || row['Content'] || row['Body'] || '<p>Contenido no disponible.</p>';
-
-    // Clean content
-    // Minimal dangerous tag removal
-    const cleanContent = content
-        .replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gim, "")
-        .replace(/on\w+="[^"]*"/g, "");
-
-    return {
-        id: (index + 1).toString(),
-        slug: slugify(title),
-        title: title,
-        excerpt: cleanContent.substring(0, 150).replace(/<[^>]*>?/gm, '') + '...',
-        content: cleanContent,
-        date: date,
-        author: 'Palbin', // Default
-        image: '/placeholder.svg', // Default
-        tags: [],
-        legacyPath: '', // Can be populated if header exists
-        metaTitle: title,
-        metaDescription: ''
-    };
-}
-
-async function main() {
-    console.log("Starting Blog Migration...");
-
-    if (!fs.existsSync(INPUT_CSV_PATH)) {
-        console.error(`Input file not found: ${INPUT_CSV_PATH}`);
-        console.log("Usage: node scripts/blog-migrate.js");
-        process.exit(1);
+    if (char === ';' && !inQuotes) {
+      values.push(current);
+      current = '';
+      continue;
     }
 
-    // Read and Decode
-    const rawBuffer = fs.readFileSync(INPUT_CSV_PATH);
-    const text = readTextSmart(rawBuffer);
+    current += char;
+  }
 
-    // Parse
-    const rawData = parseCSV(text);
-    console.log(`Parsed ${rawData.length} rows.`);
-
-    // Map
-    const posts = rawData.map((row, i) => mapPost(row, i));
-
-    // Save
-    fs.writeFileSync(OUTPUT_JSON_PATH, JSON.stringify(posts, null, 2));
-    // Also update lib/data/generated-blog.json for app usage
-    fs.writeFileSync(TARGET_LIB_PATH, JSON.stringify(posts, null, 2));
-
-    console.log(`Successfully migrated ${posts.length} posts.`);
-    console.log(`Saved to ${OUTPUT_JSON_PATH} and ${TARGET_LIB_PATH}`);
+  values.push(current);
+  return values.map((value) => value.trim());
 }
 
-main();
+function parseCsv(content) {
+  const lines = content.split(/\r?\n/).filter((line) => line.trim().length > 0);
+  if (lines.length < 2) return [];
+
+  const headers = parseCsvLine(lines[0]).map((header) => header.replace(/^"|"$/g, ''));
+
+  return lines.slice(1).map((line) => {
+    const values = parseCsvLine(line).map((value) => value.replace(/^"|"$/g, ''));
+    const row = {};
+
+    headers.forEach((header, index) => {
+      row[header] = values[index] || '';
+    });
+
+    return row;
+  });
+}
+
+function parseDateToUtcIso(value) {
+  const match = value.match(/^(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2})$/);
+  if (!match) return null;
+
+  const [, day, month, year, hours, minutes] = match;
+  const date = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hours), Number(minutes)));
+  return date.toISOString();
+}
+
+function slugify(value) {
+  return value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function migrate() {
+  if (!fs.existsSync(INPUT_CSV_PATH)) {
+    throw new Error(`Input file not found: ${INPUT_CSV_PATH}`);
+  }
+
+  const csv = fs.readFileSync(INPUT_CSV_PATH, 'utf8');
+  const rows = parseCsv(csv);
+
+  const publishedRows = rows.filter((row) => row.Estado === 'Publicado');
+
+  const posts = publishedRows
+    .map((row, index) => {
+      const title = row.Titulo;
+      const slugBase = slugify(title);
+      const publishedAt = parseDateToUtcIso(row['Fecha Creacion']);
+      const updatedAt = parseDateToUtcIso(row['Fecha Actualizacion']) || publishedAt;
+
+      if (!title || !publishedAt) {
+        return null;
+      }
+
+      return {
+        id: String(index + 1),
+        slug: `${index + 1}-${slugBase}`,
+        title,
+        excerpt: `Artículo: ${title}`,
+        contentHtml: `<p><strong>${title}</strong></p><p>Contenido pendiente de importación. Si quieres información sobre este tema, contáctanos y te ayudamos.</p>`,
+        featuredImageUrl: null,
+        authorName: 'Personalizados Hostelería',
+        publishedAt,
+        updatedAt,
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+
+  fs.writeFileSync(OUTPUT_JSON_PATH, `${JSON.stringify(posts, null, 2)}\n`);
+  console.log(`Generated ${posts.length} blog posts at ${OUTPUT_JSON_PATH}`);
+}
+
+migrate();
