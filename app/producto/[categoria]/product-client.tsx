@@ -36,8 +36,8 @@ function normalizePhone(raw: string): string {
   return String(raw || "").replace(/\D/g, "");
 }
 
-export default function ProductClient({ product }: ProductClientProps) {
-  const [personalizationValues, setPersonalizationValues] = useState<Record<string, any>>({});
+export default function ProductClient({ product, categoria: _categoria }: ProductClientProps) {
+  const otherProducts = getAllProducts().filter((p) => p.id !== product.id).slice(0, 8);
 
   const otherProducts = useMemo(() => {
     return getAllProducts().filter((p) => p.slug !== product.slug).slice(0, 8);
