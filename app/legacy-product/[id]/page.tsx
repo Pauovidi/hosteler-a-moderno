@@ -7,21 +7,22 @@ import { buildBaseMetadata, buildProductMetadata } from "@/lib/seo";
 import ProductClient from "@/app/producto_[categoria]_product-client";
 
 type PageProps = {
-  params: { id: string };
-  searchParams?: { slug?: string };
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<{ slug?: string }>;
 };
 
 export async function generateMetadata({ params, searchParams }: PageProps) {
   const base = buildBaseMetadata();
-  const id = params?.id;
+  const { id } = await params;
   if (!id) return base;
 
   const product = getProductById(id);
   if (!product) return base;
 
+  const sp = (await searchParams) ?? {};
   const legacySlug =
-    searchParams?.slug && searchParams.slug.trim()
-      ? searchParams.slug.trim()
+    sp?.slug && sp.slug.trim()
+      ? sp.slug.trim()
       : product.slug.replace(new RegExp(`-${id}$`), "");
 
   const canonicalPath = `/p${id}-${legacySlug}.html`;
@@ -41,8 +42,8 @@ export async function generateMetadata({ params, searchParams }: PageProps) {
   };
 }
 
-export default function LegacyProductPage({ params }: PageProps) {
-  const id = params?.id;
+export default async function LegacyProductPage({ params }: PageProps) {
+  const { id } = await params;
   if (!id) notFound();
 
   const product = getProductById(id);
