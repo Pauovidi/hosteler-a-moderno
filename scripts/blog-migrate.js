@@ -1,144 +1,161 @@
 const fs = require('fs');
 const path = require('path');
-const { Readable } = require('stream');
 
-// Configuration
 const INPUT_CSV_PATH = path.join(__dirname, '../data/exportBlog.csv');
 const OUTPUT_JSON_PATH = path.join(__dirname, '../out/blog-posts.json');
 const TARGET_LIB_PATH = path.join(__dirname, '../lib/data/generated-blog.json');
 
-// Ensure directories
 function ensureDir(dir) {
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-    }
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 }
-ensureDir(path.dirname(OUTPUT_JSON_PATH));
 
-// Decoding Helper (Same as migrate-data.js)
 function readTextSmart(buffer) {
-    // Detect if valid UTF-8
-    let isUtf8 = true;
-    for (let i = 0; i < buffer.length; i++) {
-        const byte = buffer[i];
-        if ((byte & 0x80) === 0) continue;
-        if ((byte & 0xE0) === 0xC0) {
-            if (i + 1 >= buffer.length || (buffer[i + 1] & 0xC0) !== 0x80) { isUtf8 = false; break; }
-            i += 1;
-        } else if ((byte & 0xF0) === 0xE0) {
-            if (i + 2 >= buffer.length || (buffer[i + 1] & 0xC0) !== 0x80 || (buffer[i + 2] & 0xC0) !== 0x80) { isUtf8 = false; break; }
-            i += 2;
-        } else if ((byte & 0xF8) === 0xF0) {
-            if (i + 3 >= buffer.length || (buffer[i + 1] & 0xC0) !== 0x80 || (buffer[i + 2] & 0xC0) !== 0x80 || (buffer[i + 3] & 0xC0) !== 0x80) { isUtf8 = false; break; }
-            i += 3;
-        } else {
-            isUtf8 = false;
-            break;
-        }
+  let isUtf8 = true;
+  for (let i = 0; i < buffer.length; i++) {
+    const byte = buffer[i];
+    if ((byte & 0x80) === 0) continue;
+    if ((byte & 0xE0) === 0xC0) {
+      if (i + 1 >= buffer.length || (buffer[i + 1] & 0xC0) !== 0x80) { isUtf8 = false; break; }
+      i += 1;
+    } else if ((byte & 0xF0) === 0xE0) {
+      if (i + 2 >= buffer.length || (buffer[i + 1] & 0xC0) !== 0x80 || (buffer[i + 2] & 0xC0) !== 0x80) { isUtf8 = false; break; }
+      i += 2;
+    } else if ((byte & 0xF8) === 0xF0) {
+      if (i + 3 >= buffer.length || (buffer[i + 1] & 0xC0) !== 0x80 || (buffer[i + 2] & 0xC0) !== 0x80 || (buffer[i + 3] & 0xC0) !== 0x80) { isUtf8 = false; break; }
+      i += 3;
+    } else {
+      isUtf8 = false;
+      break;
     }
-
-    if (isUtf8) return buffer.toString('utf8');
-    return buffer.toString('latin1');
+  }
+  return isUtf8 ? buffer.toString('utf8') : buffer.toString('latin1');
 }
 
-// Simple CSV Parser (Semicolon)
+function parseCsvLine(line) {
+  const values = [];
+  let current = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+
+    if (ch === '"') {
+      const next = line[i + 1];
+      if (inQuotes && next === '"') {
+        current += '"';
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (ch === ';' && !inQuotes) {
+      values.push(current.trim());
+      current = '';
+      continue;
+    }
+
+    current += ch;
+  }
+
+  values.push(current.trim());
+  return values;
+}
+
 function parseCSV(text) {
-    const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
-    if (lines.length === 0) return [];
+  const lines = text.split(/\r?\n/).filter((l) => l.trim().length > 0);
+  if (lines.length === 0) return [];
 
-    const headers = lines[0].split(';').map(h => h.trim().replace(/^"|"$/g, ''));
-    const result = [];
+  const headers = parseCsvLine(lines[0]).map((h) => h.replace(/^"|"$/g, ''));
+  const rows = [];
 
-    for (let i = 1; i < lines.length; i++) {
-        const line = lines[i];
-        // Note: This simple split fails if quotes contain semicolons.
-        // But for this legacy export, it seems sufficient based on product migration.
-        // If needed, we can use a library, but sticking to "no extra deps".
-        const values = line.split(';');
-        const row = {};
+  for (let i = 1; i < lines.length; i++) {
+    const rawValues = parseCsvLine(lines[i]).map((v) => v.replace(/^"|"$/g, ''));
+    const row = {};
+    headers.forEach((header, idx) => {
+      row[header] = rawValues[idx] || '';
+    });
+    rows.push(row);
+  }
 
-        headers.forEach((h, idx) => {
-            let val = values[idx] || '';
-            val = val.trim().replace(/^"|"$/g, '');
-            row[h] = val;
-        });
-        result.push(row);
-    }
-    return result;
+  return rows;
 }
 
-// Slugify
-function slugify(text) {
-    return text.toString().toLowerCase()
-        .replace(/\s+/g, '-')           // Replace spaces with -
-        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-        .replace(/^-+/, '')             // Trim - from start
-        .replace(/-+$/, '');            // Trim - from end
+function slugify(input) {
+  return String(input || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
-// Main Map
-function mapPost(row, index) {
-    // Map CSV columns to BlogPost
-    // CSV Headers seen: Título;Estado;Comentarios;Fecha Creación;Fecha Actualización;
-    // We assume there's a content column, probably "Contenido" or similar, 
-    // but the `Get-Content` output was truncated.
-    // Let's assume standard headers or try to find them dynamically.
+function toUtcIso(dateStr) {
+  const match = String(dateStr || '').trim().match(/^(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2})$/);
+  if (!match) return null;
 
-    // Fallback if headers are missing/weird
-    const title = row['Título'] || row['Title'] || `Untitled Post ${index}`;
-    const date = row['Fecha Creación'] || row['Date'] || new Date().toISOString();
-    const content = row['Contenido'] || row['Content'] || row['Body'] || '<p>Contenido no disponible.</p>';
-
-    // Clean content
-    // Minimal dangerous tag removal
-    const cleanContent = content
-        .replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gim, "")
-        .replace(/on\w+="[^"]*"/g, "");
-
-    return {
-        id: (index + 1).toString(),
-        slug: slugify(title),
-        title: title,
-        excerpt: cleanContent.substring(0, 150).replace(/<[^>]*>?/gm, '') + '...',
-        content: cleanContent,
-        date: date,
-        author: 'Palbin', // Default
-        image: '/placeholder.svg', // Default
-        tags: [],
-        legacyPath: '', // Can be populated if header exists
-        metaTitle: title,
-        metaDescription: ''
-    };
+  const [, dd, mm, yyyy, hh, min] = match;
+  const utc = Date.UTC(Number(yyyy), Number(mm) - 1, Number(dd), Number(hh), Number(min), 0, 0);
+  return new Date(utc).toISOString();
 }
 
-async function main() {
-    console.log("Starting Blog Migration...");
+function createContentHtml(title) {
+  return `<p><strong>${title}</strong></p><p>Contenido pendiente de importación. Si quieres información sobre este tema, contáctanos y te ayudamos.</p>`;
+}
 
-    if (!fs.existsSync(INPUT_CSV_PATH)) {
-        console.error(`Input file not found: ${INPUT_CSV_PATH}`);
-        console.log("Usage: node scripts/blog-migrate.js");
-        process.exit(1);
-    }
+function main() {
+  console.log('Starting blog build from CSV...');
 
-    // Read and Decode
-    const rawBuffer = fs.readFileSync(INPUT_CSV_PATH);
-    const text = readTextSmart(rawBuffer);
+  if (!fs.existsSync(INPUT_CSV_PATH)) {
+    console.error(`Input file not found: ${INPUT_CSV_PATH}`);
+    process.exit(1);
+  }
 
-    // Parse
-    const rawData = parseCSV(text);
-    console.log(`Parsed ${rawData.length} rows.`);
+  ensureDir(path.dirname(OUTPUT_JSON_PATH));
+  ensureDir(path.dirname(TARGET_LIB_PATH));
 
-    // Map
-    const posts = rawData.map((row, i) => mapPost(row, i));
+  const rawBuffer = fs.readFileSync(INPUT_CSV_PATH);
+  const text = readTextSmart(rawBuffer);
+  const rows = parseCSV(text);
 
-    // Save
-    fs.writeFileSync(OUTPUT_JSON_PATH, JSON.stringify(posts, null, 2));
-    // Also update lib/data/generated-blog.json for app usage
-    fs.writeFileSync(TARGET_LIB_PATH, JSON.stringify(posts, null, 2));
+  const publishedRows = rows.filter((row) => String(row['Estado'] || '').trim() === 'Publicado');
 
-    console.log(`Successfully migrated ${posts.length} posts.`);
-    console.log(`Saved to ${OUTPUT_JSON_PATH} and ${TARGET_LIB_PATH}`);
+  const normalized = publishedRows
+    .map((row) => {
+      const title = String(row['Titulo'] || '').trim();
+      const publishedAt = toUtcIso(row['Fecha Creacion']);
+      const updatedAt = toUtcIso(row['Fecha Actualizacion']) || publishedAt;
+
+      if (!title || !publishedAt) return null;
+
+      return {
+        title,
+        slugBase: slugify(title),
+        publishedAt,
+        updatedAt,
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+    .map((item, idx) => ({
+      id: String(idx + 1),
+      slug: `${idx + 1}-${item.slugBase}`,
+      title: item.title,
+      excerpt: `Artículo: ${item.title}`,
+      contentHtml: createContentHtml(item.title),
+      featuredImageUrl: null,
+      authorName: 'Personalizados Hostelería',
+      publishedAt: item.publishedAt,
+      updatedAt: item.updatedAt,
+    }));
+
+  fs.writeFileSync(OUTPUT_JSON_PATH, JSON.stringify(normalized, null, 2));
+  fs.writeFileSync(TARGET_LIB_PATH, JSON.stringify(normalized, null, 2));
+
+  console.log(`Generated ${normalized.length} blog posts.`);
+  console.log(`Saved: ${OUTPUT_JSON_PATH}`);
+  console.log(`Saved: ${TARGET_LIB_PATH}`);
 }
 
 main();

@@ -24,7 +24,7 @@ function legacyProductHref(p: Product): string {
 
 export default function ProductClient({ product, categoria }: ProductClientProps) {
   // Get other products for "Related Products" section
-  const otherProducts = getAllProducts().filter((p) => p.slug !== categoria);
+  const otherProducts = getAllProducts().filter((p) => p.slug !== categoria).slice(0, 8);
 
   return (
     <div className="min-h-screen flex flex-col">

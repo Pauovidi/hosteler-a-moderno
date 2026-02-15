@@ -1,16 +1,18 @@
 import { MetadataRoute } from 'next'
 import { getAllProducts } from '@/lib/data/products'
+import { getAllPosts } from '@/lib/data/blog'
 
 const BASE_URL = 'https://v0-personalizados-hosteleria.vercel.app'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const products = getAllProducts()
+    const posts = getAllPosts()
 
     // Static routes
     const routes = [
         '',
         '/presupuesto',
-        // '/blog', // Uncomment when blog is ready
+        '/blog',
     ].map((route) => ({
         url: `${BASE_URL}${route}`,
         lastModified: new Date(),
@@ -26,8 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }))
 
-    // Blog routes placeholder
-    // const blogRoutes = ...
+    const blogRoutes = posts.map((post) => ({
+        url: `${BASE_URL}/blog/${post.slug}`,
+        lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+    }))
 
-    return [...routes, ...productRoutes]
+    return [...routes, ...productRoutes, ...blogRoutes]
 }
