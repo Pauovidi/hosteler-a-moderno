@@ -6,81 +6,11 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { getAllProducts, type Product } from "@/lib/data/products";
 import { buildBaseMetadata } from "@/lib/seo";
+import { filterProductsForLegacyMenu, legacyMenuMap } from "@/data/legacy-menu-map";
 
 type PageProps = {
   params: { id: string };
   searchParams?: { slug?: string };
-};
-
-type MenuRule = {
-  title?: string;
-  mode?: "all";
-  include?: string[];
-  exclude?: string[];
-};
-
-// ✅ NO creamos lib/legacy. Mapa inline y listo.
-// Ajusta keywords si ves que falta/sobra algo.
-const MENU_RULES: Record<string, MenuRule> = {
-  // Menú
-  "415714": { title: "Productos", mode: "all" },
-
-  "412083": {
-    title: "Servilletas",
-    include: [
-      "servilleta",
-      "airlaid",
-      "tissue",
-      "papel",
-      "miniservice",
-      "miniservicio",
-      "portacubiertos",
-      "porta cubiertos",
-      "portamenú",
-      "porta menú",
-      "servilletero",
-    ],
-    exclude: ["copa", "vaso", "cristal", "vajilla", "plato", "cuberter", "tenedor", "cuchillo", "cuchara", "mantel", "textil"],
-  },
-
-  "412080": {
-    title: "Cristalería",
-    include: [
-      "copa",
-      "vaso",
-      "cristal",
-      "vidrio",
-      "brandy",
-      "cognac",
-      "vino",
-      "gin",
-      "tonic",
-      "whisky",
-      "cerveza",
-      "jarra",
-      "cava",
-      "champagne",
-    ],
-    exclude: ["servilleta", "airlaid", "vajilla", "plato", "cuberter", "tenedor", "cuchillo", "cuchara", "mantel", "textil"],
-  },
-
-  "412082": {
-    title: "Vajilla",
-    include: ["vajilla", "plato", "taza", "bol", "bowl", "fuente", "bandeja", "porcelana", "cerámica", "ceramica"],
-    exclude: ["copa", "vaso", "cristal", "servilleta", "airlaid", "cuberter", "tenedor", "cuchillo", "cuchara", "mantel", "textil"],
-  },
-
-  "453874": {
-    title: "Cubertería",
-    include: ["cuberter", "cubiertos", "tenedor", "cuchillo", "cuchara", "inox", "acero", "stainless"],
-    exclude: ["copa", "vaso", "cristal", "servilleta", "airlaid", "vajilla", "plato", "mantel", "textil"],
-  },
-
-  "412081": {
-    title: "Textil Hoteles",
-    include: ["mantel", "manteler", "textil", "hotel", "camino", "delantal", "toalla", "sábana", "sabana", "fundas", "servilleta tela"],
-    exclude: ["copa", "vaso", "cristal", "vajilla", "plato", "cuberter", "tenedor", "cuchillo", "cuchara"],
-  },
 };
 
 function normalize(s: string): string {
@@ -106,100 +36,16 @@ function titleFromSlug(slug?: string): string {
     .join(" ");
 }
 
+function stripHtml(html: string): string {
+  return String(html || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 function productLegacySlug(product: Product): string {
   const base = String(product.slug || "")
     .replace(new RegExp(`-${product.id}$`), "")
     .replace(/\/+$/g, "")
     .trim();
   return base || "producto";
-}
-
-function productHaystack(p: Product): string {
-  return normalize(
-    [
-      p.title,
-      p.name,
-      p.slug,
-      p.shortDescription,
-      p.metaTitle,
-      p.metaDescription,
-      ...(p.categoriesFlat || []),
-      ...(p.categoryPaths || []).flat(),
-    ]
-      .filter(Boolean)
-      .join(" ")
-  );
-}
-
-function matchesAny(haystack: string, keywords: string[]): boolean {
-  const h = normalize(haystack);
-  return keywords.some((k) => {
-    const kk = normalize(k);
-    return kk.length >= 3 && h.includes(kk);
-  });
-}
-
-// Fallback viejo (por slug) pero SOLO si no hay regla por ID o si la regla deja 0 resultados
-function filterBySlugFallback(products: Product[], legacySlug?: string): Product[] {
-  if (!legacySlug) return products;
-
-  const normalizedSlug = normalize(legacySlug);
-  if (normalizedSlug.includes("productos") || normalizedSlug.includes("catalog") || normalizedSlug.includes("catalogo")) {
-    return products;
-  }
-
-  const tokens = normalizedSlug
-    .split(/[-\s]+/)
-    .map((t) => t.trim())
-    .filter((t) => t.length >= 4);
-
-  if (tokens.length === 0) return products;
-
-  const matches = products.filter((p) => {
-    const h = productHaystack(p);
-    return tokens.some((t) => h.includes(normalize(t)));
-  });
-
-  return matches.length ? matches : products;
-}
-
-function filterForMenu(id: string, products: Product[], legacySlug?: string) {
-  const rule = MENU_RULES[id];
-
-  // Si no hay regla => fallback por slug (lo que ya tenías)
-  if (!rule) {
-    const bySlug = filterBySlugFallback(products, legacySlug);
-    return {
-      title: titleFromSlug(legacySlug),
-      products: bySlug,
-    };
-  }
-
-  const title = rule.title || titleFromSlug(legacySlug);
-
-  if (rule.mode === "all") {
-    return { title, products };
-  }
-
-  const include = rule.include || [];
-  const exclude = rule.exclude || [];
-
-  const filtered = products.filter((p) => {
-    const h = productHaystack(p);
-    if (exclude.length && matchesAny(h, exclude)) return false;
-    if (include.length) return matchesAny(h, include);
-    return true;
-  });
-
-  // Si la regla deja 0 (por keywords pobres), NO rompas: vuelve al fallback por slug
-  if (!filtered.length) {
-    return {
-      title,
-      products: filterBySlugFallback(products, legacySlug),
-    };
-  }
-
-  return { title, products: filtered };
 }
 
 export async function generateMetadata({ params, searchParams }: PageProps) {
@@ -210,7 +56,7 @@ export async function generateMetadata({ params, searchParams }: PageProps) {
   const slug = searchParams?.slug || "";
   const canonicalPath = `/c${id}-${slug}.html`;
 
-  const ruleTitle = MENU_RULES[id]?.title;
+  const ruleTitle = legacyMenuMap[id]?.title;
   const title = `${ruleTitle || titleFromSlug(slug)} | Personalizados Hosteleria`;
   const description = `Descubre ${normalize(ruleTitle || titleFromSlug(slug)).toLowerCase()} en Personalizados Hosteleria.`;
 
@@ -237,7 +83,8 @@ export default function LegacyCategoryPage({ params, searchParams }: PageProps) 
   const legacySlug = searchParams?.slug || "";
   const allProducts = getAllProducts();
 
-  const { title: pageTitle, products: categoryProducts } = filterForMenu(id, allProducts, legacySlug);
+  const categoryProducts = filterProductsForLegacyMenu(allProducts, id);
+  const pageTitle = legacyMenuMap[id]?.title || titleFromSlug(legacySlug);
 
   return (
     <div className="min-h-screen">
@@ -250,7 +97,24 @@ export default function LegacyCategoryPage({ params, searchParams }: PageProps) 
         </p>
 
         {categoryProducts.length === 0 ? (
-          <div className="text-center text-gray-600">No hay productos en esta sección.</div>
+          <div className="max-w-2xl mx-auto text-center border border-gray-200 rounded-xl p-8 bg-white">
+            <h2 className="text-2xl font-semibold mb-3">No se encontraron productos</h2>
+            <p className="text-gray-600 mb-6">Prueba con el catálogo completo o solicita ayuda para encontrar el producto ideal.</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                href="/c415714-productos-personalizados.html"
+                className="inline-flex items-center justify-center rounded-md bg-black text-white px-5 py-3 font-medium hover:opacity-90"
+              >
+                Ver todo
+              </Link>
+              <Link
+                href="/presupuesto"
+                className="inline-flex items-center justify-center rounded-md border border-gray-300 px-5 py-3 font-medium hover:bg-gray-50"
+              >
+                Pedir presupuesto
+              </Link>
+            </div>
+          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {categoryProducts.map((product) => {
@@ -278,7 +142,8 @@ export default function LegacyCategoryPage({ params, searchParams }: PageProps) 
                     <h2 className="font-semibold text-lg leading-snug group-hover:underline">{product.title}</h2>
 
                     <p className="text-sm text-gray-600 mt-2 line-clamp-3">
-                      {product.shortDescription || "Producto personalizado para hostelería."}
+                      {stripHtml(product.shortDescription || product.shortDescriptionHtml || "") ||
+                        "Producto personalizado para hostelería."}
                     </p>
 
                     <div className="mt-4 font-semibold">

@@ -16,18 +16,6 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/p:id(\\d+)-:legacySlug.html',
-        destination: '/legacy-product/:id?slug=:legacySlug',
-      },
-      {
-        source: '/c:id(\\d+)-:legacySlug.html',
-        destination: '/legacy-category/:id?slug=:legacySlug',
-      },
-    ];
-  },
   async redirects() {
     try {
       const fs = await import('fs');
