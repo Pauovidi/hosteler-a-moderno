@@ -8,7 +8,7 @@ import { buildBaseMetadata, buildProductMetadata } from "@/lib/seo";
 import { getProductById } from "@/lib/data/products";
 
 type Props = {
-  params: { legacy: string[] };
+  params: Promise<{ legacy: string[] }>;
 };
 
 function parseLegacy(segments: string[]) {
@@ -27,7 +27,8 @@ function parseLegacy(segments: string[]) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const base = buildBaseMetadata();
-  const parsed = parseLegacy(params.legacy);
+  const { legacy } = await params;
+  const parsed = parseLegacy(legacy);
 
   if (!parsed) return base;
 
@@ -79,16 +80,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function LegacyCatchAllPage({ params }: Props) {
-  const parsed = parseLegacy(params.legacy);
+export default async function LegacyCatchAllPage({ params }: Props) {
+  const { legacy } = await params;
+  const parsed = parseLegacy(legacy);
 
   if (!parsed) notFound();
 
   const { kind, id, slug } = parsed;
 
   if (kind === "c") {
-    return <LegacyCategoryPage params={{ id }} searchParams={{ slug }} />;
+    return <LegacyCategoryPage params={Promise.resolve({ id })} searchParams={Promise.resolve({ slug })} />;
   }
 
-  return <LegacyProductPage params={{ id }} searchParams={{ slug }} />;
+  return <LegacyProductPage params={Promise.resolve({ id })} searchParams={Promise.resolve({ slug })} />;
 }
