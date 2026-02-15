@@ -48,7 +48,7 @@
   - Mapping lives in `data/legacy-landing-map.json`.
   - Canonical is set to the **legacy URL itself** (`/c123-slug.html`).
 
-## Data Flow
+## Data Floww
 
 - **Source**: `data/exportProducts.csv`
 - **Output (official)**: `lib/data/products.json`
