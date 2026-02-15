@@ -40,8 +40,10 @@ export default function ProductClient({ product }: ProductClientProps) {
   const [personalizationValues, setPersonalizationValues] = useState<Record<string, any>>({});
 
   const otherProducts = useMemo(() => {
-    return getAllProducts().filter((p) => p.slug !== product.slug).slice(0, 8);
-  }, [product.slug]);
+  return getAllProducts()
+    .filter((p) => p.slug !== product.slug)   // o p.id !== product.id
+    .slice(0, 8);
+}, [product.slug]);
 
   const phoneNumber = normalizePhone(process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "34693039422");
 
