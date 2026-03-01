@@ -158,4 +158,4 @@ function main() {
   console.log(`Saved: ${TARGET_LIB_PATH}`);
 }
 
-main();
+migrate();

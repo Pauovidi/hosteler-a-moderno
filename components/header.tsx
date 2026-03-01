@@ -14,6 +14,7 @@ const navLinks = [
   { name: "Vajilla", href: "/c412082-vajilla-personalizada.html" },
   { name: "Cubertería", href: "/c453874-cubiertos-personalizados.html" },
   { name: "Textil Hoteles", href: "/c412081-manteleria-textil-personalizada.html" },
+  { name: "Blog", href: "/blog" },
   { name: "Contacto", href: "/presupuesto" },
 ];
 
