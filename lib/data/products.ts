@@ -143,30 +143,50 @@ function parsePersonalizations(raw: string | undefined): PersonalizationField[] 
 }
 
 // Cast and Map
-const productsArray = (generatedProducts as unknown as Product[]).map((p) => ({
-  ...p,
-  // Clean CP850 artifacts early so UI/SEO doesn't show broken accents
-  name: fixCp850Controls(p.name),
-  slug: p.slug,
-  descriptionHtml: p.descriptionHtml ? fixCp850Controls(p.descriptionHtml) : "",
-  shortDescriptionHtml: p.shortDescriptionHtml ? fixCp850Controls(p.shortDescriptionHtml) : "",
+const productsArray = (generatedProducts as unknown as Product[]).map((p) => {
+  // --- IMAGE FALLBACK ---
+  // Use imagesSource if available; otherwise fall back to images[] from JSON
+  const fallbackImages = ((p as any).images as string[] | undefined) ?? [];
 
-  // Compat map
-  title: fixCp850Controls(p.name),
-  image: p.imagesSource && p.imagesSource.length > 0 ? p.imagesSource[0] : "/placeholder.svg",
-  features: (p as any).features || [],
-  brands: p.brand ? [p.brand] : (p.brands || []),
+  const normalizedImages = (
+    Array.isArray(p.imagesSource) && p.imagesSource.length > 0
+      ? p.imagesSource
+      : fallbackImages
+  )
+    .filter((src) => typeof src === "string")
+    // Keep only valid image extensions; skip .thumb preview files
+    .filter((src) => /\.(png|jpe?g|webp|avif|gif)$/i.test(src));
 
-  // Keep HTML for the product page, but provide clean plain text for cards/SEO
-  longDescription: p.descriptionHtml ? fixCp850Controls(p.descriptionHtml) : "",
-  shortDescription: p.shortDescriptionHtml
-    ? toPlainText(p.shortDescriptionHtml)
-    : p.descriptionHtml
-    ? toPlainText(p.descriptionHtml)
-    : "",
+  const mainImage =
+    normalizedImages.length > 0 ? normalizedImages[0] : "/placeholder.svg";
 
-  personalizations: parsePersonalizations((p as any).personalizationsRaw),
-}));
+  return {
+    ...p,
+    // Clean CP850 artifacts early so UI/SEO doesn't show broken accents
+    name: fixCp850Controls(p.name),
+    slug: p.slug,
+    descriptionHtml: p.descriptionHtml ? fixCp850Controls(p.descriptionHtml) : "",
+    shortDescriptionHtml: p.shortDescriptionHtml ? fixCp850Controls(p.shortDescriptionHtml) : "",
+
+    // Compat map
+    title: fixCp850Controls(p.name),
+    // Expose normalized list so the rest of the UI can iterate images
+    imagesSource: normalizedImages,
+    image: mainImage,
+    features: (p as any).features || [],
+    brands: p.brand ? [p.brand] : (p.brands || []),
+
+    // Keep HTML for the product page, but provide clean plain text for cards/SEO
+    longDescription: p.descriptionHtml ? fixCp850Controls(p.descriptionHtml) : "",
+    shortDescription: p.shortDescriptionHtml
+      ? toPlainText(p.shortDescriptionHtml)
+      : p.descriptionHtml
+        ? toPlainText(p.descriptionHtml)
+        : "",
+
+    personalizations: parsePersonalizations((p as any).personalizationsRaw),
+  };
+});
 
 export const products: Record<string, Product> = productsArray.reduce((acc, product) => {
   acc[product.slug] = product;
