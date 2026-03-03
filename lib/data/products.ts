@@ -149,16 +149,76 @@ const productsArray = (generatedProducts as unknown as Product[]).map((p) => {
   const fallbackImages = ((p as any).images as string[] | undefined) ?? [];
 
   const normalizedImages = (
-    Array.isArray(p.imagesSource) && p.imagesSource.length > 0
-      ? p.imagesSource
-      : fallbackImages
+    Array.isArray(p.imagesSource) && p.imagesSource.length > 0 ? p.imagesSource : fallbackImages
   )
     .filter((src) => typeof src === "string")
     // Keep only valid image extensions; skip .thumb preview files
     .filter((src) => /\.(png|jpe?g|webp|avif|gif)$/i.test(src));
 
-  const mainImage =
-    normalizedImages.length > 0 ? normalizedImages[0] : "/placeholder.svg";
+  // Prefer real product photos over branding/assets (logos, social icons, placeholders, etc.)
+  const isBadAsset = (src: string) => {
+    const s = src.toLowerCase();
+    return (
+      s.includes("logo") ||
+      s.includes("facebook") ||
+      s.includes("instagram") ||
+      s.includes("twitter") ||
+      s.includes("linkedin") ||
+      s.includes("pinterest") ||
+      s.includes("youtube") ||
+      s.includes("tiktok") ||
+      s.includes("whatsapp") ||
+      s.includes("transparent") ||
+      s.includes("blank") ||
+      s.includes("placeholder") ||
+      s.includes("icon") ||
+      s.includes("sprite") ||
+      s.includes("camion") ||
+      s.includes("truck") ||
+      s.includes("presupuesto") ||
+      s.includes("presupuestos") ||
+      s.includes("carrito") ||
+      s.includes("compra")
+    );
+  };
+
+  const scoreImage = (src: string) => {
+    const s = src.toLowerCase();
+    let score = 0;
+
+    // Penaliza assets no-producto
+    if (isBadAsset(s)) score += 1000;
+
+    // Penaliza thumbs/miniaturas típicas (aunque tengan extensión válida)
+    if (s.includes("x128")) score += 200;
+
+    // Penaliza imágenes "modelo/plantilla" si aparecen mucho
+    if (s.includes("mod-") || s.includes("mod_")) score += 100;
+
+    // Preferencia por fotos (jpg/jpeg) sobre png (a menudo logos/diagramas)
+    if (/\.(jpe?g)$/i.test(s)) score += 0;
+    else if (/\.webp$/i.test(s)) score += 10;
+    else if (/\.avif$/i.test(s)) score += 20;
+    else if (/\.png$/i.test(s)) score += 60;
+    else score += 80;
+
+    // Bonus: si parece foto "real"
+    if (s.includes("img-") || s.includes("foto") || s.includes("photo") || s.includes("dsc")) score -= 30;
+
+    return score;
+  };
+
+  const preferredImages = normalizedImages
+    .slice()
+    .sort((a, b) => scoreImage(a) - scoreImage(b));
+
+  // Si todas las candidatas son "bad assets", al menos usa normalizedImages sin filtrar por asset
+  const bestImage =
+    preferredImages.find((src) => !isBadAsset(src)) ??
+    preferredImages[0] ??
+    "/placeholder.svg";
+
+  const mainImage = bestImage;
 
   return {
     ...p,
@@ -170,8 +230,8 @@ const productsArray = (generatedProducts as unknown as Product[]).map((p) => {
 
     // Compat map
     title: fixCp850Controls(p.name),
-    // Expose normalized list so the rest of the UI can iterate images
-    imagesSource: normalizedImages,
+    // Expose sorted list so the rest of the UI can iterate images (best first)
+    imagesSource: preferredImages,
     image: mainImage,
     features: (p as any).features || [],
     brands: p.brand ? [p.brand] : (p.brands || []),

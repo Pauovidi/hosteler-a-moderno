@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { getPost, getAllPosts } from "@/lib/data/blog";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 
 interface Props {
@@ -71,9 +72,14 @@ export default async function BlogPostPage({ params }: Props) {
                         <span>{post.authorName}</span>
                     </div>
 
-                    <div className="prose prose-stone max-w-none prose-lg">
-                        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
-                    </div>
+                    {post.featuredImageUrl ? (
+                        <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl border mb-6">
+                            <Image src={post.featuredImageUrl} alt={post.title} fill className="object-cover" />
+                        </div>
+                    ) : null}
+
+                    <div className="prose prose-neutral max-w-none"
+                        dangerouslySetInnerHTML={{ __html: post.contentHtml || "" }} />
                 </article>
             </main>
             <Footer />
