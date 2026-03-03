@@ -155,7 +155,7 @@ const productsArray = (generatedProducts as unknown as Product[]).map((p) => {
     // Keep only valid image extensions; skip .thumb preview files
     .filter((src) => /\.(png|jpe?g|webp|avif|gif)$/i.test(src));
 
-  // Prefer real product photos over branding/assets (logos, social icons, placeholders, etc.)
+  // Exclude brand/social/generic assets — extended list including common contaminating filenames
   const isBadAsset = (src: string) => {
     const s = src.toLowerCase();
     return (
@@ -178,47 +178,36 @@ const productsArray = (generatedProducts as unknown as Product[]).map((p) => {
       s.includes("presupuesto") ||
       s.includes("presupuestos") ||
       s.includes("carrito") ||
-      s.includes("compra")
+      s.includes("compra") ||
+      s.includes("default") ||
+      s.includes("generico") ||
+      s.includes("servilleta") ||
+      s.includes("canguro") ||
+      s.includes("airlaid") ||
+      s.includes("miniservice") ||
+      s.includes("-qr") ||
+      s.includes(" qr")
     );
   };
 
-  const scoreImage = (src: string) => {
-    const s = src.toLowerCase();
-    let score = 0;
-
-    // Penaliza assets no-producto
-    if (isBadAsset(s)) score += 1000;
-
-    // Penaliza thumbs/miniaturas típicas (aunque tengan extensión válida)
-    if (s.includes("x128")) score += 200;
-
-    // Penaliza imágenes "modelo/plantilla" si aparecen mucho
-    if (s.includes("mod-") || s.includes("mod_")) score += 100;
-
-    // Preferencia por fotos (jpg/jpeg) sobre png (a menudo logos/diagramas)
-    if (/\.(jpe?g)$/i.test(s)) score += 0;
-    else if (/\.webp$/i.test(s)) score += 10;
-    else if (/\.avif$/i.test(s)) score += 20;
-    else if (/\.png$/i.test(s)) score += 60;
-    else score += 80;
-
-    // Bonus: si parece foto "real"
-    if (s.includes("img-") || s.includes("foto") || s.includes("photo") || s.includes("dsc")) score -= 30;
-
-    return score;
+  // Extract the 2-digit numeric prefix from paths like "/28_sublym.jpg" → 28
+  const getPrefixNum = (src: string) => {
+    const m = src.match(/\/(\d{2})_/);
+    return m ? Number(m[1]) : null;
   };
 
-  const preferredImages = normalizedImages
-    .slice()
-    .sort((a, b) => scoreImage(a) - scoreImage(b));
+  // "Full" product images have prefix >= 20 (export convention for real product photos)
+  const fullCandidates = normalizedImages
+    .filter((src) => {
+      const n = getPrefixNum(src);
+      return n !== null && n >= 20;
+    })
+    .filter((src) => !isBadAsset(src));
 
-  // Si todas las candidatas son "bad assets", al menos usa normalizedImages sin filtrar por asset
-  const bestImage =
-    preferredImages.find((src) => !isBadAsset(src)) ??
-    preferredImages[0] ??
-    "/placeholder.svg";
+  // If no clean full-prefix images exist, use placeholder — better empty than wrong
+  const chosenImages = fullCandidates.length > 0 ? fullCandidates : [];
 
-  const mainImage = bestImage;
+  const mainImage = chosenImages[0] ?? "/placeholder.svg";
 
   return {
     ...p,
@@ -230,8 +219,8 @@ const productsArray = (generatedProducts as unknown as Product[]).map((p) => {
 
     // Compat map
     title: fixCp850Controls(p.name),
-    // Expose sorted list so the rest of the UI can iterate images (best first)
-    imagesSource: preferredImages,
+    // Expose clean product images (prefix >= 20, no bad assets)
+    imagesSource: chosenImages,
     image: mainImage,
     features: (p as any).features || [],
     brands: p.brand ? [p.brand] : (p.brands || []),
