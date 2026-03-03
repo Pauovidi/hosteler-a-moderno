@@ -6,11 +6,11 @@ const path = require('path');
 // Usage:
 //   node scripts/import-catalog.js --input data/exportProducts.csv --out lib/data/products.json [--strict]
 function getArgValue(flag) {
-  const idx = process.argv.indexOf(flag);
-  if (idx === -1) return null;
-  const val = process.argv[idx + 1];
-  if (!val || val.startsWith('--')) return null;
-  return val;
+    const idx = process.argv.indexOf(flag);
+    if (idx === -1) return null;
+    const val = process.argv[idx + 1];
+    if (!val || val.startsWith('--')) return null;
+    return val;
 }
 
 const INPUT_CSV = path.resolve(process.cwd(), getArgValue('--input') || 'data/exportProducts.csv');
@@ -395,6 +395,33 @@ function run() {
 
     report.products_count = products.length;
     report.options_count = products.reduce((acc, p) => acc + p.options.length, 0);
+
+    // --- PRESERVE images[] from previous products.json ---
+    // Load existing products.json to carry over images[] already set
+    const existingImagesBySlug = new Map();
+    const existingImagesById = new Map();
+    if (fs.existsSync(OUTPUT_JSON)) {
+        try {
+            const existing = JSON.parse(fs.readFileSync(OUTPUT_JSON, 'utf8'));
+            for (const ep of existing) {
+                if (ep.images && Array.isArray(ep.images) && ep.images.length > 0) {
+                    if (ep.slug) existingImagesBySlug.set(ep.slug, ep.images);
+                    if (ep.id) existingImagesById.set(String(ep.id), ep.images);
+                }
+            }
+            console.log(`Preserving images[] from existing JSON: ${existingImagesBySlug.size} entries by slug, ${existingImagesById.size} by id`);
+        } catch (e) {
+            console.warn('Could not load existing products.json for image preservation:', e.message);
+        }
+    }
+
+    // Merge images[] into new products
+    for (const p of products) {
+        if (!p.images || p.images.length === 0) {
+            const imgs = existingImagesBySlug.get(p.slug) || existingImagesById.get(String(p.id));
+            if (imgs) p.images = imgs;
+        }
+    }
 
     // Outputs
     fs.mkdirSync(path.dirname(OUTPUT_JSON), { recursive: true });

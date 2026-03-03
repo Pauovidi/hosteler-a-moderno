@@ -14,6 +14,7 @@
     "legacy:build": "node scripts/legacy-urls.js",
     "legacy:build:strict": "node scripts/legacy-urls.js --strict",
     "prebuild": "npm run data:build && npm run legacy:build",
+    "fix:images": "node scripts/fix-images-from-export.js",
     "blog:build": "node scripts/blog-migrate.js"
   },
   "dependencies": {
