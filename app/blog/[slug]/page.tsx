@@ -66,7 +66,7 @@ export default async function BlogPostPage({ params }: Props) {
                     </h1>
 
                     <div className="flex items-center gap-4 text-sm text-muted-foreground mb-12 pb-8 border-b border-border">
-                        <span>{new Date(post.publishedAt).toLocaleDateString('es-ES')}</span>
+                        <span>{new Date(post.publishedAt).toLocaleDateString("es-ES")}</span>
                         <span>•</span>
                         <span>{post.authorName}</span>
                     </div>

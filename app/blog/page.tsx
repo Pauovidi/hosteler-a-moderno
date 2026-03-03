@@ -25,7 +25,7 @@ export default function BlogPage() {
                         <Card key={post.slug} className="flex flex-col">
                             <CardHeader>
                                 <CardTitle className="font-display text-xl">{post.title}</CardTitle>
-                                <CardDescription>{new Date(post.publishedAt).toLocaleDateString('es-ES')} | Por {post.authorName}</CardDescription>
+                                <CardDescription>{new Date(post.publishedAt).toLocaleDateString("es-ES")} | Por {post.authorName}</CardDescription>
                             </CardHeader>
                             <CardContent className="flex-1">
                                 <p className="text-muted-foreground">{post.excerpt}</p>
