@@ -192,22 +192,20 @@ const productsArray = (generatedProducts as unknown as Product[]).map((p) => {
     );
   };
 
-  // Extract the 2-digit numeric prefix from paths like "/28_sublym.jpg" → 28
   const getPrefixNum = (src: string) => {
     const m = src.match(/\/(\d{2})_/);
-    return m ? Number(m[1]) : null;
+    return m ? Number(m[1]) : 99;
   };
 
-  // "Full" product images have prefix >= 20 (export convention for real product photos)
-  const fullCandidates = normalizedImages
-    .filter((src) => {
-      const n = getPrefixNum(src);
-      return n !== null && n >= 20;
-    })
-    .filter((src) => !isBadAsset(src));
+  // Remove global brand/noise assets
+  const clean = normalizedImages.filter((src) => !isBadAsset(src));
 
-  // If no clean full-prefix images exist, use placeholder — better empty than wrong
-  const chosenImages = fullCandidates.length > 0 ? fullCandidates : [];
+  // Source of truth: prefer THUMB-derived .webp images (01_, 02_, 03_…) over raw jpg/png
+  const webps = clean.filter((src) => src.toLowerCase().endsWith(".webp"));
+
+  const chosenImages = (webps.length > 0 ? webps : clean)
+    .slice()
+    .sort((a, b) => getPrefixNum(a) - getPrefixNum(b));
 
   const mainImage = chosenImages[0] ?? "/placeholder.svg";
 
@@ -221,7 +219,7 @@ const productsArray = (generatedProducts as unknown as Product[]).map((p) => {
 
     // Compat map
     title: fixCp850Controls(p.name),
-    // Expose clean product images (prefix >= 20, no bad assets)
+    // Sorted THUMB-derived webp images (best source), or clean fallback
     imagesSource: chosenImages,
     image: mainImage,
     features: (p as any).features || [],
