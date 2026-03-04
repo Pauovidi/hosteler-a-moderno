@@ -148,12 +148,14 @@ const productsArray = (generatedProducts as unknown as Product[]).map((p) => {
   // Use imagesSource if available; otherwise fall back to images[] from JSON
   const fallbackImages = ((p as any).images as string[] | undefined) ?? [];
 
-  const normalizedImages = (
+  const rawImages = (
     Array.isArray(p.imagesSource) && p.imagesSource.length > 0 ? p.imagesSource : fallbackImages
-  )
-    .filter((src) => typeof src === "string")
-    // Keep only valid image extensions; skip .thumb preview files
-    .filter((src) => /\.(png|jpe?g|webp|avif|gif)$/i.test(src));
+  ).filter((src) => typeof src === "string");
+
+  // Source of truth: .thumb files → use their pre-generated .webp equivalent in public/media
+  const normalizedImages = rawImages
+    .map((src) => src.replace(/\.thumb$/i, ".webp"))
+    .filter((src) => /\.(webp|png|jpe?g|avif|gif)$/i.test(src));
 
   // Exclude brand/social/generic assets — extended list including common contaminating filenames
   const isBadAsset = (src: string) => {
