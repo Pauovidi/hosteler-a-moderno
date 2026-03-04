@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -23,6 +24,19 @@ export default function BlogPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {posts.map((post) => (
                         <Card key={post.slug} className="flex flex-col">
+                            {post.featuredImageUrl ? (
+                                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-md">
+                                    <Image
+                                        src={post.featuredImageUrl}
+                                        alt={`Imagen destacada de ${post.title}`}
+                                        fill
+                                        className="object-cover"
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    />
+                                </div>
+                            ) : (
+                                <div className="aspect-[16/9] w-full rounded-t-md bg-muted" aria-hidden="true" />
+                            )}
                             <CardHeader>
                                 <CardTitle className="font-display text-xl">{post.title}</CardTitle>
                                 <CardDescription>{new Date(post.publishedAt).toLocaleDateString("es-ES")} | Por {post.authorName}</CardDescription>
