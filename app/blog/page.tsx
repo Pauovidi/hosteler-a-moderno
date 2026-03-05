@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { getAllPosts } from "@/lib/data/blog";
+import { getVisiblePosts } from "@/lib/data/blog";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-    const posts = getAllPosts();
+    const posts = getVisiblePosts();
 
     return (
         <div className="min-h-screen flex flex-col">

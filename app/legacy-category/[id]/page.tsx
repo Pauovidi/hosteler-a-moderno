@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { getAllProducts, type Product } from "@/lib/data/products";
+import { getVisibleProducts, type Product } from "@/lib/data/products";
 import { buildBaseMetadata } from "@/lib/seo";
 import { legacyMenuMap } from "@/data/legacy-menu-map";
 
@@ -128,7 +128,7 @@ export default async function LegacyCategoryPage({ params, searchParams }: PageP
   const sp = (await searchParams) ?? {};
   const legacySlug = sp.slug || "";
 
-  const allProducts = getAllProducts();
+  const allProducts = getVisibleProducts();
 
   // ✅ Filtrado por ID de menú legacy
   const categoryProducts = filterByMenuId(allProducts, id);
