@@ -98,8 +98,7 @@
       "/media/products/copa-de-vino-sublym-55-grabada-con-tu-logo/28_sublym-1606637975.jpg",
       "/media/products/copa-de-vino-sublym-55-grabada-con-tu-logo/32_facebook-4.png",
       "/media/products/copa-de-vino-sublym-55-grabada-con-tu-logo/33_instagram-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7295934",
@@ -190,8 +189,7 @@
       "/media/products/copa-vina-grabada-con-su-logo-3-volumenes-58-cl-47-cl-35-cl/26_transparent.png",
       "/media/products/copa-vina-grabada-con-su-logo-3-volumenes-58-cl-47-cl-35-cl/29_1-1607712619.jpg",
       "/media/products/copa-vina-grabada-con-su-logo-3-volumenes-58-cl-47-cl-35-cl/34_default.jpg"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7303108",
@@ -302,8 +300,7 @@
       "/media/products/copa-grand-cepage-grabada-con-tu-logo/28_grand-cepag-1606636548.jpg",
       "/media/products/copa-grand-cepage-grabada-con-tu-logo/32_facebook-4.png",
       "/media/products/copa-grand-cepage-grabada-con-tu-logo/33_instagram-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7303199",
@@ -390,8 +387,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7303479",
@@ -501,8 +497,7 @@
       "/media/products/jarra-cerveza-classic-grabada-con-su-logo/26_transparent.png",
       "/media/products/jarra-cerveza-classic-grabada-con-su-logo/29_1-1607938683.png",
       "/media/products/jarra-cerveza-classic-grabada-con-su-logo/34_facebook-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7306917",
@@ -566,8 +561,7 @@
       "/media/products/manteleria-personalizada-a-medida/26_transparent.png",
       "/media/products/manteleria-personalizada-a-medida/29_manteleria-personalizada-1-1610441370.jpg",
       "/media/products/manteleria-personalizada-a-medida/34_tabla-1.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7308708",
@@ -623,8 +617,7 @@
       "/media/products/servilletero-para-servelleta-2020-personalizado/28_2020venezia-1580637910.png",
       "/media/products/servilletero-para-servelleta-2020-personalizado/32_manteleria-personalizada-1-1610441370-jpg.thumb",
       "/media/products/servilletero-para-servelleta-2020-personalizado/33_1-1606664708-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7308723",
@@ -688,13 +681,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/servilletero-giant-personalizado-con-tu-logo/01_servilletero-giant-personalizado-blanco-1610106331.webp",
-      "/media/products/servilletero-giant-personalizado-con-tu-logo/02_servilletero-gian-personalizado-azul-1610106592-jp.webp",
-      "/media/products/servilletero-giant-personalizado-con-tu-logo/03_servilletero-personalizado-cocktail-negro-16101066.webp",
-      "/media/products/servilletero-giant-personalizado-con-tu-logo/04_servilletero-miniservice-personalizado-blanco-1610.webp",
-      "/media/products/servilletero-giant-personalizado-con-tu-logo/34_principe-1607691048-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Logo para eláservilletero][Adjunta aquí el logo][][1][6]|[Color que deseas para tu servilletero][Escribe aquí el color que quieres Azul, Verde, Nogal, Envejecido, Naranja, etc. ][][0][1]",
     "options": [
@@ -757,8 +744,7 @@
       "/media/products/servilletero-giant-personalizado-con-tu-logo/26_transparent.png",
       "/media/products/servilletero-giant-personalizado-con-tu-logo/29_servilletero-giant-personalizado-blanco-1610106331.jpg",
       "/media/products/servilletero-giant-personalizado-con-tu-logo/34_principe-1607691048-jpg.thumb"
-    ],
-    "image": "/media/products/servilletero-giant-personalizado-con-tu-logo/01_servilletero-giant-personalizado-blanco-1610106331.webp"
+    ]
   },
   {
     "id": "7317021",
@@ -868,8 +854,7 @@
       "/media/products/copa-cerveza-harmonia-grabada-con-tu-logo/28_harmonia-principal-1606665579.jpg",
       "/media/products/copa-cerveza-harmonia-grabada-con-tu-logo/32_facebook-4.png",
       "/media/products/copa-cerveza-harmonia-grabada-con-tu-logo/33_instagram-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7317042",
@@ -979,8 +964,7 @@
       "/media/products/vaso-cerveza-savoy-grabado-con-su-logo/26_transparent.png",
       "/media/products/vaso-cerveza-savoy-grabado-con-su-logo/29_savoy1-1610794807.jpg",
       "/media/products/vaso-cerveza-savoy-grabado-con-su-logo/34_palladio1-1606667783-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7317860",
@@ -1077,8 +1061,7 @@
       "/media/products/copa-champagne-cava-cueva/28_classic-1607418433.jpg",
       "/media/products/copa-champagne-cava-cueva/32_facebook-4.png",
       "/media/products/copa-champagne-cava-cueva/33_instagram-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7318009",
@@ -1112,12 +1095,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/taza-y-platillo-ischia-grabado-con-tu-logo/01_tazay-platillo-personalizados-ischia-1611430321-pn.webp",
-      "/media/products/taza-y-platillo-ischia-grabado-con-tu-logo/02_taza-y-platillo-de-cafe-personalizados-ischia-1611.webp",
-      "/media/products/taza-y-platillo-ischia-grabado-con-tu-logo/03_calidad-cristal-perssonalizados-hosteleria-1611425.webp",
-      "/media/products/taza-y-platillo-ischia-grabado-con-tu-logo/04_buena-ischia-1607871232-png.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][][][1][6]",
     "options": [
@@ -1162,8 +1140,7 @@
       "/media/products/taza-y-platillo-ischia-grabado-con-tu-logo/26_transparent.png",
       "/media/products/taza-y-platillo-ischia-grabado-con-tu-logo/29_tazay-platillo-personalizados-ischia-1611430321.png",
       "/media/products/taza-y-platillo-ischia-grabado-con-tu-logo/34_facebook-4.png"
-    ],
-    "image": "/media/products/taza-y-platillo-ischia-grabado-con-tu-logo/01_tazay-platillo-personalizados-ischia-1611430321-pn.webp"
+    ]
   },
   {
     "id": "7318037",
@@ -1197,11 +1174,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-brandy-o-cognac-magnum-130-cl-grabada-con-tu-logo/01_magnum-130-1580490498-png.webp",
-      "/media/products/copa-brandy-o-cognac-magnum-130-cl-grabada-con-tu-logo/02_copas-brandy-y-cognac-1580491075-jpg.webp",
-      "/media/products/copa-brandy-o-cognac-magnum-130-cl-grabada-con-tu-logo/03_calidad-cristal-perssonalizados-hosteleria-1610989.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][][][1][6]",
     "options": [
@@ -1237,8 +1210,7 @@
       "/media/products/copa-brandy-o-cognac-magnum-130-cl-grabada-con-tu-logo/28_magnum-130-1580490498.png",
       "/media/products/copa-brandy-o-cognac-magnum-130-cl-grabada-con-tu-logo/32_facebook-4.png",
       "/media/products/copa-brandy-o-cognac-magnum-130-cl-grabada-con-tu-logo/33_instagram-4.png"
-    ],
-    "image": "/media/products/copa-brandy-o-cognac-magnum-130-cl-grabada-con-tu-logo/01_magnum-130-1580490498-png.webp"
+    ]
   },
   {
     "id": "7319521",
@@ -1362,8 +1334,7 @@
       "/media/products/copa-cubata-pro-72-cl-s-grabada-con-tu-logo/26_transparent.png",
       "/media/products/copa-cubata-pro-72-cl-s-grabada-con-tu-logo/29_cubata-pro4-1593709442.jpg",
       "/media/products/copa-cubata-pro-72-cl-s-grabada-con-tu-logo/34_nonic34lovehate-1599756134-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7319832",
@@ -1402,10 +1373,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/servilleta-giant-impresa-con-tu-logo-a-uno-o-dos-colores/01_arroz-giant-1580585323-jpg.webp",
-      "/media/products/servilleta-giant-impresa-con-tu-logo-a-uno-o-dos-colores/02_servilletero-santo-tome-1580585620-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[ADJUNTA AQUÍ TU LOGO ][][][1][6]|[DINOS AQUÍ SI QUIERES UN SEGUNDO COLOR][COLOR EJEMP: NEGRO, VERDE, AZUL, ETC. O NINGUNO][][0][2]|[DINOS AQUÍ EL COLOR DE SERVILLETERO QUE DESEAS][EJEMP. BLANCO, VERDE, AZUL, NEGRO, ETC. ][][0][2]|[DINOS EN QUÉ COLOR QUIERES LOS SERVILLETEROS][Te recordamos que los 6 primeros servilleteros te los regalamos, dinos aquí el color que deseas][][0][2]",
     "options": [
@@ -1450,8 +1418,7 @@
       "/media/products/servilleta-giant-impresa-con-tu-logo-a-uno-o-dos-colores/30_facebook-4.png",
       "/media/products/servilleta-giant-impresa-con-tu-logo-a-uno-o-dos-colores/31_instagram-4.png",
       "/media/products/servilleta-giant-impresa-con-tu-logo-a-uno-o-dos-colores/32_twitter-5.png"
-    ],
-    "image": "/media/products/servilleta-giant-impresa-con-tu-logo-a-uno-o-dos-colores/01_arroz-giant-1580585323-jpg.webp"
+    ]
   },
   {
     "id": "7320954",
@@ -1504,10 +1471,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/servilletero-miniservice-con-palillero-y-portamenu-con-tu-logo/01_servilletero-miniservice-1580633994-jpg.webp",
-      "/media/products/servilletero-miniservice-con-palillero-y-portamenu-con-tu-logo/28_personalizacion-miniservice-1698137093-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo para eláservilletero][Recuerda que debe ser en formato: jpg, png o pdf][][0][6]|[Dinos en qué color de acabado quieres eláservilletero][Ejem. azul, verde, negro, blanco, etc. ][][0][1]",
     "options": [
@@ -1570,8 +1534,7 @@
       "/media/products/servilletero-miniservice-con-palillero-y-portamenu-con-tu-logo/29_facebook-4.png",
       "/media/products/servilletero-miniservice-con-palillero-y-portamenu-con-tu-logo/30_instagram-4.png",
       "/media/products/servilletero-miniservice-con-palillero-y-portamenu-con-tu-logo/31_twitter-5.png"
-    ],
-    "image": "/media/products/servilletero-miniservice-con-palillero-y-portamenu-con-tu-logo/01_servilletero-miniservice-1580633994-jpg.webp"
+    ]
   },
   {
     "id": "7321015",
@@ -1610,13 +1573,7 @@
     "marketingLabelDate": "",
     "cost": 31.71,
     "price": 0,
-    "imagesSource": [
-      "/media/products/servilleta-miniservice-personalizada-con-su-logo/01_personalizacion-miniservice-1698137093-jpg.webp",
-      "/media/products/servilleta-miniservice-personalizada-con-su-logo/02_miniservice-blanca-y-eco-1698044484-jpg.webp",
-      "/media/products/servilleta-miniservice-personalizada-con-su-logo/03_medidas-servilletas-miniservice-1698044484-jpg.webp",
-      "/media/products/servilleta-miniservice-personalizada-con-su-logo/04_personalizados-hosteleria-ventajas-de-compra-16980.webp",
-      "/media/products/servilleta-miniservice-personalizada-con-su-logo/34_3-1677231729-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí el logo para la servilleta][][][1][6]|[Adjunta aquí el color de la impresión][Ejem. azul, negro, verde, etc. ][][0][1]|[Adjunta aquí el 2§ color si lo hubiera][Ejem. azul, negro, verde, etc. ][][0][1]",
     "options": [
@@ -1670,8 +1627,7 @@
       "/media/products/servilleta-miniservice-personalizada-con-su-logo/26_transparent.png",
       "/media/products/servilleta-miniservice-personalizada-con-su-logo/29_personalizacion-miniservice-1698137093.jpg",
       "/media/products/servilleta-miniservice-personalizada-con-su-logo/34_3-1677231729-jpg.thumb"
-    ],
-    "image": "/media/products/servilleta-miniservice-personalizada-con-su-logo/01_personalizacion-miniservice-1698137093-jpg.webp"
+    ]
   },
   {
     "id": "7321016",
@@ -1768,8 +1724,7 @@
       "/media/products/servilleta-2020-personalizada-con-su-logo/28_3-1677231729.jpg",
       "/media/products/servilleta-2020-personalizada-con-su-logo/32_personalizacion-miniservice-1698137093-jpg.thumb",
       "/media/products/servilleta-2020-personalizada-con-su-logo/33_servilleta-miniservice-impresion-total-abierta-176.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7321017",
@@ -1821,13 +1776,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/servilleta-canguro-tissu-personalizada-con-su-logo/01_servilleta-canguro-personalizada-eco-1679681730-jp.webp",
-      "/media/products/servilleta-canguro-tissu-personalizada-con-su-logo/02_servilleta-canguro-personalizada-ecologica-1679681.webp",
-      "/media/products/servilleta-canguro-tissu-personalizada-con-su-logo/03_servilleta-personalizada-canguro-eco-1679681730-jp.webp",
-      "/media/products/servilleta-canguro-tissu-personalizada-con-su-logo/04_prospecto-servileta-canguro-1679683410-jpg.webp",
-      "/media/products/servilleta-canguro-tissu-personalizada-con-su-logo/34_manteleria-personalizada-1-1610441370-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí el Código QR y/o tu logo][Recuerda formato: jpg, png o pdf][][0][6]|[COLOR DE TINTA DE IMPRESIÓN ][Blanca, Azul, amarilla, etc.][][0][1]",
     "options": [
@@ -1881,8 +1830,7 @@
       "/media/products/servilleta-canguro-tissu-personalizada-con-su-logo/26_transparent.png",
       "/media/products/servilleta-canguro-tissu-personalizada-con-su-logo/29_servilleta-canguro-personalizada-eco-1679681730.jpg",
       "/media/products/servilleta-canguro-tissu-personalizada-con-su-logo/34_manteleria-personalizada-1-1610441370-jpg.thumb"
-    ],
-    "image": "/media/products/servilleta-canguro-tissu-personalizada-con-su-logo/01_servilleta-canguro-personalizada-eco-1679681730-jp.webp"
+    ]
   },
   {
     "id": "7321281",
@@ -1913,8 +1861,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Texto para caja 150*75 mm (sólo el texto)][indica aquí qué quieres poner][][0][2]|[La Fuente de letra ][indica aquí el nombre de la fuente de letra][][0][2]|[Adjunta aquí un logo o imagen caja][recuerda que la medida m xima ser de 150*75 mm][][0][6]|[Texto para copa 45*45 mm m ximo][dinos texto y fuente de letra][][0][2]|[Adjunta aquí logo para copa][Logo copa si prefieres][][0][6]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "7331797",
@@ -1976,8 +1923,7 @@
         "discountValue": 0,
         "effectivePrice": 303.7
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7348502",
@@ -2088,8 +2034,7 @@
       "/media/products/copa-classic-grabada-con-tu-logo/28_copas-de-vino-personalizadas-classic-1610996309.jpg",
       "/media/products/copa-classic-grabada-con-tu-logo/32_default.jpg",
       "/media/products/copa-classic-grabada-con-tu-logo/33_magnum-130-1580490498-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7348503",
@@ -2180,8 +2125,7 @@
       "/media/products/copa-mencia-templada-grabada-con-tu-logo/28_principal-mencia-1606654630.jpg",
       "/media/products/copa-mencia-templada-grabada-con-tu-logo/32_copas-de-vino-personalizadas-classic-1610996309-jp.thumb",
       "/media/products/copa-mencia-templada-grabada-con-tu-logo/33_imagen-principal-1606640258-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7350332",
@@ -2212,8 +2156,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "7357969",
@@ -2324,8 +2267,7 @@
       "/media/products/copa-cabernet-vino-joven-grabada-con-tu-logo/28_cabernete-1606642017.jpg",
       "/media/products/copa-cabernet-vino-joven-grabada-con-tu-logo/32_facebook-4.png",
       "/media/products/copa-cabernet-vino-joven-grabada-con-tu-logo/33_instagram-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7358016",
@@ -2387,8 +2329,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7358231",
@@ -2419,8 +2360,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí un logo o imagen][][][0][6]|[dinos aquí si quieres un texto ][te aconsejamos que no sea mucho, afea la copa][][0][2]|[dinos aquí la fuente de letra que quieres][arial, calibri, etc., ][][0][1]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "7359483",
@@ -2446,13 +2386,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/grabado-de-copas-con-su-logo/01_grabado-de-copas-1583399918-jpg.webp",
-      "/media/products/grabado-de-copas-con-su-logo/28_copas-gin-tonic-persoanalizadas-ambassador-1610889.webp",
-      "/media/products/grabado-de-copas-con-su-logo/29_copia-de-enoteca-1607710335-jpg.webp",
-      "/media/products/grabado-de-copas-con-su-logo/30_copia-de-enoteca-1607709202-jpg.webp",
-      "/media/products/grabado-de-copas-con-su-logo/31_cubata-pro-1607327059-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí el logo que quieres que grabemos][formato pdf, png o jpg][][1][6]",
     "options": [
@@ -2506,8 +2440,7 @@
       "/media/products/grabado-de-copas-con-su-logo/29_copia-de-enoteca-1607710335-jpg.thumb",
       "/media/products/grabado-de-copas-con-su-logo/30_copia-de-enoteca-1607709202-jpg.thumb",
       "/media/products/grabado-de-copas-con-su-logo/31_cubata-pro-1607327059-jpg.thumb"
-    ],
-    "image": "/media/products/grabado-de-copas-con-su-logo/01_grabado-de-copas-1583399918-jpg.webp"
+    ]
   },
   {
     "id": "7359784",
@@ -2595,8 +2528,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7373943",
@@ -2693,8 +2625,7 @@
       "/media/products/copa-cava-vina-19-cl-grabada-con-tu-logo-o-el-de-un-evento/28_vina-1607420469.jpg",
       "/media/products/copa-cava-vina-19-cl-grabada-con-tu-logo-o-el-de-un-evento/32_facebook-4.png",
       "/media/products/copa-cava-vina-19-cl-grabada-con-tu-logo-o-el-de-un-evento/33_instagram-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7387249",
@@ -2804,8 +2735,7 @@
       "/media/products/vaso-cerveza-principe-grabado-con-su-logo/30_facebook-4.png",
       "/media/products/vaso-cerveza-principe-grabado-con-su-logo/31_instagram-4.png",
       "/media/products/vaso-cerveza-principe-grabado-con-su-logo/32_twitter-5.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7421151",
@@ -2852,11 +2782,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-cerveza-capri-34-cl-grabada-con-su-logo/01_capricon-fond-1606741339-jpg.webp",
-      "/media/products/copa-de-cerveza-capri-34-cl-grabada-con-su-logo/02_capri-1583344667-png.webp",
-      "/media/products/copa-de-cerveza-capri-34-cl-grabada-con-su-logo/03_capri34-1605774113-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][formato pdf, jpg o png][][0][6]|[marca de cerveza][formato pdf, jpg o png][][0][6]",
     "options": [
@@ -2919,8 +2845,7 @@
       "/media/products/copa-de-cerveza-capri-34-cl-grabada-con-su-logo/28_capricon-fond-1606741339.jpg",
       "/media/products/copa-de-cerveza-capri-34-cl-grabada-con-su-logo/32_facebook-4.png",
       "/media/products/copa-de-cerveza-capri-34-cl-grabada-con-su-logo/33_instagram-4.png"
-    ],
-    "image": "/media/products/copa-de-cerveza-capri-34-cl-grabada-con-su-logo/01_capricon-fond-1606741339-jpg.webp"
+    ]
   },
   {
     "id": "7437378",
@@ -3036,8 +2961,7 @@
       "/media/products/copa-cerveza-palladio-grabada-con-su-logo/30_harmonia-principal-1606665579-jpg.thumb",
       "/media/products/copa-cerveza-palladio-grabada-con-su-logo/31_1-1606664708-jpg.thumb",
       "/media/products/copa-cerveza-palladio-grabada-con-su-logo/32_krista-exalt-1593448377-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7444183",
@@ -3124,8 +3048,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7444475",
@@ -3235,8 +3158,7 @@
       "/media/products/vaso-nonix-cerveza-grabado-con-tu-logo/26_transparent.png",
       "/media/products/vaso-nonix-cerveza-grabado-con-tu-logo/29_vaso-de-cerveza-personalizado-nonix-29-1612703110.jpg",
       "/media/products/vaso-nonix-cerveza-grabado-con-tu-logo/34_facebook-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7444507",
@@ -3323,8 +3245,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7444826",
@@ -3434,8 +3355,7 @@
       "/media/products/jarra-de-cerveza-maxim-grabada-con-su-logo/26_transparent.png",
       "/media/products/jarra-de-cerveza-maxim-grabada-con-su-logo/29_jarra-de-cerveza-personalizada-amberes-1610737582.jpg",
       "/media/products/jarra-de-cerveza-maxim-grabada-con-su-logo/34_imagen-principal-1606640258-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7457529",
@@ -3540,8 +3460,7 @@
       "/media/products/copa-reveal-up-oenology-grabada-con-tu-logo/28_reveal-up1-1606639607.jpg",
       "/media/products/copa-reveal-up-oenology-grabada-con-tu-logo/32_copas-de-vino-personalizadas-classic-1610996309-jp.thumb",
       "/media/products/copa-reveal-up-oenology-grabada-con-tu-logo/33_ejemplo-mantelin-35cms-ancho50cmslargo-impreso-en-.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7569855",
@@ -3638,8 +3557,7 @@
       "/media/products/manteleria-en-tnt-mantelines-manteles-rollos-de-mantel-y-caminos/28_tnt-1588497370.jpg",
       "/media/products/manteleria-en-tnt-mantelines-manteles-rollos-de-mantel-y-caminos/32_manteleria-personalizada-1-1610441370-jpg.thumb",
       "/media/products/manteleria-en-tnt-mantelines-manteles-rollos-de-mantel-y-caminos/33_servilleta-canguro-personalizada-eco-1679681730-jp.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7569977",
@@ -3667,13 +3585,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/toallita-gel-isopropilico-con-alcohol-al-70/01_toallita-perfumada-1588503881-png.webp",
-      "/media/products/toallita-gel-isopropilico-con-alcohol-al-70/28_manteleria-personalizada-1-1610441370-jpg.webp",
-      "/media/products/toallita-gel-isopropilico-con-alcohol-al-70/29_magnum-130-1580490498-png.webp",
-      "/media/products/toallita-gel-isopropilico-con-alcohol-al-70/30_taza-0-8-cl-y-platillo-personalizados-a-uno-o-dos-.webp",
-      "/media/products/toallita-gel-isopropilico-con-alcohol-al-70/31_platillo-de-cafe-mod-ph1-1618769947-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -3736,8 +3648,7 @@
       "/media/products/toallita-gel-isopropilico-con-alcohol-al-70/29_magnum-130-1580490498-png.thumb",
       "/media/products/toallita-gel-isopropilico-con-alcohol-al-70/30_taza-0-8-cl-y-platillo-personalizados-a-uno-o-dos-.thumb",
       "/media/products/toallita-gel-isopropilico-con-alcohol-al-70/31_platillo-de-cafe-mod-ph1-1618769947-jpg.thumb"
-    ],
-    "image": "/media/products/toallita-gel-isopropilico-con-alcohol-al-70/01_toallita-perfumada-1588503881-png.webp"
+    ]
   },
   {
     "id": "7626682",
@@ -3814,8 +3725,7 @@
         "discountValue": 0,
         "effectivePrice": 3840
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7665459",
@@ -3881,8 +3791,7 @@
         "discountValue": 0,
         "effectivePrice": 1580
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7682486",
@@ -3927,12 +3836,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/vajilla-personalizada-modelo-ph1/01_categoria-vajilla-ph1-1615129263-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph1/02_2-1614349358-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph1/03_3-1614349364-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph1/04_7-1614349374-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Logo que le gustaría incluir][en formato pdf, jpg, o png.][0.0000][1][6]",
     "options": [],
@@ -3958,8 +3862,7 @@
       "/media/products/vajilla-personalizada-modelo-ph1/26_transparent.png",
       "/media/products/vajilla-personalizada-modelo-ph1/29_categoria-vajilla-ph1-1615129263.jpg",
       "/media/products/vajilla-personalizada-modelo-ph1/34_facebook-4.png"
-    ],
-    "image": "/media/products/vajilla-personalizada-modelo-ph1/01_categoria-vajilla-ph1-1615129263-jpg.webp"
+    ]
   },
   {
     "id": "7721601",
@@ -3993,13 +3896,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/taza-mug-voluto-en-25-y-32-cl-grabada-con-logo/01_mug-personalizado-voluto-medidas-1611431020-jpg.webp",
-      "/media/products/taza-mug-voluto-en-25-y-32-cl-grabada-con-logo/02_mug-personalizado-voluto-25-cl-1611431020-png.webp",
-      "/media/products/taza-mug-voluto-en-25-y-32-cl-grabada-con-logo/03_mug-personalizado-volutto-1611426110-png.webp",
-      "/media/products/taza-mug-voluto-en-25-y-32-cl-grabada-con-logo/04_calidad-cristal-perssonalizados-hosteleria-1611426.webp",
-      "/media/products/taza-mug-voluto-en-25-y-32-cl-grabada-con-logo/34_palladio1-1606667783-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su logo ][formato pdf, jpg o png][][0][6]",
     "options": [
@@ -4044,8 +3941,7 @@
       "/media/products/taza-mug-voluto-en-25-y-32-cl-grabada-con-logo/26_transparent.png",
       "/media/products/taza-mug-voluto-en-25-y-32-cl-grabada-con-logo/29_mug-personalizado-voluto-medidas-1611431020.jpg",
       "/media/products/taza-mug-voluto-en-25-y-32-cl-grabada-con-logo/34_palladio1-1606667783-jpg.thumb"
-    ],
-    "image": "/media/products/taza-mug-voluto-en-25-y-32-cl-grabada-con-logo/01_mug-personalizado-voluto-medidas-1611431020-jpg.webp"
+    ]
   },
   {
     "id": "7721811",
@@ -4179,8 +4075,7 @@
       "/media/products/copa-combinado-havana-62-cl/26_transparent.png",
       "/media/products/copa-combinado-havana-62-cl/29_ph-com62-personalizacion-1692433999.jpg",
       "/media/products/copa-combinado-havana-62-cl/34_vina-1607420469-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7721821",
@@ -4228,13 +4123,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-combinado-premium-cocktail-76-cl-grabada-con-logo-a-laser-o-color/01_premium-1607328791-jpg.webp",
-      "/media/products/copa-combinado-premium-cocktail-76-cl-grabada-con-logo-a-laser-o-color/02_premium-cocktail-76-1593335306-png.webp",
-      "/media/products/copa-combinado-premium-cocktail-76-cl-grabada-con-logo-a-laser-o-color/03_calidad-cristal-perssonalizados-hosteleria-1611391.webp",
-      "/media/products/copa-combinado-premium-cocktail-76-cl-grabada-con-logo-a-laser-o-color/32_classic-1607418433-jpg.webp",
-      "/media/products/copa-combinado-premium-cocktail-76-cl-grabada-con-logo-a-laser-o-color/33_palladio1-1606667783-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su logo ][en formato pdf, jpg o png][][0][6]",
     "options": [
@@ -4297,8 +4186,7 @@
       "/media/products/copa-combinado-premium-cocktail-76-cl-grabada-con-logo-a-laser-o-color/28_premium-1607328791.jpg",
       "/media/products/copa-combinado-premium-cocktail-76-cl-grabada-con-logo-a-laser-o-color/32_classic-1607418433-jpg.thumb",
       "/media/products/copa-combinado-premium-cocktail-76-cl-grabada-con-logo-a-laser-o-color/33_palladio1-1606667783-jpg.thumb"
-    ],
-    "image": "/media/products/copa-combinado-premium-cocktail-76-cl-grabada-con-logo-a-laser-o-color/01_premium-1607328791-jpg.webp"
+    ]
   },
   {
     "id": "7721851",
@@ -4340,13 +4228,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-mineral-45-cl-grabada-con-logo/01_mineral-45-cl-1606641559-jpg.webp",
-      "/media/products/copa-vino-mineral-45-cl-grabada-con-logo/02_mineral45-1593338438-jpg.webp",
-      "/media/products/copa-vino-mineral-45-cl-grabada-con-logo/03_calidad-cristal-perssonalizados-hosteleria-1610979.webp",
-      "/media/products/copa-vino-mineral-45-cl-grabada-con-logo/32_cabernete-1606642017-jpg.webp",
-      "/media/products/copa-vino-mineral-45-cl-grabada-con-logo/33_5-1612704446-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su logo][formato png, jpg o pdf][][0][6]",
     "options": [
@@ -4409,8 +4291,7 @@
       "/media/products/copa-vino-mineral-45-cl-grabada-con-logo/28_mineral-45-cl-1606641559.jpg",
       "/media/products/copa-vino-mineral-45-cl-grabada-con-logo/32_cabernete-1606642017-jpg.thumb",
       "/media/products/copa-vino-mineral-45-cl-grabada-con-logo/33_5-1612704446-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-mineral-45-cl-grabada-con-logo/01_mineral-45-cl-1606641559-jpg.webp"
+    ]
   },
   {
     "id": "7721861",
@@ -4515,8 +4396,7 @@
       "/media/products/copa-vino-domaine-55-cl-grabada-con-su-logo/28_supreme-1606637412.jpg",
       "/media/products/copa-vino-domaine-55-cl-grabada-con-su-logo/32_allegra1-1607713655-jpg.thumb",
       "/media/products/copa-vino-domaine-55-cl-grabada-con-su-logo/33_copa-combinados-personalizada-enoteca-78-161096022.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7722075",
@@ -4569,12 +4449,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-sequence-oenology-53-cl-grabada-con-su-logo/01_sequenc-1606640682-jpg.webp",
-      "/media/products/copa-vino-sequence-oenology-53-cl-grabada-con-su-logo/02_sequence-53-1593798471-png.webp",
-      "/media/products/copa-vino-sequence-oenology-53-cl-grabada-con-su-logo/03_calidad-cristal-perssonalizados-hosteleria-1610979.webp",
-      "/media/products/copa-vino-sequence-oenology-53-cl-grabada-con-su-logo/33_reveal-up1-1606639607-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta logo aquí][formato pdf, png o jpg][][0][6]",
     "options": [
@@ -4637,8 +4512,7 @@
       "/media/products/copa-vino-sequence-oenology-53-cl-grabada-con-su-logo/28_sequenc-1606640682.jpg",
       "/media/products/copa-vino-sequence-oenology-53-cl-grabada-con-su-logo/32_default.jpg",
       "/media/products/copa-vino-sequence-oenology-53-cl-grabada-con-su-logo/33_reveal-up1-1606639607-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-sequence-oenology-53-cl-grabada-con-su-logo/01_sequenc-1606640682-jpg.webp"
+    ]
   },
   {
     "id": "7722169",
@@ -4708,8 +4582,7 @@
       "/media/products/taza-easy-23-cl-grabada-con-logo/26_transparent.png",
       "/media/products/taza-easy-23-cl-grabada-con-logo/29_taza-y-platillo-personalizado-easy-23-1611430048.jpg",
       "/media/products/taza-easy-23-cl-grabada-con-logo/34_categoria-vajilla-ph1-1615129263-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7722183",
@@ -4866,8 +4739,7 @@
       "/media/products/tacerio-ph2-grabado-con-logo-a-un-color/26_transparent.png",
       "/media/products/tacerio-ph2-grabado-con-logo-a-un-color/29_vajilla-personalizada-mod-ph2-1615140716.jpg",
       "/media/products/tacerio-ph2-grabado-con-logo-a-un-color/34_categoria-vajilla-ph1-1615129263-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7722196",
@@ -4982,8 +4854,7 @@
       "/media/products/taza-y-platillo-personalizados-mod-ph-1/26_transparent.png",
       "/media/products/taza-y-platillo-personalizados-mod-ph-1/29_tazas-y-platillos-personalizados-ph1-1615138171.jpg",
       "/media/products/taza-y-platillo-personalizados-mod-ph-1/34_vajilla-personalizada-modelo-ph3-1615129507-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7722932",
@@ -5093,8 +4964,7 @@
       "/media/products/coleccion-krista-cerveza-grabada-con-logo/30_default.jpg",
       "/media/products/coleccion-krista-cerveza-grabada-con-logo/31_palladio1-1606667783-jpg.thumb",
       "/media/products/coleccion-krista-cerveza-grabada-con-logo/32_copa-de-cerveza-personalizada-cheers-1610802388-jp.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7734357",
@@ -5203,8 +5073,7 @@
       "/media/products/copas-de-combinado-pasabace-grabadas-a-color/26_transparent.png",
       "/media/products/copas-de-combinado-pasabace-grabadas-a-color/29_copas-gin-tonic-persoanalizadas-ambassador-1610889.jpg",
       "/media/products/copas-de-combinado-pasabace-grabadas-a-color/34_1-1607938683-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7735955",
@@ -5313,8 +5182,7 @@
       "/media/products/copa-vino-enoteca-grabada-con-su-logo-y-en-la-medida-optima-oferta-excepcional/26_transparent.png",
       "/media/products/copa-vino-enoteca-grabada-con-su-logo-y-en-la-medida-optima-oferta-excepcional/29_copia-de-enoteca-1607710770.jpg",
       "/media/products/copa-vino-enoteca-grabada-con-su-logo-y-en-la-medida-optima-oferta-excepcional/34_personalizacion-miniservice-1698137093-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7736015",
@@ -5428,8 +5296,7 @@
       "/media/products/vaso-cerveza-weizenbeer-grabado-con-tu-logo-a-laser-o-a-un-color/26_transparent.png",
       "/media/products/vaso-cerveza-weizenbeer-grabado-con-tu-logo-a-laser-o-a-un-color/29_5-1612704446.jpg",
       "/media/products/vaso-cerveza-weizenbeer-grabado-con-tu-logo-a-laser-o-a-un-color/34_harmonia-principal-1606665579-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7758027",
@@ -5520,8 +5387,7 @@
       "/media/products/mantel-tnt-personalizado-3040-con-codigo-qr/29_taza-y-platillo-personalizado-easy-23-1611430048-j.thumb",
       "/media/products/mantel-tnt-personalizado-3040-con-codigo-qr/30_jarra-de-cerveza-personalizada-classic-50-16099542.thumb",
       "/media/products/mantel-tnt-personalizado-3040-con-codigo-qr/31_jarra-de-cerveza-personalizada-baviera-38-cl-16100.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7792612",
@@ -5630,8 +5496,7 @@
       "/media/products/copa-vino-enoteca-55-cl-grabada-con-su-logo-y-en-la-medida-optima-oferta-excepcional/28_copia-de-enoteca-1607710335.jpg",
       "/media/products/copa-vino-enoteca-55-cl-grabada-con-su-logo-y-en-la-medida-optima-oferta-excepcional/32_manteleria-personalizada-1-1610441370-jpg.thumb",
       "/media/products/copa-vino-enoteca-55-cl-grabada-con-su-logo-y-en-la-medida-optima-oferta-excepcional/33_magnum-130-1580490498-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7792613",
@@ -5740,8 +5605,7 @@
       "/media/products/copa-vino-enoteca-61-5-cl-grabada-con-su-logo-y-en-la-medida-optima-oferta-excepcional/28_copia-de-enoteca-1607709202.jpg",
       "/media/products/copa-vino-enoteca-61-5-cl-grabada-con-su-logo-y-en-la-medida-optima-oferta-excepcional/32_classic-1607418433-jpg.thumb",
       "/media/products/copa-vino-enoteca-61-5-cl-grabada-con-su-logo-y-en-la-medida-optima-oferta-excepcional/33_copa-de-champagne-personalizada-subirat-1610958147.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7792718",
@@ -5769,12 +5633,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vina-47-cl-grabada-con-su-logo-y-en-la-medida-optima/01_2-1607717922-jpg.webp",
-      "/media/products/copa-vina-47-cl-grabada-con-su-logo-y-en-la-medida-optima/02_vina-47-1602949901-png.webp",
-      "/media/products/copa-vina-47-cl-grabada-con-su-logo-y-en-la-medida-optima/03_vinas-imagen-general-1602949110-jpg.webp",
-      "/media/products/copa-vina-47-cl-grabada-con-su-logo-y-en-la-medida-optima/04_calidad-cristal-perssonalizados-hosteleria-1610977.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[ADJUNTA AQUÍ TU LOGO][en formato pdf, png o jpg][0.0000][0][6]|[LOGO MáS DE 45 MM*45MM][QUIERO INFORMACIÓN PARA LOGO SUPERIOR A 45 MM*45MM][][0][5]",
     "options": [
@@ -5837,8 +5696,7 @@
       "/media/products/copa-vina-47-cl-grabada-con-su-logo-y-en-la-medida-optima/26_transparent.png",
       "/media/products/copa-vina-47-cl-grabada-con-su-logo-y-en-la-medida-optima/29_2-1607717922.jpg",
       "/media/products/copa-vina-47-cl-grabada-con-su-logo-y-en-la-medida-optima/34_default.jpg"
-    ],
-    "image": "/media/products/copa-vina-47-cl-grabada-con-su-logo-y-en-la-medida-optima/01_2-1607717922-jpg.webp"
+    ]
   },
   {
     "id": "7792761",
@@ -5866,12 +5724,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vina-58-cl-grabada-con-su-logo-y-en-la-medida-optima/01_2-1607712271-jpg.webp",
-      "/media/products/copa-vina-58-cl-grabada-con-su-logo-y-en-la-medida-optima/02_vina-58-1602950158-png.webp",
-      "/media/products/copa-vina-58-cl-grabada-con-su-logo-y-en-la-medida-optima/03_vinas-imagen-general-1602941446-jpg.webp",
-      "/media/products/copa-vina-58-cl-grabada-con-su-logo-y-en-la-medida-optima/04_calidad-cristal-perssonalizados-hosteleria-1610977.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[ADJUNTA AQUÍ TU LOGO][en formato pdf, png o jpg][0.0000][0][6]|[LOGO MáS DE 45 MM*45MM][QUIERO INFORMACIÓN PARA LOGO SUPERIOR A 45 MM*45MM][][0][5]",
     "options": [
@@ -5934,8 +5787,7 @@
       "/media/products/copa-vina-58-cl-grabada-con-su-logo-y-en-la-medida-optima/26_transparent.png",
       "/media/products/copa-vina-58-cl-grabada-con-su-logo-y-en-la-medida-optima/29_2-1607712271.jpg",
       "/media/products/copa-vina-58-cl-grabada-con-su-logo-y-en-la-medida-optima/34_default.jpg"
-    ],
-    "image": "/media/products/copa-vina-58-cl-grabada-con-su-logo-y-en-la-medida-optima/01_2-1607712271-jpg.webp"
+    ]
   },
   {
     "id": "7800658",
@@ -6044,8 +5896,7 @@
       "/media/products/copa-combinado-grabada-cubata-pro-72/28_cubata-pro-1607327059.jpg",
       "/media/products/copa-combinado-grabada-cubata-pro-72/32_ph-com62-personalizacion-1692433999-jpg.thumb",
       "/media/products/copa-combinado-grabada-cubata-pro-72/33_premium-1607328791-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7814592",
@@ -6123,8 +5974,7 @@
       "/media/products/elementos-qr-en-madera-grabado/28_elementos-qr-negro-1603719738.jpg",
       "/media/products/elementos-qr-en-madera-grabado/32_canguro-personalizada-airlaid-1670574108-jpg.thumb",
       "/media/products/elementos-qr-en-madera-grabado/33_facebook-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7814616",
@@ -6162,12 +6012,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/cubo-en-madera-lectura-qr-grabado/01_elementos-qr-natural-1603719826-jpg.webp",
-      "/media/products/cubo-en-madera-lectura-qr-grabado/02_cubo-1604304363-jpg.webp",
-      "/media/products/cubo-en-madera-lectura-qr-grabado/03_cubo800-1604304131-jpg.webp",
-      "/media/products/cubo-en-madera-lectura-qr-grabado/32_canguro-personalizada-airlaid-1670574108-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte el código QR][][][0][6]|[Adjunte logo si lo desea][][][0][6]",
     "options": [
@@ -6203,8 +6048,7 @@
       "/media/products/cubo-en-madera-lectura-qr-grabado/28_elementos-qr-natural-1603719826.jpg",
       "/media/products/cubo-en-madera-lectura-qr-grabado/32_canguro-personalizada-airlaid-1670574108-jpg.thumb",
       "/media/products/cubo-en-madera-lectura-qr-grabado/33_facebook-4.png"
-    ],
-    "image": "/media/products/cubo-en-madera-lectura-qr-grabado/01_elementos-qr-natural-1603719826-jpg.webp"
+    ]
   },
   {
     "id": "7815981",
@@ -6242,11 +6086,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/pizarra-en-madera-lectura-qr-grabado/01_elementos-qr-blanco-1603719689-jpg.webp",
-      "/media/products/pizarra-en-madera-lectura-qr-grabado/02_pizarra-1598293956-png.webp",
-      "/media/products/pizarra-en-madera-lectura-qr-grabado/30_canguro-personalizada-airlaid-1670574108-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su código QR][][][0][6]|[Adjunte su logo][][][0][1]|[díganos qué número de mesas quiere.][1, 2, 3, etc., hasta cu l, anote primero y último][][0][1]",
     "options": [
@@ -6282,8 +6122,7 @@
       "/media/products/pizarra-en-madera-lectura-qr-grabado/30_canguro-personalizada-airlaid-1670574108-jpg.thumb",
       "/media/products/pizarra-en-madera-lectura-qr-grabado/31_facebook-4.png",
       "/media/products/pizarra-en-madera-lectura-qr-grabado/32_instagram-4.png"
-    ],
-    "image": "/media/products/pizarra-en-madera-lectura-qr-grabado/01_elementos-qr-blanco-1603719689-jpg.webp"
+    ]
   },
   {
     "id": "7816846",
@@ -6390,8 +6229,7 @@
       "/media/products/canguropersonalizada-3436/26_transparent.png",
       "/media/products/canguropersonalizada-3436/29_canguro-personalizada-airlaid-1670574108.jpg",
       "/media/products/canguropersonalizada-3436/34_facebook-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7855701",
@@ -6440,12 +6278,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/vaso-nonic-34-cl-grabado-a-laser-o-a-un-color/01_nonic34lovehate-1599756134-jpg.webp",
-      "/media/products/vaso-nonic-34-cl-grabado-a-laser-o-a-un-color/02_nonic-1599759739-jpg.webp",
-      "/media/products/vaso-nonic-34-cl-grabado-a-laser-o-a-un-color/03_calidad-cristal-perssonalizados-hosteleria-1611062.webp",
-      "/media/products/vaso-nonic-34-cl-grabado-a-laser-o-a-un-color/33_harmonia-principal-1606665579-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -6508,8 +6341,7 @@
       "/media/products/vaso-nonic-34-cl-grabado-a-laser-o-a-un-color/28_nonic34lovehate-1599756134.jpg",
       "/media/products/vaso-nonic-34-cl-grabado-a-laser-o-a-un-color/32_default.jpg",
       "/media/products/vaso-nonic-34-cl-grabado-a-laser-o-a-un-color/33_harmonia-principal-1606665579-jpg.thumb"
-    ],
-    "image": "/media/products/vaso-nonic-34-cl-grabado-a-laser-o-a-un-color/01_nonic34lovehate-1599756134-jpg.webp"
+    ]
   },
   {
     "id": "7873435",
@@ -6554,13 +6386,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/vajilla-personalizada-modelo-ph2/01_vajiilla-personalizada-mod-2-1615129851-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph2/02_3-1614367866-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph2/03_5-1614367871-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph2/04_calidad-personalizacion-vajilla-1615130276-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph2/34_classic-1607418433-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [],
@@ -6586,8 +6412,7 @@
       "/media/products/vajilla-personalizada-modelo-ph2/26_transparent.png",
       "/media/products/vajilla-personalizada-modelo-ph2/29_vajiilla-personalizada-mod-2-1615129851.jpg",
       "/media/products/vajilla-personalizada-modelo-ph2/34_classic-1607418433-jpg.thumb"
-    ],
-    "image": "/media/products/vajilla-personalizada-modelo-ph2/01_vajiilla-personalizada-mod-2-1615129851-jpg.webp"
+    ]
   },
   {
     "id": "7876212",
@@ -6643,8 +6468,7 @@
       "/media/products/cuberteria-personalizada-antracita-18-10/28_antracita-con-logo-1606729720.jpg",
       "/media/products/cuberteria-personalizada-antracita-18-10/32_jarra-de-cerveza-sintra-29-cl-1610043712-png.thumb",
       "/media/products/cuberteria-personalizada-antracita-18-10/33_jarra-de-cerveza-personalizada-amberes-1610737582-.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7876254",
@@ -6700,8 +6524,7 @@
       "/media/products/cuberteria-personalizada-queen-18-10/29_servilleta-canguro-personalizada-eco-1679681730-jp.thumb",
       "/media/products/cuberteria-personalizada-queen-18-10/30_principe-1607691048-jpg.thumb",
       "/media/products/cuberteria-personalizada-queen-18-10/31_jarra-de-cerveza-personalizada-amberes-1610737582-.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7937695",
@@ -6811,8 +6634,7 @@
       "/media/products/copa-combinado-grabada-imperial-65/28_imperial1-1607329781.jpg",
       "/media/products/copa-combinado-grabada-imperial-65/32_principe-1607691048-jpg.thumb",
       "/media/products/copa-combinado-grabada-imperial-65/33_premium-1607328791-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7940487",
@@ -6921,8 +6743,7 @@
       "/media/products/copa-vino-allegra-grabada-con-tu-personalizacion/26_transparent.png",
       "/media/products/copa-vino-allegra-grabada-con-tu-personalizacion/29_allegra1-1607713655.jpg",
       "/media/products/copa-vino-allegra-grabada-con-tu-personalizacion/34_cabernete-1606642017-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "7940599",
@@ -7013,8 +6834,7 @@
       "/media/products/copa-vino-primetime-grabada-con-tu-personalizacion/28_primetime-1607717033.jpg",
       "/media/products/copa-vino-primetime-grabada-con-tu-personalizacion/32_1-1607938683-png.thumb",
       "/media/products/copa-vino-primetime-grabada-con-tu-personalizacion/33_cabernete-1606642017-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8146615",
@@ -7070,8 +6890,7 @@
       "/media/products/cuberteria-personalizada-solares/29_premium-1607328791-jpg.thumb",
       "/media/products/cuberteria-personalizada-solares/30_d-manuel-2-1607014824-jpg.thumb",
       "/media/products/cuberteria-personalizada-solares/31_copa-champagne-personalizada-refine-20-1610911381-.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8146634",
@@ -7127,8 +6946,7 @@
       "/media/products/cuberteria-personalizada-d-manuel/28_d-manuel-2-1607014824.jpg",
       "/media/products/cuberteria-personalizada-d-manuel/32_manteleria-personalizada-1-1610441370-jpg.thumb",
       "/media/products/cuberteria-personalizada-d-manuel/33_tazay-platillo-personalizados-ischia-1611430321-pn.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8152396",
@@ -7233,8 +7051,7 @@
       "/media/products/copa-combinado-personalizada-master-62/26_transparent.png",
       "/media/products/copa-combinado-personalizada-master-62/29_master-1607343275.jpg",
       "/media/products/copa-combinado-personalizada-master-62/34_d-manuel-2-1607014824-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8152453",
@@ -7342,8 +7159,7 @@
       "/media/products/copa-combinados-personalizada-enoteca-78/26_transparent.png",
       "/media/products/copa-combinados-personalizada-enoteca-78/29_copa-combinados-personalizada-enoteca-78-161096022.png",
       "/media/products/copa-combinados-personalizada-enoteca-78/34_taza-y-platillo-personalizado-easy-23-1611430048-j.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8152829",
@@ -7449,8 +7265,7 @@
       "/media/products/copa-combinados-personalizada-enoteca-63/26_transparent.png",
       "/media/products/copa-combinados-personalizada-enoteca-63/29_copa-gin-tonic-personalizada-enoteca-63-1610960197.png",
       "/media/products/copa-combinados-personalizada-enoteca-63/34_principe-1607691048-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8153592",
@@ -7484,13 +7299,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-champagne-personalizada-xarel/01_copa-champagne-personalizada-xarel-1610958446-png.webp",
-      "/media/products/copa-champagne-personalizada-xarel/02_copa-cava-personalizada-xarel-medidas-1610958446-p.webp",
-      "/media/products/copa-champagne-personalizada-xarel/03_calidad-cristal-perssonalizados-hosteleria-1610958.webp",
-      "/media/products/copa-champagne-personalizada-xarel/32_1-1607938683-png.webp",
-      "/media/products/copa-champagne-personalizada-xarel/33_capricon-fond-1606741339-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte logo][en pdf, jpg o png][][0][6]",
     "options": [
@@ -7553,8 +7362,7 @@
       "/media/products/copa-champagne-personalizada-xarel/28_copa-champagne-personalizada-xarel-1610958446.png",
       "/media/products/copa-champagne-personalizada-xarel/32_1-1607938683-png.thumb",
       "/media/products/copa-champagne-personalizada-xarel/33_capricon-fond-1606741339-jpg.thumb"
-    ],
-    "image": "/media/products/copa-champagne-personalizada-xarel/01_copa-champagne-personalizada-xarel-1610958446-png.webp"
+    ]
   },
   {
     "id": "8153634",
@@ -7594,13 +7402,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-champagne-personalizada-subirats/01_copa-de-champagne-personalizada-subirat-1610958147.webp",
-      "/media/products/copa-champagne-personalizada-subirats/02_copa-de-cava-personalizada-subirat-1610958147-jpg.webp",
-      "/media/products/copa-champagne-personalizada-subirats/03_calidad-cristal-perssonalizados-hosteleria-1610958.webp",
-      "/media/products/copa-champagne-personalizada-subirats/32_principal-mencia-1606654630-jpg.webp",
-      "/media/products/copa-champagne-personalizada-subirats/33_ph-com62-personalizacion-1692433999-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte logo][formato pdf, png o jpg][][0][6]",
     "options": [
@@ -7663,8 +7465,7 @@
       "/media/products/copa-champagne-personalizada-subirats/28_copa-de-champagne-personalizada-subirat-1610958147.jpg",
       "/media/products/copa-champagne-personalizada-subirats/32_principal-mencia-1606654630-jpg.thumb",
       "/media/products/copa-champagne-personalizada-subirats/33_ph-com62-personalizacion-1692433999-jpg.thumb"
-    ],
-    "image": "/media/products/copa-champagne-personalizada-subirats/01_copa-de-champagne-personalizada-subirat-1610958147.webp"
+    ]
   },
   {
     "id": "8154118",
@@ -7698,13 +7499,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-champagne-personalizada-kalix/01_copa-champagne-personalizada-kalix-1610957690-jpg.webp",
-      "/media/products/copa-champagne-personalizada-kalix/02_copa-cava-personalizada-kalix-medidas-1610957690-j.webp",
-      "/media/products/copa-champagne-personalizada-kalix/03_calidad-cristal-perssonalizados-hosteleria-1610957.webp",
-      "/media/products/copa-champagne-personalizada-kalix/04_copa-cava-personalizada-kalix-1610957690-jpg.webp",
-      "/media/products/copa-champagne-personalizada-kalix/34_personalizacion-miniservice-1698137093-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -7767,8 +7562,7 @@
       "/media/products/copa-champagne-personalizada-kalix/26_transparent.png",
       "/media/products/copa-champagne-personalizada-kalix/29_copa-champagne-personalizada-kalix-1610957690.jpg",
       "/media/products/copa-champagne-personalizada-kalix/34_personalizacion-miniservice-1698137093-jpg.thumb"
-    ],
-    "image": "/media/products/copa-champagne-personalizada-kalix/01_copa-champagne-personalizada-kalix-1610957690-jpg.webp"
+    ]
   },
   {
     "id": "8165665",
@@ -7808,13 +7602,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-champagne-personalizada-aurum/01_copa-champagne-personalizada-aurum-1610957068-jpg.webp",
-      "/media/products/copa-champagne-personalizada-aurum/02_copa-cava-personalizada-aurum-medidas-1610957075-j.webp",
-      "/media/products/copa-champagne-personalizada-aurum/03_calidad-cristal-perssonalizados-hosteleria-1610956.webp",
-      "/media/products/copa-champagne-personalizada-aurum/32_classic-1607418433-jpg.webp",
-      "/media/products/copa-champagne-personalizada-aurum/33_supreme-1606637412-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjuntar logo][formato pdf, png o jpg][][0][6]",
     "options": [
@@ -7877,8 +7665,7 @@
       "/media/products/copa-champagne-personalizada-aurum/28_copa-champagne-personalizada-aurum-1610957068.jpg",
       "/media/products/copa-champagne-personalizada-aurum/32_classic-1607418433-jpg.thumb",
       "/media/products/copa-champagne-personalizada-aurum/33_supreme-1606637412-jpg.thumb"
-    ],
-    "image": "/media/products/copa-champagne-personalizada-aurum/01_copa-champagne-personalizada-aurum-1610957068-jpg.webp"
+    ]
   },
   {
     "id": "8165721",
@@ -7922,13 +7709,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-champagne-personalizada-allegra/01_copa-cava-personalizada-allegra-1610534082-png.webp",
-      "/media/products/copa-champagne-personalizada-allegra/02_copa-champagne-personalizada-allegra-1610534085-pn.webp",
-      "/media/products/copa-champagne-personalizada-allegra/03_allegra-1-1607609584-jpg.webp",
-      "/media/products/copa-champagne-personalizada-allegra/04_calidad-cristal-perssonalizados-hosteleria-1610911.webp",
-      "/media/products/copa-champagne-personalizada-allegra/34_ph-com62-personalizacion-1692433999-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjuntar logo][formato pdf, png o jpg][][0][6]",
     "options": [
@@ -7991,8 +7772,7 @@
       "/media/products/copa-champagne-personalizada-allegra/26_transparent.png",
       "/media/products/copa-champagne-personalizada-allegra/29_copa-cava-personalizada-allegra-1610534082.png",
       "/media/products/copa-champagne-personalizada-allegra/34_ph-com62-personalizacion-1692433999-jpg.thumb"
-    ],
-    "image": "/media/products/copa-champagne-personalizada-allegra/01_copa-cava-personalizada-allegra-1610534082-png.webp"
+    ]
   },
   {
     "id": "8166114",
@@ -8026,13 +7806,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-champagne-personalizada-refine/01_copa-champagne-personalizada-refine-20-1610911381-.webp",
-      "/media/products/copa-champagne-personalizada-refine/02_copa-champagne-personalizada-refine-20-medidas-161.webp",
-      "/media/products/copa-champagne-personalizada-refine/03_calidad-cristal-perssonalizados-hosteleria-1610911.webp",
-      "/media/products/copa-champagne-personalizada-refine/32_jarra-de-cerveza-personalizada-amberes-1610737582-.webp",
-      "/media/products/copa-champagne-personalizada-refine/33_supreme-1606637412-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjuntar logo][formato pdf, jpg o png][][0][6]",
     "options": [
@@ -8095,8 +7869,7 @@
       "/media/products/copa-champagne-personalizada-refine/28_copa-champagne-personalizada-refine-20-1610911381.jpg",
       "/media/products/copa-champagne-personalizada-refine/32_jarra-de-cerveza-personalizada-amberes-1610737582-.thumb",
       "/media/products/copa-champagne-personalizada-refine/33_supreme-1606637412-jpg.thumb"
-    ],
-    "image": "/media/products/copa-champagne-personalizada-refine/01_copa-champagne-personalizada-refine-20-1610911381-.webp"
+    ]
   },
   {
     "id": "8166437",
@@ -8130,13 +7903,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-champagne-personalizada-montecarlo/01_copa-champagne-personalizada-montecarlo-22-5-16108.webp",
-      "/media/products/copa-champagne-personalizada-montecarlo/02_copa-cava-personalizada-montecarlo-22-5-1610889674.webp",
-      "/media/products/copa-champagne-personalizada-montecarlo/03_calidad-cristal-perssonalizados-hosteleria-1610889.webp",
-      "/media/products/copa-champagne-personalizada-montecarlo/32_magnum-130-1580490498-png.webp",
-      "/media/products/copa-champagne-personalizada-montecarlo/33_capricon-fond-1606741339-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjuntar logo][formato pdf, png o jpg][][0][6]",
     "options": [
@@ -8199,8 +7966,7 @@
       "/media/products/copa-champagne-personalizada-montecarlo/28_copa-champagne-personalizada-montecarlo-22-5-16108.jpg",
       "/media/products/copa-champagne-personalizada-montecarlo/32_magnum-130-1580490498-png.thumb",
       "/media/products/copa-champagne-personalizada-montecarlo/33_capricon-fond-1606741339-jpg.thumb"
-    ],
-    "image": "/media/products/copa-champagne-personalizada-montecarlo/01_copa-champagne-personalizada-montecarlo-22-5-16108.webp"
+    ]
   },
   {
     "id": "8166540",
@@ -8301,8 +8067,7 @@
       "/media/products/vaso-combinados-personalizado-tin-can/28_1-1607631549.jpg",
       "/media/products/vaso-combinados-personalizado-tin-can/32_jarra-de-cerveza-personalizada-amberes-1610737582-.thumb",
       "/media/products/vaso-combinados-personalizado-tin-can/33_krista-exalt-1593448377-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8168397",
@@ -8336,13 +8101,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/vaso-personalizado-cobalto/01_1-1607673605-png.webp",
-      "/media/products/vaso-personalizado-cobalto/02_2-1607673879-png.webp",
-      "/media/products/vaso-personalizado-cobalto/30_personalizacion-miniservice-1698137093-jpg.webp",
-      "/media/products/vaso-personalizado-cobalto/31_cabernete-1606642017-jpg.webp",
-      "/media/products/vaso-personalizado-cobalto/32_vaso-de-cerveza-personalizado-nonix-29-1612703110-.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjuntar logo][formato png, jpg o pdf][][0][6]",
     "options": [
@@ -8378,8 +8137,7 @@
       "/media/products/vaso-personalizado-cobalto/30_personalizacion-miniservice-1698137093-jpg.thumb",
       "/media/products/vaso-personalizado-cobalto/31_cabernete-1606642017-jpg.thumb",
       "/media/products/vaso-personalizado-cobalto/32_vaso-de-cerveza-personalizado-nonix-29-1612703110-.thumb"
-    ],
-    "image": "/media/products/vaso-personalizado-cobalto/01_1-1607673605-png.webp"
+    ]
   },
   {
     "id": "8168623",
@@ -8431,11 +8189,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/vaso-cerveza-personalizado-aleman-33/01_1-1607687309-jpg.webp",
-      "/media/products/vaso-cerveza-personalizado-aleman-33/02_2-1607687315-jpg.webp",
-      "/media/products/vaso-cerveza-personalizado-aleman-33/03_calidad-cristal-perssonalizados-hosteleria-1611062.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][Formato png,jpg,pdf.][][0][6]",
     "options": [
@@ -8498,8 +8252,7 @@
       "/media/products/vaso-cerveza-personalizado-aleman-33/28_1-1607687309.jpg",
       "/media/products/vaso-cerveza-personalizado-aleman-33/32_facebook-4.png",
       "/media/products/vaso-cerveza-personalizado-aleman-33/33_instagram-4.png"
-    ],
-    "image": "/media/products/vaso-cerveza-personalizado-aleman-33/01_1-1607687309-jpg.webp"
+    ]
   },
   {
     "id": "8168686",
@@ -8546,13 +8299,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-cerveza-personalizada-cheers/01_copa-de-cerveza-personalizada-cheers-1610802388-jp.webp",
-      "/media/products/copa-cerveza-personalizada-cheers/02_copa-de-cerveza-personalizada-cheers-medidas-16108.webp",
-      "/media/products/copa-cerveza-personalizada-cheers/03_calidad-cristal-perssonalizados-hosteleria-1610800.webp",
-      "/media/products/copa-cerveza-personalizada-cheers/32_capricon-fond-1606741339-jpg.webp",
-      "/media/products/copa-cerveza-personalizada-cheers/33_vaso-de-cerveza-personalizado-nonix-29-1612703110-.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjuntar logo][][][0][6]",
     "options": [
@@ -8615,8 +8362,7 @@
       "/media/products/copa-cerveza-personalizada-cheers/28_copa-de-cerveza-personalizada-cheers-1610802388.jpg",
       "/media/products/copa-cerveza-personalizada-cheers/32_capricon-fond-1606741339-jpg.thumb",
       "/media/products/copa-cerveza-personalizada-cheers/33_vaso-de-cerveza-personalizado-nonix-29-1612703110-.thumb"
-    ],
-    "image": "/media/products/copa-cerveza-personalizada-cheers/01_copa-de-cerveza-personalizada-cheers-1610802388-jp.webp"
+    ]
   },
   {
     "id": "8181055",
@@ -8661,13 +8407,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/vajilla-personalizada-modelo-ph3/01_vajilla-personalizada-modelo-ph3-1615129507-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph3/02_platos-modelo-ph3-victoria-1614105245-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph3/03_tazas-y-platillos-victoria-1614105208-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph3/04_calidad-vajilla-personalizados-hosteleria-16114831.webp",
-      "/media/products/vajilla-personalizada-modelo-ph3/34_jarra-de-cerveza-sintra-29-cl-1610043712-png.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [],
@@ -8693,8 +8433,7 @@
       "/media/products/vajilla-personalizada-modelo-ph3/26_transparent.png",
       "/media/products/vajilla-personalizada-modelo-ph3/29_vajilla-personalizada-modelo-ph3-1615129507.jpg",
       "/media/products/vajilla-personalizada-modelo-ph3/34_jarra-de-cerveza-sintra-29-cl-1610043712-png.thumb"
-    ],
-    "image": "/media/products/vajilla-personalizada-modelo-ph3/01_vajilla-personalizada-modelo-ph3-1615129507-jpg.webp"
+    ]
   },
   {
     "id": "8181747",
@@ -8735,13 +8474,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/vajilla-personalizada-modelo-ph4/01_2-1614346284-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph4/02_4-1614346297-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph4/03_6-1614346310-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph4/04_8-1614346322-jpg.webp",
-      "/media/products/vajilla-personalizada-modelo-ph4/34_principe-1607691048-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjuntar logo][][][0][6]",
     "options": [],
@@ -8767,8 +8500,7 @@
       "/media/products/vajilla-personalizada-modelo-ph4/26_transparent.png",
       "/media/products/vajilla-personalizada-modelo-ph4/29_2-1614346284.jpg",
       "/media/products/vajilla-personalizada-modelo-ph4/34_principe-1607691048-jpg.thumb"
-    ],
-    "image": "/media/products/vajilla-personalizada-modelo-ph4/01_2-1614346284-jpg.webp"
+    ]
   },
   {
     "id": "8204022",
@@ -8797,8 +8529,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "8218337",
@@ -8912,8 +8643,7 @@
       "/media/products/vaso-cerveza-personalizado-weizenbeer-52/26_transparent.png",
       "/media/products/vaso-cerveza-personalizado-weizenbeer-52/29_vaso-weizenbeer-personalizado-1612707577.jpg",
       "/media/products/vaso-cerveza-personalizado-weizenbeer-52/34_harmonia-principal-1606665579-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8222098",
@@ -8969,8 +8699,7 @@
       "/media/products/cuberteria-personalizada-paris-18-10-2-5-mm/26_transparent.png",
       "/media/products/cuberteria-personalizada-paris-18-10-2-5-mm/29_paris-1609494499.png",
       "/media/products/cuberteria-personalizada-paris-18-10-2-5-mm/34_1-1607938683-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8222111",
@@ -9026,8 +8755,7 @@
       "/media/products/cuberteria-personalizada-77-18-10-2-0-mm/26_transparent.png",
       "/media/products/cuberteria-personalizada-77-18-10-2-0-mm/29_2-1609498438.png",
       "/media/products/cuberteria-personalizada-77-18-10-2-0-mm/34_savoy1-1610794807-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8222241",
@@ -9087,8 +8815,7 @@
       "/media/products/cuberteria-personalizada-natalia-18-10-2-5-mm/26_transparent.png",
       "/media/products/cuberteria-personalizada-natalia-18-10-2-5-mm/29_1-1609497274.jpg",
       "/media/products/cuberteria-personalizada-natalia-18-10-2-5-mm/34_imagen-principal-1606640258-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8222245",
@@ -9144,8 +8871,7 @@
       "/media/products/cuberteria-personalizada-toledo-18-10-2-5-mm/26_transparent.png",
       "/media/products/cuberteria-personalizada-toledo-18-10-2-5-mm/29_2-1609498212.png",
       "/media/products/cuberteria-personalizada-toledo-18-10-2-5-mm/34_1-1607938683-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8222301",
@@ -9179,13 +8905,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/cuberteria-personalizada-aurora-champan-nacar-3-mm/01_1-1609506687-png.webp",
-      "/media/products/cuberteria-personalizada-aurora-champan-nacar-3-mm/02_2-1609506687-png.webp",
-      "/media/products/cuberteria-personalizada-aurora-champan-nacar-3-mm/03_3-1609506688-png.webp",
-      "/media/products/cuberteria-personalizada-aurora-champan-nacar-3-mm/04_4-1609506688-png.webp",
-      "/media/products/cuberteria-personalizada-aurora-champan-nacar-3-mm/34_personalizacion-miniservice-1698137093-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su logo ][formato pdf, jpg o png][][0][6]",
     "options": [],
@@ -9211,8 +8931,7 @@
       "/media/products/cuberteria-personalizada-aurora-champan-nacar-3-mm/26_transparent.png",
       "/media/products/cuberteria-personalizada-aurora-champan-nacar-3-mm/29_1-1609506687.png",
       "/media/products/cuberteria-personalizada-aurora-champan-nacar-3-mm/34_personalizacion-miniservice-1698137093-jpg.thumb"
-    ],
-    "image": "/media/products/cuberteria-personalizada-aurora-champan-nacar-3-mm/01_1-1609506687-png.webp"
+    ]
   },
   {
     "id": "8222302",
@@ -9242,13 +8961,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/cuberteria-personalizada-antracita-cobre-3-mm/01_1-1609509926-png.webp",
-      "/media/products/cuberteria-personalizada-antracita-cobre-3-mm/02_2-1609509926-png.webp",
-      "/media/products/cuberteria-personalizada-antracita-cobre-3-mm/03_3-1609509927-png.webp",
-      "/media/products/cuberteria-personalizada-antracita-cobre-3-mm/04_4-1609509927-png.webp",
-      "/media/products/cuberteria-personalizada-antracita-cobre-3-mm/34_classic-1607418433-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su logo ][formato pdf, jpg o png][][0][6]",
     "options": [],
@@ -9274,8 +8987,7 @@
       "/media/products/cuberteria-personalizada-antracita-cobre-3-mm/26_transparent.png",
       "/media/products/cuberteria-personalizada-antracita-cobre-3-mm/29_1-1609509926.png",
       "/media/products/cuberteria-personalizada-antracita-cobre-3-mm/34_classic-1607418433-jpg.thumb"
-    ],
-    "image": "/media/products/cuberteria-personalizada-antracita-cobre-3-mm/01_1-1609509926-png.webp"
+    ]
   },
   {
     "id": "8222402",
@@ -9309,13 +9021,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/cuberteria-personalizada-antracita-mate-3-mm/01_1-1609526374-png.webp",
-      "/media/products/cuberteria-personalizada-antracita-mate-3-mm/02_2-1609526374-png.webp",
-      "/media/products/cuberteria-personalizada-antracita-mate-3-mm/03_3-1609526374-png.webp",
-      "/media/products/cuberteria-personalizada-antracita-mate-3-mm/04_4-1609526374-png.webp",
-      "/media/products/cuberteria-personalizada-antracita-mate-3-mm/34_manteleria-personalizada-1-1610441370-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su logo ][formato pdf, jpg o png][][0][6]",
     "options": [],
@@ -9341,8 +9047,7 @@
       "/media/products/cuberteria-personalizada-antracita-mate-3-mm/26_transparent.png",
       "/media/products/cuberteria-personalizada-antracita-mate-3-mm/29_1-1609526374.png",
       "/media/products/cuberteria-personalizada-antracita-mate-3-mm/34_manteleria-personalizada-1-1610441370-jpg.thumb"
-    ],
-    "image": "/media/products/cuberteria-personalizada-antracita-mate-3-mm/01_1-1609526374-png.webp"
+    ]
   },
   {
     "id": "8225418",
@@ -9398,8 +9103,7 @@
       "/media/products/cuberteria-personalizada-anne-mate-2-5-mm/26_transparent.png",
       "/media/products/cuberteria-personalizada-anne-mate-2-5-mm/29_1-1609665010.jpg",
       "/media/products/cuberteria-personalizada-anne-mate-2-5-mm/34_harmonia-principal-1606665579-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8225473",
@@ -9508,8 +9212,7 @@
       "/media/products/copas-de-combinado-personalizada-ambassador-54-5/26_transparent.png",
       "/media/products/copas-de-combinado-personalizada-ambassador-54-5/29_ambasa-1609671227.jpg",
       "/media/products/copas-de-combinado-personalizada-ambassador-54-5/34_3-1677231729-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8225510",
@@ -9556,13 +9259,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-gin-tonic-personalizada-allegra-49-cl/01_copa-gin-tonic-personalizada-allegra-1610885807-jp.webp",
-      "/media/products/copa-gin-tonic-personalizada-allegra-49-cl/02_copa-gin-tonic-personalizada-allegra-medidas-16108.webp",
-      "/media/products/copa-gin-tonic-personalizada-allegra-49-cl/03_copa-cerveza-allegra-personalizada-1610885761-png.webp",
-      "/media/products/copa-gin-tonic-personalizada-allegra-49-cl/04_calidad-cristal-perssonalizados-hosteleria-1610885.webp",
-      "/media/products/copa-gin-tonic-personalizada-allegra-49-cl/34_cabernete-1606642017-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -9625,8 +9322,7 @@
       "/media/products/copa-gin-tonic-personalizada-allegra-49-cl/26_transparent.png",
       "/media/products/copa-gin-tonic-personalizada-allegra-49-cl/29_copa-gin-tonic-personalizada-allegra-1610885807.jpg",
       "/media/products/copa-gin-tonic-personalizada-allegra-49-cl/34_cabernete-1606642017-jpg.thumb"
-    ],
-    "image": "/media/products/copa-gin-tonic-personalizada-allegra-49-cl/01_copa-gin-tonic-personalizada-allegra-1610885807-jp.webp"
+    ]
   },
   {
     "id": "8225540",
@@ -9661,18 +9357,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0.01,
-    "imagesSource": [
-      "/media/products/plato-llano-personalizado-mod-ph1/01_plato-hondo-27-ph1-1724776598-jpg.webp",
-      "/media/products/plato-llano-personalizado-mod-ph1/01_plato-llano-ph1-1724775614-jpg.webp",
-      "/media/products/plato-llano-personalizado-mod-ph1/02_plato-hondo-27-cm-ph1-1724776598-jpg.webp",
-      "/media/products/plato-llano-personalizado-mod-ph1/02_platos-llanos-ph1-1724775614-jpg.webp",
-      "/media/products/plato-llano-personalizado-mod-ph1/03_platos-inclinado-y-gourmet-1615805249-jpg.webp",
-      "/media/products/plato-llano-personalizado-mod-ph1/03_vajilla-personalizada-mod-ph1-platos-llanos-161453.webp",
-      "/media/products/plato-llano-personalizado-mod-ph1/04_calidad-personalizacion-vajilla-1615805268-jpg.webp",
-      "/media/products/plato-llano-personalizado-mod-ph1/32_tazay-platillo-personalizados-ischia-1611430321-pn.webp",
-      "/media/products/plato-llano-personalizado-mod-ph1/33_palladio1-1606667783-jpg.webp",
-      "/media/products/plato-llano-personalizado-mod-ph1/34_personalizacion-miniservice-1698137093-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [],
@@ -9698,8 +9383,7 @@
       "/media/products/plato-llano-personalizado-mod-ph1/28_plato-llano-ph1-1724775614.jpg",
       "/media/products/plato-llano-personalizado-mod-ph1/32_tazay-platillo-personalizados-ischia-1611430321-pn.thumb",
       "/media/products/plato-llano-personalizado-mod-ph1/33_palladio1-1606667783-jpg.thumb"
-    ],
-    "image": "/media/products/plato-llano-personalizado-mod-ph1/01_plato-hondo-27-ph1-1724776598-jpg.webp"
+    ]
   },
   {
     "id": "8225541",
@@ -9793,8 +9477,7 @@
       "/media/products/ensaladeras-ph1/26_transparent.png",
       "/media/products/ensaladeras-ph1/29_ensaladera-ph1-1724776256.jpg",
       "/media/products/ensaladeras-ph1/34_1-1607938683-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8225542",
@@ -9918,8 +9601,7 @@
       "/media/products/plato-llano-personalizado-mod-ph1/28_plato-llano-ph1-1724775614.jpg",
       "/media/products/plato-llano-personalizado-mod-ph1/32_tazay-platillo-personalizados-ischia-1611430321-pn.thumb",
       "/media/products/plato-llano-personalizado-mod-ph1/33_palladio1-1606667783-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8225543",
@@ -10009,8 +9691,7 @@
       "/media/products/fuente-carne-28-cms/28_fuente-ph1-1724775378.jpg",
       "/media/products/fuente-carne-28-cms/32_manteleria-personalizada-1-1610441370-jpg.thumb",
       "/media/products/fuente-carne-28-cms/33_magnum-130-1580490498-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8225562",
@@ -10044,13 +9725,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/plato-personalizado-mod-ph4/01_platos-llanos-personalizados-ph-4-1614428429-jpg.webp",
-      "/media/products/plato-personalizado-mod-ph4/02_plato-hondo-personalizado-ph4-1614428471-jpg.webp",
-      "/media/products/plato-personalizado-mod-ph4/03_ejemplos-vajilla-ph4-1614428509-jpg.webp",
-      "/media/products/plato-personalizado-mod-ph4/04_calidad-personalizacion-ph4-1614428533-jpg.webp",
-      "/media/products/plato-personalizado-mod-ph4/34_copas-de-vino-personalizadas-classic-1610996309-jp.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -10131,8 +9806,7 @@
       "/media/products/plato-personalizado-mod-ph4/26_transparent.png",
       "/media/products/plato-personalizado-mod-ph4/29_platos-llanos-personalizados-ph-4-1614428429.jpg",
       "/media/products/plato-personalizado-mod-ph4/34_copas-de-vino-personalizadas-classic-1610996309-jp.thumb"
-    ],
-    "image": "/media/products/plato-personalizado-mod-ph4/01_platos-llanos-personalizados-ph-4-1614428429-jpg.webp"
+    ]
   },
   {
     "id": "8225563",
@@ -10172,13 +9846,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/fuente-carne-o-pescado-mod-ph4/01_fuentes-y-rabanera-personalizadas-ph4-1614429592-j.webp",
-      "/media/products/fuente-carne-o-pescado-mod-ph4/02_fuentes-carne-o-pescado-ph4-1614457080-jpg.webp",
-      "/media/products/fuente-carne-o-pescado-mod-ph4/03_fuente-rectangular-35-cms-1617299107-jpg.webp",
-      "/media/products/fuente-carne-o-pescado-mod-ph4/04_calidad-personalizacion-ph4-1614429547-jpg.webp",
-      "/media/products/fuente-carne-o-pescado-mod-ph4/34_tazay-platillo-personalizados-ischia-1611430321-pn.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -10232,8 +9900,7 @@
       "/media/products/fuente-carne-o-pescado-mod-ph4/26_transparent.png",
       "/media/products/fuente-carne-o-pescado-mod-ph4/29_fuentes-y-rabanera-personalizadas-ph4-1614429592.jpg",
       "/media/products/fuente-carne-o-pescado-mod-ph4/34_tazay-platillo-personalizados-ischia-1611430321-pn.thumb"
-    ],
-    "image": "/media/products/fuente-carne-o-pescado-mod-ph4/01_fuentes-y-rabanera-personalizadas-ph4-1614429592-j.webp"
+    ]
   },
   {
     "id": "8231532",
@@ -10316,8 +9983,7 @@
       "/media/products/jarra-de-cerveza-oktober-1-1-lt/28_1-1609878407.jpg",
       "/media/products/jarra-de-cerveza-oktober-1-1-lt/32_principal-mencia-1606654630-jpg.thumb",
       "/media/products/jarra-de-cerveza-oktober-1-1-lt/33_canguro-personalizada-airlaid-1670574108-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8232808",
@@ -10364,11 +10030,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/jarra-de-cerveza-personalizada-classic-50-cl/01_jarra-de-cerveza-personalizada-classic-50-16099542.webp",
-      "/media/products/jarra-de-cerveza-personalizada-classic-50-cl/02_2-1609953427-png.webp",
-      "/media/products/jarra-de-cerveza-personalizada-classic-50-cl/03_calidad-cristal-perssonalizados-hosteleria-1611061.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[ADJUNTA AQUÍ TU LOGO: JPG, PNG, PDF o el de tu diseñador directamente][TU LOGO][][0][6]",
     "options": [
@@ -10431,8 +10093,7 @@
       "/media/products/jarra-de-cerveza-personalizada-classic-50-cl/28_jarra-de-cerveza-personalizada-classic-50-16099542.png",
       "/media/products/jarra-de-cerveza-personalizada-classic-50-cl/32_facebook-4.png",
       "/media/products/jarra-de-cerveza-personalizada-classic-50-cl/33_instagram-4.png"
-    ],
-    "image": "/media/products/jarra-de-cerveza-personalizada-classic-50-cl/01_jarra-de-cerveza-personalizada-classic-50-16099542.webp"
+    ]
   },
   {
     "id": "8233440",
@@ -10479,13 +10140,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/jarra-de-cerveza-personalizada-amberes-26/01_1-1610009759-jpg.webp",
-      "/media/products/jarra-de-cerveza-personalizada-amberes-26/02_jarra-de-cerveza-personalizada-amberes-26-16107383.webp",
-      "/media/products/jarra-de-cerveza-personalizada-amberes-26/03_24-1610022507-jpg.webp",
-      "/media/products/jarra-de-cerveza-personalizada-amberes-26/04_calidad-para-cristal-1610009798-png.webp",
-      "/media/products/jarra-de-cerveza-personalizada-amberes-26/34_principal-mencia-1606654630-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][en formato pdf, jpg o png][][0][6]",
     "options": [
@@ -10548,8 +10203,7 @@
       "/media/products/jarra-de-cerveza-personalizada-amberes-26/26_transparent.png",
       "/media/products/jarra-de-cerveza-personalizada-amberes-26/29_1-1610009759.jpg",
       "/media/products/jarra-de-cerveza-personalizada-amberes-26/34_principal-mencia-1606654630-jpg.thumb"
-    ],
-    "image": "/media/products/jarra-de-cerveza-personalizada-amberes-26/01_1-1610009759-jpg.webp"
+    ]
   },
   {
     "id": "8233632",
@@ -10592,13 +10246,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/jarra-de-cerveza-48-cl-clasica/01_jarra-de-cerveza-personalizada-1-1610029692-jpg.webp",
-      "/media/products/jarra-de-cerveza-48-cl-clasica/02_jarra-de-cerveza-personalizada-5-1610029704-png.webp",
-      "/media/products/jarra-de-cerveza-48-cl-clasica/03_jarra-de-cerveza-personalizada-clasica-9-161002972.webp",
-      "/media/products/jarra-de-cerveza-48-cl-clasica/04_calidad-para-cristal-1610029764-png.webp",
-      "/media/products/jarra-de-cerveza-48-cl-clasica/34_2-1607712271-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su logo][formato pdf, png, jpg][][0][6]",
     "options": [
@@ -10661,8 +10309,7 @@
       "/media/products/jarra-de-cerveza-48-cl-clasica/26_transparent.png",
       "/media/products/jarra-de-cerveza-48-cl-clasica/29_jarra-de-cerveza-personalizada-1-1610029692.jpg",
       "/media/products/jarra-de-cerveza-48-cl-clasica/34_2-1607712271-jpg.thumb"
-    ],
-    "image": "/media/products/jarra-de-cerveza-48-cl-clasica/01_jarra-de-cerveza-personalizada-1-1610029692-jpg.webp"
+    ]
   },
   {
     "id": "8233722",
@@ -10705,13 +10352,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/jarra-de-cerveza-39-cl-clasica/01_13-1610034334-png.webp",
-      "/media/products/jarra-de-cerveza-39-cl-clasica/02_12-1610034340-jpg.webp",
-      "/media/products/jarra-de-cerveza-39-cl-clasica/03_jarra-de-cerveza-39-cl-clasica-1610034324-png.webp",
-      "/media/products/jarra-de-cerveza-39-cl-clasica/04_calidad-para-cristal-1610034282-png.webp",
-      "/media/products/jarra-de-cerveza-39-cl-clasica/34_canguro-personalizada-airlaid-1670574108-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su logo][formato png, pdf, jpg][][0][6]",
     "options": [
@@ -10774,8 +10415,7 @@
       "/media/products/jarra-de-cerveza-39-cl-clasica/26_transparent.png",
       "/media/products/jarra-de-cerveza-39-cl-clasica/29_13-1610034334.png",
       "/media/products/jarra-de-cerveza-39-cl-clasica/34_canguro-personalizada-airlaid-1670574108-jpg.thumb"
-    ],
-    "image": "/media/products/jarra-de-cerveza-39-cl-clasica/01_13-1610034334-png.webp"
+    ]
   },
   {
     "id": "8233908",
@@ -10885,8 +10525,7 @@
       "/media/products/jarra-de-cerveza-sintra-grabada-con-su-logo/28_jarra-de-cerveza-personalizada-sintra-55-cl-161004.jpg",
       "/media/products/jarra-de-cerveza-sintra-grabada-con-su-logo/32_facebook-4.png",
       "/media/products/jarra-de-cerveza-sintra-grabada-con-su-logo/33_instagram-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8233943",
@@ -10929,13 +10568,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/jarra-de-cerveza-personalizada-baviera-26/01_jarra-de-cerveza-personalizada-baviera-26-cl-16100.webp",
-      "/media/products/jarra-de-cerveza-personalizada-baviera-26/02_jarra-de-cerveza-baviera-26-cl-1610044890-png.webp",
-      "/media/products/jarra-de-cerveza-personalizada-baviera-26/03_calidad-para-cristal-1610044893-png.webp",
-      "/media/products/jarra-de-cerveza-personalizada-baviera-26/04_baviera-20-1610045015-jpg.webp",
-      "/media/products/jarra-de-cerveza-personalizada-baviera-26/34_2-1607712271-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][formato pdf, png o jpg][][0][6]",
     "options": [
@@ -10998,8 +10631,7 @@
       "/media/products/jarra-de-cerveza-personalizada-baviera-26/26_transparent.png",
       "/media/products/jarra-de-cerveza-personalizada-baviera-26/29_jarra-de-cerveza-personalizada-baviera-26-cl-16100.jpg",
       "/media/products/jarra-de-cerveza-personalizada-baviera-26/34_2-1607712271-jpg.thumb"
-    ],
-    "image": "/media/products/jarra-de-cerveza-personalizada-baviera-26/01_jarra-de-cerveza-personalizada-baviera-26-cl-16100.webp"
+    ]
   },
   {
     "id": "8233945",
@@ -11105,8 +10737,7 @@
       "/media/products/jarra-de-cerveza-personalizada-baviera-38/28_jarra-de-cerveza-personalizada-baviera-38-cl-16100.jpg",
       "/media/products/jarra-de-cerveza-personalizada-baviera-38/32_cabernete-1606642017-jpg.thumb",
       "/media/products/jarra-de-cerveza-personalizada-baviera-38/33_jarra-de-cerveza-sintra-29-cl-1610043712-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8233969",
@@ -11212,8 +10843,7 @@
       "/media/products/jarra-de-cerveza-personalizada-baviera-50/28_jarra-de-cerveza-personalizada-baviera-50-cl-16100.jpg",
       "/media/products/jarra-de-cerveza-personalizada-baviera-50/32_imagen-principal-1606640258-jpg.thumb",
       "/media/products/jarra-de-cerveza-personalizada-baviera-50/33_vina-1607420469-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8233971",
@@ -11256,13 +10886,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/jarra-de-cerveza-personalizada-baviera-67/01_jarra-de-cerveza-personalizada-baviera-67-cl-16100.webp",
-      "/media/products/jarra-de-cerveza-personalizada-baviera-67/02_jarra-de-cerveza-baviera-67-cl-1610046517-png.webp",
-      "/media/products/jarra-de-cerveza-personalizada-baviera-67/03_calidad-para-cristal-1610046520-png.webp",
-      "/media/products/jarra-de-cerveza-personalizada-baviera-67/32_premium-1607328791-jpg.webp",
-      "/media/products/jarra-de-cerveza-personalizada-baviera-67/33_taza-y-platillo-personalizado-easy-23-1611430048-j.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][formato pdf, png o jpg][][0][6]",
     "options": [
@@ -11325,8 +10949,7 @@
       "/media/products/jarra-de-cerveza-personalizada-baviera-67/28_jarra-de-cerveza-personalizada-baviera-67-cl-16100.jpg",
       "/media/products/jarra-de-cerveza-personalizada-baviera-67/32_premium-1607328791-jpg.thumb",
       "/media/products/jarra-de-cerveza-personalizada-baviera-67/33_taza-y-platillo-personalizado-easy-23-1611430048-j.thumb"
-    ],
-    "image": "/media/products/jarra-de-cerveza-personalizada-baviera-67/01_jarra-de-cerveza-personalizada-baviera-67-cl-16100.webp"
+    ]
   },
   {
     "id": "8266414",
@@ -11436,8 +11059,7 @@
       "/media/products/vaso-de-cerveza-personalizado-nonix-58/26_transparent.png",
       "/media/products/vaso-de-cerveza-personalizado-nonix-58/29_vasos-de-cerveza-personalizados-nonix-1612702864.jpg",
       "/media/products/vaso-de-cerveza-personalizado-nonix-58/34_facebook-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8291504",
@@ -11516,8 +11138,7 @@
       "/media/products/taza-y-platillo-personalizados-vela/26_transparent.png",
       "/media/products/taza-y-platillo-personalizados-vela/29_2-1611497899.jpg",
       "/media/products/taza-y-platillo-personalizados-vela/34_cabernete-1606642017-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8292283",
@@ -11558,13 +11179,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/taza-cristal-personalizada-irish-late/01_taza-personalizada-irish-1611496949-jpg.webp",
-      "/media/products/taza-cristal-personalizada-irish-late/02_taza-cristal-personalizada-irish-late-1611496819-j.webp",
-      "/media/products/taza-cristal-personalizada-irish-late/03_taza-personalizada-irish-late-medidas-1611496837-p.webp",
-      "/media/products/taza-cristal-personalizada-irish-late/04_calidad-cristal-perssonalizados-hosteleria-1611497.webp",
-      "/media/products/taza-cristal-personalizada-irish-late/34_copia-de-enoteca-1607710335-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -11600,8 +11215,7 @@
       "/media/products/taza-cristal-personalizada-irish-late/26_transparent.png",
       "/media/products/taza-cristal-personalizada-irish-late/29_taza-personalizada-irish-1611496949.jpg",
       "/media/products/taza-cristal-personalizada-irish-late/34_copia-de-enoteca-1607710335-jpg.thumb"
-    ],
-    "image": "/media/products/taza-cristal-personalizada-irish-late/01_taza-personalizada-irish-1611496949-jpg.webp"
+    ]
   },
   {
     "id": "8338961",
@@ -11635,13 +11249,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/taza-y-platillo-personalizado-easy-32-cl-grabada-con-logo/01_taza-easy-personalizada-1612695758-jpg.webp",
-      "/media/products/taza-y-platillo-personalizado-easy-32-cl-grabada-con-logo/02_easy-32-medidas-1612695743-jpg.webp",
-      "/media/products/taza-y-platillo-personalizado-easy-32-cl-grabada-con-logo/03_calidad-grabado-1612695737-jpg.webp",
-      "/media/products/taza-y-platillo-personalizado-easy-32-cl-grabada-con-logo/04_taza-easy-1612695747-jpg.webp",
-      "/media/products/taza-y-platillo-personalizado-easy-32-cl-grabada-con-logo/34_ensaladera-ph1-1724776256-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -11677,8 +11285,7 @@
       "/media/products/taza-y-platillo-personalizado-easy-32-cl-grabada-con-logo/26_transparent.png",
       "/media/products/taza-y-platillo-personalizado-easy-32-cl-grabada-con-logo/29_taza-easy-personalizada-1612695758.jpg",
       "/media/products/taza-y-platillo-personalizado-easy-32-cl-grabada-con-logo/34_ensaladera-ph1-1724776256-jpg.thumb"
-    ],
-    "image": "/media/products/taza-y-platillo-personalizado-easy-32-cl-grabada-con-logo/01_taza-easy-personalizada-1612695758-jpg.webp"
+    ]
   },
   {
     "id": "8344991",
@@ -11720,12 +11327,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/lectura-codigo-qr-menu/01_707070-mm-1636360994-jpg.webp",
-      "/media/products/lectura-codigo-qr-menu/02_3-1636360516-jpg.webp",
-      "/media/products/lectura-codigo-qr-menu/03_2-1636360516-jpg.webp",
-      "/media/products/lectura-codigo-qr-menu/32_canguro-personalizada-airlaid-1670574108-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta un archivo con tu QR][][][0][6]|[Adjunta un logo de tu establecimientoiento][formato pdf, jpg o png][][0][6]|[Si quieres N§ de Mesa, enuméranos cu les ][ 1, 2, 3 .. separados por comas][][0][2]",
     "options": [
@@ -11788,8 +11390,7 @@
       "/media/products/lectura-codigo-qr-menu/28_707070-mm-1636360994.jpg",
       "/media/products/lectura-codigo-qr-menu/32_canguro-personalizada-airlaid-1670574108-jpg.thumb",
       "/media/products/lectura-codigo-qr-menu/33_facebook-4.png"
-    ],
-    "image": "/media/products/lectura-codigo-qr-menu/01_707070-mm-1636360994-jpg.webp"
+    ]
   },
   {
     "id": "8348384",
@@ -11818,8 +11419,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "8381321",
@@ -11859,13 +11459,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/ensaladera-personalizada-hosteleria-mod-ph4/01_ensaladera-personalizada-mod-ph4-1-1614505968-jpg.webp",
-      "/media/products/ensaladera-personalizada-hosteleria-mod-ph4/02_ensalkadera-personalizada-ph4-1614506033-jpg.webp",
-      "/media/products/ensaladera-personalizada-hosteleria-mod-ph4/03_ensaladera-en-color-cobalto-ph4-1614506489-jpg.webp",
-      "/media/products/ensaladera-personalizada-hosteleria-mod-ph4/04_calidad-grabado-1614506250-jpg.webp",
-      "/media/products/ensaladera-personalizada-hosteleria-mod-ph4/34_servilleta-canguro-personalizada-eco-1679681730-jp.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjúntenos su logo vectorizado][][][0][1]|[Debajo tiene un enlace a presupuestos][En la parte inferior podr rellenar la petición de presupuesto][][0][2]",
     "options": [
@@ -11919,8 +11513,7 @@
       "/media/products/ensaladera-personalizada-hosteleria-mod-ph4/26_transparent.png",
       "/media/products/ensaladera-personalizada-hosteleria-mod-ph4/29_ensaladera-personalizada-mod-ph4-1-1614505968.jpg",
       "/media/products/ensaladera-personalizada-hosteleria-mod-ph4/34_servilleta-canguro-personalizada-eco-1679681730-jp.thumb"
-    ],
-    "image": "/media/products/ensaladera-personalizada-hosteleria-mod-ph4/01_ensaladera-personalizada-mod-ph4-1-1614505968-jpg.webp"
+    ]
   },
   {
     "id": "8406666",
@@ -11998,8 +11591,7 @@
         "discountValue": 0,
         "effectivePrice": 0.01
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8419691",
@@ -12114,8 +11706,7 @@
       "/media/products/copa-de-vino-personalizada-taboo-58/26_transparent.png",
       "/media/products/copa-de-vino-personalizada-taboo-58/29_copa-vino-taboo-1616095677.jpg",
       "/media/products/copa-de-vino-personalizada-taboo-58/34_jarra-de-cerveza-personalizada-amberes-1610737582-.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8419730",
@@ -12230,8 +11821,7 @@
       "/media/products/copa-de-vino-personalizada-taboo-44/26_transparent.png",
       "/media/products/copa-de-vino-personalizada-taboo-44/29_copa-de-vino-personalizada-taboo-1616182090.jpg",
       "/media/products/copa-de-vino-personalizada-taboo-44/34_tazay-platillo-personalizados-ischia-1611430321-pn.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8452172",
@@ -12339,8 +11929,7 @@
       "/media/products/copa-tulipe-cabernet-grabada-con-tu-logo/28_imagen-principal-1617728877.jpg",
       "/media/products/copa-tulipe-cabernet-grabada-con-tu-logo/32_categoria-vajilla-ph1-1615129263-jpg.thumb",
       "/media/products/copa-tulipe-cabernet-grabada-con-tu-logo/33_copa-champagne-personalizada-refine-20-1610911381-.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8453976",
@@ -12431,8 +12020,7 @@
       "/media/products/copa-de-vino-personalizada-mencia-44cl/28_principal-mencia-1617809353.jpg",
       "/media/products/copa-de-vino-personalizada-mencia-44cl/32_cabernete-1606642017-jpg.thumb",
       "/media/products/copa-de-vino-personalizada-mencia-44cl/33_reveal-up1-1606639607-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8453991",
@@ -12480,12 +12068,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-classic-65-cl-grabada-con-tu-logo/01_classic-stoelzle-1617810028-jpg.webp",
-      "/media/products/copa-classic-65-cl-grabada-con-tu-logo/02_classic-62-producto-1617810048-jpg.webp",
-      "/media/products/copa-classic-65-cl-grabada-con-tu-logo/03_calidad-cristal-perssonalizados-hosteleria-1617872.webp",
-      "/media/products/copa-classic-65-cl-grabada-con-tu-logo/33_classic-1607418433-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta tu logo ][en png, jpg o pdf][][0][6]",
     "options": [
@@ -12548,8 +12131,7 @@
       "/media/products/copa-classic-65-cl-grabada-con-tu-logo/28_classic-stoelzle-1617810028.jpg",
       "/media/products/copa-classic-65-cl-grabada-con-tu-logo/32_default.jpg",
       "/media/products/copa-classic-65-cl-grabada-con-tu-logo/33_classic-1607418433-jpg.thumb"
-    ],
-    "image": "/media/products/copa-classic-65-cl-grabada-con-tu-logo/01_classic-stoelzle-1617810028-jpg.webp"
+    ]
   },
   {
     "id": "8454006",
@@ -12637,8 +12219,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8454022",
@@ -12686,11 +12267,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-vino-sublym-45cl-grabada-con-su-logo/01_sublym-1617811142-jpg.webp",
-      "/media/products/copa-de-vino-sublym-45cl-grabada-con-su-logo/02_sublym45-1617811133-jpg.webp",
-      "/media/products/copa-de-vino-sublym-45cl-grabada-con-su-logo/03_calidad-cristal-perssonalizados-hosteleria-1617814.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[TU LOGO MáXIMO 45 MM][Adjunta tu logo en png, jpg o pdf][0.0000][0][6]",
     "options": [
@@ -12753,8 +12330,7 @@
       "/media/products/copa-de-vino-sublym-45cl-grabada-con-su-logo/28_sublym-1617811142.jpg",
       "/media/products/copa-de-vino-sublym-45cl-grabada-con-su-logo/32_facebook-4.png",
       "/media/products/copa-de-vino-sublym-45cl-grabada-con-su-logo/33_instagram-4.png"
-    ],
-    "image": "/media/products/copa-de-vino-sublym-45cl-grabada-con-su-logo/01_sublym-1617811142-jpg.webp"
+    ]
   },
   {
     "id": "8467641",
@@ -12801,12 +12377,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-cerveza-krista-joven-41cl-grabados-con-su-logo/01_krista-joven-1618327454-jpg.webp",
-      "/media/products/copa-de-cerveza-krista-joven-41cl-grabados-con-su-logo/02_collection-1618328136-jpg.webp",
-      "/media/products/copa-de-cerveza-krista-joven-41cl-grabados-con-su-logo/31_1-1607938683-png.webp",
-      "/media/products/copa-de-cerveza-krista-joven-41cl-grabados-con-su-logo/32_1-1606664708-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][formato pdf, png o jpg][0.0000][0][6]",
     "options": [
@@ -12869,8 +12440,7 @@
       "/media/products/copa-de-cerveza-krista-joven-41cl-grabados-con-su-logo/30_default.jpg",
       "/media/products/copa-de-cerveza-krista-joven-41cl-grabados-con-su-logo/31_1-1607938683-png.thumb",
       "/media/products/copa-de-cerveza-krista-joven-41cl-grabados-con-su-logo/32_1-1606664708-jpg.thumb"
-    ],
-    "image": "/media/products/copa-de-cerveza-krista-joven-41cl-grabados-con-su-logo/01_krista-joven-1618327454-jpg.webp"
+    ]
   },
   {
     "id": "8467649",
@@ -12917,12 +12487,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-tanic-55-cl-krista-cerveza-grabados-con-su-logo/01_krista-tanic-1618328093-jpg.webp",
-      "/media/products/copa-tanic-55-cl-krista-cerveza-grabados-con-su-logo/02_collection-1618328111-jpg.webp",
-      "/media/products/copa-tanic-55-cl-krista-cerveza-grabados-con-su-logo/31_harmonia-principal-1606665579-jpg.webp",
-      "/media/products/copa-tanic-55-cl-krista-cerveza-grabados-con-su-logo/32_1-1606664708-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][formato pdf, png o jpg][0.0000][0][6]",
     "options": [
@@ -12985,8 +12550,7 @@
       "/media/products/copa-tanic-55-cl-krista-cerveza-grabados-con-su-logo/30_default.jpg",
       "/media/products/copa-tanic-55-cl-krista-cerveza-grabados-con-su-logo/31_harmonia-principal-1606665579-jpg.thumb",
       "/media/products/copa-tanic-55-cl-krista-cerveza-grabados-con-su-logo/32_1-1606664708-jpg.thumb"
-    ],
-    "image": "/media/products/copa-tanic-55-cl-krista-cerveza-grabados-con-su-logo/01_krista-tanic-1618328093-jpg.webp"
+    ]
   },
   {
     "id": "8467724",
@@ -13096,8 +12660,7 @@
       "/media/products/copa-cerveza-executive-grabada-con-su-logo/30_facebook-4.png",
       "/media/products/copa-cerveza-executive-grabada-con-su-logo/31_instagram-4.png",
       "/media/products/copa-cerveza-executive-grabada-con-su-logo/32_twitter-5.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8467729",
@@ -13144,10 +12707,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-cerveza-executive-26-cl-grabada-con-su-logo/01_1-1618330978-jpg.webp",
-      "/media/products/copa-cerveza-executive-26-cl-grabada-con-su-logo/02_conjunto-1618330981-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][formato jpg, png o pdf][][0][6]",
     "options": [
@@ -13210,8 +12770,7 @@
       "/media/products/copa-cerveza-executive-26-cl-grabada-con-su-logo/30_facebook-4.png",
       "/media/products/copa-cerveza-executive-26-cl-grabada-con-su-logo/31_instagram-4.png",
       "/media/products/copa-cerveza-executive-26-cl-grabada-con-su-logo/32_twitter-5.png"
-    ],
-    "image": "/media/products/copa-cerveza-executive-26-cl-grabada-con-su-logo/01_1-1618330978-jpg.webp"
+    ]
   },
   {
     "id": "8467753",
@@ -13264,13 +12823,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-cerveza-palladio-30cl-grabada-con-su-logo-a-laser-o-a-color/01_palladio-33-1618331917-jpg.webp",
-      "/media/products/copa-cerveza-palladio-30cl-grabada-con-su-logo-a-laser-o-a-color/02_conjunto-palladio-1618331923-jpg.webp",
-      "/media/products/copa-cerveza-palladio-30cl-grabada-con-su-logo-a-laser-o-a-color/30_harmonia-principal-1606665579-jpg.webp",
-      "/media/products/copa-cerveza-palladio-30cl-grabada-con-su-logo-a-laser-o-a-color/31_capricon-fond-1606741339-jpg.webp",
-      "/media/products/copa-cerveza-palladio-30cl-grabada-con-su-logo-a-laser-o-a-color/32_palladio1-1606667783-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -13333,8 +12886,7 @@
       "/media/products/copa-cerveza-palladio-30cl-grabada-con-su-logo-a-laser-o-a-color/30_harmonia-principal-1606665579-jpg.thumb",
       "/media/products/copa-cerveza-palladio-30cl-grabada-con-su-logo-a-laser-o-a-color/31_capricon-fond-1606741339-jpg.thumb",
       "/media/products/copa-cerveza-palladio-30cl-grabada-con-su-logo-a-laser-o-a-color/32_palladio1-1606667783-jpg.thumb"
-    ],
-    "image": "/media/products/copa-cerveza-palladio-30cl-grabada-con-su-logo-a-laser-o-a-color/01_palladio-33-1618331917-jpg.webp"
+    ]
   },
   {
     "id": "8467762",
@@ -13387,13 +12939,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-cerveza-palladio20-cl-grabada-con-su-logo-a-laser-o-a-color/01_palladio-20-1618332205-jpg.webp",
-      "/media/products/copa-cerveza-palladio20-cl-grabada-con-su-logo-a-laser-o-a-color/02_conjunto-palladio-1618332213-jpg.webp",
-      "/media/products/copa-cerveza-palladio20-cl-grabada-con-su-logo-a-laser-o-a-color/30_harmonia-principal-1606665579-jpg.webp",
-      "/media/products/copa-cerveza-palladio20-cl-grabada-con-su-logo-a-laser-o-a-color/31_capricon-fond-1606741339-jpg.webp",
-      "/media/products/copa-cerveza-palladio20-cl-grabada-con-su-logo-a-laser-o-a-color/32_palladio1-1606667783-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -13456,8 +13002,7 @@
       "/media/products/copa-cerveza-palladio20-cl-grabada-con-su-logo-a-laser-o-a-color/30_harmonia-principal-1606665579-jpg.thumb",
       "/media/products/copa-cerveza-palladio20-cl-grabada-con-su-logo-a-laser-o-a-color/31_capricon-fond-1606741339-jpg.thumb",
       "/media/products/copa-cerveza-palladio20-cl-grabada-con-su-logo-a-laser-o-a-color/32_palladio1-1606667783-jpg.thumb"
-    ],
-    "image": "/media/products/copa-cerveza-palladio20-cl-grabada-con-su-logo-a-laser-o-a-color/01_palladio-20-1618332205-jpg.webp"
+    ]
   },
   {
     "id": "8467816",
@@ -13504,11 +13049,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/vaso-cerveza-principe-30-cl-grabado-con-su-logo/01_principe-1618333202-jpg.webp",
-      "/media/products/vaso-cerveza-principe-30-cl-grabado-con-su-logo/02_principe30-1618333206-jpg.webp",
-      "/media/products/vaso-cerveza-principe-30-cl-grabado-con-su-logo/03_copas-y-vasos-cerveza-1618333211-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][Formato png,jpg,pdf.][][0][6]",
     "options": [
@@ -13571,8 +13112,7 @@
       "/media/products/vaso-cerveza-principe-30-cl-grabado-con-su-logo/28_principe-1618333202.jpg",
       "/media/products/vaso-cerveza-principe-30-cl-grabado-con-su-logo/32_facebook-4.png",
       "/media/products/vaso-cerveza-principe-30-cl-grabado-con-su-logo/33_instagram-4.png"
-    ],
-    "image": "/media/products/vaso-cerveza-principe-30-cl-grabado-con-su-logo/01_principe-1618333202-jpg.webp"
+    ]
   },
   {
     "id": "8467822",
@@ -13619,11 +13159,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/vaso-cerveza-principe-37-cl-grabado-con-su-logo/01_principe-1618333350-jpg.webp",
-      "/media/products/vaso-cerveza-principe-37-cl-grabado-con-su-logo/02_principe37-1618333354-jpg.webp",
-      "/media/products/vaso-cerveza-principe-37-cl-grabado-con-su-logo/03_copas-y-vasos-cerveza-1618333358-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunta aquí tu logo][Formato png,jpg,pdf.][][0][6]",
     "options": [],
@@ -13649,8 +13185,7 @@
       "/media/products/vaso-cerveza-principe-37-cl-grabado-con-su-logo/28_principe-1618333350.jpg",
       "/media/products/vaso-cerveza-principe-37-cl-grabado-con-su-logo/32_facebook-4.png",
       "/media/products/vaso-cerveza-principe-37-cl-grabado-con-su-logo/33_instagram-4.png"
-    ],
-    "image": "/media/products/vaso-cerveza-principe-37-cl-grabado-con-su-logo/01_principe-1618333350-jpg.webp"
+    ]
   },
   {
     "id": "8467868",
@@ -13697,10 +13232,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-cerveza-harmonia-38-cl-grabada-con-tu-logo/01_diapositiva3-1618334429-jpg.webp",
-      "/media/products/copa-cerveza-harmonia-38-cl-grabada-con-tu-logo/02_diapositiva5-1618334397-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[ADJUNTA AQUÍ TU LOGO EN 35MM*35MM][Logo de tu Establecimiento][][1][6]|[ADJUNTA AQUÍ EL LOCO DE TU MARCA SI LO QUIERES][si no lo tienes dinos la marca y la colocaremos][][0][6]",
     "options": [
@@ -13763,8 +13295,7 @@
       "/media/products/copa-cerveza-harmonia-38-cl-grabada-con-tu-logo/30_facebook-4.png",
       "/media/products/copa-cerveza-harmonia-38-cl-grabada-con-tu-logo/31_instagram-4.png",
       "/media/products/copa-cerveza-harmonia-38-cl-grabada-con-tu-logo/32_twitter-5.png"
-    ],
-    "image": "/media/products/copa-cerveza-harmonia-38-cl-grabada-con-tu-logo/01_diapositiva3-1618334429-jpg.webp"
+    ]
   },
   {
     "id": "8482744",
@@ -13837,8 +13368,7 @@
       "/media/products/taza-8-cl-personalizada-a-1-color-mod-ph1/26_transparent.png",
       "/media/products/taza-8-cl-personalizada-a-1-color-mod-ph1/29_taza-0-8-cl-y-platillo-personalizados-a-uno-o-dos-.jpg",
       "/media/products/taza-8-cl-personalizada-a-1-color-mod-ph1/34_savoy1-1610794807-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8482885",
@@ -13911,8 +13441,7 @@
       "/media/products/taza-15-cl-personalizada-a-1-color-mod-ph1/26_transparent.png",
       "/media/products/taza-15-cl-personalizada-a-1-color-mod-ph1/29_taza-15-cl-personalizada-a-un-color-1618767324.jpg",
       "/media/products/taza-15-cl-personalizada-a-1-color-mod-ph1/34_classic-1607418433-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8482904",
@@ -13985,8 +13514,7 @@
       "/media/products/platillo-cafe-12-5-cms-personalizado-a-1-color-mod-ph1/26_transparent.png",
       "/media/products/platillo-cafe-12-5-cms-personalizado-a-1-color-mod-ph1/29_platillo-de-cafe-mod-ph1-1618769947.jpg",
       "/media/products/platillo-cafe-12-5-cms-personalizado-a-1-color-mod-ph1/34_personalizacion-miniservice-1698137093-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8482939",
@@ -14059,8 +13587,7 @@
       "/media/products/platillo-cafe-14-cms-personalizado-a-1-color-mod-ph1/28_platillo-de-cafe-mod-ph1-1618770308.jpg",
       "/media/products/platillo-cafe-14-cms-personalizado-a-1-color-mod-ph1/32_palladio1-1606667783-jpg.thumb",
       "/media/products/platillo-cafe-14-cms-personalizado-a-1-color-mod-ph1/33_reveal-up1-1606639607-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8482990",
@@ -14158,8 +13685,7 @@
       "/media/products/taza-20-cl-personalizada-a-1-color-mod-ph1/26_transparent.png",
       "/media/products/taza-20-cl-personalizada-a-1-color-mod-ph1/29_taza-20-cl-mod-ph1-1618772760.jpg",
       "/media/products/taza-20-cl-personalizada-a-1-color-mod-ph1/34_manteleria-personalizada-1-1610441370-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8503347",
@@ -14239,8 +13765,7 @@
       "/media/products/taza-22-cl-personalizada-a-1-color-mod-ph7/26_transparent.png",
       "/media/products/taza-22-cl-personalizada-a-1-color-mod-ph7/29_taza-de-cafe-leche-personalizada-mod-ph7-161935389.jpg",
       "/media/products/taza-22-cl-personalizada-a-1-color-mod-ph7/34_vajilla-personalizada-mod-ph2-1615140716-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8503367",
@@ -14320,8 +13845,7 @@
       "/media/products/taza-19-cl-personalizada-a-1-color-mod-ph7/26_transparent.png",
       "/media/products/taza-19-cl-personalizada-a-1-color-mod-ph7/29_taza-de-cafe-leche-personalizada-mod-ph7-161935628.jpg",
       "/media/products/taza-19-cl-personalizada-a-1-color-mod-ph7/34_harmonia-principal-1606665579-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8503368",
@@ -14401,8 +13925,7 @@
       "/media/products/taza-16-cl-personalizada-a-1-color-mod-ph7/26_transparent.png",
       "/media/products/taza-16-cl-personalizada-a-1-color-mod-ph7/29_taza-de-cafe-leche-personalizada-mod-ph7-161935640.jpg",
       "/media/products/taza-16-cl-personalizada-a-1-color-mod-ph7/34_principe-1607691048-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8503369",
@@ -14482,8 +14005,7 @@
       "/media/products/taza-10-cl-personalizada-a-1-color-mod-ph7/26_transparent.png",
       "/media/products/taza-10-cl-personalizada-a-1-color-mod-ph7/29_taza-personalizada-mod-ph7-10-cl-1619356612.jpg",
       "/media/products/taza-10-cl-personalizada-a-1-color-mod-ph7/34_tazay-platillo-personalizados-ischia-1611430321-pn.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8503372",
@@ -14556,8 +14078,7 @@
       "/media/products/platillo-cafe-14-5-cms-personalizado-a-1-color-mod-ph7/26_transparent.png",
       "/media/products/platillo-cafe-14-5-cms-personalizado-a-1-color-mod-ph7/29_platillo-personalizado-ph7-14-cms-1619368362.jpg",
       "/media/products/platillo-cafe-14-5-cms-personalizado-a-1-color-mod-ph7/34_1-1607938683-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8503444",
@@ -14630,8 +14151,7 @@
       "/media/products/platillo-cafe-13-cms-personalizado-a-1-color-mod-ph7/26_transparent.png",
       "/media/products/platillo-cafe-13-cms-personalizado-a-1-color-mod-ph7/29_platillo-personalizado-ph7-13-cms-1619368344.jpg",
       "/media/products/platillo-cafe-13-cms-personalizado-a-1-color-mod-ph7/34_1-1606664708-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8523343",
@@ -14668,13 +14188,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/plato-de-pizza-personalizado-cremona-33/01_plato-pizza-cremona-33-2-1619866099-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-cremona-33/02_1-1619866069-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-cremona-33/03_plato-pizza-cremona-33-1619866083-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-cremona-33/04_calidad-personalizacion-vajilla-1619866115-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-cremona-33/34_copas-de-vino-personalizadas-classic-1610996309-jp.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su logo][en formato pdf, jpg o png][][0][6]",
     "options": [
@@ -14710,8 +14224,7 @@
       "/media/products/plato-de-pizza-personalizado-cremona-33/26_transparent.png",
       "/media/products/plato-de-pizza-personalizado-cremona-33/29_plato-pizza-cremona-33-2-1619866099.jpg",
       "/media/products/plato-de-pizza-personalizado-cremona-33/34_copas-de-vino-personalizadas-classic-1610996309-jp.thumb"
-    ],
-    "image": "/media/products/plato-de-pizza-personalizado-cremona-33/01_plato-pizza-cremona-33-2-1619866099-jpg.webp"
+    ]
   },
   {
     "id": "8523556",
@@ -14748,13 +14261,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/plato-de-pizza-personalizado-padua-32-cms/01_plato-pizza-padua-1619868260-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-padua-32-cms/02_calidad-personalizacion-vajilla-1619868875-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-padua-32-cms/03_1-1619868252-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-padua-32-cms/04_plato-pizza-cremona-33-2-1619868272-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-padua-32-cms/34_vaso-de-cerveza-personalizado-nonix-29-1612703110-.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su logo][en formato pdf, jpg o png][][0][6]",
     "options": [
@@ -14790,8 +14297,7 @@
       "/media/products/plato-de-pizza-personalizado-padua-32-cms/26_transparent.png",
       "/media/products/plato-de-pizza-personalizado-padua-32-cms/29_plato-pizza-padua-1619868260.jpg",
       "/media/products/plato-de-pizza-personalizado-padua-32-cms/34_vaso-de-cerveza-personalizado-nonix-29-1612703110-.thumb"
-    ],
-    "image": "/media/products/plato-de-pizza-personalizado-padua-32-cms/01_plato-pizza-padua-1619868260-jpg.webp"
+    ]
   },
   {
     "id": "8523684",
@@ -14828,13 +14334,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/plato-de-pizza-personalizado-turin-27-cms/01_plato-pizza-personalizado-turin-1619882344-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-turin-27-cms/02_calidad-personalizacion-vajilla-1619882362-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-turin-27-cms/03_plato-pizza-siena-1619882354-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-turin-27-cms/04_3-1619882380-jpg.webp",
-      "/media/products/plato-de-pizza-personalizado-turin-27-cms/34_harmonia-principal-1606665579-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su logo][en formato pdf, jpg o png][][0][6]",
     "options": [
@@ -14897,8 +14397,7 @@
       "/media/products/plato-de-pizza-personalizado-turin-27-cms/26_transparent.png",
       "/media/products/plato-de-pizza-personalizado-turin-27-cms/29_plato-pizza-personalizado-turin-1619882344.jpg",
       "/media/products/plato-de-pizza-personalizado-turin-27-cms/34_harmonia-principal-1606665579-jpg.thumb"
-    ],
-    "image": "/media/products/plato-de-pizza-personalizado-turin-27-cms/01_plato-pizza-personalizado-turin-1619882344-jpg.webp"
+    ]
   },
   {
     "id": "8523692",
@@ -14998,8 +14497,7 @@
       "/media/products/plato-de-pizza-personalizado-siena-30-5-cms/26_transparent.png",
       "/media/products/plato-de-pizza-personalizado-siena-30-5-cms/29_plato-pizza-siena-1619884733.jpg",
       "/media/products/plato-de-pizza-personalizado-siena-30-5-cms/34_capricon-fond-1606741339-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8524086",
@@ -15033,13 +14531,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/plato-llano-personalizado-25-ph5/01_vajilla-personalizada-mod-ph5-1619944744-jpg.webp",
-      "/media/products/plato-llano-personalizado-25-ph5/02_bajoplato-personalizado-35-ph5-1619944969-jpg.webp",
-      "/media/products/plato-llano-personalizado-25-ph5/03_calidad-personalizacion-vajilla-1619944761-jpg.webp",
-      "/media/products/plato-llano-personalizado-25-ph5/04_8-1619944978-jpg.webp",
-      "/media/products/plato-llano-personalizado-25-ph5/34_ejemplo-mantelin-35cms-ancho50cmslargo-impreso-en-.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -15111,8 +14603,7 @@
       "/media/products/plato-llano-personalizado-25-ph5/26_transparent.png",
       "/media/products/plato-llano-personalizado-25-ph5/29_vajilla-personalizada-mod-ph5-1619944744.jpg",
       "/media/products/plato-llano-personalizado-25-ph5/34_ejemplo-mantelin-35cms-ancho50cmslargo-impreso-en-.thumb"
-    ],
-    "image": "/media/products/plato-llano-personalizado-25-ph5/01_vajilla-personalizada-mod-ph5-1619944744-jpg.webp"
+    ]
   },
   {
     "id": "8524089",
@@ -15146,13 +14637,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/plato-llano-personalizado-31-ph5/01_8-1619945221-jpg.webp",
-      "/media/products/plato-llano-personalizado-31-ph5/02_bajoplato-personalizado-35-ph5-1619945225-jpg.webp",
-      "/media/products/plato-llano-personalizado-31-ph5/03_calidad-personalizacion-vajilla-1619945237-jpg.webp",
-      "/media/products/plato-llano-personalizado-31-ph5/04_tazas-y-platillos-personalizados-ph5-1619945257-jp.webp",
-      "/media/products/plato-llano-personalizado-31-ph5/34_copa-gin-tonic-personalizada-allegra-1610885807-jp.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -15224,8 +14709,7 @@
       "/media/products/plato-llano-personalizado-31-ph5/26_transparent.png",
       "/media/products/plato-llano-personalizado-31-ph5/29_8-1619945221.jpg",
       "/media/products/plato-llano-personalizado-31-ph5/34_copa-gin-tonic-personalizada-allegra-1610885807-jp.thumb"
-    ],
-    "image": "/media/products/plato-llano-personalizado-31-ph5/01_8-1619945221-jpg.webp"
+    ]
   },
   {
     "id": "8524091",
@@ -15285,8 +14769,7 @@
       "/media/products/plato-de-presentacion-personalizado-35-ph5/26_transparent.png",
       "/media/products/plato-de-presentacion-personalizado-35-ph5/29_7-1619945777.jpg",
       "/media/products/plato-de-presentacion-personalizado-35-ph5/34_copa-cava-personalizada-allegra-1610534082-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8524092",
@@ -15330,13 +14813,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0.01,
-    "imagesSource": [
-      "/media/products/fuente-de-presentacion-personalizada-36-cms-ph5/01_fuente-personalizada-ph5-36-1619946314-jpg.webp",
-      "/media/products/fuente-de-presentacion-personalizada-36-cms-ph5/02_fuente-personalizada-ph5-36-2-1619946320-jpg.webp",
-      "/media/products/fuente-de-presentacion-personalizada-36-cms-ph5/03_mod-ph5-wing-2-1619946328-jpg.webp",
-      "/media/products/fuente-de-presentacion-personalizada-36-cms-ph5/04_calidad-personalizacion-vajilla-1619946333-jpg.webp",
-      "/media/products/fuente-de-presentacion-personalizada-36-cms-ph5/34_magnum-130-1580490498-png.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [],
@@ -15362,8 +14839,7 @@
       "/media/products/fuente-de-presentacion-personalizada-36-cms-ph5/26_transparent.png",
       "/media/products/fuente-de-presentacion-personalizada-36-cms-ph5/29_fuente-personalizada-ph5-36-1619946314.jpg",
       "/media/products/fuente-de-presentacion-personalizada-36-cms-ph5/34_magnum-130-1580490498-png.thumb"
-    ],
-    "image": "/media/products/fuente-de-presentacion-personalizada-36-cms-ph5/01_fuente-personalizada-ph5-36-1619946314-jpg.webp"
+    ]
   },
   {
     "id": "8524097",
@@ -15403,13 +14879,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0.01,
-    "imagesSource": [
-      "/media/products/fuente-de-presentacion-personalizada-40-cms-ph5/01_bajoplato-personalizado-35-ph5-1619948339-jpg.webp",
-      "/media/products/fuente-de-presentacion-personalizada-40-cms-ph5/02_plato-llano-personalizado-31-2-1619948346-jpg.webp",
-      "/media/products/fuente-de-presentacion-personalizada-40-cms-ph5/03_calidad-personalizacion-vajilla-1619948353-jpg.webp",
-      "/media/products/fuente-de-presentacion-personalizada-40-cms-ph5/04_mod-ph5-wing-2-1619948369-jpg.webp",
-      "/media/products/fuente-de-presentacion-personalizada-40-cms-ph5/34_categoria-vajilla-ph1-1615129263-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [],
@@ -15435,8 +14905,7 @@
       "/media/products/fuente-de-presentacion-personalizada-40-cms-ph5/26_transparent.png",
       "/media/products/fuente-de-presentacion-personalizada-40-cms-ph5/29_bajoplato-personalizado-35-ph5-1619948339.jpg",
       "/media/products/fuente-de-presentacion-personalizada-40-cms-ph5/34_categoria-vajilla-ph1-1615129263-jpg.thumb"
-    ],
-    "image": "/media/products/fuente-de-presentacion-personalizada-40-cms-ph5/01_bajoplato-personalizado-35-ph5-1619948339-jpg.webp"
+    ]
   },
   {
     "id": "8524100",
@@ -15474,13 +14943,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0.01,
-    "imagesSource": [
-      "/media/products/plato-hondo-personalizado-25-ph5/01_7-1619948907-jpg.webp",
-      "/media/products/plato-hondo-personalizado-25-ph5/02_vajilla-personalizada-mod-ph5-1619948927-jpg.webp",
-      "/media/products/plato-hondo-personalizado-25-ph5/03_calidad-personalizacion-vajilla-1619948931-jpg.webp",
-      "/media/products/plato-hondo-personalizado-25-ph5/04_ensaladera-personalizada-15-ph5-1619948940-jpg.webp",
-      "/media/products/plato-hondo-personalizado-25-ph5/34_personalizacion-miniservice-1698137093-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [],
@@ -15506,8 +14969,7 @@
       "/media/products/plato-hondo-personalizado-25-ph5/26_transparent.png",
       "/media/products/plato-hondo-personalizado-25-ph5/29_7-1619948907.jpg",
       "/media/products/plato-hondo-personalizado-25-ph5/34_personalizacion-miniservice-1698137093-jpg.thumb"
-    ],
-    "image": "/media/products/plato-hondo-personalizado-25-ph5/01_7-1619948907-jpg.webp"
+    ]
   },
   {
     "id": "8524106",
@@ -15551,13 +15013,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0.01,
-    "imagesSource": [
-      "/media/products/ensaladera-personalizada-18-cms-ph5/01_ensaladeras-personalizadas-ph5-1619950198-jpg.webp",
-      "/media/products/ensaladera-personalizada-18-cms-ph5/02_ensaladera-personalizada-18-ph-1619950176-jpg.webp",
-      "/media/products/ensaladera-personalizada-18-cms-ph5/03_ensaladera-personalizada-23-cms-ph5-1619950193-jpg.webp",
-      "/media/products/ensaladera-personalizada-18-cms-ph5/04_calidad-personalizacion-vajilla-1619950202-jpg.webp",
-      "/media/products/ensaladera-personalizada-18-cms-ph5/34_tazay-platillo-personalizados-ischia-1611430321-pn.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [],
@@ -15583,8 +15039,7 @@
       "/media/products/ensaladera-personalizada-18-cms-ph5/26_transparent.png",
       "/media/products/ensaladera-personalizada-18-cms-ph5/29_ensaladeras-personalizadas-ph5-1619950198.jpg",
       "/media/products/ensaladera-personalizada-18-cms-ph5/34_tazay-platillo-personalizados-ischia-1611430321-pn.thumb"
-    ],
-    "image": "/media/products/ensaladera-personalizada-18-cms-ph5/01_ensaladeras-personalizadas-ph5-1619950198-jpg.webp"
+    ]
   },
   {
     "id": "8524107",
@@ -15628,13 +15083,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0.01,
-    "imagesSource": [
-      "/media/products/ensaladera-personalizada-23-cms-ph5/01_ensaladera-personalizada-23-cms-ph5-1619950877-jpg.webp",
-      "/media/products/ensaladera-personalizada-23-cms-ph5/02_ensaladeras-personalizadas-ph5-1619950882-jpg.webp",
-      "/media/products/ensaladera-personalizada-23-cms-ph5/03_calidad-personalizacion-vajilla-1619950891-jpg.webp",
-      "/media/products/ensaladera-personalizada-23-cms-ph5/04_ensaladera-personalizada-18-ph-1619950888-jpg.webp",
-      "/media/products/ensaladera-personalizada-23-cms-ph5/34_vaso-de-cerveza-personalizado-nonix-29-1612703110-.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [],
@@ -15660,8 +15109,7 @@
       "/media/products/ensaladera-personalizada-23-cms-ph5/26_transparent.png",
       "/media/products/ensaladera-personalizada-23-cms-ph5/29_ensaladera-personalizada-23-cms-ph5-1619950877.jpg",
       "/media/products/ensaladera-personalizada-23-cms-ph5/34_vaso-de-cerveza-personalizado-nonix-29-1612703110-.thumb"
-    ],
-    "image": "/media/products/ensaladera-personalizada-23-cms-ph5/01_ensaladera-personalizada-23-cms-ph5-1619950877-jpg.webp"
+    ]
   },
   {
     "id": "8524225",
@@ -15728,8 +15176,7 @@
       "/media/products/taza-20-cl-personalizada-a-1-color-mod-ph5/26_transparent.png",
       "/media/products/taza-20-cl-personalizada-a-1-color-mod-ph5/29_taza-personalizada-20-cl-ph5-1619955587.jpg",
       "/media/products/taza-20-cl-personalizada-a-1-color-mod-ph5/34_cabernete-1606642017-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8524227",
@@ -15796,8 +15243,7 @@
       "/media/products/taza-y-platillo-personalizada-para-10-cl-a-1-color-mod-ph5/26_transparent.png",
       "/media/products/taza-y-platillo-personalizada-para-10-cl-a-1-color-mod-ph5/29_taza-personalizada-10-cl-ph5-1619956431.jpg",
       "/media/products/taza-y-platillo-personalizada-para-10-cl-a-1-color-mod-ph5/34_copas-de-vino-personalizadas-classic-1610996309-jp.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8532267",
@@ -15846,13 +15292,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-vino-personalizada-refine-61-cl/01_copa-de-vino-personalizada-refine-1620229375-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-refine-61-cl/02_copa-de-vino-personalizada-refine-61-1620229369-jp.webp",
-      "/media/products/copa-de-vino-personalizada-refine-61-cl/03_calidad-grabado-1620229361-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-refine-61-cl/04_copa-de-vino-personalizada-refine-44-1620229366-jp.webp",
-      "/media/products/copa-de-vino-personalizada-refine-61-cl/34_principe-1607691048-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su logo][][][0][6]|[Qué medida óptima desea ][125 cl. (6 copas por botella) ó 150 cl. (5 copas por botella)][][0][1]",
     "options": [
@@ -15915,8 +15355,7 @@
       "/media/products/copa-de-vino-personalizada-refine-61-cl/26_transparent.png",
       "/media/products/copa-de-vino-personalizada-refine-61-cl/29_copa-de-vino-personalizada-refine-1620229375.jpg",
       "/media/products/copa-de-vino-personalizada-refine-61-cl/34_principe-1607691048-jpg.thumb"
-    ],
-    "image": "/media/products/copa-de-vino-personalizada-refine-61-cl/01_copa-de-vino-personalizada-refine-1620229375-jpg.webp"
+    ]
   },
   {
     "id": "8532278",
@@ -15965,13 +15404,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-vino-personalizada-refine-44-cl/01_copa-personalizada-de-vino-refine-1620229933-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-refine-44-cl/02_copa-de-vino-personalizada-refine-44-1620229938-jp.webp",
-      "/media/products/copa-de-vino-personalizada-refine-44-cl/03_copa-personalizada-de-vino-refine-62-5-1620229944-.webp",
-      "/media/products/copa-de-vino-personalizada-refine-44-cl/04_calidad-grabado-1620229949-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-refine-44-cl/34_magnum-130-1580490498-png.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su logo][][][0][6]|[Qué medida óptima desea ][125 cl. (6 copas por botella) ó 150 cl. (5 copas por botella)][][0][1]",
     "options": [
@@ -16034,8 +15467,7 @@
       "/media/products/copa-de-vino-personalizada-refine-44-cl/26_transparent.png",
       "/media/products/copa-de-vino-personalizada-refine-44-cl/29_copa-personalizada-de-vino-refine-1620229933.jpg",
       "/media/products/copa-de-vino-personalizada-refine-44-cl/34_magnum-130-1580490498-png.thumb"
-    ],
-    "image": "/media/products/copa-de-vino-personalizada-refine-44-cl/01_copa-personalizada-de-vino-refine-1620229933-jpg.webp"
+    ]
   },
   {
     "id": "8532285",
@@ -16147,8 +15579,7 @@
       "/media/products/copa-de-vino-personalizada-refine-62-5-cl/26_transparent.png",
       "/media/products/copa-de-vino-personalizada-refine-62-5-cl/29_refine-1-1620230591.jpg",
       "/media/products/copa-de-vino-personalizada-refine-62-5-cl/34_copas-gin-tonic-persoanalizadas-ambassador-1610889.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8534091",
@@ -16179,8 +15610,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[ADJUNTA AQUÍ TU LOGO][en formato pdf, png o jpg][0.0000][0][6]|[LOGO MáS DE 45 MM*45MM][QUIERO INFORMACIÓN PARA LOGO SUPERIOR A 45 MM*45MM][][0][5]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "8534096",
@@ -16211,8 +15641,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[ADJUNTA AQUÍ TU LOGO][en formato pdf, png o jpg][0.0000][0][6]|[LOGO MáS DE 45 MM*45MM][QUIERO INFORMACIÓN PARA LOGO SUPERIOR A 45 MM*45MM][][0][5]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "8534804",
@@ -16240,12 +15669,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-personalizada-vino-albariza-47/01_copa-albariza-47-personalizada-1620303512-jpg.webp",
-      "/media/products/copa-personalizada-vino-albariza-47/02_copa-personalizada-vino-albariza-47-1620303520-jpg.webp",
-      "/media/products/copa-personalizada-vino-albariza-47/03_copa-albariza-fabricacion-1620303542-jpg.webp",
-      "/media/products/copa-personalizada-vino-albariza-47/04_copa-albariza-caracteristicas-1620303547-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[ADJUNTA AQUÍ TU LOGO][en formato pdf, png o jpg][0.0000][0][6]|[LOGO MáS DE 45 MM*45MM][QUIERO INFORMACIÓN PARA LOGO SUPERIOR A 45 MM*45MM][][0][5]",
     "options": [
@@ -16308,8 +15732,7 @@
       "/media/products/copa-personalizada-vino-albariza-47/26_transparent.png",
       "/media/products/copa-personalizada-vino-albariza-47/29_copa-albariza-47-personalizada-1620303512.jpg",
       "/media/products/copa-personalizada-vino-albariza-47/34_default.jpg"
-    ],
-    "image": "/media/products/copa-personalizada-vino-albariza-47/01_copa-albariza-47-personalizada-1620303512-jpg.webp"
+    ]
   },
   {
     "id": "8534811",
@@ -16377,8 +15800,7 @@
         "discountValue": 0,
         "effectivePrice": 2.77
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8534817",
@@ -16406,12 +15828,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-personalizada-vino-degustacion-31/01_copa-degustacion-31-personalizada-1620304142-jpg.webp",
-      "/media/products/copa-personalizada-vino-degustacion-31/02_copa-personalizada-degustacion-31-1633607981-jpg.webp",
-      "/media/products/copa-personalizada-vino-degustacion-31/03_copa-albariza-caracteristicas-1620304178-jpg.webp",
-      "/media/products/copa-personalizada-vino-degustacion-31/04_copa-albariza-fabricacion-1620304191-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[ADJUNTA AQUÍ TU LOGO][en formato pdf, png o jpg][0.0000][0][6]|[LOGO MáS DE 45 MM*45MM][QUIERO INFORMACIÓN PARA LOGO SUPERIOR A 45 MM*45MM][][0][5]",
     "options": [],
@@ -16437,8 +15854,7 @@
       "/media/products/copa-personalizada-vino-degustacion-31/26_transparent.png",
       "/media/products/copa-personalizada-vino-degustacion-31/29_copa-degustacion-31-personalizada-1620304142.jpg",
       "/media/products/copa-personalizada-vino-degustacion-31/34_default.jpg"
-    ],
-    "image": "/media/products/copa-personalizada-vino-degustacion-31/01_copa-degustacion-31-personalizada-1620304142-jpg.webp"
+    ]
   },
   {
     "id": "8534818",
@@ -16506,8 +15922,7 @@
         "discountValue": 0,
         "effectivePrice": 2.52
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8535188",
@@ -16554,13 +15969,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-personalizada-allegra-49-cl/01_allegra1-1620324249-jpg.webp",
-      "/media/products/copa-vino-personalizada-allegra-49-cl/02_allegra49-1653649681-jpg.webp",
-      "/media/products/copa-vino-personalizada-allegra-49-cl/03_copa-vino-personalizada-allegra-1620324259-jpg.webp",
-      "/media/products/copa-vino-personalizada-allegra-49-cl/04_copa-gin-tonic-personalizada-allegra-1620324301-jp.webp",
-      "/media/products/copa-vino-personalizada-allegra-49-cl/34_savoy1-1610794807-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -16623,8 +16032,7 @@
       "/media/products/copa-vino-personalizada-allegra-49-cl/26_transparent.png",
       "/media/products/copa-vino-personalizada-allegra-49-cl/29_allegra1-1620324249.jpg",
       "/media/products/copa-vino-personalizada-allegra-49-cl/34_savoy1-1610794807-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-personalizada-allegra-49-cl/01_allegra1-1620324249-jpg.webp"
+    ]
   },
   {
     "id": "8812921",
@@ -16735,8 +16143,7 @@
       "/media/products/copa-vino-schott-zwiesel-fenix-130/26_transparent.png",
       "/media/products/copa-vino-schott-zwiesel-fenix-130/29_schott-zwiesel-fenix-130-1632046968.jpg",
       "/media/products/copa-vino-schott-zwiesel-fenix-130/34_banquet-1632326428-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8812949",
@@ -16824,8 +16231,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8812955",
@@ -16873,13 +16279,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-schott-zwiesel-fenix-0-personalizada/01_fenix-0-1632047924-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-fenix-0-personalizada/02_fenix-0-medidas-1632047932-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-fenix-0-personalizada/03_calidad-cristal-grabado-1632047936-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-fenix-0-personalizada/04_marca-1632047944-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-fenix-0-personalizada/34_banquet-1632326428-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
     "options": [
@@ -16942,8 +16342,7 @@
       "/media/products/copa-vino-schott-zwiesel-fenix-0-personalizada/26_transparent.png",
       "/media/products/copa-vino-schott-zwiesel-fenix-0-personalizada/29_fenix-0-1632047924.jpg",
       "/media/products/copa-vino-schott-zwiesel-fenix-0-personalizada/34_banquet-1632326428-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-schott-zwiesel-fenix-0-personalizada/01_fenix-0-1632047924-jpg.webp"
+    ]
   },
   {
     "id": "8823999",
@@ -16991,13 +16390,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-schott-zwiesel-banquet-140-personalizada/01_banquet-1632326428-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-140-personalizada/02_banquet-140-1632160107-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-140-personalizada/03_calidad-cristal-grabado-1632160161-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-140-personalizada/04_marca-1632160193-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-140-personalizada/34_serie-banquet-1632160738-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
     "options": [
@@ -17051,8 +16444,7 @@
       "/media/products/copa-vino-schott-zwiesel-banquet-140-personalizada/26_transparent.png",
       "/media/products/copa-vino-schott-zwiesel-banquet-140-personalizada/29_banquet-1632326428.jpg",
       "/media/products/copa-vino-schott-zwiesel-banquet-140-personalizada/34_serie-banquet-1632160738-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-schott-zwiesel-banquet-140-personalizada/01_banquet-1632326428-jpg.webp"
+    ]
   },
   {
     "id": "8824011",
@@ -17100,13 +16492,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-schott-zwiesel-banquet-130-personalizada/01_serie-banquet-1632160738-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-130-personalizada/02_banquet-130-1632160731-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-130-personalizada/03_calidad-cristal-grabado-1632160742-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-130-personalizada/04_marca-1632160749-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-130-personalizada/34_banquet-1632326428-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
     "options": [
@@ -17160,8 +16546,7 @@
       "/media/products/copa-vino-schott-zwiesel-banquet-130-personalizada/26_transparent.png",
       "/media/products/copa-vino-schott-zwiesel-banquet-130-personalizada/29_serie-banquet-1632160738.jpg",
       "/media/products/copa-vino-schott-zwiesel-banquet-130-personalizada/34_banquet-1632326428-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-schott-zwiesel-banquet-130-personalizada/01_serie-banquet-1632160738-jpg.webp"
+    ]
   },
   {
     "id": "8824016",
@@ -17209,13 +16594,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-schott-zwiesel-banquet-1-personalizada/01_banquet-serie-1632160915-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-1-personalizada/02_banquet-1-1632160918-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-1-personalizada/03_calidad-cristal-grabado-1632160921-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-1-personalizada/04_marca-1632160924-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-banquet-1-personalizada/34_banquet-1632326428-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
     "options": [
@@ -17269,8 +16648,7 @@
       "/media/products/copa-vino-schott-zwiesel-banquet-1-personalizada/26_transparent.png",
       "/media/products/copa-vino-schott-zwiesel-banquet-1-personalizada/29_banquet-serie-1632160915.jpg",
       "/media/products/copa-vino-schott-zwiesel-banquet-1-personalizada/34_banquet-1632326428-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-schott-zwiesel-banquet-1-personalizada/01_banquet-serie-1632160915-jpg.webp"
+    ]
   },
   {
     "id": "8826773",
@@ -17318,13 +16696,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-schott-zwiesel-verbelle-140-personalizada/01_serie-verbelle-1632332646-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-verbelle-140-personalizada/02_verbelle-140-1632332649-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-verbelle-140-personalizada/03_calidad-cristal-grabado-1632332714-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-verbelle-140-personalizada/04_marca-1632332719-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-verbelle-140-personalizada/34_banquet-1632326428-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
     "options": [
@@ -17387,8 +16759,7 @@
       "/media/products/copa-vino-schott-zwiesel-verbelle-140-personalizada/26_transparent.png",
       "/media/products/copa-vino-schott-zwiesel-verbelle-140-personalizada/29_serie-verbelle-1632332646.jpg",
       "/media/products/copa-vino-schott-zwiesel-verbelle-140-personalizada/34_banquet-1632326428-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-schott-zwiesel-verbelle-140-personalizada/01_serie-verbelle-1632332646-jpg.webp"
+    ]
   },
   {
     "id": "8826785",
@@ -17436,13 +16807,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-schott-zwiesel-verbelle-130-personalizada/01_serie-verbelle-2-1632333200-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-verbelle-130-personalizada/02_verbelle-130-1632333205-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-verbelle-130-personalizada/03_calidad-cristal-grabado-1632333208-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-verbelle-130-personalizada/04_marca-1632333217-jpg.webp",
-      "/media/products/copa-vino-schott-zwiesel-verbelle-130-personalizada/34_banquet-1632326428-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
     "options": [
@@ -17505,8 +16870,7 @@
       "/media/products/copa-vino-schott-zwiesel-verbelle-130-personalizada/26_transparent.png",
       "/media/products/copa-vino-schott-zwiesel-verbelle-130-personalizada/29_serie-verbelle-2-1632333200.jpg",
       "/media/products/copa-vino-schott-zwiesel-verbelle-130-personalizada/34_banquet-1632326428-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-schott-zwiesel-verbelle-130-personalizada/01_serie-verbelle-2-1632333200-jpg.webp"
+    ]
   },
   {
     "id": "8826811",
@@ -17584,8 +16948,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8827097",
@@ -17658,8 +17021,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8827100",
@@ -17738,8 +17100,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8827101",
@@ -17818,8 +17179,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8861420",
@@ -17898,8 +17258,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8861425",
@@ -18001,8 +17360,7 @@
       "/media/products/copa-vino-schott-zwiesel-personalizada-ivento-130/26_transparent.png",
       "/media/products/copa-vino-schott-zwiesel-personalizada-ivento-130/29_ivento-serie-1633335810.jpg",
       "/media/products/copa-vino-schott-zwiesel-personalizada-ivento-130/34_banquet-1632326428-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "8861428",
@@ -18081,8 +17439,7 @@
         "discountValue": 0,
         "effectivePrice": 0
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "9165534",
@@ -18130,8 +17487,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjúntenos su logo vectorizado][][][0][1]|[Debajo tiene un enlace a presupuestos][En la parte inferior podr rellenar la petición de presupuesto][][0][2]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "9167127",
@@ -18179,8 +17535,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjúntenos su logo vectorizado][][][0][1]|[Debajo tiene un enlace a presupuestos][En la parte inferior podr rellenar la petición de presupuesto][][0][2]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "9170386",
@@ -18228,8 +17583,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjúntenos su logo vectorizado][][][0][1]|[Debajo tiene un enlace a presupuestos][En la parte inferior podr rellenar la petición de presupuesto][][0][2]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "9170440",
@@ -18277,8 +17631,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjúntenos su logo vectorizado][][][0][1]|[Debajo tiene un enlace a presupuestos][En la parte inferior podr rellenar la petición de presupuesto][][0][2]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "9170484",
@@ -18319,8 +17672,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjúntenos su logo vectorizado][][][0][1]|[Debajo tiene un enlace a presupuestos][En la parte inferior podr rellenar la petición de presupuesto][][0][2]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "9170489",
@@ -18361,8 +17713,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjúntenos su logo vectorizado][][][0][1]|[Debajo tiene un enlace a presupuestos][En la parte inferior podr rellenar la petición de presupuesto][][0][2]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "9428477",
@@ -18413,8 +17764,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "9428497",
@@ -18465,8 +17815,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "9682022",
@@ -18564,8 +17913,7 @@
         "discountValue": 0,
         "effectivePrice": 0.001
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "9903227",
@@ -18677,8 +18025,7 @@
         "discountValue": 0,
         "effectivePrice": 0.001
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "9903457",
@@ -18799,8 +18146,7 @@
         "discountValue": 0,
         "effectivePrice": 0.001
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "9918545",
@@ -18935,8 +18281,7 @@
       "/media/products/vajilla-personalizada-de-porcelana-mod-ph-7/26_transparent.png",
       "/media/products/vajilla-personalizada-de-porcelana-mod-ph-7/29_categoria-ph-6-1652699748.jpg",
       "/media/products/vajilla-personalizada-de-porcelana-mod-ph-7/34_magnum-130-1580490498-png.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "10163856",
@@ -18987,8 +18332,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "10164383",
@@ -19039,8 +18383,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "10189089",
@@ -19094,13 +18437,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-vino-personalizada-mod-ph-44/01_mod-ph-44-1675537373-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-mod-ph-44/02_mod-ph44-44-cl-1661420427-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-mod-ph-44/03_mod-ph44-35-cl-1661420427-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-mod-ph-44/04_calidad-cristal-grabado-1661420406-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-mod-ph-44/34_ph42-laser-1714818126-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte logo o personalización][archivo jpg, png, pdf][][0][6]|[¨Quiere medida de servir, de cu ntas copas por botella?][5, 6, sin medida][][0][1]",
     "options": [
@@ -19154,8 +18491,7 @@
       "/media/products/copa-de-vino-personalizada-mod-ph-44/26_transparent.png",
       "/media/products/copa-de-vino-personalizada-mod-ph-44/29_mod-ph-44-1675537373.jpg",
       "/media/products/copa-de-vino-personalizada-mod-ph-44/34_ph42-laser-1714818126-jpg.thumb"
-    ],
-    "image": "/media/products/copa-de-vino-personalizada-mod-ph-44/01_mod-ph-44-1675537373-jpg.webp"
+    ]
   },
   {
     "id": "10189438",
@@ -19209,12 +18545,7 @@
     "marketingLabelDate": "",
     "cost": 1.05,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-vino-personalizada-mod-ph-42/01_ph42-laser-1714818126-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-mod-ph-42/02_ph42-1714818127-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-mod-ph-42/03_sistema-de-personalizacion-1714818127-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-mod-ph-42/04_mod-ph-42-1661428482-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte logo o personalización][archivo jpg, png, pdf][][0][6]|[¨Cu ntas copas quiere sacar por botella?][5 , 6, sin medida][][0][1]",
     "options": [
@@ -19304,8 +18635,7 @@
       "/media/products/copa-de-vino-personalizada-mod-ph-42/26_transparent.png",
       "/media/products/copa-de-vino-personalizada-mod-ph-42/29_ph42-laser-1714818126.jpg",
       "/media/products/copa-de-vino-personalizada-mod-ph-42/34_facebook-4.png"
-    ],
-    "image": "/media/products/copa-de-vino-personalizada-mod-ph-42/01_ph42-laser-1714818126-jpg.webp"
+    ]
   },
   {
     "id": "10381391",
@@ -19353,12 +18683,7 @@
     "marketingLabelDate": "",
     "cost": 2.5,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-personalizada-resistente-mod-c103/01_copa-mod-phc103-1668418203-jpg.webp",
-      "/media/products/copa-vino-personalizada-resistente-mod-c103/02_copa-vino-personalizada-mod-phc103-1668418203-jpg.webp",
-      "/media/products/copa-vino-personalizada-resistente-mod-c103/03_copa-cerveza-personalizada-44-mod-phc103-166841820.webp",
-      "/media/products/copa-vino-personalizada-resistente-mod-c103/04_calidad-de-grabado-1668418242-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
     "options": [],
@@ -19384,8 +18709,7 @@
       "/media/products/copa-vino-personalizada-resistente-mod-c103/26_transparent.png",
       "/media/products/copa-vino-personalizada-resistente-mod-c103/29_copa-mod-phc103-1668418203.jpg",
       "/media/products/copa-vino-personalizada-resistente-mod-c103/34_facebook-4.png"
-    ],
-    "image": "/media/products/copa-vino-personalizada-resistente-mod-c103/01_copa-mod-phc103-1668418203-jpg.webp"
+    ]
   },
   {
     "id": "10381402",
@@ -19436,8 +18760,7 @@
     "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
-    "options": [],
-    "image": "/placeholder.svg"
+    "options": []
   },
   {
     "id": "10381440",
@@ -19485,11 +18808,7 @@
     "marketingLabelDate": "",
     "cost": 1.5,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-grabada-y-personalizada-resistente-mod-c105/01_copas-vino-o-cerveza-personalizadas-phc105-1668423.webp",
-      "/media/products/copa-vino-grabada-y-personalizada-resistente-mod-c105/02_copa-personalizada-phc105-1668423346-jpg.webp",
-      "/media/products/copa-vino-grabada-y-personalizada-resistente-mod-c105/03_calidad-grabado-1668423346-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte su personalización][Logo o texto ][0.0000][0][1]",
     "options": [],
@@ -19515,8 +18834,7 @@
       "/media/products/copa-vino-grabada-y-personalizada-resistente-mod-c105/28_copas-vino-o-cerveza-personalizadas-phc105-1668423.jpg",
       "/media/products/copa-vino-grabada-y-personalizada-resistente-mod-c105/32_facebook-4.png",
       "/media/products/copa-vino-grabada-y-personalizada-resistente-mod-c105/33_instagram-4.png"
-    ],
-    "image": "/media/products/copa-vino-grabada-y-personalizada-resistente-mod-c105/01_copas-vino-o-cerveza-personalizadas-phc105-1668423.webp"
+    ]
   },
   {
     "id": "10440968",
@@ -19669,8 +18987,7 @@
       "/media/products/copa-de-vino-personalizada-mod-ph-46/26_transparent.png",
       "/media/products/copa-de-vino-personalizada-mod-ph-46/29_ph46-42-1670240349.jpg",
       "/media/products/copa-de-vino-personalizada-mod-ph-46/34_ph42-laser-1714818126-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "10446445",
@@ -19733,12 +19050,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-cerveza-personalizada-mod-ph47/01_copa-de-vino-ph46-1670572798-jpg.webp",
-      "/media/products/copa-de-cerveza-personalizada-mod-ph47/02_ph46-42-1670572802-jpg.webp",
-      "/media/products/copa-de-cerveza-personalizada-mod-ph47/03_4-1670572805-jpg.webp",
-      "/media/products/copa-de-cerveza-personalizada-mod-ph47/04_ph46-56-1670572813-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte logo o personalización][archivo jpg, png, pdf][][1][6]|[¨Cu ntas copas quiere sacar por botella?][5 , 6, sin medida][][1][1]",
     "options": [
@@ -19801,8 +19113,7 @@
       "/media/products/copa-de-cerveza-personalizada-mod-ph47/26_transparent.png",
       "/media/products/copa-de-cerveza-personalizada-mod-ph47/29_copa-de-vino-ph46-1670572798.jpg",
       "/media/products/copa-de-cerveza-personalizada-mod-ph47/34_facebook-4.png"
-    ],
-    "image": "/media/products/copa-de-cerveza-personalizada-mod-ph47/01_copa-de-vino-ph46-1670572798-jpg.webp"
+    ]
   },
   {
     "id": "10446447",
@@ -19918,8 +19229,7 @@
       "/media/products/servilleta-airlaid-pliegue-americano-o-1-8-3436-personalizada-qr/26_transparent.png",
       "/media/products/servilleta-airlaid-pliegue-americano-o-1-8-3436-personalizada-qr/29_servilleta-airlaid-personalizada-1670574582.jpg",
       "/media/products/servilleta-airlaid-pliegue-americano-o-1-8-3436-personalizada-qr/34_facebook-4.png"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "10502318",
@@ -19958,13 +19268,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/botella-de-agua-personalizada-phb75/01_botella-de-agua-personalizada-75-cl-1673095321-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb75/02_botella-agua-phb100-1673020013-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb75/03_calidad-grabado-1673020246-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb75/04_botella-de-agua-personalizada-33-cl-1673095315-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb75/34_1-1607938683-png.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Logo a personalizar][archivo en jpg, png o pdf][][0][6]",
     "options": [],
@@ -19990,8 +19294,7 @@
       "/media/products/botella-de-agua-personalizada-phb75/26_transparent.png",
       "/media/products/botella-de-agua-personalizada-phb75/29_botella-de-agua-personalizada-75-cl-1673095321.jpg",
       "/media/products/botella-de-agua-personalizada-phb75/34_1-1607938683-png.thumb"
-    ],
-    "image": "/media/products/botella-de-agua-personalizada-phb75/01_botella-de-agua-personalizada-75-cl-1673095321-jpg.webp"
+    ]
   },
   {
     "id": "10502397",
@@ -20030,13 +19333,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/botella-de-agua-personalizada-phb33/01_botella-de-agua-personalizada-33-cl-1673095294-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb33/02_botella-agua-phb100-1673020566-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb33/03_calidad-grabado-1673020548-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb33/04_botella-de-agua-personalizada-75-cl-1673095288-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb33/34_jarra-de-cerveza-personalizada-amberes-1610737582-.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Logo a personalizar][archivo en jpg, png o pdf][][0][6]",
     "options": [],
@@ -20062,8 +19359,7 @@
       "/media/products/botella-de-agua-personalizada-phb33/26_transparent.png",
       "/media/products/botella-de-agua-personalizada-phb33/29_botella-de-agua-personalizada-33-cl-1673095294.jpg",
       "/media/products/botella-de-agua-personalizada-phb33/34_jarra-de-cerveza-personalizada-amberes-1610737582-.thumb"
-    ],
-    "image": "/media/products/botella-de-agua-personalizada-phb33/01_botella-de-agua-personalizada-33-cl-1673095294-jpg.webp"
+    ]
   },
   {
     "id": "10502399",
@@ -20102,13 +19398,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0.0001,
-    "imagesSource": [
-      "/media/products/botella-de-agua-personalizada-phb100/01_botella-de-agua-personalizada-33-cl-1673095456-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb100/02_botella-de-agua-personalizada-75-cl-1673095460-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb100/03_botella-agua-phb100-1673095541-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb100/04_calidad-de-grabado-1673095686-jpg.webp",
-      "/media/products/botella-de-agua-personalizada-phb100/34_1-1607938683-png.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Logo a personalizar][archivo en jpg, png o pdf][][0][6]",
     "options": [],
@@ -20134,8 +19424,7 @@
       "/media/products/botella-de-agua-personalizada-phb100/26_transparent.png",
       "/media/products/botella-de-agua-personalizada-phb100/29_botella-de-agua-personalizada-33-cl-1673095456.jpg",
       "/media/products/botella-de-agua-personalizada-phb100/34_1-1607938683-png.thumb"
-    ],
-    "image": "/media/products/botella-de-agua-personalizada-phb100/01_botella-de-agua-personalizada-33-cl-1673095456-jpg.webp"
+    ]
   },
   {
     "id": "10502758",
@@ -20174,13 +19463,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0.0001,
-    "imagesSource": [
-      "/media/products/botella-de-agua-grabada-phb1200/01_botella-de-agua-personalizada-12-lt-1673174248-jpg.webp",
-      "/media/products/botella-de-agua-grabada-phb1200/02_calidad-de-grabado-1673174262-jpg.webp",
-      "/media/products/botella-de-agua-grabada-phb1200/30_jarra-de-cerveza-sintra-29-cl-1610043712-png.webp",
-      "/media/products/botella-de-agua-grabada-phb1200/31_mineral-45-cl-1606641559-jpg.webp",
-      "/media/products/botella-de-agua-grabada-phb1200/32_5-1612704446-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Logo a personalizar][archivo en jpg, png o pdf][][0][6]",
     "options": [],
@@ -20206,8 +19489,7 @@
       "/media/products/botella-de-agua-grabada-phb1200/30_jarra-de-cerveza-sintra-29-cl-1610043712-png.thumb",
       "/media/products/botella-de-agua-grabada-phb1200/31_mineral-45-cl-1606641559-jpg.thumb",
       "/media/products/botella-de-agua-grabada-phb1200/32_5-1612704446-jpg.thumb"
-    ],
-    "image": "/media/products/botella-de-agua-grabada-phb1200/01_botella-de-agua-personalizada-12-lt-1673174248-jpg.webp"
+    ]
   },
   {
     "id": "10502760",
@@ -20246,13 +19528,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/botella-de-agua-grabada-phb25/01_botella-de-agua-personalizada-25-cl-1673174862-jpg.webp",
-      "/media/products/botella-de-agua-grabada-phb25/02_calidad-de-grabado-1673174874-jpg.webp",
-      "/media/products/botella-de-agua-grabada-phb25/03_botella-de-agua-personalizada-1-lt-1673174888-jpg.webp",
-      "/media/products/botella-de-agua-grabada-phb25/04_botella-de-agua-personalizada-50-cl-1673174896-jpg.webp",
-      "/media/products/botella-de-agua-grabada-phb25/34_vina-1607420469-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Logo a personalizar][archivo en jpg, png o pdf][][0][6]",
     "options": [],
@@ -20278,8 +19554,7 @@
       "/media/products/botella-de-agua-grabada-phb25/26_transparent.png",
       "/media/products/botella-de-agua-grabada-phb25/29_botella-de-agua-personalizada-25-cl-1673174862.jpg",
       "/media/products/botella-de-agua-grabada-phb25/34_vina-1607420469-jpg.thumb"
-    ],
-    "image": "/media/products/botella-de-agua-grabada-phb25/01_botella-de-agua-personalizada-25-cl-1673174862-jpg.webp"
+    ]
   },
   {
     "id": "10502762",
@@ -20318,13 +19593,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/botella-de-agua-grabada-phb50/01_botella-de-agua-personalizada-50-cl-1673175038-jpg.webp",
-      "/media/products/botella-de-agua-grabada-phb50/02_calidad-de-grabado-1673175043-jpg.webp",
-      "/media/products/botella-de-agua-grabada-phb50/03_botella-de-agua-personalizada-1-lt-1673175052-jpg.webp",
-      "/media/products/botella-de-agua-grabada-phb50/04_botella-de-agua-personalizada-25-cl-1673175062-jpg.webp",
-      "/media/products/botella-de-agua-grabada-phb50/34_magnum-130-1580490498-png.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Logo a personalizar][archivo en jpg, png o pdf][][0][6]",
     "options": [],
@@ -20350,8 +19619,7 @@
       "/media/products/botella-de-agua-grabada-phb50/26_transparent.png",
       "/media/products/botella-de-agua-grabada-phb50/29_botella-de-agua-personalizada-50-cl-1673175038.jpg",
       "/media/products/botella-de-agua-grabada-phb50/34_magnum-130-1580490498-png.thumb"
-    ],
-    "image": "/media/products/botella-de-agua-grabada-phb50/01_botella-de-agua-personalizada-50-cl-1673175038-jpg.webp"
+    ]
   },
   {
     "id": "10502763",
@@ -20416,8 +19684,7 @@
       "/media/products/botella-de-agua-grabada-km0-phb100/26_transparent.png",
       "/media/products/botella-de-agua-grabada-km0-phb100/29_botellas-de-agua-personalizables-1673175194.jpg",
       "/media/products/botella-de-agua-grabada-km0-phb100/34_savoy1-1610794807-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "10514824",
@@ -20482,8 +19749,7 @@
       "/media/products/jarra-de-agua-km-0-personalizada/28_11-1673788180.jpg",
       "/media/products/jarra-de-agua-km-0-personalizada/32_reveal-up1-1606639607-jpg.thumb",
       "/media/products/jarra-de-agua-km-0-personalizada/33_mineral-45-cl-1606641559-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "10515222",
@@ -20581,8 +19847,7 @@
         "discountValue": 0,
         "effectivePrice": 0.001
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "10515234",
@@ -20680,8 +19945,7 @@
         "discountValue": 0,
         "effectivePrice": 0.001
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "10620240",
@@ -20779,8 +20043,7 @@
         "discountValue": 0,
         "effectivePrice": 0.001
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "10620241",
@@ -20878,8 +20141,7 @@
         "discountValue": 0,
         "effectivePrice": 0.001
       }
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "10681853",
@@ -20933,11 +20195,7 @@
     "marketingLabelDate": "",
     "cost": 1.12,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-vino-personalizada-mod-ph-57/01_copa-de-vino-ph57-50-cl-1706380888-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-mod-ph-57/02_ph-57-1682245495-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-mod-ph-57/03_4-1682242090-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte logo o personalización][archivo jpg, png, pdf][][1][6]|[¨Cu ntas copas quiere sacar por botella?][5 , 6, sin medida][][1][1]",
     "options": [
@@ -21009,8 +20267,7 @@
       "/media/products/copa-de-vino-personalizada-mod-ph-57/28_copa-de-vino-ph57-50-cl-1706380888.jpg",
       "/media/products/copa-de-vino-personalizada-mod-ph-57/32_facebook-4.png",
       "/media/products/copa-de-vino-personalizada-mod-ph-57/33_instagram-4.png"
-    ],
-    "image": "/media/products/copa-de-vino-personalizada-mod-ph-57/01_copa-de-vino-ph57-50-cl-1706380888-jpg.webp"
+    ]
   },
   {
     "id": "10681855",
@@ -21064,11 +20321,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-vino-personalizada-mod-ph47/01_ph46-56-1682243540-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-mod-ph47/02_4-1682243544-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-mod-ph47/30_ph42-laser-1714818126-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte logo o personalización][archivo jpg, png, pdf][][1][6]|[¨Cu ntas copas quiere sacar por botella?][5 , 6, sin medida][][1][1]",
     "options": [
@@ -21131,8 +20384,7 @@
       "/media/products/copa-de-vino-personalizada-mod-ph47/30_ph42-laser-1714818126-jpg.thumb",
       "/media/products/copa-de-vino-personalizada-mod-ph47/31_facebook-4.png",
       "/media/products/copa-de-vino-personalizada-mod-ph47/32_instagram-4.png"
-    ],
-    "image": "/media/products/copa-de-vino-personalizada-mod-ph47/01_ph46-56-1682243540-jpg.webp"
+    ]
   },
   {
     "id": "10681856",
@@ -21190,13 +20442,7 @@
     "marketingLabelDate": "",
     "cost": 1.76,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-personalizada-mod-ph85/01_modelo-ph85-1692461003-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph85/02_mod-ph85-1692461003-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph85/03_estandar-calidad-grabado-1692461007-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph85/32_principe-1607691048-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph85/33_vajilla-personalizada-mod-ph2-1615140716-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -21259,8 +20505,7 @@
       "/media/products/copa-vino-personalizada-mod-ph85/28_modelo-ph85-1692461003.jpg",
       "/media/products/copa-vino-personalizada-mod-ph85/32_principe-1607691048-jpg.thumb",
       "/media/products/copa-vino-personalizada-mod-ph85/33_vajilla-personalizada-mod-ph2-1615140716-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-personalizada-mod-ph85/01_modelo-ph85-1692461003-jpg.webp"
+    ]
   },
   {
     "id": "10854195",
@@ -21318,13 +20563,7 @@
     "marketingLabelDate": "",
     "cost": 2.88,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-personalizada-mod-ph100/01_ph100-1692462728-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph100/02_mod-ph100-1692462728-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph100/03_calidad-1692462728-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph100/32_personalizacion-miniservice-1698137093-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph100/33_3-1677231729-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -21387,8 +20626,7 @@
       "/media/products/copa-vino-personalizada-mod-ph100/28_ph100-1692462728.jpg",
       "/media/products/copa-vino-personalizada-mod-ph100/32_personalizacion-miniservice-1698137093-jpg.thumb",
       "/media/products/copa-vino-personalizada-mod-ph100/33_3-1677231729-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-personalizada-mod-ph100/01_ph100-1692462728-jpg.webp"
+    ]
   },
   {
     "id": "10921426",
@@ -21488,8 +20726,7 @@
       "/media/products/miniservice-impresion-total-1717/26_transparent.png",
       "/media/products/miniservice-impresion-total-1717/29_servilleta-miniservice-impresion-total-abierta-176.jpg",
       "/media/products/miniservice-impresion-total-1717/34_personalizacion-miniservice-1698137093-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "10922733",
@@ -21528,13 +20765,7 @@
     "marketingLabelDate": "",
     "cost": 31.71,
     "price": 0,
-    "imagesSource": [
-      "/media/products/servilleta-miniservice-personalizada-alterna/01_miniservice-impresa-alterna-fotomontaje-1698143055.webp",
-      "/media/products/servilleta-miniservice-personalizada-alterna/02_miniservice-impresa-alterna-opcion-blanca-o-eco-16.webp",
-      "/media/products/servilleta-miniservice-personalizada-alterna/03_miniservice-impresa-alterna-1698143055-jpg.webp",
-      "/media/products/servilleta-miniservice-personalizada-alterna/04_servilleta-miniservice-blanca-o-ecologica-16981430.webp",
-      "/media/products/servilleta-miniservice-personalizada-alterna/34_1-1607938683-png.webp"
-    ],
+    "imagesSource": [],
     "tags": [
       "servilleta-miniservice-impresion-alterna"
     ],
@@ -21599,8 +20830,7 @@
       "/media/products/servilleta-miniservice-personalizada-alterna/26_transparent.png",
       "/media/products/servilleta-miniservice-personalizada-alterna/29_miniservice-impresa-alterna-fotomontaje-1698143055.jpg",
       "/media/products/servilleta-miniservice-personalizada-alterna/34_1-1607938683-png.thumb"
-    ],
-    "image": "/media/products/servilleta-miniservice-personalizada-alterna/01_miniservice-impresa-alterna-fotomontaje-1698143055.webp"
+    ]
   },
   {
     "id": "10927454",
@@ -21650,13 +20880,7 @@
     "marketingLabelDate": "",
     "cost": 32.94,
     "price": 0,
-    "imagesSource": [
-      "/media/products/servilleta-2020-o-cocktail-impresa-en-su-totalidad/01_6-servilleta-cocktail-impresion-total-1698855903-j.webp",
-      "/media/products/servilleta-2020-o-cocktail-impresa-en-su-totalidad/02_4-servilleta-impresa-advertencias-de-grabado-16988.webp",
-      "/media/products/servilleta-2020-o-cocktail-impresa-en-su-totalidad/03_7-servilleta-20x20-impresa-un-color-1698856548-jpg.webp",
-      "/media/products/servilleta-2020-o-cocktail-impresa-en-su-totalidad/04_8-servilleta-impresa-blanca-o-eco-1698856556-jpg.webp",
-      "/media/products/servilleta-2020-o-cocktail-impresa-en-su-totalidad/34_personalizacion-miniservice-1698137093-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su personalizacion][archivo en jpg, png o pdf][][0][6]",
     "options": [
@@ -21692,8 +20916,7 @@
       "/media/products/servilleta-2020-o-cocktail-impresa-en-su-totalidad/26_transparent.png",
       "/media/products/servilleta-2020-o-cocktail-impresa-en-su-totalidad/29_6-servilleta-cocktail-impresion-total-1698855903.jpg",
       "/media/products/servilleta-2020-o-cocktail-impresa-en-su-totalidad/34_personalizacion-miniservice-1698137093-jpg.thumb"
-    ],
-    "image": "/media/products/servilleta-2020-o-cocktail-impresa-en-su-totalidad/01_6-servilleta-cocktail-impresion-total-1698855903-j.webp"
+    ]
   },
   {
     "id": "10927523",
@@ -21743,13 +20966,7 @@
     "marketingLabelDate": "",
     "cost": 32.94,
     "price": 0,
-    "imagesSource": [
-      "/media/products/servilleta-2020-o-cocktail-impresa-alterna/01_8-servilleta-impresa-blanca-o-eco-1698856685-jpg.webp",
-      "/media/products/servilleta-2020-o-cocktail-impresa-alterna/02_5-servilleta-cocktail-impresa-espacio-de-impresion.webp",
-      "/media/products/servilleta-2020-o-cocktail-impresa-alterna/03_2-servilleta-10-10-personalizada-en-servilletero-1.webp",
-      "/media/products/servilleta-2020-o-cocktail-impresa-alterna/04_4-servilleta-impresa-advertencias-de-grabado-16988.webp",
-      "/media/products/servilleta-2020-o-cocktail-impresa-alterna/34_personalizacion-miniservice-1698137093-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su personalizacion][archivo en jpg, png o pdf][][0][6]",
     "options": [
@@ -21794,8 +21011,7 @@
       "/media/products/servilleta-2020-o-cocktail-impresa-alterna/26_transparent.png",
       "/media/products/servilleta-2020-o-cocktail-impresa-alterna/29_8-servilleta-impresa-blanca-o-eco-1698856685.jpg",
       "/media/products/servilleta-2020-o-cocktail-impresa-alterna/34_personalizacion-miniservice-1698137093-jpg.thumb"
-    ],
-    "image": "/media/products/servilleta-2020-o-cocktail-impresa-alterna/01_8-servilleta-impresa-blanca-o-eco-1698856685-jpg.webp"
+    ]
   },
   {
     "id": "10927633",
@@ -21829,18 +21045,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/plato-llano-ph2-estilo-tradicional/01_plato-llano-ph2-1708257914-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/01_platos-llanos-ph2-17-21-24-1708257731-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/02_plato-llano-17-ph2-1708258255-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/02_plato-llano-27-cm-ph2-1708258272-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/03_plato-llano-21-ph2-1708258255-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/03_plato-llano-30-5-ph2-1708258272-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/04_plato-llano-24-ph2-1708258255-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/04_plato-llano-32-cm-ph2-1708258272-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/34_categoria-vajilla-ph1-1615129263-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/34_servilleta-canguro-personalizada-eco-1679681730-jp.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -21894,8 +21099,7 @@
       "/media/products/plato-llano-ph2-estilo-tradicional/26_transparent.png",
       "/media/products/plato-llano-ph2-estilo-tradicional/29_plato-llano-ph2-1708257914.jpg",
       "/media/products/plato-llano-ph2-estilo-tradicional/34_categoria-vajilla-ph1-1615129263-jpg.thumb"
-    ],
-    "image": "/media/products/plato-llano-ph2-estilo-tradicional/01_plato-llano-ph2-1708257914-jpg.webp"
+    ]
   },
   {
     "id": "10993975",
@@ -21929,18 +21133,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/plato-llano-ph2-estilo-tradicional/01_plato-llano-ph2-1708257914-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/01_platos-llanos-ph2-17-21-24-1708257731-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/02_plato-llano-17-ph2-1708258255-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/02_plato-llano-27-cm-ph2-1708258272-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/03_plato-llano-21-ph2-1708258255-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/03_plato-llano-30-5-ph2-1708258272-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/04_plato-llano-24-ph2-1708258255-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/04_plato-llano-32-cm-ph2-1708258272-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/34_categoria-vajilla-ph1-1615129263-jpg.webp",
-      "/media/products/plato-llano-ph2-estilo-tradicional/34_servilleta-canguro-personalizada-eco-1679681730-jp.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "",
     "options": [
@@ -21994,8 +21187,7 @@
       "/media/products/plato-llano-ph2-estilo-tradicional/26_transparent.png",
       "/media/products/plato-llano-ph2-estilo-tradicional/29_plato-llano-ph2-1708257914.jpg",
       "/media/products/plato-llano-ph2-estilo-tradicional/34_categoria-vajilla-ph1-1615129263-jpg.thumb"
-    ],
-    "image": "/media/products/plato-llano-ph2-estilo-tradicional/01_plato-llano-ph2-1708257914-jpg.webp"
+    ]
   },
   {
     "id": "11147514",
@@ -22053,13 +21245,7 @@
     "marketingLabelDate": "",
     "cost": 1.76,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-vino-personalizada-mod-ph58/01_copa-de-vino-ph58-1733942007-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph58/02_copa-de-vino-ph58-2-1733942007-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph58/03_copa-vino-ph58-con-medida-1733942007-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph58/04_sistema-personalizacion-phcom-1733942007-jpg.webp",
-      "/media/products/copa-vino-personalizada-mod-ph58/34_ph42-laser-1714818126-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[MUY IMPORTANTE: En el desplegable de precios se indican las cantidades mínimas y no es posible pedir menos cantidad aunque el programa se lo permita. Cuando realice el pedido recibir un email como acuse de recibo y nos pondremos en contacto con usted. ][Si la cantidad que usted desea no aparece en el desplegable y supera el mínimo anote como observación lo que desee.][][0][2]|[Añada un archivo de logo vectorizado][PDF, SVG, AI, vectorizado en cualquier caso][][0][1]",
     "options": [
@@ -22131,8 +21317,7 @@
       "/media/products/copa-vino-personalizada-mod-ph58/26_transparent.png",
       "/media/products/copa-vino-personalizada-mod-ph58/29_copa-de-vino-ph58-1733942007.jpg",
       "/media/products/copa-vino-personalizada-mod-ph58/34_ph42-laser-1714818126-jpg.thumb"
-    ],
-    "image": "/media/products/copa-vino-personalizada-mod-ph58/01_copa-de-vino-ph58-1733942007-jpg.webp"
+    ]
   },
   {
     "id": "11489802",
@@ -22167,13 +21352,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/platos-hosteleria-de-ala-estrecha-y-personalizados-con-su-logo/01_1-ph-bal1-ala-estrecha-1740223276-jpg.webp",
-      "/media/products/platos-hosteleria-de-ala-estrecha-y-personalizados-con-su-logo/02_7-ph-bal1-ala-estrecha-1740229078-jpg.webp",
-      "/media/products/platos-hosteleria-de-ala-estrecha-y-personalizados-con-su-logo/03_11-precios-vajilla-ph-bal1-2025-1740231924-jpg.webp",
-      "/media/products/platos-hosteleria-de-ala-estrecha-y-personalizados-con-su-logo/32_manteleria-personalizada-1-1610441370-jpg.webp",
-      "/media/products/platos-hosteleria-de-ala-estrecha-y-personalizados-con-su-logo/33_magnum-130-1580490498-png.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[logotipo o personalización][archivo vectorizado siempre][][0][1]",
     "options": [],
@@ -22199,8 +21378,7 @@
       "/media/products/platos-hosteleria-de-ala-estrecha-y-personalizados-con-su-logo/28_1-ph-bal1-ala-estrecha-1740223276.jpg",
       "/media/products/platos-hosteleria-de-ala-estrecha-y-personalizados-con-su-logo/32_manteleria-personalizada-1-1610441370-jpg.thumb",
       "/media/products/platos-hosteleria-de-ala-estrecha-y-personalizados-con-su-logo/33_magnum-130-1580490498-png.thumb"
-    ],
-    "image": "/media/products/platos-hosteleria-de-ala-estrecha-y-personalizados-con-su-logo/01_1-ph-bal1-ala-estrecha-1740223276-jpg.webp"
+    ]
   },
   {
     "id": "11490107",
@@ -22261,8 +21439,7 @@
       "/media/products/platos-hosteleria-personalizados-de-ala-ancha/26_transparent.png",
       "/media/products/platos-hosteleria-personalizados-de-ala-ancha/29_2-ph-bal2-1740302182.jpg",
       "/media/products/platos-hosteleria-personalizados-de-ala-ancha/34_manteleria-personalizada-1-1610441370-jpg.thumb"
-    ],
-    "image": "/placeholder.svg"
+    ]
   },
   {
     "id": "11490115",
@@ -22290,13 +21467,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/tazas-y-platillos-personalizados-de-hosteleria/01_3-ph-bal-tazas-1740303586-jpg.webp",
-      "/media/products/tazas-y-platillos-personalizados-de-hosteleria/02_precios-tazas-y-platillos-personalizados-ph-bal-17.webp",
-      "/media/products/tazas-y-platillos-personalizados-de-hosteleria/03_precios-taza-y-platillo-personalizado-ph-bal-17403.webp",
-      "/media/products/tazas-y-platillos-personalizados-de-hosteleria/32_categoria-vajilla-ph1-1615129263-jpg.webp",
-      "/media/products/tazas-y-platillos-personalizados-de-hosteleria/33_vajilla-personalizada-mod-ph2-1615140716-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[logotipo o personalización][][][0][1]",
     "options": [],
@@ -22322,8 +21493,7 @@
       "/media/products/tazas-y-platillos-personalizados-de-hosteleria/28_3-ph-bal-tazas-1740303586.jpg",
       "/media/products/tazas-y-platillos-personalizados-de-hosteleria/32_categoria-vajilla-ph1-1615129263-jpg.thumb",
       "/media/products/tazas-y-platillos-personalizados-de-hosteleria/33_vajilla-personalizada-mod-ph2-1615140716-jpg.thumb"
-    ],
-    "image": "/media/products/tazas-y-platillos-personalizados-de-hosteleria/01_3-ph-bal-tazas-1740303586-jpg.webp"
+    ]
   },
   {
     "id": "11530888",
@@ -22357,13 +21527,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-vino-personalizada-ph60/01_ph60-1747408712-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-ph60/02_ph60-travis-1747409516-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-ph60/03_ph60-y-ph40-travis-1747409516-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-ph60/32_savoy1-1610794807-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-ph60/33_vaso-de-cerveza-personalizado-nonix-29-1612703110-.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[logotipo o personalización][][][0][1]",
     "options": [],
@@ -22389,8 +21553,7 @@
       "/media/products/copa-de-vino-personalizada-ph60/28_ph60-1747408712.jpg",
       "/media/products/copa-de-vino-personalizada-ph60/32_savoy1-1610794807-jpg.thumb",
       "/media/products/copa-de-vino-personalizada-ph60/33_vaso-de-cerveza-personalizado-nonix-29-1612703110-.thumb"
-    ],
-    "image": "/media/products/copa-de-vino-personalizada-ph60/01_ph60-1747408712-jpg.webp"
+    ]
   },
   {
     "id": "11562943",
@@ -22425,13 +21588,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/vajilla-hosteleria-personalizada-mod-ph-can2/01_platos-llanos-medidas-mod-ph-can2-1753979986-jpg.webp",
-      "/media/products/vajilla-hosteleria-personalizada-mod-ph-can2/02_plato-hondo-medida-mod-ph-can2-1753087277-jpg.webp",
-      "/media/products/vajilla-hosteleria-personalizada-mod-ph-can2/03_tazas-y-platillos-mod-ph-can2-1753087292-jpg.webp",
-      "/media/products/vajilla-hosteleria-personalizada-mod-ph-can2/04_fuentes-con-medida-de-mod-ph-can2-1753978881-jpg.webp",
-      "/media/products/vajilla-hosteleria-personalizada-mod-ph-can2/34_1-ph-bal1-ala-estrecha-1740223276-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Archivo vectorizado][][][0][6]",
     "options": [
@@ -22548,8 +21705,7 @@
       "/media/products/vajilla-hosteleria-personalizada-mod-ph-can2/26_transparent.png",
       "/media/products/vajilla-hosteleria-personalizada-mod-ph-can2/29_platos-llanos-medidas-mod-ph-can2-1753979986.jpg",
       "/media/products/vajilla-hosteleria-personalizada-mod-ph-can2/34_1-ph-bal1-ala-estrecha-1740223276-jpg.thumb"
-    ],
-    "image": "/media/products/vajilla-hosteleria-personalizada-mod-ph-can2/01_platos-llanos-medidas-mod-ph-can2-1753979986-jpg.webp"
+    ]
   },
   {
     "id": "11570243",
@@ -22582,13 +21738,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copas-de-vino-sopladas-y-personalizadas/01_mod-ph-madehand1-1754498980-jpg.webp",
-      "/media/products/copas-de-vino-sopladas-y-personalizadas/02_ph-hm1-1754498980-jpg.webp",
-      "/media/products/copas-de-vino-sopladas-y-personalizadas/03_ph-hm2-1754498980-jpg.webp",
-      "/media/products/copas-de-vino-sopladas-y-personalizadas/04_ph-hm3-1754498993-jpg.webp",
-      "/media/products/copas-de-vino-sopladas-y-personalizadas/34_harmonia-principal-1606665579-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[Adjunte aquí su personalizacion][archivo vectorizado en lo posible][][0][6]",
     "options": [
@@ -22642,8 +21792,7 @@
       "/media/products/copas-de-vino-sopladas-y-personalizadas/26_transparent.png",
       "/media/products/copas-de-vino-sopladas-y-personalizadas/29_mod-ph-madehand1-1754498980.jpg",
       "/media/products/copas-de-vino-sopladas-y-personalizadas/34_harmonia-principal-1606665579-jpg.thumb"
-    ],
-    "image": "/media/products/copas-de-vino-sopladas-y-personalizadas/01_mod-ph-madehand1-1754498980-jpg.webp"
+    ]
   },
   {
     "id": "11570725",
@@ -22676,13 +21825,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copas-de-vino-sopladas-y-personalizadas-ph-madehand2/01_ph-hm5-1754557103-jpg.webp",
-      "/media/products/copas-de-vino-sopladas-y-personalizadas-ph-madehand2/02_ph-hm6-1754557103-jpg.webp",
-      "/media/products/copas-de-vino-sopladas-y-personalizadas-ph-madehand2/03_ph-hm7-1754558001-jpg.webp",
-      "/media/products/copas-de-vino-sopladas-y-personalizadas-ph-madehand2/04_ph-hm4-1754557103-jpg.webp",
-      "/media/products/copas-de-vino-sopladas-y-personalizadas-ph-madehand2/34_magnum-130-1580490498-png.webp"
-    ],
+    "imagesSource": [],
     "tags": [],
     "personalizationsRaw": "[logotipo o personalización][archivo vectorizado en lo posible][][0][6]",
     "options": [
@@ -22745,8 +21888,7 @@
       "/media/products/copas-de-vino-sopladas-y-personalizadas-ph-madehand2/26_transparent.png",
       "/media/products/copas-de-vino-sopladas-y-personalizadas-ph-madehand2/29_ph-hm5-1754557103.jpg",
       "/media/products/copas-de-vino-sopladas-y-personalizadas-ph-madehand2/34_magnum-130-1580490498-png.thumb"
-    ],
-    "image": "/media/products/copas-de-vino-sopladas-y-personalizadas-ph-madehand2/01_ph-hm5-1754557103-jpg.webp"
+    ]
   },
   {
     "id": "11641611",
@@ -22774,13 +21916,7 @@
     "marketingLabelDate": "",
     "cost": 0,
     "price": 0,
-    "imagesSource": [
-      "/media/products/copa-de-vino-personalizada-ph54-52-cl-el-modelo-estrategico-para-controlar-la-rentabilidad/01_copa-vino-ph54-personalizada-hosteleria-1762337791.webp",
-      "/media/products/copa-de-vino-personalizada-ph54-52-cl-el-modelo-estrategico-para-controlar-la-rentabilidad/02_copa-vino-ph54-alta-resistencia-grabada-laser-1762.webp",
-      "/media/products/copa-de-vino-personalizada-ph54-52-cl-el-modelo-estrategico-para-controlar-la-rentabilidad/03_detalle-grabado-logo-control-escandallo-1762337791.webp",
-      "/media/products/copa-de-vino-personalizada-ph54-52-cl-el-modelo-estrategico-para-controlar-la-rentabilidad/32_copia-de-enoteca-1607710335-jpg.webp",
-      "/media/products/copa-de-vino-personalizada-ph54-52-cl-el-modelo-estrategico-para-controlar-la-rentabilidad/33_copia-de-enoteca-1607709202-jpg.webp"
-    ],
+    "imagesSource": [],
     "tags": [
       "copa de vino personalizada hosteleria",
       "control escandallo vino",
@@ -22810,7 +21946,6 @@
       "/media/products/copa-de-vino-personalizada-ph54-52-cl-el-modelo-estrategico-para-controlar-la-rentabilidad/28_copa-vino-ph54-personalizada-hosteleria-1762337791.jpg",
       "/media/products/copa-de-vino-personalizada-ph54-52-cl-el-modelo-estrategico-para-controlar-la-rentabilidad/32_copia-de-enoteca-1607710335-jpg.thumb",
       "/media/products/copa-de-vino-personalizada-ph54-52-cl-el-modelo-estrategico-para-controlar-la-rentabilidad/33_copia-de-enoteca-1607709202-jpg.thumb"
-    ],
-    "image": "/media/products/copa-de-vino-personalizada-ph54-52-cl-el-modelo-estrategico-para-controlar-la-rentabilidad/01_copa-vino-ph54-personalizada-hosteleria-1762337791.webp"
+    ]
   }
 ]
