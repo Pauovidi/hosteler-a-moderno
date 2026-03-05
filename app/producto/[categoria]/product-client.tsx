@@ -12,7 +12,7 @@ import { ArrowLeft, FileText, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { Product, getAllProducts } from "@/lib/data/products";
+import { Product, getVisibleProducts } from "@/lib/data/products";
 
 interface ProductClientProps {
   product: Product;
@@ -40,7 +40,7 @@ export default function ProductClient({ product }: ProductClientProps) {
   const [personalizationValues, setPersonalizationValues] = useState<Record<string, any>>({});
 
   const otherProducts = useMemo(() => {
-  return getAllProducts()
+  return getVisibleProducts()
     .filter((p) => p.slug !== product.slug)   // o p.id !== product.id
     .slice(0, 8);
 }, [product.slug]);

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, FileText, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { Product, getAllProducts } from "@/lib/data/products";
+import { Product, getVisibleProducts } from "@/lib/data/products";
 
 interface ProductClientProps {
   product: Product;
@@ -24,7 +24,7 @@ function legacyProductHref(p: Product): string {
 
 export default function ProductClient({ product, categoria }: ProductClientProps) {
   // Get other products for "Related Products" section
-  const otherProducts = getAllProducts().filter((p) => p.slug !== categoria).slice(0, 8);
+  const otherProducts = getVisibleProducts().filter((p) => p.slug !== categoria).slice(0, 8);
 
   return (
     <div className="min-h-screen flex flex-col">
