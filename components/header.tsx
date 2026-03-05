@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 
 // IMPORTANT: Old-site (legacy) category URLs (we keep them for SEO)
 const navLinks = [
-  { name: "Productos", href: "/c415714-productos-personalizados.html" },
   { name: "Servilletas", href: "/c412083-servilletas-para-hosteleria-personalizadas.html" },
   { name: "Cristalería", href: "/c412080-cristaleria-personalizada-hosteleria.html" },
   { name: "Vajilla", href: "/c412082-vajilla-personalizada.html" },
@@ -46,7 +45,7 @@ export function Header() {
               <div key={link.name} className="relative group">
                 <Link
                   href={link.href}
-                  className="font-sans text-foreground/80 hover:text-foreground transition-colors text-lg tracking-wide"
+                  className="font-sans text-foreground/80 hover:text-foreground transition-colors text-base font-semibold tracking-wide"
                 >
                   {link.name}
                 </Link>
@@ -86,7 +85,7 @@ export function Header() {
                 <div key={link.name}>
                   <Link
                     href={link.href}
-                    className="font-sans text-foreground/80 hover:text-foreground transition-colors text-lg block py-2"
+                    className="font-sans text-foreground/80 hover:text-foreground transition-colors text-base font-semibold block py-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.name}

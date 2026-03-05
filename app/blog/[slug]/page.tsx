@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { getPost, getAllPosts } from "@/lib/data/blog";
+import { findPostFromBlogSegment, getAllPosts, getBlogPostHref } from "@/lib/data/blog";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
@@ -11,9 +11,14 @@ interface Props {
     params: Promise<{ slug: string }>;
 }
 
+function canonicalFromPath(path: string): string {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.personalizadoshosteleria.com";
+    return new URL(path, baseUrl).toString();
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
-    const post = getPost(slug);
+    const post = findPostFromBlogSegment(slug);
 
     if (!post) {
         return {
@@ -21,15 +26,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         };
     }
 
+    const canonicalPath = getBlogPostHref(post);
+
     return {
         title: post.title,
         description: post.excerpt,
+        alternates: {
+            canonical: canonicalFromPath(canonicalPath),
+        },
         openGraph: {
             type: "article",
             title: post.title,
             description: post.excerpt,
             publishedTime: post.publishedAt,
             authors: [post.authorName],
+            url: canonicalFromPath(canonicalPath),
         },
     };
 }
@@ -37,16 +48,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export async function generateStaticParams() {
     const posts = getAllPosts();
     return posts.map((post) => ({
-        slug: post.slug,
+        slug: getBlogPostHref(post).replace(/^\/blog\//, ""),
     }));
 }
 
 export default async function BlogPostPage({ params }: Props) {
     const { slug } = await params;
-    const post = getPost(slug);
+    const post = findPostFromBlogSegment(slug);
 
     if (!post) {
         notFound();
+    }
+
+    const canonicalPath = getBlogPostHref(post);
+    const currentPath = `/blog/${slug}`;
+
+    if (currentPath !== canonicalPath) {
+        permanentRedirect(canonicalPath);
     }
 
     return (
