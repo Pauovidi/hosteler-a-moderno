@@ -15,7 +15,8 @@
     "legacy:build:strict": "node scripts/legacy-urls.js --strict",
     "prebuild": "npm run data:build && npm run legacy:build",
     "fix:images": "node scripts/fix-images-from-export.js",
-    "blog:build": "node scripts/blog-migrate.js"
+    "blog:build": "node scripts/blog-migrate.js",
+    "visibility:apply": "node scripts/apply-visibility-from-csv.mjs"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
