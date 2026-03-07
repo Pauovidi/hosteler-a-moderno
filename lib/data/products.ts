@@ -80,6 +80,7 @@ export interface PersonalizationField {
 // SIMULATED DATABASE
 // Importing generated data from CSV migration (real import)
 import generatedProducts from './products.json';
+import visibilityProducts from './visibility-products.json';
 
 
 function fixCp850Controls(input: string): string {
@@ -248,6 +249,38 @@ export function getProduct(slug: string): Product | undefined {
 
 export function getAllProducts(): Product[] {
   return Object.values(products);
+}
+
+function buildVisibleProductIdSet(): Set<string> {
+  const allowedProductIds = Array.isArray((visibilityProducts as any).allowedProductIds)
+    ? (visibilityProducts as any).allowedProductIds
+    : [];
+  const hiddenProductIds = Array.isArray((visibilityProducts as any).hiddenProductIds)
+    ? (visibilityProducts as any).hiddenProductIds
+    : [];
+
+  const allowedSet = new Set(allowedProductIds.map((id: string) => String(id)));
+  const hiddenSet = new Set(hiddenProductIds.map((id: string) => String(id)));
+
+  const visibleSet = new Set<string>();
+  for (const id of allowedSet) {
+    if (!hiddenSet.has(id)) {
+      visibleSet.add(id);
+    }
+  }
+
+  return visibleSet;
+}
+
+const visibleProductIds = buildVisibleProductIdSet();
+
+export function isProductVisibleInListings(productId: string): boolean {
+  const id = String(productId || "");
+  return visibleProductIds.has(id);
+}
+
+export function getVisibleProducts(): Product[] {
+  return getAllProducts().filter((product) => isProductVisibleInListings(product.id));
 }
 
 export function getProductById(id: string): Product | undefined {

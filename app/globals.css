@@ -5,6 +5,8 @@
 
 /* Personalizados Hosteleria - Classic Elegant Theme */
 :root {
+  --font-body: 'Manrope', 'Arial', sans-serif;
+
   /* Classic light background - warm white */
   --background: oklch(0.98 0.005 85);
   --foreground: oklch(0.25 0.02 60);
@@ -69,7 +71,7 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-body), 'Arial', sans-serif;
+  --font-sans: var(--font-body), 'Manrope', 'Arial', sans-serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --font-display: 'Orbitron', 'Impact', sans-serif;
   --color-background: var(--background);

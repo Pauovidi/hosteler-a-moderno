@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllProducts, Product } from "@/lib/data/products";
+import { getVisibleProducts, Product } from "@/lib/data/products";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
@@ -45,7 +45,7 @@ export async function generateStaticParams() {
 
 export default async function CategoryPage({ params }: Props) {
   const { categoria } = await params;
-  const products = getAllProducts();
+  const products = getVisibleProducts();
 
   // Logic to filter products
   // 1. Check exact alias match
