@@ -6,7 +6,6 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-// IMPORTANT: Old-site (legacy) category URLs (we keep them for SEO)
 const navLinks = [
   { name: "Servilletas", href: "/c412083-servilletas-para-hosteleria-personalizadas.html" },
   { name: "Cristalería", href: "/c412080-cristaleria-personalizada-hosteleria.html" },
@@ -22,24 +21,22 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Top bar */}
       <div className="bg-foreground text-background py-2 px-4 text-sm hidden md:block">
         <div className="container mx-auto flex justify-between items-center">
-          <span className="font-sans">Llámanos: +34 XXX XXX XXX</span>
+          <a href="tel:+34693039422" className="font-sans hover:underline">
+            Llámanos: 693 039 422
+          </a>
           <span className="font-sans">info@personalizadoshosteleria.com</span>
         </div>
       </div>
 
-      {/* Main nav */}
       <nav className="bg-white border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Personalizados Hosteleria">
             <img src="/logo-3.jpg" alt="Personalizados Hosteleria" className="h-12 w-auto" />
             <span className="sr-only">Personalizados Hosteleria</span>
           </Link>
 
-          {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <div key={link.name} className="relative group">
@@ -59,7 +56,6 @@ export function Header() {
             </Button>
           </Link>
 
-          {/* Mobile menu button */}
           <button
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -71,7 +67,6 @@ export function Header() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
