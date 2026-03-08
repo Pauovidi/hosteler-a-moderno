@@ -1,60 +1,59 @@
 # Capa de visibilidad por CSV (no destructiva)
 
-Este proyecto aplica reglas de visibilidad **solo en listados** para productos y posts.
+Este proyecto aplica reglas de visibilidad solo en listados para productos y posts.
 
 ## Archivos de entrada
 
-Coloca los CSV en estas rutas exactas:
+Usa estas rutas exactas:
 
 - `data/visibility/blog.csv`
-  - Separador: `,`
-  - Columnas usadas:
-    - `Páginas principales`
-    - `Acción`
 - `data/visibility/products.csv`
-  - Separador: `;`
-  - Columnas usadas:
-    - `ID`
-    - `QUITAR o eliminar`
 
-Si falta alguno de los CSV, el script falla con un mensaje claro.
+El script detecta automaticamente el separador (coma o punto y coma) y elimina BOM UTF-8 si existe.
 
-## Generar la visibilidad
+Columnas esperadas:
+
+- Blog: URL legacy (por ejemplo `Paginas principales`) y accion (por ejemplo `Accion`).
+- Productos: `ID` y opcionalmente `QUITAR o eliminar`.
+
+La deteccion de cabeceras es tolerante (aproximada, case-insensitive y sin acentos).
+
+## Generar visibilidad
 
 ```bash
 pnpm visibility:apply
 ```
 
-Esto genera:
+Genera:
 
 - `lib/data/visibility-blog.json`
 - `lib/data/visibility-products.json`
-- `out/visibility-report.json` (diagnóstico: conteos, ejemplos, IDs/slugs no encontrados)
+- `out/visibility-report.json` (diagnostico con conteos, columnas detectadas y filas problematicas)
 
 ## Reglas aplicadas
 
-### Blog (listados)
+### Blog (solo listado `/blog`)
 
-- Si `Acción` empieza por `ELIMINAR` (sin importar mayúsculas/minúsculas), se oculta en listados.
-- Se compara por `legacyUrl` cuando existe, y en fallback por slug derivado de la URL legacy.
+- Si `Accion` empieza por `ELIMINAR` (case-insensitive), se oculta en listados.
+- Coincidencia por `legacyUrl` si existe; fallback por pathname derivado de la URL legacy.
 
-### Productos (listados)
+### Productos (solo listados)
 
-- Se aplica **lista blanca**: solo se muestran IDs presentes en el CSV de productos.
-- Además, si `QUITAR o eliminar` es `X`/`x`, también se oculta.
+- Lista blanca: si un producto no esta en `products.csv`, se oculta en listados.
+- Si `QUITAR o eliminar` tiene `X`/`x`, tambien se oculta aunque este en la lista blanca.
 
-## Qué NO toca (SEO / detalle)
+## SEO y detalle
 
-- No se elimina contenido.
-- No se rompen URLs.
-- Las páginas de detalle de producto/post siguen accesibles por URL directa.
+- No se bloquea URL directa.
+- No se eliminan fichas de producto ni posts.
+- Solo cambia la visibilidad en listados.
 
-## Comprobación rápida
+## Como probar (flujo PR)
 
-1. Ejecuta `pnpm visibility:apply`.
-2. Ejecuta `pnpm build`.
-3. Revisa:
-   - `/blog`: no deben aparecer posts marcados como ELIMINAR.
-   - Listados de productos: solo IDs permitidos y no marcados con X.
-   - URL directa de producto oculto: debe cargar.
-   - URL directa de post oculto: debe cargar.
+1. Edita `data/visibility/blog.csv` y/o `data/visibility/products.csv`.
+2. Ejecuta `pnpm visibility:apply`.
+3. Ejecuta `pnpm build`.
+4. Verifica:
+   - `/blog` sin posts marcados para eliminar.
+   - Listados de productos/categorias solo con IDs permitidos y no marcados con `X`.
+   - URLs directas de detalle siguen accesibles.

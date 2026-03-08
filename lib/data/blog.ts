@@ -26,10 +26,10 @@ function legacySlugFromUrl(url: string): string {
   try {
     const parsed = new URL(value);
     const lastSegment = parsed.pathname.split("/").filter(Boolean).pop() || "";
-    return lastSegment.replace(/\.html?$/i, "").replace(/^p\d+-/i, "");
+    return lastSegment.replace(/\.html?$/i, "").replace(/^[pc]\\d+-/i, "");
   } catch {
     const lastSegment = value.split("/").filter(Boolean).pop() || "";
-    return lastSegment.replace(/\.html?$/i, "").replace(/^p\d+-/i, "");
+    return lastSegment.replace(/\.html?$/i, "").replace(/^[pc]\\d+-/i, "");
   }
 }
 

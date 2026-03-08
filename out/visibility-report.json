@@ -1,0 +1,91 @@
+{
+  "files": {
+    "blogCsv": "data\\visibility\\blog.csv",
+    "productsCsv": "data\\visibility\\products.csv",
+    "blogDelimiter": ",",
+    "productsDelimiter": ";"
+  },
+  "columnsDetected": {
+    "blog": {
+      "url": "Páginas principales",
+      "action": "Acción"
+    },
+    "products": {
+      "id": "ID",
+      "remove": "QUITAR o eliminar"
+    }
+  },
+  "counts": {
+    "blogHidden": 68,
+    "blogTotalRows": 120,
+    "productsAllowedCount": 209,
+    "productsHiddenCount": 16,
+    "problematicRows": 0
+  },
+  "examples": {
+    "hiddenLegacyUrls": [
+      "https://www.personalizadoshosteleria.com/blog/c3964-nuestros-posts.html",
+      "https://www.personalizadoshosteleria.com/blog/c4275-situacion-covid19.html",
+      "https://www.personalizadoshosteleria.com/blog/c4565-vajilla-personalizada.html",
+      "https://www.personalizadoshosteleria.com/blog/c4567-cuberteria-personalizada.html",
+      "https://www.personalizadoshosteleria.com/blog/c5629-servilletas-miniservice-hosteleria-publicidad.html"
+    ],
+    "allowedProductIds": [
+      "10189089",
+      "10189438",
+      "10381391",
+      "10381440",
+      "10440968"
+    ],
+    "hiddenProductIds": [
+      "7308708",
+      "7308723",
+      "7320954",
+      "7321018",
+      "7565483"
+    ]
+  },
+  "idsNotFound": {
+    "allowedNotFoundInCatalog": [
+      "7321014",
+      "7321018",
+      "7565483",
+      "7565573",
+      "7565615",
+      "7570950",
+      "7584376",
+      "7592109",
+      "7855125"
+    ],
+    "hiddenNotFoundInCatalog": [
+      "7321018",
+      "7565483",
+      "7565573",
+      "7565615",
+      "7570950",
+      "7584376",
+      "7592109",
+      "7855125"
+    ],
+    "hiddenBlogSlugsNotFound": [
+      "servilletas-un-mundo",
+      "personalizacion-en-copas-de-vino",
+      "copas-de-vino-grabadas-y-personalizadas",
+      "copas-de-vino-grabadas-y-personalizadas",
+      "copas-de-vino-grabadas-y-personalizadas",
+      "copas-de-vino-grabadas-y-personalizadas",
+      "nuevo-impax-en-la-hosteleria-pero-seguiremos",
+      "servilleteros-personalizados-y-servilletas",
+      "cuatro-subcategorias-de-copas-personalizadas",
+      "servilletas-de-hosteleria-el-mejor-modo-de-comprarlas",
+      "nueva-portada-personalizados-hosteleria",
+      "que-elegir-para-una-copa-de-vino-personalizada-%C2%BFvidrio-o-cristal",
+      "copas-de-vino-personalizadas-capitulo-1",
+      "copas-de-vino-personalizadas-cabernet",
+      "copas-de-vino-resistentes-y-personalizadas",
+      "prueba-palbin"
+    ]
+  },
+  "problematicRows": [],
+  "notes": []
+}
