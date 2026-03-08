@@ -1,0 +1,28 @@
+{
+  "counts": {
+    "blogRows": 120,
+    "blogHidden": 68,
+    "productsRows": 209,
+    "allowedProductIds": 209,
+    "hiddenProductIds": 16,
+    "emptyProductIds": 0,
+    "rareRows": 0
+  },
+  "delimiters": {
+    "blog": ",",
+    "products": ";"
+  },
+  "columns": {
+    "blog": {
+      "url": "Páginas principales",
+      "action": "Acción"
+    },
+    "products": {
+      "id": "ID",
+      "remove": "QUITAR o eliminar"
+    }
+  },
+  "emptyIdRows": [],
+  "rareRows": [],
+  "notes": []
+}
