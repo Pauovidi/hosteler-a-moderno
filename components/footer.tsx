@@ -13,11 +13,7 @@ const legalLinks = [
   { name: "Aviso Legal", href: "#" },
   { name: "Politica de Privacidad", href: "#" },
   { name: "Politica de Cookies", href: "#" },
-  {
-    name: "Devoluciones",
-    href: "http://personalizadoshosteleria.com/b24885-politica-de-empresa-sobre-devolucion-de-productos-personalizados.html",
-    external: true,
-  },
+  { name: "Devoluciones", href: "/devoluciones", external: false },
 ];
 
 const prefooterText = "Trabajamos básicamente productos de Hostelería, los personalizamos con su logo y todos nuestros precios llevan incluidos los gastos, incluso los de envío. Grabamos o personalizamos en CRISTAL: Copas de Vino, Copas de Cerveza, Jarras de Cerveza, Vasos de Cerveza, Copas de Gin Tonic o Combinados y otros elementos de cristal. También personalizamos : Mantelería Textil, Servilleteros de madera y diferentes elementos para lectura de Código QR de tu menú o presentación de establecimiento. Y por supuesto todo tipo de servilletas para hostelería, tanto en tissue, airlaid, en formato canguro y 1/8, además de Miniservice y Cocktail.";
@@ -55,26 +51,10 @@ function LinkedInIcon() {
 }
 
 const socialLinks = [
-  {
-    label: "YouTube",
-    href: "https://www.youtube.com/channel/UC23W16JZbkHXdK3gU_0R-MQ",
-    icon: YouTubeIcon,
-  },
-  {
-    label: "Facebook",
-    href: "https://www.facebook.com/personalizadoshosteleria",
-    icon: FacebookIcon,
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/?utm_source=pwa_homescreen",
-    icon: InstagramIcon,
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/personalizados-hosteler%C3%ADa-4239791a4/",
-    icon: LinkedInIcon,
-  },
+  { label: "YouTube", href: "https://www.youtube.com/channel/UC23W16JZbkHXdK3gU_0R-MQ", icon: YouTubeIcon },
+  { label: "Facebook", href: "https://www.facebook.com/personalizadoshosteleria", icon: FacebookIcon },
+  { label: "Instagram", href: "https://www.instagram.com/?utm_source=pwa_homescreen", icon: InstagramIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/personalizados-hosteler%C3%ADa-4239791a4/", icon: LinkedInIcon },
 ];
 
 export function Footer() {
@@ -144,14 +124,20 @@ export function Footer() {
               <ul className="space-y-3">
                 {legalLinks.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="text-background/70 hover:text-gold transition-colors"
-                      target={link.external ? "_blank" : undefined}
-                      rel={link.external ? "noopener noreferrer" : undefined}
-                    >
-                      {link.name}
-                    </a>
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        className="text-background/70 hover:text-gold transition-colors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {link.name}
+                      </a>
+                    ) : (
+                      <Link href={link.href} className="text-background/70 hover:text-gold transition-colors">
+                        {link.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

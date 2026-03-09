@@ -20,12 +20,11 @@ export function CTA() {
           </p>
 
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
-            Solicite su{" "}
-            <span className="text-gradient-gold">Presupuesto Personalizado</span>
+            Solicite su <span className="text-gradient-gold">Presupuesto Personalizado</span>
           </h2>
 
           <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
-            Contacte con nosotros para cualquier duda. Si no le atendemos en el momento, 
+            Contacte con nosotros para cualquier duda. Si no le atendemos en el momento,
             lo haremos antes de lo que supone. Asesoramiento sin compromiso.
           </p>
 
@@ -39,19 +38,19 @@ export function CTA() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <a href="tel:+34XXXXXXXXX">
+
+            <a href="tel:+34693039422">
               <Button
                 size="lg"
                 variant="outline"
                 className="border-2 border-gold text-foreground hover:bg-gold/10 font-display tracking-wider px-8 bg-transparent"
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
-                Llamar Ahora
+                Llamar ahora
               </Button>
             </a>
           </div>
 
-          {/* Contact hint */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -65,7 +64,6 @@ export function CTA() {
         </motion.div>
       </div>
 
-      {/* Background decoration - classic lines */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
     </section>
