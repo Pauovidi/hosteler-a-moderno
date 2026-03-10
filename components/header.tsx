@@ -101,19 +101,19 @@ export function Header() {
               return (
                 <div
                   key={item.label}
-                  className="relative"
+                  className="relative group"
                   onMouseEnter={() => setOpenDesktopMenu(item.label)}
-                  onMouseLeave={() => setOpenDesktopMenu(null)}
+                  onMouseLeave={() => setOpenDesktopMenu((prev) => (prev === item.label ? null : prev))}
+                  onKeyDown={(event) => {
+                    if (event.key === "Escape") {
+                      setOpenDesktopMenu(null);
+                    }
+                  }}
                 >
-                  <Link
-                    href={item.href}
+                  <button
+                    type="button"
                     className="inline-flex items-center gap-1 font-sans text-foreground/80 hover:text-foreground transition-colors text-sm font-semibold tracking-wide"
-                    onClick={(event) => {
-                      if (!isOpen) {
-                        event.preventDefault();
-                        setOpenDesktopMenu(item.label);
-                      }
-                    }}
+                    onClick={() => setOpenDesktopMenu((prev) => (prev === item.label ? null : item.label))}
                     onFocus={() => setOpenDesktopMenu(item.label)}
                     onKeyDown={(event) => {
                       if (event.key === "Enter" || event.key === " ") {
@@ -129,18 +129,13 @@ export function Header() {
                   >
                     {item.label}
                     <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
-                  </Link>
+                  </button>
 
-                  {isOpen ? (
-                    <div
-                      className="absolute left-0 top-full mt-2 min-w-[320px] rounded-md border border-border bg-white shadow-lg p-2"
-                      role="menu"
-                      onKeyDown={(event) => {
-                        if (event.key === "Escape") {
-                          setOpenDesktopMenu(null);
-                        }
-                      }}
-                    >
+                  <div
+                    className={`absolute left-0 top-full z-[80] pt-2 min-w-[320px] ${isOpen ? "block" : "hidden"} group-hover:block group-focus-within:block`}
+                    role="menu"
+                  >
+                    <div className="rounded-md border border-border bg-white shadow-lg p-2">
                       {item.children.map((child) => (
                         <Link
                           key={child.label}
@@ -153,7 +148,7 @@ export function Header() {
                         </Link>
                       ))}
                     </div>
-                  ) : null}
+                  </div>
                 </div>
               );
             })}
@@ -197,7 +192,35 @@ export function Header() {
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
               {MENU_CATEGORIES.map((item) => (
                 <div key={item.label} className="border-b border-border/60 pb-3">
-                  <div className="flex items-center justify-between gap-2">
+                  {item.children?.length ? (
+                    <>
+                      <button
+                        type="button"
+                        className="w-full flex items-center justify-between gap-2 font-sans text-foreground/80 hover:text-foreground transition-colors text-base font-semibold py-2"
+                        aria-label={`Desplegar ${item.label}`}
+                        aria-expanded={!!openMobileMenus[item.label]}
+                        onClick={() => toggleMobileMenu(item.label)}
+                      >
+                        <span>{item.label}</span>
+                        <ChevronDown className={`h-4 w-4 transition-transform ${openMobileMenus[item.label] ? "rotate-180" : ""}`} />
+                      </button>
+
+                      {openMobileMenus[item.label] ? (
+                        <div className="ml-3 mt-1 flex flex-col gap-1">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.label}
+                              href={child.href}
+                              className="text-sm text-foreground/70 hover:text-foreground py-1"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      ) : null}
+                    </>
+                  ) : (
                     <Link
                       href={item.href}
                       className="font-sans text-foreground/80 hover:text-foreground transition-colors text-base font-semibold block py-2"
@@ -205,34 +228,7 @@ export function Header() {
                     >
                       {item.label}
                     </Link>
-
-                    {item.children?.length ? (
-                      <button
-                        type="button"
-                        className="p-2 text-foreground/80"
-                        aria-label={`Desplegar ${item.label}`}
-                        aria-expanded={!!openMobileMenus[item.label]}
-                        onClick={() => toggleMobileMenu(item.label)}
-                      >
-                        <ChevronDown className={`h-4 w-4 transition-transform ${openMobileMenus[item.label] ? "rotate-180" : ""}`} />
-                      </button>
-                    ) : null}
-                  </div>
-
-                  {item.children?.length && openMobileMenus[item.label] ? (
-                    <div className="ml-3 mt-1 flex flex-col gap-1">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.label}
-                          href={child.href}
-                          className="text-sm text-foreground/70 hover:text-foreground py-1"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  ) : null}
+                  )}
                 </div>
               ))}
 
