@@ -15,35 +15,35 @@ type MenuItem = {
 const MENU_CATEGORIES: MenuItem[] = [
   {
     label: "Cristalería Personalizada",
-    href: "/cristaleria-personalizada/",
+    href: "/cristaleria-personalizada",
     children: [
-      { label: "Copas de Vino Personalizadas", href: "/copas-de-vino-personalizadas/" },
-      { label: "Cristalería Cerveza Personalizada", href: "/cristaleria-cerveza-personalizada/" },
-      { label: "Vasos Combinados Botellas Cava", href: "/vasos-combinados-botellas-cava/" },
+      { label: "Copas de Vino Personalizadas", href: "/copas-de-vino-personalizadas" },
+      { label: "Cristalería Cerveza Personalizada", href: "/cristaleria-cerveza-personalizada" },
+      { label: "Vasos Combinados Botellas Cava", href: "/vasos-combinados-botellas-cava" },
     ],
   },
   {
     label: "Vajilla Personalizada",
-    href: "/vajilla-personalizada/",
+    href: "/vajilla-personalizada",
     children: [
-      { label: "Tazas y Platillos Personalizados", href: "/tazas-y-platillos-personalizados/" },
-      { label: "Platos Personalizados", href: "/platos-personalizados/" },
-      { label: "Fuentes Ensaladeras Personalizadas", href: "/fuentes-ensaladeras-personalizadas/" },
-      { label: "Platos de Pizza Personalizados", href: "/platos-de-pizza-personalizados/" },
-      { label: "Manteles Caminos Personalizados", href: "/manteles-caminos-personalizados/" },
+      { label: "Tazas y Platillos Personalizados", href: "/tazas-y-platillos-personalizados" },
+      { label: "Platos Personalizados", href: "/platos-personalizados" },
+      { label: "Fuentes Ensaladeras Personalizadas", href: "/fuentes-ensaladeras-personalizadas" },
+      { label: "Platos de Pizza Personalizados", href: "/platos-de-pizza-personalizados" },
+      { label: "Manteles Caminos Personalizados", href: "/manteles-caminos-personalizados" },
     ],
   },
   {
     label: "Servilletas Personalizadas",
-    href: "/servilletas-personalizadas/",
+    href: "/servilletas-personalizadas",
     children: [
-      { label: "Servilletas Bar Cocktail Personalizadas", href: "/servilletas-bar-cocktail-personalizadas/" },
-      { label: "Servilletas de Mesa Personalizadas", href: "/servilletas-de-mesa-personalizadas/" },
+      { label: "Servilletas Bar Cocktail Personalizadas", href: "/servilletas-bar-cocktail-personalizadas" },
+      { label: "Servilletas de Mesa Personalizadas", href: "/servilletas-de-mesa-personalizadas" },
     ],
   },
   {
     label: "Cubertería Personalizada",
-    href: "/cuberteria-personalizada/",
+    href: "/cuberteria-personalizada",
   },
 ];
 
