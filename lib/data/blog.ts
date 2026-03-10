@@ -19,17 +19,19 @@ export function getAllPosts(): BlogPost[] {
   return blogPosts;
 }
 
-function legacySlugFromUrl(url: string): string {
-  const value = String(url || "").trim();
+function normalizeLegacyPath(input: string): string {
+  const value = String(input || "").trim();
   if (!value) return "";
 
   try {
     const parsed = new URL(value);
-    const lastSegment = parsed.pathname.split("/").filter(Boolean).pop() || "";
-    return lastSegment.replace(/\.html?$/i, "").replace(/^p\d+-/i, "");
+    return parsed.pathname.replace(/\/+$/, "");
   } catch {
-    const lastSegment = value.split("/").filter(Boolean).pop() || "";
-    return lastSegment.replace(/\.html?$/i, "").replace(/^p\d+-/i, "");
+    const safe = value.split("#")[0].split("?")[0].trim();
+    if (!safe) return "";
+    if (safe.startsWith("/")) return safe.replace(/\/+$/, "");
+    const parts = safe.split("/").filter(Boolean);
+    return parts.length ? `/${parts.join("/")}` : "";
   }
 }
 
@@ -38,16 +40,26 @@ const hiddenLegacyUrls = Array.isArray((visibilityBlog as any).hiddenLegacyUrls)
   : [];
 
 const hiddenLegacyUrlSet = new Set(hiddenLegacyUrls);
-const hiddenSlugSet = new Set(hiddenLegacyUrls.map(legacySlugFromUrl).filter(Boolean));
+const hiddenLegacyPathSet = new Set(hiddenLegacyUrls.map(normalizeLegacyPath).filter(Boolean));
 
 export function getVisiblePosts(): BlogPost[] {
   return blogPosts.filter((post) => {
     const legacyUrl = String((post as any).legacyUrl || "").trim();
-    if (legacyUrl && hiddenLegacyUrlSet.has(legacyUrl)) {
+
+    if (!legacyUrl) {
+      return true;
+    }
+
+    if (hiddenLegacyUrlSet.has(legacyUrl)) {
       return false;
     }
 
-    return !hiddenSlugSet.has(String(post.slug || "").trim());
+    const postPath = normalizeLegacyPath(legacyUrl);
+    if (postPath && hiddenLegacyPathSet.has(postPath)) {
+      return false;
+    }
+
+    return true;
   });
 }
 
