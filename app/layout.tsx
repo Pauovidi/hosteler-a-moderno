@@ -13,10 +13,16 @@ const manrope = Manrope({
 
 import { buildBaseMetadata } from '@/lib/seo'
 
-// ... existing imports
+const baseMetadata = buildBaseMetadata()
 
-export const metadata: Metadata = buildBaseMetadata()
-
+export const metadata: Metadata = {
+  ...baseMetadata,
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
+}
 
 export default function RootLayout({
   children,

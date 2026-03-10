@@ -53,16 +53,26 @@ const hiddenLegacyUrls = Array.isArray((visibilityBlog as any).hiddenLegacyUrls)
   : [];
 
 const hiddenLegacyUrlSet = new Set(hiddenLegacyUrls);
-const hiddenSlugSet = new Set(hiddenLegacyUrls.map(legacySlugFromUrl).filter(Boolean));
+const hiddenLegacyPathSet = new Set(hiddenLegacyUrls.map(safeLegacyPath).filter(Boolean));
 
 export function getVisiblePosts(): BlogPost[] {
   return blogPosts.filter((post) => {
-    const legacyUrl = String(post.legacyUrl || '').trim();
-    if (legacyUrl && hiddenLegacyUrlSet.has(legacyUrl)) {
+    const legacyUrl = String((post as any).legacyUrl || '').trim();
+
+    if (!legacyUrl) {
+      return true;
+    }
+
+    if (hiddenLegacyUrlSet.has(legacyUrl)) {
       return false;
     }
 
-    return !hiddenSlugSet.has(String(post.slug || '').trim());
+    const postPath = safeLegacyPath(legacyUrl);
+    if (postPath && hiddenLegacyPathSet.has(postPath)) {
+      return false;
+    }
+
+    return true;
   });
 }
 

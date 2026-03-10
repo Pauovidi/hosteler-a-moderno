@@ -8,8 +8,6 @@ const PRODUCTS_CSV_PATH = path.join(ROOT, "data/visibility/products.csv");
 const BLOG_JSON_PATH = path.join(ROOT, "lib/data/visibility-blog.json");
 const PRODUCTS_JSON_PATH = path.join(ROOT, "lib/data/visibility-products.json");
 const REPORT_PATH = path.join(ROOT, "out/visibility-report.json");
-const PRODUCTS_DATA_PATH = path.join(ROOT, "lib/data/products.json");
-const BLOG_DATA_PATH = path.join(ROOT, "lib/data/generated-blog.json");
 
 function parseDelimited(text, delimiter) {
   const rows = [];
@@ -57,141 +55,226 @@ function parseDelimited(text, delimiter) {
   return rows;
 }
 
-async function readCsv(filePath, delimiter) {
+function stripBom(text) {
+  return text.charCodeAt(0) === 0xfeff ? text.slice(1) : text;
+}
+
+async function readCsvFixedDelimiter(filePath, delimiter) {
   let raw;
   try {
     raw = await fs.readFile(filePath, "utf8");
   } catch {
-    throw new Error(`No se encontró el CSV requerido: ${path.relative(ROOT, filePath)}`);
+    throw new Error(`No se encontro el CSV requerido: ${path.relative(ROOT, filePath)}`);
   }
 
-  const text = raw.charCodeAt(0) === 0xfeff ? raw.slice(1) : raw;
+  const text = stripBom(raw);
   const rows = parseDelimited(text, delimiter).filter((r) => r.some((v) => String(v || "").trim()));
-
-  if (rows.length === 0) {
-    throw new Error(`El CSV está vacío: ${path.relative(ROOT, filePath)}`);
+  if (!rows.length) {
+    throw new Error(`El CSV esta vacio: ${path.relative(ROOT, filePath)}`);
   }
 
   const headers = rows[0].map((h) => String(h || "").trim());
-  const dataRows = rows.slice(1).map((cols) => {
-    const entry = {};
-    headers.forEach((header, index) => {
-      entry[header] = String(cols[index] || "").trim();
+  const dataRows = rows.slice(1).map((cols, idx) => {
+    const record = {};
+    headers.forEach((header, cidx) => {
+      record[header] = String(cols[cidx] || "").trim();
     });
-    return entry;
+    return { rowNumber: idx + 2, record };
   });
 
-  return { headers, rows: dataRows };
+  return { headers, rows: dataRows, delimiter };
 }
 
-function slugFromLegacyUrl(input) {
-  const value = String(input || "").trim();
-  if (!value) return "";
+function countDelimiterOutsideQuotes(line, delimiter) {
+  let count = 0;
+  let inQuotes = false;
 
-  try {
-    const parsed = new URL(value);
-    const lastSegment = parsed.pathname.split("/").filter(Boolean).pop() || "";
-    return lastSegment.replace(/\.html?$/i, "").replace(/^p\d+-/i, "");
-  } catch {
-    const lastSegment = value.split("/").filter(Boolean).pop() || "";
-    return lastSegment.replace(/\.html?$/i, "").replace(/^p\d+-/i, "");
+  for (let i = 0; i < line.length; i += 1) {
+    const ch = line[i];
+    const next = line[i + 1];
+
+    if (ch === '"') {
+      if (inQuotes && next === '"') {
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (!inQuotes && ch === delimiter) {
+      count += 1;
+    }
   }
+
+  return count;
+}
+
+function detectDelimiter(text) {
+  const candidates = [",", ";"];
+  const lines = String(text || "")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .slice(0, 5);
+
+  if (!lines.length) return ";";
+
+  const scored = candidates.map((delimiter) => ({
+    delimiter,
+    score: lines.reduce((acc, line) => acc + countDelimiterOutsideQuotes(line, delimiter), 0),
+  }));
+
+  scored.sort((a, b) => b.score - a.score);
+  return scored[0].score > 0 ? scored[0].delimiter : ";";
+}
+
+async function readCsvAutoDelimiter(filePath) {
+  let raw;
+  try {
+    raw = await fs.readFile(filePath, "utf8");
+  } catch {
+    throw new Error(`No se encontro el CSV requerido: ${path.relative(ROOT, filePath)}`);
+  }
+
+  const text = stripBom(raw);
+  const delimiter = detectDelimiter(text);
+  const rows = parseDelimited(text, delimiter).filter((r) => r.some((v) => String(v || "").trim()));
+
+  if (!rows.length) {
+    throw new Error(`El CSV esta vacio: ${path.relative(ROOT, filePath)}`);
+  }
+
+  const headers = rows[0].map((h) => String(h || "").trim());
+  const dataRows = rows.slice(1).map((cols, idx) => {
+    const record = {};
+    headers.forEach((header, cidx) => {
+      record[header] = String(cols[cidx] || "").trim();
+    });
+    return { rowNumber: idx + 2, record };
+  });
+
+  return { headers, rows: dataRows, delimiter };
 }
 
 function normalizeId(value) {
   return String(value || "").trim();
 }
 
-async function readJsonArray(filePath) {
-  try {
-    const data = JSON.parse(await fs.readFile(filePath, "utf8"));
-    return Array.isArray(data) ? data : [];
-  } catch {
-    return [];
-  }
+function pushRare(list, item) {
+  list.push(item);
 }
 
 async function main() {
+  const blog = await readCsvFixedDelimiter(BLOG_CSV_PATH, ",");
+  const products = await readCsvAutoDelimiter(PRODUCTS_CSV_PATH);
+
+  const rareRows = [];
   const notes = [];
 
-  const blogCsv = await readCsv(BLOG_CSV_PATH, ",");
   const blogUrlColumn = "Páginas principales";
   const blogActionColumn = "Acción";
 
-  if (!blogCsv.headers.includes(blogUrlColumn) || !blogCsv.headers.includes(blogActionColumn)) {
-    if (!blogCsv.headers.includes(blogUrlColumn)) notes.push(`Falta columna en blog.csv: ${blogUrlColumn}`);
-    if (!blogCsv.headers.includes(blogActionColumn)) notes.push(`Falta columna en blog.csv: ${blogActionColumn}`);
+  if (!blog.headers.includes(blogUrlColumn)) {
+    notes.push(`Falta columna en blog.csv: ${blogUrlColumn}`);
+  }
+  if (!blog.headers.includes(blogActionColumn)) {
+    notes.push(`Falta columna en blog.csv: ${blogActionColumn}`);
   }
 
-  const hiddenLegacyUrls = [];
-  for (const row of blogCsv.rows) {
-    const url = String(row[blogUrlColumn] || "").trim();
-    const action = String(row[blogActionColumn] || "").trim();
+  const hiddenLegacyUrlSet = new Set();
+
+  for (const row of blog.rows) {
+    const url = String(row.record[blogUrlColumn] || "").trim();
+    const action = String(row.record[blogActionColumn] || "").trim();
+
+    if (!url && action) {
+      pushRare(rareRows, {
+        file: "blog.csv",
+        rowNumber: row.rowNumber,
+        type: "missing_url",
+        value: action,
+      });
+      continue;
+    }
+
     if (url && /^eliminar/i.test(action)) {
-      hiddenLegacyUrls.push(url);
+      hiddenLegacyUrlSet.add(url);
     }
   }
 
-  const productsCsv = await readCsv(PRODUCTS_CSV_PATH, ";");
   const idColumn = "ID";
   const removeColumn = "QUITAR o eliminar";
 
-  if (!productsCsv.headers.includes(idColumn) || !productsCsv.headers.includes(removeColumn)) {
-    if (!productsCsv.headers.includes(idColumn)) notes.push(`Falta columna en products.csv: ${idColumn}`);
-    if (!productsCsv.headers.includes(removeColumn)) notes.push(`Falta columna en products.csv: ${removeColumn}`);
+  if (!products.headers.includes(idColumn)) {
+    notes.push(`Falta columna en products.csv: ${idColumn}`);
+  }
+  if (!products.headers.includes(removeColumn)) {
+    notes.push(`Falta columna en products.csv: ${removeColumn}`);
   }
 
   const allowedSet = new Set();
   const hiddenSet = new Set();
+  const emptyIdRows = [];
 
-  for (const row of productsCsv.rows) {
-    const id = normalizeId(row[idColumn]);
-    if (!id) continue;
+  for (const row of products.rows) {
+    const id = normalizeId(row.record[idColumn]);
+    const removeFlag = String(row.record[removeColumn] || "").trim();
+
+    if (!id) {
+      emptyIdRows.push(row.rowNumber);
+      pushRare(rareRows, {
+        file: "products.csv",
+        rowNumber: row.rowNumber,
+        type: "empty_id",
+      });
+      continue;
+    }
 
     allowedSet.add(id);
 
-    const removeRaw = String(row[removeColumn] || "").trim();
-    if (/^x$/i.test(removeRaw)) {
+    if (/^x$/i.test(removeFlag)) {
       hiddenSet.add(id);
     }
   }
 
+  const hiddenLegacyUrls = Array.from(hiddenLegacyUrlSet).sort();
   const allowedProductIds = Array.from(allowedSet).sort();
   const hiddenProductIds = Array.from(hiddenSet).sort();
 
   await fs.mkdir(path.dirname(BLOG_JSON_PATH), { recursive: true });
+  await fs.mkdir(path.dirname(PRODUCTS_JSON_PATH), { recursive: true });
   await fs.mkdir(path.dirname(REPORT_PATH), { recursive: true });
 
   await fs.writeFile(BLOG_JSON_PATH, `${JSON.stringify({ hiddenLegacyUrls }, null, 2)}\n`, "utf8");
   await fs.writeFile(PRODUCTS_JSON_PATH, `${JSON.stringify({ allowedProductIds, hiddenProductIds }, null, 2)}\n`, "utf8");
 
-  const allProductsData = await readJsonArray(PRODUCTS_DATA_PATH);
-  const allProductIds = new Set(allProductsData.map((p) => normalizeId(p?.id)).filter(Boolean));
-  const allowedNotFoundInCatalog = allowedProductIds.filter((id) => !allProductIds.has(id));
-  const hiddenNotFoundInCatalog = hiddenProductIds.filter((id) => !allProductIds.has(id));
-
-  const blogData = await readJsonArray(BLOG_DATA_PATH);
-  const blogSlugs = new Set(blogData.map((post) => String(post?.slug || "").trim()).filter(Boolean));
-  const hiddenBlogSlugs = hiddenLegacyUrls.map(slugFromLegacyUrl).filter(Boolean);
-  const hiddenBlogSlugsNotFound = hiddenBlogSlugs.filter((slug) => !blogSlugs.has(slug));
-
   const report = {
     counts: {
+      blogRows: blog.rows.length,
       blogHidden: hiddenLegacyUrls.length,
-      blogTotalRows: blogCsv.rows.length,
-      productsAllowedCount: allowedProductIds.length,
-      productsHiddenCount: hiddenProductIds.length,
+      productsRows: products.rows.length,
+      allowedProductIds: allowedProductIds.length,
+      hiddenProductIds: hiddenProductIds.length,
+      emptyProductIds: emptyIdRows.length,
+      rareRows: rareRows.length,
     },
-    examples: {
-      hiddenLegacyUrls: hiddenLegacyUrls.slice(0, 5),
-      allowedProductIds: allowedProductIds.slice(0, 5),
-      hiddenProductIds: hiddenProductIds.slice(0, 5),
+    delimiters: {
+      blog: blog.delimiter,
+      products: products.delimiter,
     },
-    idsNotFound: {
-      allowedNotFoundInCatalog: allowedNotFoundInCatalog.slice(0, 50),
-      hiddenNotFoundInCatalog: hiddenNotFoundInCatalog.slice(0, 50),
-      hiddenBlogSlugsNotFound: hiddenBlogSlugsNotFound.slice(0, 50),
+    columns: {
+      blog: {
+        url: blogUrlColumn,
+        action: blogActionColumn,
+      },
+      products: {
+        id: idColumn,
+        remove: removeColumn,
+      },
     },
+    emptyIdRows,
+    rareRows,
     notes,
   };
 
