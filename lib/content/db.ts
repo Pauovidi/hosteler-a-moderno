@@ -201,6 +201,42 @@ export async function listEditableBlogPosts(): Promise<EditableBlogPostRecord[]>
   return rows.map(mapBlogRow);
 }
 
+export async function getEditableBlogPostRecordByRecordId(
+  recordId: string,
+): Promise<EditableBlogPostRecord | null> {
+  const rows = await runQuery`
+    SELECT record_id, legacy_id, slug, title, excerpt, status, legacy_url, featured_image_url, published_at, payload::text AS payload, created_at, updated_at
+    FROM editable_blog_posts
+    WHERE record_id = ${recordId}
+    LIMIT 1;
+  `;
+  return rows[0] ? mapBlogRow(rows[0]) : null;
+}
+
+export async function getEditableBlogPostRecordByLegacyId(
+  legacyId: string,
+): Promise<EditableBlogPostRecord | null> {
+  const rows = await runQuery`
+    SELECT record_id, legacy_id, slug, title, excerpt, status, legacy_url, featured_image_url, published_at, payload::text AS payload, created_at, updated_at
+    FROM editable_blog_posts
+    WHERE legacy_id = ${legacyId}
+    LIMIT 1;
+  `;
+  return rows[0] ? mapBlogRow(rows[0]) : null;
+}
+
+export async function getEditableBlogPostRecordBySlug(
+  slug: string,
+): Promise<EditableBlogPostRecord | null> {
+  const rows = await runQuery`
+    SELECT record_id, legacy_id, slug, title, excerpt, status, legacy_url, featured_image_url, published_at, payload::text AS payload, created_at, updated_at
+    FROM editable_blog_posts
+    WHERE slug = ${slug}
+    LIMIT 1;
+  `;
+  return rows[0] ? mapBlogRow(rows[0]) : null;
+}
+
 export async function getEditableProductsCount(): Promise<number> {
   const rows = await runQuery<{ total: number }>`
     SELECT COUNT(*)::int AS total
@@ -321,5 +357,12 @@ export async function upsertEditableBlogPostRecord(input: {
       published_at = EXCLUDED.published_at,
       payload = EXCLUDED.payload,
       updated_at = NOW();
+  `;
+}
+
+export async function deleteEditableBlogPostRecord(recordId: string): Promise<void> {
+  await runQuery`
+    DELETE FROM editable_blog_posts
+    WHERE record_id = ${recordId};
   `;
 }

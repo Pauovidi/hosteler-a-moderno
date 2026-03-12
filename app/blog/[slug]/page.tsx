@@ -2,7 +2,11 @@ import { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { getAllPosts, getCanonicalBlogPath, resolveBlogPostFromIncoming } from "@/lib/data/blog";
+import {
+  getAllPosts,
+  getCanonicalBlogPath,
+  resolveBlogPostFromIncoming,
+} from "@/lib/content/blog-store";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
@@ -84,7 +88,7 @@ function toPathSlug(canonicalPath: string): string {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = resolveBlogPostFromIncoming(slug);
+  const post = await resolveBlogPostFromIncoming(slug);
 
   if (!post) {
     return {
@@ -112,7 +116,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
   const uniqueSlugs = new Set(posts.map((post) => toPathSlug(getCanonicalBlogPath(post))));
 
   return Array.from(uniqueSlugs).map((slug) => ({
@@ -122,7 +126,7 @@ export async function generateStaticParams() {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = resolveBlogPostFromIncoming(slug);
+  const post = await resolveBlogPostFromIncoming(slug);
 
   if (!post) {
     notFound();
