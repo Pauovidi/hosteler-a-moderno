@@ -12,11 +12,12 @@ import { ArrowLeft, FileText, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { Product, getVisibleProducts } from "@/lib/data/products";
+import { Product } from "@/lib/data/products";
 
 interface ProductClientProps {
   product: Product;
   categoria: string;
+  relatedProducts: Product[];
 }
 
 function toLegacySlug(p: Product) {
@@ -36,14 +37,8 @@ function normalizePhone(raw: string): string {
   return String(raw || "").replace(/\D/g, "");
 }
 
-export default function ProductClient({ product }: ProductClientProps) {
+export default function ProductClient({ product, relatedProducts }: ProductClientProps) {
   const [personalizationValues, setPersonalizationValues] = useState<Record<string, any>>({});
-
-  const otherProducts = useMemo(() => {
-  return getVisibleProducts()
-    .filter((p) => p.slug !== product.slug)   // o p.id !== product.id
-    .slice(0, 8);
-}, [product.slug]);
 
   const phoneNumber = normalizePhone(process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "34693039422");
 
@@ -310,7 +305,7 @@ export default function ProductClient({ product }: ProductClientProps) {
               Otros Productos que Pueden Interesarle
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {otherProducts.map((prod) => (
+              {relatedProducts.map((prod) => (
                 <Link key={prod.slug} href={legacyProductHref(prod)}>
                   <div className="group border border-border hover:border-gold/30 transition-all">
                     <div className="aspect-square relative overflow-hidden">

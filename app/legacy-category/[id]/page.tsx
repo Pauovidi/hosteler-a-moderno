@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { getVisibleProducts, type Product } from "@/lib/data/products";
+import { getCanonicalProductPath, getVisibleProducts } from "@/lib/content/products-store";
+import type { Product } from "@/lib/data/products";
 import { buildBaseMetadata } from "@/lib/seo";
 import { legacyMenuMap } from "@/data/legacy-menu-map";
 
@@ -38,14 +39,6 @@ function titleFromSlug(slug?: string): string {
 
 function stripHtml(html: string): string {
   return String(html || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-}
-
-function productLegacySlug(product: Product): string {
-  const base = String(product.slug || "")
-    .replace(new RegExp(`-${product.id}$`), "")
-    .replace(/\/+$/g, "")
-    .trim();
-  return base || "producto";
 }
 
 /**
@@ -128,7 +121,7 @@ export default async function LegacyCategoryPage({ params, searchParams }: PageP
   const sp = (await searchParams) ?? {};
   const legacySlug = sp.slug || "";
 
-  const allProducts = getVisibleProducts();
+  const allProducts = await getVisibleProducts();
 
   // ✅ Filtrado por ID de menú legacy
   const categoryProducts = filterByMenuId(allProducts, id);
@@ -151,8 +144,7 @@ export default async function LegacyCategoryPage({ params, searchParams }: PageP
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {categoryProducts.map((product) => {
-              const pSlug = productLegacySlug(product);
-              const href = `/p${product.id}-${pSlug}.html`;
+              const href = getCanonicalProductPath(product);
               const img = product.image || "/logo-3.jpg";
 
               return (

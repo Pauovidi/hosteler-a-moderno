@@ -8,11 +8,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, FileText, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { Product, getVisibleProducts } from "@/lib/data/products";
+import { Product } from "@/lib/data/products";
 
 interface ProductClientProps {
   product: Product;
   categoria: string;
+  relatedProducts: Product[];
 }
 
 function legacyProductHref(p: Product): string {
@@ -22,10 +23,7 @@ function legacyProductHref(p: Product): string {
   return `/p${id}-${legacySlug}.html`;
 }
 
-export default function ProductClient({ product, categoria }: ProductClientProps) {
-  // Get other products for "Related Products" section
-  const otherProducts = getVisibleProducts().filter((p) => p.slug !== categoria).slice(0, 8);
-
+export default function ProductClient({ product, categoria, relatedProducts }: ProductClientProps) {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -176,7 +174,7 @@ export default function ProductClient({ product, categoria }: ProductClientProps
               Otros Productos que Pueden Interesarle
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {otherProducts.map((prod) => (
+              {relatedProducts.map((prod) => (
                 <Link key={prod.slug} href={legacyProductHref(prod)}>
                   <div className="group border border-border hover:border-gold/30 transition-all">
                     <div className="aspect-square relative overflow-hidden">

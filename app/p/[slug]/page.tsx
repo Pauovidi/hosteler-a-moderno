@@ -1,12 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProduct, getAllProducts } from "@/lib/data/products";
+import { getProduct, getVisibleProducts } from "@/lib/content/products-store";
 import { buildProductMetadata } from "@/lib/seo";
 import ProductClient from "@/components/product/product-client";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -14,9 +10,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
-    // Previously we used 'categoria' param which was actually the slug.
-    // Now we use 'slug' directly.
-    const product = getProduct(slug);
+    const product = await getProduct(slug);
 
     if (!product) {
         return {
@@ -28,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-    const products = getAllProducts();
+    const products = await getVisibleProducts();
     return products.map((product) => ({
         slug: product.slug,
     }));
@@ -36,14 +30,16 @@ export async function generateStaticParams() {
 
 export default async function ProductDetailPage({ params }: Props) {
     const { slug } = await params;
-    const product = getProduct(slug);
+    const [product, visibleProducts] = await Promise.all([
+      getProduct(slug),
+      getVisibleProducts(),
+    ]);
 
     if (!product) {
         return notFound();
     }
 
-    // Pass slug as 'categoria' to keep compatibility if client component relies on it,
-    // or refactor client component. The client component used 'categoria' to filter
-    // allow listing "Other Products". We can just pass the slug.
-    return <ProductClient product={product} categoria={slug} />;
+    const relatedProducts = visibleProducts.filter((candidate) => candidate.slug !== slug).slice(0, 8);
+
+    return <ProductClient product={product} relatedProducts={relatedProducts} />;
 }

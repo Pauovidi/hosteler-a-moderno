@@ -156,6 +156,42 @@ export async function listEditableProducts(): Promise<EditableProductRecord[]> {
   return rows.map(mapProductRow);
 }
 
+export async function getEditableProductRecordByRecordId(
+  recordId: string,
+): Promise<EditableProductRecord | null> {
+  const rows = await runQuery`
+    SELECT record_id, legacy_id, slug, title, status, image_url, payload::text AS payload, created_at, updated_at
+    FROM editable_products
+    WHERE record_id = ${recordId}
+    LIMIT 1;
+  `;
+  return rows[0] ? mapProductRow(rows[0]) : null;
+}
+
+export async function getEditableProductRecordByLegacyId(
+  legacyId: string,
+): Promise<EditableProductRecord | null> {
+  const rows = await runQuery`
+    SELECT record_id, legacy_id, slug, title, status, image_url, payload::text AS payload, created_at, updated_at
+    FROM editable_products
+    WHERE legacy_id = ${legacyId}
+    LIMIT 1;
+  `;
+  return rows[0] ? mapProductRow(rows[0]) : null;
+}
+
+export async function getEditableProductRecordBySlug(
+  slug: string,
+): Promise<EditableProductRecord | null> {
+  const rows = await runQuery`
+    SELECT record_id, legacy_id, slug, title, status, image_url, payload::text AS payload, created_at, updated_at
+    FROM editable_products
+    WHERE slug = ${slug}
+    LIMIT 1;
+  `;
+  return rows[0] ? mapProductRow(rows[0]) : null;
+}
+
 export async function listEditableBlogPosts(): Promise<EditableBlogPostRecord[]> {
   const rows = await runQuery`
     SELECT record_id, legacy_id, slug, title, excerpt, status, legacy_url, featured_image_url, published_at, payload::text AS payload, created_at, updated_at
@@ -222,6 +258,13 @@ export async function upsertEditableProductRecord(input: {
       image_url = EXCLUDED.image_url,
       payload = EXCLUDED.payload,
       updated_at = NOW();
+  `;
+}
+
+export async function deleteEditableProductRecord(recordId: string): Promise<void> {
+  await runQuery`
+    DELETE FROM editable_products
+    WHERE record_id = ${recordId};
   `;
 }
 

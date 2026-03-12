@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { getVisibleProducts, Product } from "@/lib/data/products";
+import { getCanonicalProductPath, getVisibleProducts } from "@/lib/content/products-store";
+import { Product } from "@/lib/data/products";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
@@ -45,7 +45,7 @@ export async function generateStaticParams() {
 
 export default async function CategoryPage({ params }: Props) {
   const { categoria } = await params;
-  const products = getVisibleProducts();
+  const products = await getVisibleProducts();
 
   // Logic to filter products
   // 1. Check exact alias match
@@ -87,7 +87,7 @@ export default async function CategoryPage({ params }: Props) {
           {categoryProducts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {categoryProducts.map((product) => (
-                <Link key={product.slug} href={`/p/${product.slug}`} className="group">
+                <Link key={product.slug} href={getCanonicalProductPath(product)} className="group">
                   <div className="border border-border rounded-lg overflow-hidden transition-all hover:shadow-lg hover:border-gold/30">
                     <div className="aspect-square relative overflow-hidden bg-muted">
                       <Image

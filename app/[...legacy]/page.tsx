@@ -8,9 +8,12 @@ import LegacyProductPage from "@/app/legacy-product/[id]/page";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { getVisibleProducts } from "@/lib/data/products";
 import { buildBaseMetadata, buildProductMetadata } from "@/lib/seo";
-import { getProductById } from "@/lib/data/products";
+import {
+  getCanonicalProductPath,
+  getProductById,
+  getVisibleProducts,
+} from "@/lib/content/products-store";
 import { CATEGORY_LABELS, getCategoryProductIds } from "@/lib/catalog/category-index";
 
 type Props = {
@@ -44,26 +47,14 @@ function getCategorySlug(segments: string[]): string | null {
   return raw;
 }
 
-function toLegacySlug(productSlug: string, productId: string): string {
-  const slug = String(productSlug || "");
-  const suffix = `-${String(productId || "")}`;
-  return slug.endsWith(suffix) ? slug.slice(0, -suffix.length) : slug;
-}
-
-function legacyProductHref(productSlug: string, productId: string): string {
-  const id = String(productId || "");
-  const legacySlug = toLegacySlug(productSlug, id) || "producto";
-  return `/p${id}-${legacySlug}.html`;
-}
-
-function getCategoryListingData(slug: string) {
+async function getCategoryListingData(slug: string) {
   const categoryLabel = CATEGORY_LABELS[slug];
   if (!categoryLabel) {
     return null;
   }
 
   const ids = new Set(getCategoryProductIds(slug));
-  const products = getVisibleProducts().filter((product) => ids.has(String(product.id)));
+  const products = (await getVisibleProducts()).filter((product) => ids.has(String(product.id)));
 
   return {
     slug,
@@ -104,7 +95,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       };
     }
 
-    const product = getProductById(id);
+    const product = await getProductById(id);
     if (!product) return base;
 
     const productMeta = buildProductMetadata(product);
@@ -126,7 +117,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const categorySlug = getCategorySlug(legacy);
   if (!categorySlug) return base;
 
-  const listing = getCategoryListingData(categorySlug);
+  const listing = await getCategoryListingData(categorySlug);
   if (!listing) return base;
 
   const canonical = `/${listing.slug}`;
@@ -148,7 +139,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function CategoryListingPage({ title, products }: { title: string; products: ReturnType<typeof getVisibleProducts> }) {
+function CategoryListingPage({
+  title,
+  products,
+}: {
+  title: string;
+  products: Awaited<ReturnType<typeof getVisibleProducts>>;
+}) {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -164,7 +161,7 @@ function CategoryListingPage({ title, products }: { title: string; products: Ret
           {products.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {products.map((product) => (
-                <Link key={product.id} href={legacyProductHref(product.slug, product.id)} className="group">
+                <Link key={product.id} href={getCanonicalProductPath(product)} className="group">
                   <div className="border border-border rounded-lg overflow-hidden transition-all hover:shadow-lg hover:border-gold/30">
                     <div className="aspect-square relative overflow-hidden bg-muted">
                       <Image
@@ -226,7 +223,7 @@ export default async function LegacyCatchAllPage({ params }: Props) {
     notFound();
   }
 
-  const listing = getCategoryListingData(categorySlug);
+  const listing = await getCategoryListingData(categorySlug);
   if (!listing) {
     notFound();
   }
