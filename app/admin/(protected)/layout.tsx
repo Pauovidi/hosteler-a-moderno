@@ -5,6 +5,8 @@ import { AdminShell } from "@/components/admin/shell";
 import { SignOutForm } from "@/components/admin/sign-out-form";
 import { requireAdminSession } from "@/lib/content/auth";
 
+export const dynamic = "force-dynamic";
+
 export default async function ProtectedAdminLayout({
   children,
 }: {

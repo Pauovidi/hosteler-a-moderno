@@ -9,6 +9,7 @@ import {
   getAdminPasswordHash,
   getAdminPasswordPlain,
   getAdminSessionMaxAgeSeconds,
+  getAdminSessionSecure,
   getAdminSessionSecret,
   getAdminUsername,
   hasAdminPasswordConfigured,
@@ -20,6 +21,14 @@ const ADMIN_SESSION_COOKIE = "ph_admin_session";
 type SessionPayload = {
   username: string;
   expiresAt: number;
+};
+
+type AdminSessionCookieOptions = {
+  httpOnly: true;
+  sameSite: "lax";
+  secure: boolean;
+  path: "/";
+  maxAge: number;
 };
 
 function base64UrlEncode(value: string): string {
@@ -98,26 +107,78 @@ export function isAdminLoginAvailable(): boolean {
   return isAdminConfigured() && hasAdminPasswordConfigured();
 }
 
-export async function createAdminSession(): Promise<void> {
-  const cookieStore = await cookies();
-  const maxAge = getAdminSessionMaxAgeSeconds();
-  const token = serializeSession({
-    username: getAdminUsername(),
-    expiresAt: Date.now() + maxAge * 1000,
-  });
+export function getAdminSessionCookieName(): string {
+  return ADMIN_SESSION_COOKIE;
+}
 
-  cookieStore.set(ADMIN_SESSION_COOKIE, token, {
+export function getAdminSessionCookieOptions(
+  maxAge = getAdminSessionMaxAgeSeconds(),
+): AdminSessionCookieOptions {
+  return {
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+    secure: getAdminSessionSecure(),
     path: "/",
     maxAge,
-  });
+  };
+}
+
+export function buildAdminSessionToken(): { token: string; maxAge: number } {
+  const maxAge = getAdminSessionMaxAgeSeconds();
+  return {
+    token: serializeSession({
+      username: getAdminUsername(),
+      expiresAt: Date.now() + maxAge * 1000,
+    }),
+    maxAge,
+  };
+}
+
+export function isSecureRequest(request: Request): boolean {
+  const forwardedProto = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
+  if (forwardedProto) {
+    return forwardedProto === "https";
+  }
+
+  return new URL(request.url).protocol === "https:";
+}
+
+export function validateAdminCredentials(input: {
+  username: string;
+  password: string;
+}): "ok" | "config" | "credentials" {
+  const submittedUsername = String(input.username || "").trim();
+  const submittedPassword = String(input.password || "");
+  const expectedUsername = getAdminUsername();
+  const configuredHash = getAdminPasswordHash();
+  const configuredPassword = getAdminPasswordPlain();
+
+  if (!isAdminLoginAvailable()) {
+    return "config";
+  }
+
+  const usernameMatches = submittedUsername === expectedUsername;
+  const passwordMatches = configuredHash
+    ? verifyPasswordAgainstHash(submittedPassword, configuredHash)
+    : configuredPassword === submittedPassword;
+
+  if (!usernameMatches || !passwordMatches) {
+    return "credentials";
+  }
+
+  return "ok";
+}
+
+export async function createAdminSession(): Promise<void> {
+  const cookieStore = await cookies();
+  const { token, maxAge } = buildAdminSessionToken();
+
+  cookieStore.set(ADMIN_SESSION_COOKIE, token, getAdminSessionCookieOptions(maxAge));
 }
 
 export async function clearAdminSession(): Promise<void> {
   const cookieStore = await cookies();
-  cookieStore.delete(ADMIN_SESSION_COOKIE);
+  cookieStore.set(ADMIN_SESSION_COOKIE, "", getAdminSessionCookieOptions(0));
 }
 
 export async function getAdminSession(): Promise<SessionPayload | null> {
@@ -127,35 +188,29 @@ export async function getAdminSession(): Promise<SessionPayload | null> {
 }
 
 export async function requireAdminSession(): Promise<SessionPayload> {
+  const session = await getAdminSession();
+  if (session) {
+    return session;
+  }
+
   if (!isAdminLoginAvailable()) {
     redirect("/admin/login?error=config");
   }
 
-  const session = await getAdminSession();
-  if (!session) {
-    redirect("/admin/login");
-  }
-
-  return session;
+  redirect("/admin/login");
 }
 
 export async function authenticateAdmin(formData: FormData): Promise<void> {
-  const submittedUsername = String(formData.get("username") || "").trim();
-  const submittedPassword = String(formData.get("password") || "");
-  const expectedUsername = getAdminUsername();
-  const configuredHash = getAdminPasswordHash();
-  const configuredPassword = getAdminPasswordPlain();
+  const result = validateAdminCredentials({
+    username: String(formData.get("username") || ""),
+    password: String(formData.get("password") || ""),
+  });
 
-  if (!isAdminLoginAvailable()) {
+  if (result === "config") {
     redirect("/admin/login?error=config");
   }
 
-  const usernameMatches = submittedUsername === expectedUsername;
-  const passwordMatches = configuredHash
-    ? verifyPasswordAgainstHash(submittedPassword, configuredHash)
-    : configuredPassword === submittedPassword;
-
-  if (!usernameMatches || !passwordMatches) {
+  if (result === "credentials") {
     redirect("/admin/login?error=credentials");
   }
 

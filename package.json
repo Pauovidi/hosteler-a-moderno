@@ -7,7 +7,9 @@
     "dev": "next dev",
     "lint": "eslint .",
     "admin:hash": "node scripts/admin-password-hash.mjs",
+    "qa:smoke": "node scripts/qa-smoke.mjs",
     "start": "next start",
+    "vercel:env:push": "node scripts/push-vercel-env.mjs",
     "images:sync": "node scripts/images-sync.js",
     "images:sync:strict": "node scripts/images-sync.js --strict",
     "data:build": "node scripts/import-catalog.js --input data/exportProducts.csv --out lib/data/products.json",
@@ -20,6 +22,7 @@
     "visibility:apply": "node scripts/apply-visibility-from-csv.mjs"
   },
   "dependencies": {
+    "@electric-sql/pglite": "^0.3.16",
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.10.0",
     "@neondatabase/serverless": "^1.0.2",

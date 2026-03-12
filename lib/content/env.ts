@@ -1,12 +1,26 @@
 const DEFAULT_SESSION_MAX_AGE_SECONDS = 60 * 60 * 12;
+const PGLITE_PREFIX = "pglite://";
 
 function normalizeEnvValue(value: string | undefined): string | undefined {
   const normalized = value?.trim();
   return normalized ? normalized : undefined;
 }
 
+function readEnv(name: string): string | undefined {
+  return process.env[name];
+}
+
+function isProductionBuildPhase(): boolean {
+  return readEnv("NEXT_PHASE") === "phase-production-build";
+}
+
 export function getDatabaseUrl(): string | undefined {
-  return normalizeEnvValue(process.env.DATABASE_URL);
+  const databaseUrl = normalizeEnvValue(readEnv("DATABASE_URL"));
+  if (databaseUrl?.startsWith(PGLITE_PREFIX) && isProductionBuildPhase()) {
+    return undefined;
+  }
+
+  return databaseUrl;
 }
 
 export function hasDatabaseUrl(): boolean {
@@ -14,7 +28,7 @@ export function hasDatabaseUrl(): boolean {
 }
 
 export function getBlobReadWriteToken(): string | undefined {
-  return normalizeEnvValue(process.env.BLOB_READ_WRITE_TOKEN);
+  return normalizeEnvValue(readEnv("BLOB_READ_WRITE_TOKEN"));
 }
 
 export function hasBlobReadWriteToken(): boolean {
@@ -22,15 +36,15 @@ export function hasBlobReadWriteToken(): boolean {
 }
 
 export function getAdminUsername(): string {
-  return normalizeEnvValue(process.env.ADMIN_USERNAME) || "admin";
+  return normalizeEnvValue(readEnv("ADMIN_USERNAME")) || "admin";
 }
 
 export function getAdminPasswordHash(): string | undefined {
-  return normalizeEnvValue(process.env.ADMIN_PASSWORD_HASH);
+  return normalizeEnvValue(readEnv("ADMIN_PASSWORD_HASH"));
 }
 
 export function getAdminPasswordPlain(): string | undefined {
-  return normalizeEnvValue(process.env.ADMIN_PASSWORD);
+  return normalizeEnvValue(readEnv("ADMIN_PASSWORD"));
 }
 
 export function hasAdminPasswordConfigured(): boolean {
@@ -43,15 +57,29 @@ export function isAdminConfigured(): boolean {
 
 export function getAdminSessionSecret(): string {
   return (
-    normalizeEnvValue(process.env.ADMIN_SESSION_SECRET) ||
+    normalizeEnvValue(readEnv("ADMIN_SESSION_SECRET")) ||
     "local-dev-admin-session-secret-change-me"
   );
 }
 
 export function getAdminSessionMaxAgeSeconds(): number {
-  const raw = Number(process.env.ADMIN_SESSION_MAX_AGE_SECONDS);
+  const raw = Number(readEnv("ADMIN_SESSION_MAX_AGE_SECONDS"));
   if (!Number.isFinite(raw) || raw <= 0) {
     return DEFAULT_SESSION_MAX_AGE_SECONDS;
   }
   return Math.floor(raw);
+}
+
+export function getAdminSessionSecure(): boolean {
+  const raw = normalizeEnvValue(readEnv("ADMIN_SESSION_SECURE"))?.toLowerCase();
+
+  if (raw === "1" || raw === "true" || raw === "yes") {
+    return true;
+  }
+
+  if (raw === "0" || raw === "false" || raw === "no") {
+    return false;
+  }
+
+  return Boolean(readEnv("VERCEL") === "1" || readEnv("VERCEL_ENV") || readEnv("VERCEL_URL"));
 }

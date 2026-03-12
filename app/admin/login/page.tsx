@@ -5,6 +5,8 @@ import { loginAdminAction } from "@/app/admin/actions";
 import { getAdminSession } from "@/lib/content/auth";
 import { hasAdminPasswordConfigured } from "@/lib/content/env";
 
+export const dynamic = "force-dynamic";
+
 function getErrorMessage(error: string | undefined): string | null {
   switch (error) {
     case "credentials":

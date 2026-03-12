@@ -1,5 +1,9 @@
 import "server-only";
 
+import { mkdir } from "node:fs/promises";
+import path from "node:path";
+
+import { PGlite } from "@electric-sql/pglite";
 import { neon } from "@neondatabase/serverless";
 
 import {
@@ -11,16 +15,88 @@ import { getDatabaseUrl, hasDatabaseUrl } from "@/lib/content/env";
 
 type SqlPrimitive = string | number | boolean | null | Date;
 type SqlRow = Record<string, SqlPrimitive>;
+type QueryValues = SqlPrimitive[];
+type SqlClient = {
+  query<T extends SqlRow = SqlRow>(statement: string, values?: QueryValues): Promise<T[]>;
+  exec(statement: string): Promise<void>;
+};
+
+const PGLITE_PREFIX = "pglite://";
 
 let ensureSchemaPromise: Promise<void> | null = null;
+let ensureSchemaKey: string | null = null;
+let neonClient: ReturnType<typeof neon> | null = null;
+let neonClientKey: string | null = null;
+let pgliteClientPromise: Promise<PGlite> | null = null;
+let pgliteClientKey: string | null = null;
 
-function getSqlClient() {
+function isPgliteDatabaseUrl(databaseUrl: string): boolean {
+  return databaseUrl.startsWith(PGLITE_PREFIX);
+}
+
+function resolvePgliteDataDir(databaseUrl: string): string | undefined {
+  const target = databaseUrl.slice(PGLITE_PREFIX.length).trim();
+  if (!target || target === "memory" || target === ":memory:") {
+    return undefined;
+  }
+
+  return path.isAbsolute(target) ? target : path.resolve(target);
+}
+
+async function getPgliteClient(databaseUrl: string): Promise<PGlite> {
+  if (!pgliteClientPromise || pgliteClientKey !== databaseUrl) {
+    pgliteClientKey = databaseUrl;
+    pgliteClientPromise = (async () => {
+      const dataDir = resolvePgliteDataDir(databaseUrl);
+      if (!dataDir) {
+        return new PGlite();
+      }
+
+      await mkdir(dataDir, { recursive: true });
+      return new PGlite(dataDir);
+    })();
+  }
+
+  return pgliteClientPromise;
+}
+
+function getNeonClient(databaseUrl: string) {
+  if (!neonClient || neonClientKey !== databaseUrl) {
+    neonClientKey = databaseUrl;
+    neonClient = neon(databaseUrl);
+  }
+
+  return neonClient;
+}
+
+async function getSqlClient(): Promise<SqlClient | null> {
   const databaseUrl = getDatabaseUrl();
   if (!databaseUrl) {
     return null;
   }
 
-  return neon(databaseUrl);
+  if (isPgliteDatabaseUrl(databaseUrl)) {
+    const client = await getPgliteClient(databaseUrl);
+    return {
+      async query<T extends SqlRow = SqlRow>(statement: string, values: QueryValues = []) {
+        const result = await client.query<T>(statement, values);
+        return result.rows ?? [];
+      },
+      async exec(statement: string) {
+        await client.exec(statement);
+      },
+    };
+  }
+
+  const client = getNeonClient(databaseUrl);
+  return {
+    async query<T extends SqlRow = SqlRow>(statement: string, values: QueryValues = []) {
+      return (await client.query<T>(statement, values)) ?? [];
+    },
+    async exec(statement: string) {
+      await client.query(statement);
+    },
+  };
 }
 
 function parsePayload(value: SqlPrimitive): Record<string, unknown> {
@@ -68,20 +144,35 @@ function mapBlogRow(row: SqlRow): EditableBlogPostRecord {
 }
 
 async function runStatement(statement: string) {
-  const sql = getSqlClient();
+  const sql = await getSqlClient();
   if (!sql) {
     return;
   }
 
-  await sql(statement);
+  await sql.exec(statement);
+}
+
+function buildParameterizedQuery(
+  strings: TemplateStringsArray,
+  values: QueryValues,
+): { statement: string; params: QueryValues } {
+  let statement = strings[0] || "";
+
+  values.forEach((value, index) => {
+    statement += `$${index + 1}${strings[index + 1] || ""}`;
+  });
+
+  return { statement, params: values };
 }
 
 export async function ensureContentSchema(): Promise<void> {
-  if (!hasDatabaseUrl()) {
+  const databaseUrl = getDatabaseUrl();
+  if (!databaseUrl || !hasDatabaseUrl()) {
     return;
   }
 
-  if (!ensureSchemaPromise) {
+  if (!ensureSchemaPromise || ensureSchemaKey !== databaseUrl) {
+    ensureSchemaKey = databaseUrl;
     ensureSchemaPromise = (async () => {
       await runStatement(`
         CREATE TABLE IF NOT EXISTS editable_products (
@@ -138,13 +229,14 @@ async function runQuery<T extends SqlRow = SqlRow>(
   strings: TemplateStringsArray,
   ...values: SqlPrimitive[]
 ): Promise<T[]> {
-  const sql = getSqlClient();
+  const sql = await getSqlClient();
   if (!sql) {
     return [];
   }
 
   await ensureContentSchema();
-  return (await sql<T>(strings, ...values)) ?? [];
+  const { statement, params } = buildParameterizedQuery(strings, values);
+  return await sql.query<T>(statement, params);
 }
 
 export async function listEditableProducts(): Promise<EditableProductRecord[]> {
