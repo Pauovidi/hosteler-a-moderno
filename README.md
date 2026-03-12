@@ -38,12 +38,18 @@
 
 - `NEXT_PUBLIC_WHATSAPP_PHONE`: WhatsApp number in international format (digits only).
   - Example: `34693039422`
+- `ADMIN_USERNAME`: usuario del panel admin.
+- `ADMIN_PASSWORD_HASH`: hash scrypt del password admin.
+- `ADMIN_SESSION_SECRET`: secreto para firmar la cookie de sesión.
+- `DATABASE_URL`: conexión Postgres compatible con Vercel/Neon.
+- `BLOB_READ_WRITE_TOKEN`: token de escritura para Vercel Blob.
 
 
 ## Scripts
 
 - `npm run data:build` / `npm run data:build:strict`: Import real catalog from `data/exportProducts.csv` to `lib/data/products.json`.
 - `npm run legacy:build` / `npm run legacy:build:strict`: Generate legacy 301 redirects to `out/redirects.json` (requires `data/legacy-map.csv`).
+- `npm run admin:hash -- <password>`: Generate a scrypt hash for `ADMIN_PASSWORD_HASH`.
 - `npm run build`: Build for production.
 - `npm run start`: Start production server.
 
@@ -59,3 +65,9 @@
 - **Source**: `data/exportProducts.csv`
 - **Output (official)**: `lib/data/products.json`
 - **Frontend**: consumes the official JSON via `lib/data/products.ts`
+
+## Admin Panel
+
+- Technical notes: [docs/admin-panel.md](docs/admin-panel.md)
+- Route: `/admin`
+- Target architecture: editable content in DB with public fallback to current JSON/CSV while migration is in progress
