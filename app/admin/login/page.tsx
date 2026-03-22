@@ -2,8 +2,12 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { loginAdminAction } from "@/app/admin/actions";
-import { getAdminSession } from "@/lib/content/auth";
-import { hasAdminPasswordConfigured } from "@/lib/content/env";
+import {
+  getAdminAuthConfigMessage,
+  getAdminAuthConfigState,
+  getAdminSession,
+  isAdminLoginAvailable,
+} from "@/lib/content/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +16,7 @@ function getErrorMessage(error: string | undefined): string | null {
     case "credentials":
       return "Usuario o contraseña incorrectos.";
     case "config":
-      return "Falta configurar el acceso admin en las variables de entorno.";
+      return "La configuración del acceso admin es inválida o incompleta.";
     default:
       return null;
   }
@@ -30,7 +34,9 @@ export default async function AdminLoginPage({
 
   const params = (await searchParams) ?? {};
   const errorMessage = getErrorMessage(params.error);
-  const hasPassword = hasAdminPasswordConfigured();
+  const isLoginReady = isAdminLoginAvailable();
+  const authConfigState = getAdminAuthConfigState();
+  const authConfigMessage = getAdminAuthConfigMessage();
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#fef3c7,_#f5f5f4_55%)] px-4 py-10">
@@ -69,9 +75,10 @@ export default async function AdminLoginPage({
               Acceso pensado para un único administrador inicial. Usa cookie segura y sesión firmada en servidor.
             </p>
 
-            {!hasPassword ? (
+            {!isLoginReady ? (
               <div className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-                Falta configurar `ADMIN_USERNAME` y `ADMIN_PASSWORD_HASH` o `ADMIN_PASSWORD`.
+                {authConfigMessage ||
+                  "Falta configurar `ADMIN_USERNAME` y `ADMIN_PASSWORD_HASH` o `ADMIN_PASSWORD`."}
               </div>
             ) : null}
 
@@ -113,6 +120,14 @@ export default async function AdminLoginPage({
             </form>
 
             <p className="mt-6 text-xs leading-5 text-stone-500">
+              {authConfigState === "hash"
+                ? "La autenticación usa ADMIN_PASSWORD_HASH como fuente de verdad."
+                : authConfigState === "plain"
+                  ? "La autenticación usa ADMIN_PASSWORD porque no hay hash configurado."
+                  : "Si defines ADMIN_PASSWORD_HASH y ADMIN_PASSWORD a la vez, ambos deben corresponder a la misma contraseña."}
+            </p>
+
+            <p className="mt-3 text-xs leading-5 text-stone-500">
               La web pública sigue disponible en{" "}
               <Link href="/" className="font-semibold text-stone-700 underline-offset-2 hover:underline">
                 inicio

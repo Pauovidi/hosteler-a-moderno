@@ -12,8 +12,6 @@ import {
   getAdminSessionSecure,
   getAdminSessionSecret,
   getAdminUsername,
-  hasAdminPasswordConfigured,
-  isAdminConfigured,
 } from "@/lib/content/env";
 
 const ADMIN_SESSION_COOKIE = "ph_admin_session";
@@ -30,6 +28,22 @@ type AdminSessionCookieOptions = {
   path: "/";
   maxAge: number;
 };
+
+export type AdminAuthConfigState =
+  | "hash"
+  | "plain"
+  | "missing"
+  | "invalid-hash"
+  | "conflict";
+
+type AdminAuthConfig = {
+  state: AdminAuthConfigState;
+  hash: string | undefined;
+  password: string | undefined;
+  message: string | null;
+};
+
+let lastAdminAuthWarningKey: string | null = null;
 
 function base64UrlEncode(value: string): string {
   return Buffer.from(value, "utf8").toString("base64url");
@@ -103,8 +117,98 @@ function verifyPasswordAgainstHash(password: string, hash: string): boolean {
   return derivedKey.length === expected.length && timingSafeEqual(derivedKey, expected);
 }
 
+function isSupportedAdminPasswordHash(hash: string): boolean {
+  const [scheme, saltHex, keyHex] = hash.split(":");
+  return (
+    scheme === "scrypt"
+    && Boolean(saltHex)
+    && Boolean(keyHex)
+    && /^[0-9a-f]+$/i.test(saltHex)
+    && /^[0-9a-f]+$/i.test(keyHex)
+  );
+}
+
+function warnAdminAuthMisconfiguration(config: AdminAuthConfig): void {
+  if (!config.message) {
+    return;
+  }
+
+  const warningKey = `${config.state}:${config.message}`;
+  if (lastAdminAuthWarningKey === warningKey) {
+    return;
+  }
+
+  lastAdminAuthWarningKey = warningKey;
+  console.warn(`[admin-auth] ${config.message}`);
+}
+
+function resolveAdminAuthConfig(): AdminAuthConfig {
+  const hash = getAdminPasswordHash();
+  const password = getAdminPasswordPlain();
+
+  if (hash && !isSupportedAdminPasswordHash(hash)) {
+    return {
+      state: "invalid-hash",
+      hash,
+      password,
+      message:
+        "ADMIN_PASSWORD_HASH existe pero no usa el formato scrypt:<salt_hex>:<derived_key_hex>. Corrige el hash o elimínalo si quieres usar ADMIN_PASSWORD.",
+    };
+  }
+
+  if (hash && password && !verifyPasswordAgainstHash(password, hash)) {
+    return {
+      state: "conflict",
+      hash,
+      password,
+      message:
+        "ADMIN_PASSWORD_HASH y ADMIN_PASSWORD están definidos pero no coinciden. El login queda deshabilitado hasta alinear ambas variables.",
+    };
+  }
+
+  if (hash) {
+    return {
+      state: "hash",
+      hash,
+      password,
+      message: null,
+    };
+  }
+
+  if (password) {
+    return {
+      state: "plain",
+      hash,
+      password,
+      message: null,
+    };
+  }
+
+  return {
+    state: "missing",
+    hash,
+    password,
+    message:
+      "Falta configurar ADMIN_PASSWORD_HASH o ADMIN_PASSWORD. Si defines ambas, deben representar la misma contraseña.",
+  };
+}
+
+export function getAdminAuthConfigState(): AdminAuthConfigState {
+  const config = resolveAdminAuthConfig();
+  warnAdminAuthMisconfiguration(config);
+  return config.state;
+}
+
+export function getAdminAuthConfigMessage(): string | null {
+  const config = resolveAdminAuthConfig();
+  warnAdminAuthMisconfiguration(config);
+  return config.message;
+}
+
 export function isAdminLoginAvailable(): boolean {
-  return isAdminConfigured() && hasAdminPasswordConfigured();
+  const config = resolveAdminAuthConfig();
+  warnAdminAuthMisconfiguration(config);
+  return config.state === "hash" || config.state === "plain";
 }
 
 export function getAdminSessionCookieName(): string {
@@ -150,17 +254,18 @@ export function validateAdminCredentials(input: {
   const submittedUsername = String(input.username || "").trim();
   const submittedPassword = String(input.password || "");
   const expectedUsername = getAdminUsername();
-  const configuredHash = getAdminPasswordHash();
-  const configuredPassword = getAdminPasswordPlain();
+  const config = resolveAdminAuthConfig();
+  warnAdminAuthMisconfiguration(config);
 
-  if (!isAdminLoginAvailable()) {
+  if (config.state !== "hash" && config.state !== "plain") {
     return "config";
   }
 
   const usernameMatches = submittedUsername === expectedUsername;
-  const passwordMatches = configuredHash
-    ? verifyPasswordAgainstHash(submittedPassword, configuredHash)
-    : configuredPassword === submittedPassword;
+  const passwordMatches =
+    config.state === "hash"
+      ? verifyPasswordAgainstHash(submittedPassword, config.hash!)
+      : submittedPassword === config.password;
 
   if (!usernameMatches || !passwordMatches) {
     return "credentials";

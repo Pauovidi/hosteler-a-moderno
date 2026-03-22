@@ -1,13 +1,16 @@
 import Link from "next/link";
 
 import {
+  getAdminAuthConfigState,
+  isAdminLoginAvailable,
+} from "@/lib/content/auth";
+import {
   getEditableBlogPostsCount,
   getEditableProductsCount,
 } from "@/lib/content/db";
 import {
   hasBlobReadWriteToken,
   hasDatabaseUrl,
-  isAdminConfigured,
 } from "@/lib/content/env";
 
 function StatCard({
@@ -34,6 +37,16 @@ export default async function AdminDashboardPage() {
   const [productCount, blogCount] = hasDatabaseUrl()
     ? await Promise.all([getEditableProductsCount(), getEditableBlogPostsCount()])
     : [0, 0];
+  const authState = getAdminAuthConfigState();
+  const authStatusLabel = isAdminLoginAvailable()
+    ? authState === "hash"
+      ? "Hash listo"
+      : "Password listo"
+    : authState === "conflict"
+      ? "Conflicto"
+      : authState === "invalid-hash"
+        ? "Hash inválido"
+        : "Pendiente";
 
   return (
     <div className="space-y-6">
@@ -53,7 +66,7 @@ export default async function AdminDashboardPage() {
           <div className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
             <p className="text-sm font-medium text-stone-500">Autenticación</p>
             <p className="mt-2 text-sm text-stone-950">
-              {isAdminConfigured() ? "Configurada" : "Pendiente"}
+              {authStatusLabel}
             </p>
           </div>
           <div className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
