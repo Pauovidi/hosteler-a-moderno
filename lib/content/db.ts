@@ -30,6 +30,56 @@ let neonClientKey: string | null = null;
 let pgliteClientPromise: Promise<PGlite> | null = null;
 let pgliteClientKey: string | null = null;
 
+const CONTENT_SCHEMA_BOOTSTRAP_LOCK_KEY = "content-schema-bootstrap-v1";
+
+const CONTENT_SCHEMA_STATEMENTS = [
+  `
+    CREATE TABLE IF NOT EXISTS editable_products (
+      record_id TEXT PRIMARY KEY,
+      legacy_id TEXT UNIQUE,
+      slug TEXT NOT NULL UNIQUE,
+      title TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'draft',
+      image_url TEXT,
+      payload JSONB NOT NULL DEFAULT '{}'::jsonb,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `,
+  `
+    CREATE INDEX IF NOT EXISTS editable_products_status_idx
+    ON editable_products (status);
+  `,
+  `
+    CREATE INDEX IF NOT EXISTS editable_products_updated_at_idx
+    ON editable_products (updated_at DESC);
+  `,
+  `
+    CREATE TABLE IF NOT EXISTS editable_blog_posts (
+      record_id TEXT PRIMARY KEY,
+      legacy_id TEXT UNIQUE,
+      slug TEXT NOT NULL UNIQUE,
+      title TEXT NOT NULL,
+      excerpt TEXT NOT NULL DEFAULT '',
+      status TEXT NOT NULL DEFAULT 'draft',
+      legacy_url TEXT UNIQUE,
+      featured_image_url TEXT,
+      published_at TIMESTAMPTZ,
+      payload JSONB NOT NULL DEFAULT '{}'::jsonb,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `,
+  `
+    CREATE INDEX IF NOT EXISTS editable_blog_posts_status_idx
+    ON editable_blog_posts (status);
+  `,
+  `
+    CREATE INDEX IF NOT EXISTS editable_blog_posts_published_at_idx
+    ON editable_blog_posts (published_at DESC NULLS LAST, updated_at DESC);
+  `,
+];
+
 function isPgliteDatabaseUrl(databaseUrl: string): boolean {
   return databaseUrl.startsWith(PGLITE_PREFIX);
 }
@@ -152,6 +202,20 @@ async function runStatement(statement: string) {
   await sql.exec(statement);
 }
 
+function buildPostgresBootstrapStatement(): string {
+  const escapedLockKey = CONTENT_SCHEMA_BOOTSTRAP_LOCK_KEY.replace(/'/g, "''");
+  const statements = CONTENT_SCHEMA_STATEMENTS.join("\n");
+
+  return `
+    DO $content_schema$
+    BEGIN
+      PERFORM pg_advisory_xact_lock(hashtext('${escapedLockKey}'));
+      ${statements}
+    END
+    $content_schema$;
+  `;
+}
+
 function buildParameterizedQuery(
   strings: TemplateStringsArray,
   values: QueryValues,
@@ -174,58 +238,63 @@ export async function ensureContentSchema(): Promise<void> {
   if (!ensureSchemaPromise || ensureSchemaKey !== databaseUrl) {
     ensureSchemaKey = databaseUrl;
     ensureSchemaPromise = (async () => {
-      await runStatement(`
-        CREATE TABLE IF NOT EXISTS editable_products (
-          record_id TEXT PRIMARY KEY,
-          legacy_id TEXT UNIQUE,
-          slug TEXT NOT NULL UNIQUE,
-          title TEXT NOT NULL,
-          status TEXT NOT NULL DEFAULT 'draft',
-          image_url TEXT,
-          payload JSONB NOT NULL DEFAULT '{}'::jsonb,
-          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-        );
-      `);
-      await runStatement(`
-        CREATE INDEX IF NOT EXISTS editable_products_status_idx
-        ON editable_products (status);
-      `);
-      await runStatement(`
-        CREATE INDEX IF NOT EXISTS editable_products_updated_at_idx
-        ON editable_products (updated_at DESC);
-      `);
-      await runStatement(`
-        CREATE TABLE IF NOT EXISTS editable_blog_posts (
-          record_id TEXT PRIMARY KEY,
-          legacy_id TEXT UNIQUE,
-          slug TEXT NOT NULL UNIQUE,
-          title TEXT NOT NULL,
-          excerpt TEXT NOT NULL DEFAULT '',
-          status TEXT NOT NULL DEFAULT 'draft',
-          legacy_url TEXT UNIQUE,
-          featured_image_url TEXT,
-          published_at TIMESTAMPTZ,
-          payload JSONB NOT NULL DEFAULT '{}'::jsonb,
-          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-        );
-      `);
-      await runStatement(`
-        CREATE INDEX IF NOT EXISTS editable_blog_posts_status_idx
-        ON editable_blog_posts (status);
-      `);
-      await runStatement(`
-        CREATE INDEX IF NOT EXISTS editable_blog_posts_published_at_idx
-        ON editable_blog_posts (published_at DESC NULLS LAST, updated_at DESC);
-      `);
+      if (isPgliteDatabaseUrl(databaseUrl)) {
+        for (const statement of CONTENT_SCHEMA_STATEMENTS) {
+          await runStatement(statement);
+        }
+        return;
+      }
+
+      await runStatement(buildPostgresBootstrapStatement());
     })();
   }
 
   await ensureSchemaPromise;
 }
 
-async function runQuery<T extends SqlRow = SqlRow>(
+function isMissingContentSchemaError(error: unknown): boolean {
+  if (!(error instanceof Error)) {
+    return false;
+  }
+
+  const code = "code" in error ? String((error as { code?: unknown }).code || "") : "";
+  if (code === "42P01" || code === "3F000") {
+    return true;
+  }
+
+  const message = error.message.toLowerCase();
+  return (
+    (message.includes("editable_products") || message.includes("editable_blog_posts"))
+    && (
+      message.includes("does not exist")
+      || message.includes("relation")
+      || message.includes("schema")
+    )
+  );
+}
+
+async function runReadQuery<T extends SqlRow = SqlRow>(
+  strings: TemplateStringsArray,
+  ...values: SqlPrimitive[]
+): Promise<T[]> {
+  const sql = await getSqlClient();
+  if (!sql) {
+    return [];
+  }
+
+  const { statement, params } = buildParameterizedQuery(strings, values);
+
+  try {
+    return await sql.query<T>(statement, params);
+  } catch (error) {
+    if (isMissingContentSchemaError(error)) {
+      return [];
+    }
+    throw error;
+  }
+}
+
+async function runWriteQuery<T extends SqlRow = SqlRow>(
   strings: TemplateStringsArray,
   ...values: SqlPrimitive[]
 ): Promise<T[]> {
@@ -240,7 +309,7 @@ async function runQuery<T extends SqlRow = SqlRow>(
 }
 
 export async function listEditableProducts(): Promise<EditableProductRecord[]> {
-  const rows = await runQuery`
+  const rows = await runReadQuery`
     SELECT record_id, legacy_id, slug, title, status, image_url, payload::text AS payload, created_at, updated_at
     FROM editable_products
     ORDER BY updated_at DESC, created_at DESC;
@@ -251,7 +320,7 @@ export async function listEditableProducts(): Promise<EditableProductRecord[]> {
 export async function getEditableProductRecordByRecordId(
   recordId: string,
 ): Promise<EditableProductRecord | null> {
-  const rows = await runQuery`
+  const rows = await runReadQuery`
     SELECT record_id, legacy_id, slug, title, status, image_url, payload::text AS payload, created_at, updated_at
     FROM editable_products
     WHERE record_id = ${recordId}
@@ -263,7 +332,7 @@ export async function getEditableProductRecordByRecordId(
 export async function getEditableProductRecordByLegacyId(
   legacyId: string,
 ): Promise<EditableProductRecord | null> {
-  const rows = await runQuery`
+  const rows = await runReadQuery`
     SELECT record_id, legacy_id, slug, title, status, image_url, payload::text AS payload, created_at, updated_at
     FROM editable_products
     WHERE legacy_id = ${legacyId}
@@ -275,7 +344,7 @@ export async function getEditableProductRecordByLegacyId(
 export async function getEditableProductRecordBySlug(
   slug: string,
 ): Promise<EditableProductRecord | null> {
-  const rows = await runQuery`
+  const rows = await runReadQuery`
     SELECT record_id, legacy_id, slug, title, status, image_url, payload::text AS payload, created_at, updated_at
     FROM editable_products
     WHERE slug = ${slug}
@@ -285,7 +354,7 @@ export async function getEditableProductRecordBySlug(
 }
 
 export async function listEditableBlogPosts(): Promise<EditableBlogPostRecord[]> {
-  const rows = await runQuery`
+  const rows = await runReadQuery`
     SELECT record_id, legacy_id, slug, title, excerpt, status, legacy_url, featured_image_url, published_at, payload::text AS payload, created_at, updated_at
     FROM editable_blog_posts
     ORDER BY COALESCE(published_at, updated_at) DESC, updated_at DESC;
@@ -296,7 +365,7 @@ export async function listEditableBlogPosts(): Promise<EditableBlogPostRecord[]>
 export async function getEditableBlogPostRecordByRecordId(
   recordId: string,
 ): Promise<EditableBlogPostRecord | null> {
-  const rows = await runQuery`
+  const rows = await runReadQuery`
     SELECT record_id, legacy_id, slug, title, excerpt, status, legacy_url, featured_image_url, published_at, payload::text AS payload, created_at, updated_at
     FROM editable_blog_posts
     WHERE record_id = ${recordId}
@@ -308,7 +377,7 @@ export async function getEditableBlogPostRecordByRecordId(
 export async function getEditableBlogPostRecordByLegacyId(
   legacyId: string,
 ): Promise<EditableBlogPostRecord | null> {
-  const rows = await runQuery`
+  const rows = await runReadQuery`
     SELECT record_id, legacy_id, slug, title, excerpt, status, legacy_url, featured_image_url, published_at, payload::text AS payload, created_at, updated_at
     FROM editable_blog_posts
     WHERE legacy_id = ${legacyId}
@@ -320,7 +389,7 @@ export async function getEditableBlogPostRecordByLegacyId(
 export async function getEditableBlogPostRecordBySlug(
   slug: string,
 ): Promise<EditableBlogPostRecord | null> {
-  const rows = await runQuery`
+  const rows = await runReadQuery`
     SELECT record_id, legacy_id, slug, title, excerpt, status, legacy_url, featured_image_url, published_at, payload::text AS payload, created_at, updated_at
     FROM editable_blog_posts
     WHERE slug = ${slug}
@@ -330,7 +399,7 @@ export async function getEditableBlogPostRecordBySlug(
 }
 
 export async function getEditableProductsCount(): Promise<number> {
-  const rows = await runQuery<{ total: number }>`
+  const rows = await runReadQuery<{ total: number }>`
     SELECT COUNT(*)::int AS total
     FROM editable_products;
   `;
@@ -338,7 +407,7 @@ export async function getEditableProductsCount(): Promise<number> {
 }
 
 export async function getEditableBlogPostsCount(): Promise<number> {
-  const rows = await runQuery<{ total: number }>`
+  const rows = await runReadQuery<{ total: number }>`
     SELECT COUNT(*)::int AS total
     FROM editable_blog_posts;
   `;
@@ -354,7 +423,7 @@ export async function upsertEditableProductRecord(input: {
   imageUrl: string | null;
   payload: Record<string, unknown>;
 }): Promise<void> {
-  await runQuery`
+  await runWriteQuery`
     INSERT INTO editable_products (
       record_id,
       legacy_id,
@@ -390,7 +459,7 @@ export async function upsertEditableProductRecord(input: {
 }
 
 export async function deleteEditableProductRecord(recordId: string): Promise<void> {
-  await runQuery`
+  await runWriteQuery`
     DELETE FROM editable_products
     WHERE record_id = ${recordId};
   `;
@@ -408,7 +477,7 @@ export async function upsertEditableBlogPostRecord(input: {
   publishedAt: string | null;
   payload: Record<string, unknown>;
 }): Promise<void> {
-  await runQuery`
+  await runWriteQuery`
     INSERT INTO editable_blog_posts (
       record_id,
       legacy_id,
@@ -453,7 +522,7 @@ export async function upsertEditableBlogPostRecord(input: {
 }
 
 export async function deleteEditableBlogPostRecord(recordId: string): Promise<void> {
-  await runQuery`
+  await runWriteQuery`
     DELETE FROM editable_blog_posts
     WHERE record_id = ${recordId};
   `;
