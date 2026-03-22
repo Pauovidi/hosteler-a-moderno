@@ -19,7 +19,9 @@
     "prebuild": "npm run data:build && npm run legacy:build",
     "fix:images": "node scripts/fix-images-from-export.js",
     "blog:build": "node scripts/blog-migrate.js",
-    "visibility:apply": "node scripts/apply-visibility-from-csv.mjs"
+    "visibility:apply": "node scripts/apply-visibility-from-csv.mjs",
+    "wp:import:dry-run": "node scripts/wp-headless-import.mjs --dry-run",
+    "wp:import": "node scripts/wp-headless-import.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.3.16",
