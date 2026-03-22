@@ -14,7 +14,7 @@ import {
   getProductById,
   getVisibleProducts,
 } from "@/lib/content/products-store";
-import { CATEGORY_LABELS, getCategoryProductIds } from "@/lib/catalog/category-index";
+import { getProductCategoryBySlug, getProductsByCategory } from "@/lib/headless/catalog";
 
 type Props = {
   params: Promise<{ legacy: string[] }>;
@@ -48,17 +48,19 @@ function getCategorySlug(segments: string[]): string | null {
 }
 
 async function getCategoryListingData(slug: string) {
-  const categoryLabel = CATEGORY_LABELS[slug];
-  if (!categoryLabel) {
+  const category = await getProductCategoryBySlug(slug);
+  if (!category) {
     return null;
   }
 
-  const ids = new Set(getCategoryProductIds(slug));
-  const products = (await getVisibleProducts()).filter((product) => ids.has(String(product.id)));
+  const visibleProducts = await getVisibleProducts();
+  const categoryProducts = await getProductsByCategory(slug);
+  const ids = new Set(categoryProducts.map((product) => String(product.id)));
+  const products = visibleProducts.filter((product) => ids.has(String(product.id)));
 
   return {
     slug,
-    title: categoryLabel,
+    title: category.name,
     products,
   };
 }

@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { getCanonicalProductPath, getVisibleProducts } from "@/lib/content/products-store";
 import type { Product } from "@/lib/data/products";
 import { buildBaseMetadata } from "@/lib/seo";
+import { getProductsByLegacyMenuId } from "@/lib/headless/catalog";
 import { legacyMenuMap } from "@/data/legacy-menu-map";
 
 type PageProps = {
@@ -121,10 +122,14 @@ export default async function LegacyCategoryPage({ params, searchParams }: PageP
   const sp = (await searchParams) ?? {};
   const legacySlug = sp.slug || "";
 
-  const allProducts = await getVisibleProducts();
-
-  // ✅ Filtrado por ID de menú legacy
-  const categoryProducts = filterByMenuId(allProducts, id);
+  const [allProducts, mappedProducts] = await Promise.all([
+    getVisibleProducts(),
+    getProductsByLegacyMenuId(id),
+  ]);
+  const mappedIds = new Set(mappedProducts.map((product) => String(product.id)));
+  const categoryProducts = mappedIds.size > 0
+    ? allProducts.filter((product) => mappedIds.has(String(product.id)))
+    : filterByMenuId(allProducts, id);
 
   // H1: prioridad al mapa interno (menú), fallback al slug
   const pageTitle = legacyMenuMap[id]?.title || titleFromSlug(legacySlug);

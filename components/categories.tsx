@@ -3,35 +3,36 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const categories = [
   {
-    id: "servilletas",
+    id: "servilletas-personalizadas",
     title: "Servilletas Personalizadas",
     description: "Servilletas de papel y tela con su logo para crear una imagen de marca coherente.",
     image: "https://cdn.palbincdn.com/users/36776/upload/images/servilletas-personalizadas.png",
-    href: "/c412083-servilletas-para-hosteleria-personalizadas.html",
+    href: "/servilletas-personalizadas",
   },
   {
-    id: "cristaleria",
+    id: "cristaleria-personalizada",
     title: "Cristalería Personalizada",
     description: "Copas, vasos y jarras grabados con su marca. Colaboramos con Arcoroc, Bormioli, Stoelzle.",
     image: "https://cdn.palbincdn.com/users/36776/upload/images/copas-personalizadas.png",
-    href: "/c412080-cristaleria-personalizada-hosteleria.html",
+    href: "/cristaleria-personalizada",
   },
   {
-    id: "vajilla",
+    id: "vajilla-personalizada",
     title: "Vajilla Personalizada",
     description: "Platos, tazas y platillos con su identidad corporativa. Porcelana de primera calidad.",
     image: "https://cdn.palbincdn.com/users/36776/upload/images/copas-vasos-jarras-todo-personalizado.png",
-    href: "/c412082-vajilla-personalizada.html",
+    href: "/vajilla-personalizada",
   },
   {
-    id: "cuberteria",
+    id: "cuberteria-personalizada",
     title: "Cubertería Personalizada",
     description: "Cubiertos de acero inoxidable grabados con láser. Modelos exclusivos 18/10.",
     image: "https://cdn.palbincdn.com/users/36776/upload/images/cuberteria-personalizada-4.png",
-    href: "/c453874-cubiertos-personalizados.html",
+    href: "/cuberteria-personalizada",
   },
   {
     id: "textil",
@@ -41,6 +42,15 @@ const categories = [
     href: "/c412081-manteleria-textil-personalizada.html",
   },
 ];
+
+type CategoryCard = (typeof categories)[number];
+
+type MenuItem = {
+  label: string;
+  href: string;
+};
+
+const categoryCardBySlug = new Map(categories.map((category) => [category.id, category]));
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -62,6 +72,57 @@ const itemVariants = {
 };
 
 export function Categories() {
+  const [categoryCards, setCategoryCards] = useState<CategoryCard[]>(categories);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadCategories() {
+      try {
+        const response = await fetch("/api/headless/menu", {
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          return;
+        }
+
+        const payload = (await response.json()) as { items?: MenuItem[] };
+        if (!Array.isArray(payload.items) || payload.items.length === 0) {
+          return;
+        }
+
+        const dynamicCards = payload.items
+          .map((item) => {
+            const slug = item.href.replace(/^\/+|\/+$/g, "");
+            const fallbackCard = categoryCardBySlug.get(slug);
+            if (!fallbackCard) {
+              return null;
+            }
+
+            return {
+              ...fallbackCard,
+              title: item.label,
+              href: item.href,
+            };
+          })
+          .filter((item): item is CategoryCard => Boolean(item));
+
+        if (dynamicCards.length > 0) {
+          setCategoryCards((previous) => {
+            const hasTextil = previous.find((category) => category.id === "textil");
+            return hasTextil ? [...dynamicCards, hasTextil] : dynamicCards;
+          });
+        }
+      } catch {
+        // Keep the static fallback cards during migration.
+      }
+    }
+
+    void loadCategories();
+
+    return () => controller.abort();
+  }, []);
+
   return (
     <section id="productos" className="py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -89,11 +150,11 @@ export function Categories() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {categories.map((category, index) => (
+          {categoryCards.map((category, index) => (
             <motion.div
               key={category.id}
               variants={itemVariants}
-              className={index === categories.length - 1 ? "md:col-span-2 lg:col-span-1" : ""}
+              className={index === categoryCards.length - 1 ? "md:col-span-2 lg:col-span-1" : ""}
             >
               <Link href={category.href}>
                 <div className="group bg-card border border-border overflow-hidden hover:border-gold/30 transition-all duration-300">

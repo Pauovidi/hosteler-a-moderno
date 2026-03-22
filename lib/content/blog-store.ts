@@ -10,6 +10,7 @@ import {
 } from "@/lib/data/blog";
 import { listEditableBlogPosts } from "@/lib/content/db";
 import { hasDatabaseUrl } from "@/lib/content/env";
+import { getPosts as getHeadlessPosts, resolvePostFromIncoming as resolveHeadlessPostFromIncoming } from "@/lib/headless/catalog";
 import { renderMarkdownToHtml } from "@/lib/content/markdown";
 
 type BlogMergeResult = {
@@ -39,7 +40,7 @@ function normalizeBlogPayload(payload: Record<string, unknown>): BlogPost {
 }
 
 async function mergePublicBlogPosts(): Promise<BlogMergeResult> {
-  const fallbackPosts = getFallbackPosts();
+  const fallbackPosts = await getHeadlessPosts();
 
   if (!hasDatabaseUrl()) {
     return {
@@ -111,34 +112,14 @@ export async function getPost(slug: string): Promise<BlogPost | undefined> {
 export async function resolveBlogPostFromIncoming(
   incoming: string,
 ): Promise<BlogPost | undefined> {
+  const headlessResolved = await resolveHeadlessPostFromIncoming(incoming);
+  if (headlessResolved) {
+    return headlessResolved;
+  }
+
   const result = await mergePublicBlogPosts();
-  const incomingRaw = String(incoming || "").trim();
-  const incomingNoHtml = incomingRaw.replace(/\.html$/i, "");
-  const candidateWithIncoming = `/blog/${incomingRaw}`;
-  const candidateWithHtml = `/blog/${incomingNoHtml}.html`;
-
-  const byLegacyPath = result.posts.find((post) => {
-    const legacyPath = String(post.legacyUrl || "").trim();
-    if (!legacyPath) {
-      return false;
-    }
-
-    return legacyPath === candidateWithIncoming || legacyPath === candidateWithHtml;
-  });
-
-  if (byLegacyPath) {
-    return byLegacyPath;
-  }
-
-  const idMatch = incomingNoHtml.match(/^p(\d+)-/i);
-  if (idMatch?.[1]) {
-    const byId = result.posts.find((post) => String(post.id) === String(idMatch[1]));
-    if (byId) {
-      return byId;
-    }
-  }
-
-  return result.posts.find((post) => post.slug === incomingNoHtml);
+  const incomingRaw = String(incoming || "").trim().replace(/\.html$/i, "");
+  return result.posts.find((post) => post.slug === incomingRaw);
 }
 
 export function getCanonicalBlogPath(post: BlogPost): string {

@@ -11,6 +11,7 @@ import {
 } from "@/lib/data/products";
 import { listEditableProducts } from "@/lib/content/db";
 import { hasDatabaseUrl } from "@/lib/content/env";
+import { getProducts as getHeadlessProducts } from "@/lib/headless/catalog";
 
 type ProductMergeResult = {
   products: Product[];
@@ -125,7 +126,7 @@ function normalizeProductRecordPayload(payload: Record<string, unknown>): Produc
 
 function mergePublicProducts(): Promise<ProductMergeResult> {
   return (async () => {
-    const fallbackProducts = getFallbackProducts();
+    const fallbackProducts = await getHeadlessProducts();
 
     if (!hasDatabaseUrl()) {
       return {
