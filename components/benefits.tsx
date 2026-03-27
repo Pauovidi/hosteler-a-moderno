@@ -20,8 +20,8 @@ const benefits = [
     icon: Package,
   },
   {
-    title: "Asesoramiento Experto",
-    description: "Especialistas en aperturas, eventos y proyectos de marca para hosteleria y agencias.",
+    title: "Branding y Soluciones para Hostelería y Agencias",
+    description: "Asesoramiento experto en aperturas, eventos y proyectos de marca.",
     icon: Users,
   },
   {

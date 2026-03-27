@@ -139,7 +139,7 @@ export function Categories() {
             Todo para su Establecimiento
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Solución integral para reposición constante, grandes aperturas y proyectos de branding
+            Branding y Soluciones Integrales para Hostelería y Agencias Expertos en aperturas, eventos y estrategias de marca.
           </p>
         </motion.div>
 
