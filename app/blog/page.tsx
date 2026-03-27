@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { getVisiblePosts, getCanonicalBlogPath } from "@/lib/data/blog";
+import { getCanonicalBlogPath, getVisiblePosts } from "@/lib/content/blog-store";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   description: "Noticias, consejos y tendencias sobre el sector HORECA y personalización de productos.",
 };
 
-export default function BlogPage() {
-  const posts = getVisiblePosts();
+export default async function BlogPage() {
+  const posts = await getVisiblePosts();
 
   return (
     <div className="min-h-screen flex flex-col">

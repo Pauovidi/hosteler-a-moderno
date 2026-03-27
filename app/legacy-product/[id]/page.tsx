@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { getProductById } from "@/lib/data/products";
+import { getProductById, getVisibleProducts } from "@/lib/content/products-store";
 import { buildBaseMetadata, buildProductMetadata } from "@/lib/seo";
 
 // Reuse the existing product UI
@@ -16,7 +16,7 @@ export async function generateMetadata({ params, searchParams }: PageProps) {
   const { id } = await params;
   if (!id) return base;
 
-  const product = getProductById(id);
+  const product = await getProductById(id);
   if (!product) return base;
 
   const sp = (await searchParams) ?? {};
@@ -46,12 +46,19 @@ export default async function LegacyProductPage({ params }: PageProps) {
   const { id } = await params;
   if (!id) notFound();
 
-  const product = getProductById(id);
+  const [product, visibleProducts] = await Promise.all([
+    getProductById(id),
+    getVisibleProducts(),
+  ]);
   if (!product) notFound();
 
-  // El ProductClient de este repo requiere "categoria" (string) pero aquí no existe como tal.
-  // Le pasamos el slug para que no casque y para mantener coherencia.
+  const relatedProducts = visibleProducts.filter((candidate) => candidate.slug !== product.slug).slice(0, 8);
+
   return (
-    <ProductClient product={product} categoria={product.slug} />
+    <ProductClient
+      product={product}
+      categoria={product.slug}
+      relatedProducts={relatedProducts}
+    />
   );
 }

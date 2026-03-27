@@ -4,8 +4,10 @@ import { notFound } from "next/navigation";
 
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { getVisibleProducts, type Product } from "@/lib/data/products";
+import { getCanonicalProductPath, getVisibleProducts } from "@/lib/content/products-store";
+import type { Product } from "@/lib/data/products";
 import { buildBaseMetadata } from "@/lib/seo";
+import { getProductsByLegacyMenuId } from "@/lib/headless/catalog";
 import { legacyMenuMap } from "@/data/legacy-menu-map";
 
 type PageProps = {
@@ -38,14 +40,6 @@ function titleFromSlug(slug?: string): string {
 
 function stripHtml(html: string): string {
   return String(html || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-}
-
-function productLegacySlug(product: Product): string {
-  const base = String(product.slug || "")
-    .replace(new RegExp(`-${product.id}$`), "")
-    .replace(/\/+$/g, "")
-    .trim();
-  return base || "producto";
 }
 
 /**
@@ -128,10 +122,14 @@ export default async function LegacyCategoryPage({ params, searchParams }: PageP
   const sp = (await searchParams) ?? {};
   const legacySlug = sp.slug || "";
 
-  const allProducts = getVisibleProducts();
-
-  // ✅ Filtrado por ID de menú legacy
-  const categoryProducts = filterByMenuId(allProducts, id);
+  const [allProducts, mappedProducts] = await Promise.all([
+    getVisibleProducts(),
+    getProductsByLegacyMenuId(id),
+  ]);
+  const mappedIds = new Set(mappedProducts.map((product) => String(product.id)));
+  const categoryProducts = mappedIds.size > 0
+    ? allProducts.filter((product) => mappedIds.has(String(product.id)))
+    : filterByMenuId(allProducts, id);
 
   // H1: prioridad al mapa interno (menú), fallback al slug
   const pageTitle = legacyMenuMap[id]?.title || titleFromSlug(legacySlug);
@@ -151,8 +149,7 @@ export default async function LegacyCategoryPage({ params, searchParams }: PageP
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {categoryProducts.map((product) => {
-              const pSlug = productLegacySlug(product);
-              const href = `/p${product.id}-${pSlug}.html`;
+              const href = getCanonicalProductPath(product);
               const img = product.image || "/logo-3.jpg";
 
               return (

@@ -27,7 +27,11 @@ export default function proxy(req: NextRequest) {
   const id = match[2];
   let slug = match[3] || "";
 
-  try { slug = decodeURIComponent(slug); } catch {}
+  try {
+    slug = decodeURIComponent(slug);
+  } catch {
+    // Keep original slug if it cannot be decoded.
+  }
 
   const url = req.nextUrl.clone();
   url.pathname = type === "p" ? `/legacy-product/${id}` : `/legacy-category/${id}`;

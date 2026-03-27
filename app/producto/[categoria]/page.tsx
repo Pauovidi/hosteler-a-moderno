@@ -1,23 +1,12 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { getVisibleProducts, Product } from "@/lib/data/products";
+import { getCanonicalProductPath, getVisibleProducts } from "@/lib/content/products-store";
+import { Product } from "@/lib/data/products";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { slugify } from "@/lib/utils";
-
-// Configuration for Category Mapping
-// Keys: URL slugs (normalized)
-// Values: Possible exact strings in products.json 'categoriesFlat'
-const CATEGORY_ALIASES: Record<string, string[]> = {
-  "cristaleria": ["Cristalería Personalizada para Hostelería y Restauración"],
-  "vajilla": ["Vajilla Personalizada para Hostelería"],
-  "servilletas": ["Servilletas Personalizadas Profesionales para Hostelería y Eventos"],
-  "cuberteria": ["CUBIERTOS PERSONALIZADOS"],
-  "textil-hoteles": ["MANTELERÍA PERSONALIZADA TEXTIL Y NO TEXTIL", "Textil"],
-};
+import { getProductCategories, getProductCategoryBySlug, getProductsByCategory } from "@/lib/headless/catalog";
 
 interface Props {
   params: Promise<{ categoria: string }>;
@@ -25,10 +14,8 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { categoria } = await params;
-
-  // Find readable name
-  const aliases = CATEGORY_ALIASES[categoria];
-  const readableName = aliases ? aliases[0] : categoria.replace(/-/g, ' ');
+  const category = await getProductCategoryBySlug(categoria);
+  const readableName = category?.name || categoria.replace(/-/g, " ");
 
   return {
     title: `Catálogo: ${readableName} - Personalizados Hostelería`,
@@ -37,38 +24,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  // Generate params for known categories
-  return Object.keys(CATEGORY_ALIASES).map((cat) => ({
-    categoria: cat,
-  }));
+  const categories = await getProductCategories();
+  const allCategories = categories.flatMap((category) => [category, ...category.children]);
+  return allCategories.map((category) => ({ categoria: category.slug }));
 }
 
 export default async function CategoryPage({ params }: Props) {
   const { categoria } = await params;
-  const products = getVisibleProducts();
-
-  // Logic to filter products
-  // 1. Check exact alias match
-  const targetLabels = CATEGORY_ALIASES[categoria];
-
-  let categoryProducts: Product[] = [];
-
-  if (targetLabels) {
-    categoryProducts = products.filter(p =>
-      p.categoriesFlat.some(cat => targetLabels.includes(cat))
-    );
-  }
-
-  // 2. Fallback: loose match via slugify
-  // If no exact alias, or if we want to catch edge cases, checking if any category slugified contains the param
-  if (categoryProducts.length === 0) {
-    categoryProducts = products.filter(p =>
-      p.categoriesFlat.some(cat => slugify(cat).includes(categoria))
-    );
-  }
-
-  // Display Name
-  const displayName = targetLabels ? targetLabels[0] : categoria.replace(/-/g, ' ').toUpperCase();
+  const [visibleProducts, category, headlessProducts] = await Promise.all([
+    getVisibleProducts(),
+    getProductCategoryBySlug(categoria),
+    getProductsByCategory(categoria),
+  ]);
+  const ids = new Set(headlessProducts.map((product) => String(product.id)));
+  const categoryProducts: Product[] = visibleProducts.filter((product) => ids.has(String(product.id)));
+  const displayName = category?.name || categoria.replace(/-/g, " ").toUpperCase();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -87,7 +57,7 @@ export default async function CategoryPage({ params }: Props) {
           {categoryProducts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {categoryProducts.map((product) => (
-                <Link key={product.slug} href={`/p/${product.slug}`} className="group">
+                <Link key={product.slug} href={getCanonicalProductPath(product)} className="group">
                   <div className="border border-border rounded-lg overflow-hidden transition-all hover:shadow-lg hover:border-gold/30">
                     <div className="aspect-square relative overflow-hidden bg-muted">
                       <Image

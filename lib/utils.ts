@@ -14,8 +14,8 @@ export function slugify(text: string): string {
     .replace(/&/g, " y ") // Replace & with ' y '
     .replace(/\./g, " ") // Replace dots with space
     .replace(/\s+/g, "-") // Collapse whitespace and replace with -
-    .replace(/[^\w\-]+/g, "") // Remove all non-word chars
-    .replace(/\-\-+/g, "-") // Replace multiple - with single -
+    .replace(/[^\w-]+/g, "") // Remove all non-word chars
+    .replace(/--+/g, "-") // Replace multiple - with single -
     .replace(/^-+/, "") // Trim - from start of text
     .replace(/-+$/, ""); // Trim - from end of text
 }

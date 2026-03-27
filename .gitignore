@@ -8,7 +8,14 @@ instrumentation-client.ts
 # Common ignores
 node_modules/
 .next/
+.env
+.env.preview
+.env.production
+.env.shared
+.env.vercel
+.pglite/
 .env*.local
 .DS_Store
 .vercel
-.env*.local
+out/qa-smoke-report.json
+out/qa-smoke-progress.log

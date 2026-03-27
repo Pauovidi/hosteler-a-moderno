@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
@@ -56,6 +56,34 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDesktopMenu, setOpenDesktopMenu] = useState<string | null>(null);
   const [openMobileMenus, setOpenMobileMenus] = useState<Record<string, boolean>>({});
+  const [menuCategories, setMenuCategories] = useState<MenuItem[]>(MENU_CATEGORIES);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadMenu() {
+      try {
+        const response = await fetch("/api/headless/menu", {
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          return;
+        }
+
+        const payload = (await response.json()) as { items?: MenuItem[] };
+        if (Array.isArray(payload.items) && payload.items.length > 0) {
+          setMenuCategories(payload.items);
+        }
+      } catch {
+        // Keep the baked-in menu fallback if the headless endpoint is not ready yet.
+      }
+    }
+
+    void loadMenu();
+
+    return () => controller.abort();
+  }, []);
 
   const toggleMobileMenu = (label: string) => {
     setOpenMobileMenus((prev) => ({
@@ -83,7 +111,7 @@ export function Header() {
           </Link>
 
           <div className="hidden lg:flex items-center gap-6">
-            {MENU_CATEGORIES.map((item) => {
+            {menuCategories.map((item) => {
               if (!item.children?.length) {
                 return (
                   <Link
@@ -190,7 +218,7 @@ export function Header() {
             className="lg:hidden bg-white border-b border-border"
           >
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
-              {MENU_CATEGORIES.map((item) => (
+              {menuCategories.map((item) => (
                 <div key={item.label} className="border-b border-border/60 pb-3">
                   {item.children?.length ? (
                     <>

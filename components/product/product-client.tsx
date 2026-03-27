@@ -8,17 +8,24 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, FileText, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { Product, getAllProducts } from "@/lib/data/products";
+import { Product } from "@/lib/data/products";
 
 interface ProductClientProps {
     product: Product;
-    categoria: string;
+    relatedProducts: Product[];
 }
 
-export default function ProductClient({ product, categoria }: ProductClientProps) {
-    // Get other products for "Related Products" section
-    const otherProducts = getAllProducts().filter((p) => p.slug !== categoria);
+function toProductHref(product: Product): string {
+    const id = String(product.id || "");
+    if (/^\d+$/.test(id)) {
+        const legacySlug = product.slug.replace(new RegExp(`-${id}$`), "") || product.slug;
+        return `/p${id}-${legacySlug}.html`;
+    }
 
+    return `/p/${product.slug}`;
+}
+
+export default function ProductClient({ product, relatedProducts }: ProductClientProps) {
     return (
         <div className="min-h-screen flex flex-col">
             <Header />
@@ -166,8 +173,8 @@ export default function ProductClient({ product, categoria }: ProductClientProps
                             Otros Productos que Pueden Interesarle
                         </h2>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                            {otherProducts.map((prod) => (
-                                <Link key={prod.slug} href={`/producto/${prod.slug}`}>
+                            {relatedProducts.map((prod) => (
+                                <Link key={prod.slug} href={toProductHref(prod)}>
                                     <div className="group border border-border hover:border-gold/30 transition-all">
                                         <div className="aspect-square relative overflow-hidden">
                                             <Image

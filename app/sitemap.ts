@@ -1,12 +1,12 @@
 import { MetadataRoute } from 'next'
-import { getAllProducts } from '@/lib/data/products'
-import { getAllPosts } from '@/lib/data/blog'
+import { getAllPosts, getCanonicalBlogPath } from '@/lib/content/blog-store'
+import { getAllProducts, getCanonicalProductPath } from '@/lib/content/products-store'
 
 const BASE_URL = 'https://v0-personalizados-hosteleria.vercel.app'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-    const products = getAllProducts()
-    const posts = getAllPosts()
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const products = await getAllProducts()
+    const posts = await getAllPosts()
 
     // Static routes
     const routes = [
@@ -22,14 +22,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Product routes
     const productRoutes = products.map((product) => ({
-        url: `${BASE_URL}/producto/${product.slug}`,
+        url: `${BASE_URL}${getCanonicalProductPath(product)}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
     }))
 
     const blogRoutes = posts.map((post) => ({
-        url: `${BASE_URL}/blog/${post.slug}`,
+        url: `${BASE_URL}${getCanonicalBlogPath(post)}`,
         lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.7,
