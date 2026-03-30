@@ -45,11 +45,13 @@ function PresupuestoInner() {
     email: "",
     telefono: "",
     empresa: "",
-    categorias: [] as string[],
+    categoria: "",
     mensaje: "",
   });
 
   const [enviado, setEnviado] = useState(false);
+  const [selectedFileName, setSelectedFileName] = useState("");
+  const [fileError, setFileError] = useState("");
 
   useEffect(() => {
     // Prefill message when coming from a product page
@@ -58,18 +60,33 @@ function PresupuestoInner() {
     }
   }, [fromProduct.mensaje]);
 
-  const handleCategoriaToggle = (categoria: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      categorias: prev.categorias.includes(categoria)
-        ? prev.categorias.filter((c) => c !== categoria)
-        : [...prev.categorias, categoria],
-    }));
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      setSelectedFileName("");
+      setFileError("");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      event.target.value = "";
+      setSelectedFileName("");
+      setFileError("El archivo supera el máximo de 5 MB.");
+      return;
+    }
+
+    setSelectedFileName(file.name);
+    setFileError("");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí en el futuro se conectará con email/CRM. Para demo, simulamos.
+
+    if (fileError || !formData.categoria) {
+      return;
+    }
+
     setEnviado(true);
   };
 
@@ -99,9 +116,11 @@ function PresupuestoInner() {
                     email: "",
                     telefono: "",
                     empresa: "",
-                    categorias: [],
+                    categoria: "",
                     mensaje: "",
                   });
+                  setSelectedFileName("");
+                  setFileError("");
                 }}
                 className="bg-gradient-gold text-primary-foreground hover:opacity-90 font-display tracking-wider"
               >
@@ -192,28 +211,51 @@ function PresupuestoInner() {
                   </div>
 
                   <div>
-                    <Label className="font-display">Categorías de interés</Label>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-3">
+                    <Label className="font-display">Categoría de interés *</Label>
+                    <div className="grid grid-cols-1 gap-3 mt-3 md:grid-cols-2">
                       {categorias.map((categoria) => (
                         <label
                           key={categoria}
                           className={
-                            "flex items-center gap-2 p-3 border rounded-lg cursor-pointer transition-colors " +
-                            (formData.categorias.includes(categoria)
+                            "flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition-colors " +
+                            (formData.categoria === categoria
                               ? "border-gold bg-gold/5"
                               : "border-border hover:border-gold/30")
                           }
                         >
                           <input
-                            type="checkbox"
-                            checked={formData.categorias.includes(categoria)}
-                            onChange={() => handleCategoriaToggle(categoria)}
-                            className="rounded"
+                            type="radio"
+                            name="categoria"
+                            value={categoria}
+                            checked={formData.categoria === categoria}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, categoria: e.target.value }))}
+                            required
+                            className="h-4 w-4"
                           />
                           <span className="text-sm">{categoria}</span>
                         </label>
                       ))}
                     </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="archivo" className="font-display">Logotipo o imagen</Label>
+                    <Input
+                      id="archivo"
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                      onChange={handleFileChange}
+                      className="mt-2"
+                    />
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Puedes adjuntar un archivo de imagen de hasta 5 MB. En esta versión solo se valida en el navegador.
+                    </p>
+                    {selectedFileName ? (
+                      <p className="mt-2 text-sm text-foreground">Archivo seleccionado: {selectedFileName}</p>
+                    ) : null}
+                    {fileError ? (
+                      <p className="mt-2 text-sm text-destructive">{fileError}</p>
+                    ) : null}
                   </div>
 
                   <div>

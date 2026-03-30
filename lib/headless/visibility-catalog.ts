@@ -4,7 +4,12 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { getAllProducts as getFallbackProducts } from "@/lib/data/products";
-import { FRONTEND_CATEGORY_LABELS, LEGACY_CATEGORY_ID_TO_FRONTEND_SLUG } from "@/lib/headless/constants";
+import {
+  CATEGORY_CHILD_ORDER,
+  FRONTEND_CATEGORY_LABELS,
+  LEGACY_CATEGORY_ID_TO_FRONTEND_SLUG,
+  TOP_LEVEL_CATEGORY_ORDER,
+} from "@/lib/headless/constants";
 import type { HeadlessCatalogSnapshot, ProductCategoryNode } from "@/lib/headless/types";
 
 type VisibilityRow = {
@@ -161,6 +166,62 @@ function ensureCategoryNode(
   return node;
 }
 
+function compareByOrder(left: ProductCategoryNode, right: ProductCategoryNode, orderedSlugs: readonly string[]) {
+  const leftIndex = orderedSlugs.indexOf(left.slug);
+  const rightIndex = orderedSlugs.indexOf(right.slug);
+
+  if (leftIndex === -1 && rightIndex === -1) {
+    return left.name.localeCompare(right.name, "es");
+  }
+
+  if (leftIndex === -1) {
+    return 1;
+  }
+
+  if (rightIndex === -1) {
+    return -1;
+  }
+
+  return leftIndex - rightIndex;
+}
+
+function applyCommercialCategoryStructure(
+  roots: ProductCategoryNode[],
+  categoryBySlug: Map<string, ProductCategoryNode>,
+) {
+  for (const node of categoryBySlug.values()) {
+    const label = FRONTEND_CATEGORY_LABELS[node.slug];
+    if (label) {
+      node.name = label;
+    }
+  }
+
+  const takeAwaySlug = "manteles-caminos-personalizados";
+  const vajillaSlug = "vajilla-personalizada";
+  const takeAwayNode = categoryBySlug.get(takeAwaySlug);
+  const vajillaNode = categoryBySlug.get(vajillaSlug);
+
+  if (takeAwayNode && vajillaNode) {
+    vajillaNode.children = vajillaNode.children.filter((child) => child.slug !== takeAwaySlug);
+    takeAwayNode.parentSlug = null;
+
+    if (!roots.some((node) => node.slug === takeAwaySlug)) {
+      roots.push(takeAwayNode);
+    }
+  }
+
+  roots.sort((left, right) => compareByOrder(left, right, TOP_LEVEL_CATEGORY_ORDER));
+
+  for (const [parentSlug, childOrder] of Object.entries(CATEGORY_CHILD_ORDER)) {
+    const parent = categoryBySlug.get(parentSlug);
+    if (!parent) {
+      continue;
+    }
+
+    parent.children.sort((left, right) => compareByOrder(left, right, childOrder));
+  }
+}
+
 export function getVisibilityRows(): VisibilityRow[] {
   return readVisibilityRows();
 }
@@ -206,6 +267,8 @@ export function getFallbackCatalogSnapshot(): HeadlessCatalogSnapshot {
     }
     productIdsByCategorySlug.get(subCategorySlug)?.add(row.legacyId);
   }
+
+  applyCommercialCategoryStructure(roots, categoryBySlug);
 
   fallbackSnapshotCache = {
     categories: roots,

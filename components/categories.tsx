@@ -28,6 +28,13 @@ const categories = [
     href: "/vajilla-personalizada",
   },
   {
+    id: "manteles-caminos-personalizados",
+    title: "Take Away",
+    description: "Manteles, caminos y soluciones take away personalizadas para una presentación de marca cuidada.",
+    image: "/media/blog/t-mantel/01_post-personalizados-hosteleria.png",
+    href: "/manteles-caminos-personalizados",
+  },
+  {
     id: "cuberteria-personalizada",
     title: "Cubertería Personalizada",
     description: "Cubiertos de acero inoxidable grabados con láser. Modelos exclusivos 18/10.",

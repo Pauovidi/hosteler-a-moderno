@@ -4,7 +4,6 @@ import { Categories } from "@/components/categories";
 import { Benefits } from "@/components/benefits";
 import { CTA } from "@/components/cta";
 import { Footer } from "@/components/footer";
-import { WhatsAppButton } from "@/components/whatsapp-button";
 
 export default function Home() {
   return (
@@ -15,7 +14,6 @@ export default function Home() {
       <Benefits />
       <CTA />
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 }
