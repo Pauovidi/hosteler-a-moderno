@@ -14,7 +14,7 @@ const legalLinks = [
   { name: "Devoluciones", href: "/devoluciones", external: false },
 ];
 
-const FOOTER_LOGO_SRC = "/logo-3.jpg";
+const FOOTER_LOGO_SRC = "/logo-3-blanco.webp";
 
 export function Footer() {
   const [menuItems, setMenuItems] = useState<CatalogMenuItem[]>(CATALOG_MENU_FALLBACK);
