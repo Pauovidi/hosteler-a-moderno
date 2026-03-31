@@ -14,7 +14,11 @@ import {
   getProductById,
   getVisibleProducts,
 } from "@/lib/content/products-store";
-import { getProductCategoryBySlug, getProductsByCategory } from "@/lib/headless/catalog";
+import {
+  getProductCategories,
+  getProductCategoryBySlug,
+  getProductsByCategory,
+} from "@/lib/headless/catalog";
 
 type Props = {
   params: Promise<{ legacy: string[] }>;
@@ -61,6 +65,7 @@ async function getCategoryListingData(slug: string) {
   return {
     slug,
     title: category.name,
+    childCategories: category.children,
     products,
   };
 }
@@ -143,11 +148,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 function CategoryListingPage({
   title,
+  childCategories,
   products,
 }: {
   title: string;
+  childCategories: Awaited<ReturnType<typeof getProductCategories>>;
   products: Awaited<ReturnType<typeof getVisibleProducts>>;
 }) {
+  const hasChildCategories = childCategories.length > 0;
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -160,7 +169,32 @@ function CategoryListingPage({
             </p>
           </div>
 
-          {products.length > 0 ? (
+          {hasChildCategories ? (
+            <div className="mx-auto max-w-5xl">
+              <div className="mb-8 text-center">
+                <p className="text-sm uppercase tracking-[0.3em] text-gold">Subcategorías</p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {childCategories.map((child) => (
+                  <Link key={child.slug} href={child.path} className="group">
+                    <div className="flex h-full flex-col justify-between rounded-lg border border-border bg-card p-6 transition-all hover:border-gold/40 hover:shadow-lg">
+                      <div>
+                        <p className="mb-4 text-xs uppercase tracking-[0.25em] text-gold">Catálogo</p>
+                        <h2 className="font-display text-xl text-foreground transition-colors group-hover:text-gold">
+                          {child.name}
+                        </h2>
+                        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                          Accede a la selección específica de {child.name.toLowerCase()} dentro de {title.toLowerCase()}.
+                        </p>
+                      </div>
+                      <span className="mt-6 text-sm font-medium text-gold">Ver subcategoría →</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : products.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {products.map((product) => (
                 <Link key={product.id} href={getCanonicalProductPath(product)} className="group">
@@ -230,5 +264,11 @@ export default async function LegacyCatchAllPage({ params }: Props) {
     notFound();
   }
 
-  return <CategoryListingPage title={listing.title} products={listing.products} />;
+  return (
+    <CategoryListingPage
+      title={listing.title}
+      childCategories={listing.childCategories}
+      products={listing.products}
+    />
+  );
 }

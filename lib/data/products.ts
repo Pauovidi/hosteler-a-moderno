@@ -238,6 +238,22 @@ const productsArray = (generatedProducts as unknown as Product[]).map((p) => {
   };
 });
 
+const LISTING_EXCLUSION_PATTERN = /(servilleter|(?:^|[^a-z])qr(?:[^a-z]|$)|codigo qr|código qr|elementos qr|lectura qr)/i;
+
+function isExcludedFromListings(product: Product): boolean {
+  const haystack = [
+    product.name,
+    product.slug,
+    product.shortDescription,
+    product.shortDescriptionHtml,
+    product.descriptionHtml,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return LISTING_EXCLUSION_PATTERN.test(haystack);
+}
+
 export const products: Record<string, Product> = productsArray.reduce((acc, product) => {
   acc[product.slug] = product;
   return acc;
@@ -273,10 +289,15 @@ function buildVisibleProductIdSet(): Set<string> {
 }
 
 const visibleProductIds = buildVisibleProductIdSet();
+const excludedProductIds = new Set(
+  productsArray
+    .filter((product) => isExcludedFromListings(product))
+    .map((product) => String(product.id)),
+);
 
 export function isProductVisibleInListings(productId: string): boolean {
   const id = String(productId || "");
-  return visibleProductIds.has(id);
+  return visibleProductIds.has(id) && !excludedProductIds.has(id);
 }
 
 export function getVisibleProducts(): Product[] {

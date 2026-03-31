@@ -11,15 +11,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { FileText, Send, CheckCircle } from "lucide-react";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-
-const categorias = [
-  "Servilletas",
-  "Cristalería",
-  "Vajilla",
-  "Cubertería",
-  "Textil Hoteles",
-  "Otros",
-];
+import {
+  QUOTE_ATTACHMENT_FIELD_NAME,
+  QUOTE_CATEGORIES,
+  QUOTE_FILE_ACCEPT,
+  QUOTE_MAX_FILE_SIZE_BYTES,
+} from "@/lib/quote/shared";
 
 // ✅ Page wrapper con Suspense (evita el prerender error)
 export default function PresupuestoPage() {
@@ -45,11 +42,18 @@ function PresupuestoInner() {
     email: "",
     telefono: "",
     empresa: "",
-    categorias: [] as string[],
+    categoria: "",
     mensaje: "",
   });
 
   const [enviado, setEnviado] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [selectedFileName, setSelectedFileName] = useState("");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState("");
+  const [submitError, setSubmitError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [fileInputKey, setFileInputKey] = useState(0);
 
   useEffect(() => {
     // Prefill message when coming from a product page
@@ -58,19 +62,87 @@ function PresupuestoInner() {
     }
   }, [fromProduct.mensaje]);
 
-  const handleCategoriaToggle = (categoria: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      categorias: prev.categorias.includes(categoria)
-        ? prev.categorias.filter((c) => c !== categoria)
-        : [...prev.categorias, categoria],
-    }));
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      setSelectedFileName("");
+      setSelectedFile(null);
+      setFileError("");
+      return;
+    }
+
+    if (file.size > QUOTE_MAX_FILE_SIZE_BYTES) {
+      event.target.value = "";
+      setSelectedFileName("");
+      setSelectedFile(null);
+      setFileError("El archivo supera el máximo de 5 MB.");
+      return;
+    }
+
+    setSelectedFileName(file.name);
+    setSelectedFile(file);
+    setFileError("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const resetForm = () => {
+    setFormData({
+      nombre: "",
+      email: "",
+      telefono: "",
+      empresa: "",
+      categoria: "",
+      mensaje: "",
+    });
+    setSelectedFileName("");
+    setSelectedFile(null);
+    setFileError("");
+    setSubmitError("");
+    setSuccessMessage("");
+    setFileInputKey((current) => current + 1);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí en el futuro se conectará con email/CRM. Para demo, simulamos.
-    setEnviado(true);
+
+    if (fileError || !formData.categoria) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const payload = new FormData();
+      payload.set("nombre", formData.nombre);
+      payload.set("email", formData.email);
+      payload.set("telefono", formData.telefono);
+      payload.set("empresa", formData.empresa);
+      payload.set("categoria", formData.categoria);
+      payload.set("mensaje", formData.mensaje);
+
+      if (selectedFile) {
+        payload.set(QUOTE_ATTACHMENT_FIELD_NAME, selectedFile);
+      }
+
+      const response = await fetch("/api/quote-request", {
+        method: "POST",
+        body: payload,
+      });
+      const result = (await response.json().catch(() => null)) as { ok?: boolean; error?: string; message?: string } | null;
+
+      if (!response.ok || !result?.ok) {
+        setSubmitError(result?.error || "No se pudo enviar la solicitud. Inténtalo de nuevo.");
+        return;
+      }
+
+      setSuccessMessage(result.message || "Tu solicitud se ha enviado correctamente.");
+      setEnviado(true);
+    } catch {
+      setSubmitError("No se pudo enviar la solicitud. Inténtalo de nuevo.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (enviado) {
@@ -89,19 +161,12 @@ function PresupuestoInner() {
               </div>
               <h1 className="font-display text-3xl text-foreground mb-4">¡Solicitud Enviada!</h1>
               <p className="text-muted-foreground text-lg mb-8">
-                Hemos recibido tu solicitud de presupuesto. Te contactaremos en menos de 24 horas laborables.
+                {successMessage || "Hemos recibido tu solicitud de presupuesto. Te contactaremos en menos de 24 horas laborables."}
               </p>
               <Button
                 onClick={() => {
                   setEnviado(false);
-                  setFormData({
-                    nombre: "",
-                    email: "",
-                    telefono: "",
-                    empresa: "",
-                    categorias: [],
-                    mensaje: "",
-                  });
+                  resetForm();
                 }}
                 className="bg-gradient-gold text-primary-foreground hover:opacity-90 font-display tracking-wider"
               >
@@ -192,28 +257,52 @@ function PresupuestoInner() {
                   </div>
 
                   <div>
-                    <Label className="font-display">Categorías de interés</Label>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-3">
-                      {categorias.map((categoria) => (
+                    <Label className="font-display">Categoría de interés *</Label>
+                    <div className="grid grid-cols-1 gap-3 mt-3 md:grid-cols-2">
+                      {QUOTE_CATEGORIES.map((categoria) => (
                         <label
                           key={categoria}
                           className={
-                            "flex items-center gap-2 p-3 border rounded-lg cursor-pointer transition-colors " +
-                            (formData.categorias.includes(categoria)
+                            "flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition-colors " +
+                            (formData.categoria === categoria
                               ? "border-gold bg-gold/5"
                               : "border-border hover:border-gold/30")
                           }
                         >
                           <input
-                            type="checkbox"
-                            checked={formData.categorias.includes(categoria)}
-                            onChange={() => handleCategoriaToggle(categoria)}
-                            className="rounded"
+                            type="radio"
+                            name="categoria"
+                            value={categoria}
+                            checked={formData.categoria === categoria}
+                            onChange={(e) => setFormData((prev) => ({ ...prev, categoria: e.target.value }))}
+                            required
+                            className="h-4 w-4"
                           />
                           <span className="text-sm">{categoria}</span>
                         </label>
                       ))}
                     </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="archivo" className="font-display">Logotipo o imagen</Label>
+                    <Input
+                      key={fileInputKey}
+                      id="archivo"
+                      type="file"
+                      accept={QUOTE_FILE_ACCEPT}
+                      onChange={handleFileChange}
+                      className="mt-2"
+                    />
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Puedes adjuntar un logotipo o imagen en PNG, JPG, WEBP o SVG de hasta 5 MB.
+                    </p>
+                    {selectedFileName ? (
+                      <p className="mt-2 text-sm text-foreground">Archivo seleccionado: {selectedFileName}</p>
+                    ) : null}
+                    {fileError ? (
+                      <p className="mt-2 text-sm text-destructive">{fileError}</p>
+                    ) : null}
                   </div>
 
                   <div>
@@ -233,11 +322,15 @@ function PresupuestoInner() {
                     <Button
                       type="submit"
                       size="lg"
+                      disabled={isSubmitting}
                       className="bg-gradient-gold text-primary-foreground hover:opacity-90 font-display tracking-wider px-12"
                     >
                       <Send className="mr-2 h-5 w-5" />
-                      Enviar Solicitud
+                      {isSubmitting ? "Enviando..." : "Enviar Solicitud"}
                     </Button>
+                    {submitError ? (
+                      <p className="text-destructive text-sm mt-4">{submitError}</p>
+                    ) : null}
                     <p className="text-muted-foreground text-sm mt-4">
                       Te responderemos en menos de 24 horas laborables.
                     </p>

@@ -5,47 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
-type MenuItem = {
-  label: string;
-  href: string;
-  children?: Array<{ label: string; href: string }>;
-};
-
-const MENU_CATEGORIES: MenuItem[] = [
-  {
-    label: "Cristalería Personalizada",
-    href: "/cristaleria-personalizada/",
-    children: [
-      { label: "Copas de Vino Personalizadas", href: "/copas-de-vino-personalizadas/" },
-      { label: "Cristalería Cerveza Personalizada", href: "/cristaleria-cerveza-personalizada/" },
-      { label: "Vasos Combinados Botellas Cava", href: "/vasos-combinados-botellas-cava/" },
-    ],
-  },
-  {
-    label: "Vajilla Personalizada",
-    href: "/vajilla-personalizada/",
-    children: [
-      { label: "Tazas y Platillos Personalizados", href: "/tazas-y-platillos-personalizados/" },
-      { label: "Platos Personalizados", href: "/platos-personalizados/" },
-      { label: "Fuentes Ensaladeras Personalizadas", href: "/fuentes-ensaladeras-personalizadas/" },
-      { label: "Platos de Pizza Personalizados", href: "/platos-de-pizza-personalizados/" },
-      { label: "Manteles Caminos Personalizados", href: "/manteles-caminos-personalizados/" },
-    ],
-  },
-  {
-    label: "Servilletas Personalizadas",
-    href: "/servilletas-personalizadas/",
-    children: [
-      { label: "Servilletas Bar Cocktail Personalizadas", href: "/servilletas-bar-cocktail-personalizadas/" },
-      { label: "Servilletas de Mesa Personalizadas", href: "/servilletas-de-mesa-personalizadas/" },
-    ],
-  },
-  {
-    label: "Cubertería Personalizada",
-    href: "/cuberteria-personalizada/",
-  },
-];
+import { CATALOG_MENU_FALLBACK, type CatalogMenuItem } from "@/lib/headless/constants";
 
 const EXTRA_LINKS = [
   { label: "Blog", href: "/blog" },
@@ -56,7 +16,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDesktopMenu, setOpenDesktopMenu] = useState<string | null>(null);
   const [openMobileMenus, setOpenMobileMenus] = useState<Record<string, boolean>>({});
-  const [menuCategories, setMenuCategories] = useState<MenuItem[]>(MENU_CATEGORIES);
+  const [menuCategories, setMenuCategories] = useState<CatalogMenuItem[]>(CATALOG_MENU_FALLBACK);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -71,7 +31,7 @@ export function Header() {
           return;
         }
 
-        const payload = (await response.json()) as { items?: MenuItem[] };
+        const payload = (await response.json()) as { items?: CatalogMenuItem[] };
         if (Array.isArray(payload.items) && payload.items.length > 0) {
           setMenuCategories(payload.items);
         }
@@ -104,9 +64,9 @@ export function Header() {
       </div>
 
       <nav className="bg-white border-b border-border">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-2 flex items-center justify-between">
           <Link href="/" className="flex items-center" aria-label="Personalizados Hosteleria">
-            <img src="/logo-3.jpg" alt="Personalizados Hosteleria" className="h-12 w-auto" />
+            <img src="/logo-3.jpg" alt="Personalizados Hosteleria" className="h-[72px] w-auto" />
             <span className="sr-only">Personalizados Hosteleria</span>
           </Link>
 
